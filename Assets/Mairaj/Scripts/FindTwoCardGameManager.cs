@@ -136,6 +136,8 @@ public class FindTwoCardGameManager : MonoBehaviour
 
             // Match found, end the game
             GameEnd();
+
+            Invoke("GameCompleteDelayedSound", 0.5f);
         }
         else
         {
@@ -179,6 +181,10 @@ public class FindTwoCardGameManager : MonoBehaviour
         // Reset cards after shaking
         card1.ResetCard();
         card2.ResetCard();
+    }
+
+    private void GameCompleteDelayedSound() {
+        SoundManager.Instance.MiniGameCompleteAudioClip();
     }
 
     private void OnDestroy() 
