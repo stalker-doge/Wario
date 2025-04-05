@@ -28,6 +28,11 @@ public class TimeAndLifeManager : MonoBehaviour
 
     private int currentLifeIndex; // Start from 0, up to lives.Length - 1
 
+    private void Awake()
+    {
+        FindTwoCardGameManager.SuccessCompletionCallback += FindTwoCardGameSuccessfulCallback;
+    }
+
     private void Start()
     {
         currentLifeIndex = 0;
@@ -60,6 +65,9 @@ public class TimeAndLifeManager : MonoBehaviour
 
     private void HandleLifeLossOrGameOver()
     {
+        // Play life lost audio clip
+        SoundManager.Instance.LifeLostAudioClip();
+
         if (currentLifeIndex < lives.Length)
         {
             lives[currentLifeIndex].SetActive(false);
@@ -72,6 +80,9 @@ public class TimeAndLifeManager : MonoBehaviour
         }
         else
         {
+            // Play game over audio clip
+            SoundManager.Instance.GameOverAudioClip();
+
             // No lives left, end game
             FindTwoCardsGameEndCallBack?.Invoke();
 
@@ -79,9 +90,19 @@ public class TimeAndLifeManager : MonoBehaviour
         }
     }
 
+    private void FindTwoCardGameSuccessfulCallback() {
+        if (countDownCoroutine != null)
+            StopCoroutine(countDownCoroutine);
+    }
+
     public enum GameType { 
         mNone,
         mFindTwoCardsGame,
         mShootTargetGame
+    }
+
+    private void OnDestroy()
+    {
+        FindTwoCardGameManager.SuccessCompletionCallback -= FindTwoCardGameSuccessfulCallback;
     }
 }

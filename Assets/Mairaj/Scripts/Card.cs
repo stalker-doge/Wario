@@ -33,6 +33,9 @@ public class Card : MonoBehaviour
 
     public void ShakeCardAndReset()
     {
+        // Play a mismatch sound
+        SoundManager.Instance.CardMismatchAudioClip();
+
         // Create a sequence for handling the delay and the shake
         Sequence shakeSequence = DOTween.Sequence();
 
@@ -55,6 +58,9 @@ public class Card : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        // Play a flip sound
+        SoundManager.Instance.CardFlipAudioClip();
+
         // Notify the manager that this card was clicked
         FindObjectOfType<FindTwoCardGameManager>().OnCardClicked(this);
 
@@ -64,6 +70,9 @@ public class Card : MonoBehaviour
 
     private void Rotate(bool setTextActive)
     {
+        // Play a flip sound
+        SoundManager.Instance.CardFlipAudioClip();
+
         GetComponent<Button>().enabled = false;
         transform.DORotate(new Vector3(0, 90, 0), 0.15f, RotateMode.Fast).OnComplete(() => {
             cardNo.gameObject.SetActive(setTextActive);
