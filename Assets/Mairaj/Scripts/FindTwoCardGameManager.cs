@@ -19,6 +19,9 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private Coroutine countDownCoroutine = null;
 
+    // Successful completion of game to stop timer
+    public static System.Action SuccessCompletionCallback = null;
+
     private void Awake()
     {
         TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEnd;
@@ -128,6 +131,9 @@ public class FindTwoCardGameManager : MonoBehaviour
     {
         if (selectedCards[0].GetCardNumber() == selectedCards[1].GetCardNumber())
         {
+            // Card match audio clip
+            SoundManager.Instance.CardMatchAudioClip();
+
             // Match found, end the game
             GameEnd();
         }
@@ -145,6 +151,8 @@ public class FindTwoCardGameManager : MonoBehaviour
     private void GameEnd()
     {
         Debug.Log("Game Over! Cards matched.");
+
+        SuccessCompletionCallback?.Invoke();
 
         if (countDownCoroutine != null) { 
             StopCoroutine(countDownCoroutine);
