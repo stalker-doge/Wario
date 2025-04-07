@@ -12,21 +12,43 @@ public class LevelSwitcher : MonoBehaviour
     private string[] scenes;
     void Start()
     {
-        //if there are no scenes in the array, add all scenes except the current scene
+        //Get the scenes from PlayerPrefs
+        string scenesString = PlayerPrefs.GetString("Scenes", "");
+        //if there are no scenes in PlayerPrefs, set the scenes to an empty array
+        if (string.IsNullOrEmpty(scenesString))
+        {
+            scenes = new string[0];
+
+        }
+        else
+        {
+            //split the scenes string into an array
+            scenes = scenesString.Split(',');
+        }
+
+        //if there are no scenes in the array, add all scenes except scenes in a folder called systen
         if (scenes.Length == 0)
         {
-            //Get all scenes
-            scenes = new string[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 1];
-            int index = 0;
-            for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
+            //Get all scenes in the project
+            string[] allScenes = UnityEditor.EditorBuildSettingsScene.GetActiveSceneList(UnityEditor.EditorBuildSettings.scenes);
+            List<string> sceneList = new List<string>();
+            foreach (string scene in allScenes)
             {
-                string scenePath = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i);
-                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-                if (sceneName != UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+                //if the scene is not in a folder called system, add it to the list
+                if (!scene.Contains("System"))
                 {
-                    scenes[index] = sceneName;
-                    index++;
+                    Debug.Log("Adding scene: " + scene);
+                    sceneList.Add(scene);
                 }
+            }
+            scenes = sceneList.ToArray();
+            //saves the scenes to the PlayerPrefs
+            PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
+
+            //prints the scenes to the console
+            foreach (string scene in scenes)
+            {
+                Debug.Log("Scene: " + scene);
             }
         }
     }
@@ -42,6 +64,18 @@ public class LevelSwitcher : MonoBehaviour
         //Get random scene
         int randomIndex = Random.Range(0, scenes.Length);
         string sceneName = scenes[randomIndex];
+        //deletes the scene from the array
+        List<string> sceneList = new List<string>(scenes);
+        sceneList.RemoveAt(randomIndex);
+        scenes = sceneList.ToArray();
+        //saves the scenes to the PlayerPrefs
+        PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
+        //Load scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+    public void SwitchScene(string sceneName)
+    {
         //Load scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }

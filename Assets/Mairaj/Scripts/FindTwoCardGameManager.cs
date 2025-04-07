@@ -168,6 +168,17 @@ public class FindTwoCardGameManager : MonoBehaviour
                 cardButton.interactable = false;
             }
         }
+
+        //calls the game complete method from the score manager
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
+        {
+            scoreManager.GameComplete();
+        }
+        else
+        {
+            Debug.LogError("ScoreManager not found in the scene.");
+        }
     }
 
     private void GameEndFailedCallback() 
