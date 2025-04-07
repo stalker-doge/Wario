@@ -50,6 +50,12 @@ public class TimerManager : MonoBehaviour
         UpdateTimerText();
     }
 
+
+    public float GetTimeRemaining()
+    {
+        return timeRemaining;
+    }
+
     public void UpdateTimerText()
     {
         // Update the timer text display
