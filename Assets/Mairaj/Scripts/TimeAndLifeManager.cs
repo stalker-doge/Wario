@@ -26,11 +26,14 @@ public class TimeAndLifeManager : MonoBehaviour
     // Declare and use callbacks for other games as well
     public static System.Action FindTwoCardsGameEndCallBack = null;
 
+    public static System.Action BallonPopGameEndCallback = null;
+
     private int currentLifeIndex; // Start from 0, up to lives.Length - 1
 
     private void Awake()
     {
         FindTwoCardGameManager.SuccessCompletionCallback += FindTwoCardGameSuccessfulCallback;
+        BalloonsPopGameManager.BalloonPopupCompletionCallback += BalloonPopupGameSuccessfulCallback;
     }
 
     private void Start()
@@ -84,7 +87,11 @@ public class TimeAndLifeManager : MonoBehaviour
             SoundManager.Instance.GameOverAudioClip();
 
             // No lives left, end game
-            FindTwoCardsGameEndCallBack?.Invoke();
+            if (gameType == GameType.mFindTwoCardsGame) {
+                FindTwoCardsGameEndCallBack?.Invoke();
+            } else if (gameType == GameType.mBalloonPopGame) { 
+                BallonPopGameEndCallback?.Invoke();
+            }
 
             // Similarly implement other games callbacks
         }
@@ -95,14 +102,21 @@ public class TimeAndLifeManager : MonoBehaviour
             StopCoroutine(countDownCoroutine);
     }
 
+    private void BalloonPopupGameSuccessfulCallback() {
+        if (countDownCoroutine != null)
+            StopCoroutine(countDownCoroutine);
+    }
+
     public enum GameType { 
         mNone,
         mFindTwoCardsGame,
-        mShootTargetGame
+        mShootTargetGame,
+        mBalloonPopGame
     }
 
     private void OnDestroy()
     {
         FindTwoCardGameManager.SuccessCompletionCallback -= FindTwoCardGameSuccessfulCallback;
+        BalloonsPopGameManager.BalloonPopupCompletionCallback -= BalloonPopupGameSuccessfulCallback;
     }
 }
