@@ -24,7 +24,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void Awake()
     {
-        TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEnd;
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
         if (cards != null && cards.Length > 0)
         {
             InitializeCards();
@@ -135,7 +135,7 @@ public class FindTwoCardGameManager : MonoBehaviour
             SoundManager.Instance.CardMatchAudioClip();
 
             // Match found, end the game
-            GameEnd();
+            GameEndSuccessCallback();
 
             Invoke("GameCompleteDelayedSound", 0.5f);
         }
@@ -150,9 +150,9 @@ public class FindTwoCardGameManager : MonoBehaviour
     }
 
     // Game end logic
-    private void GameEnd()
+    private void GameEndSuccessCallback()
     {
-        Debug.Log("Game Over! Cards matched.");
+        Debug.Log("Game Over!");
 
         SuccessCompletionCallback?.Invoke();
 
@@ -168,6 +168,12 @@ public class FindTwoCardGameManager : MonoBehaviour
                 cardButton.interactable = false;
             }
         }
+    }
+
+    private void GameEndFailedCallback() 
+    {
+        // All lives gone case
+        Debug.Log("XYZ FindTwoCardsAllLivesGoneCase Callback");
     }
 
     // Coroutine to shake and reset cards
@@ -189,7 +195,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void OnDestroy() 
     {
-        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEnd;
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEndFailedCallback;
     }
 
     // Might need for future where we implement one game as one prefab so that it won't get destroyed so above OnDestroy will be useless

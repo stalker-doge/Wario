@@ -49,6 +49,6 @@ public class ScoreManager : MonoBehaviour
         }
 
         //goes back to the main menu
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
     }
 }

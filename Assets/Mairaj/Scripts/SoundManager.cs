@@ -36,6 +36,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip shootAudioClip;
 
+    [SerializeField]
+    private AudioClip balloonPopAudioClip;
+
     private void Awake()
     {
         // Singleton pattern
@@ -99,5 +102,10 @@ public class SoundManager : MonoBehaviour
     public void ShootAudioClip()
     {
         Instance.audioSource.PlayOneShot(shootAudioClip);
+    }
+
+    public void BalloonPopAudioClip() 
+    {
+        Instance.audioSource.PlayOneShot(balloonPopAudioClip);
     }
 }
