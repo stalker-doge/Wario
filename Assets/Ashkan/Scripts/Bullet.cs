@@ -17,10 +17,12 @@ public class Bullet : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
             Vector2 dir = arrow.GetDirection();
 
             bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+            //ShootBullet();
         }
     }
 
@@ -37,5 +39,13 @@ public class Bullet : MonoBehaviour
             other.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
+    }
+
+    public void ShootBullet()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+        Vector2 dir = arrow.GetDirection();
+
+        bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
     }
 }

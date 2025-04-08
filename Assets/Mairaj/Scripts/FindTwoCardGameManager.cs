@@ -1,3 +1,4 @@
+//Mairaj Muhammad -->2415831
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,29 +10,33 @@ public class FindTwoCardGameManager : MonoBehaviour
     [SerializeField]
     private Card[] cards;
 
-    [SerializeField]
-    private Text counterText; // Text component to display the countdown
+    //[SerializeField]
+    //private Text counterText; // Text component to display the countdown
 
-    private float countdownTime = 10.0f; // Start time for countdown
+    //private float countdownTime = 10.0f; // Start time for countdown
 
     private List<Card> selectedCards = new List<Card>();  // Keep track of selected cards
 
     private Coroutine countDownCoroutine = null;
 
+    // Successful completion of game to stop timer
+    public static System.Action SuccessCompletionCallback = null;
+
     private void Awake()
     {
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
         if (cards != null && cards.Length > 0)
         {
             InitializeCards();
         }
     }
 
-    private void Start()
+    /*private void Start()
     {
         countDownCoroutine = StartCoroutine(StartCountdown());
-    }
+    }*/
 
-    private IEnumerator StartCountdown()
+    /*private IEnumerator StartCountdown()
     {
         while (countdownTime > 0)
         {
@@ -42,7 +47,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         counterText.text = "0.0"; // Ensure it shows 0.0 when finished
         GameEnd(); // Trigger game end when countdown finishes
-    }
+    }*/
     private void InitializeCards()
     {
         // Generate the card numbers
@@ -126,8 +131,13 @@ public class FindTwoCardGameManager : MonoBehaviour
     {
         if (selectedCards[0].GetCardNumber() == selectedCards[1].GetCardNumber())
         {
+            // Card match audio clip
+            SoundManager.Instance.CardMatchAudioClip();
+
             // Match found, end the game
-            GameEnd();
+            GameEndSuccessCallback();
+
+            Invoke("GameCompleteDelayedSound", 0.5f);
         }
         else
         {
@@ -140,9 +150,11 @@ public class FindTwoCardGameManager : MonoBehaviour
     }
 
     // Game end logic
-    private void GameEnd()
+    private void GameEndSuccessCallback()
     {
-        Debug.Log("Game Over! Cards matched.");
+        Debug.Log("Game Over!");
+
+        SuccessCompletionCallback?.Invoke();
 
         if (countDownCoroutine != null) { 
             StopCoroutine(countDownCoroutine);
@@ -156,6 +168,23 @@ public class FindTwoCardGameManager : MonoBehaviour
                 cardButton.interactable = false;
             }
         }
+
+        //calls the game complete method from the score manager
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
+        {
+            scoreManager.GameComplete();
+        }
+        else
+        {
+            Debug.LogError("ScoreManager not found in the scene.");
+        }
+    }
+
+    private void GameEndFailedCallback() 
+    {
+        // All lives gone case
+        Debug.Log("XYZ FindTwoCardsAllLivesGoneCase Callback");
     }
 
     // Coroutine to shake and reset cards
@@ -170,4 +199,19 @@ public class FindTwoCardGameManager : MonoBehaviour
         card1.ResetCard();
         card2.ResetCard();
     }
+
+    private void GameCompleteDelayedSound() {
+        SoundManager.Instance.MiniGameCompleteAudioClip();
+    }
+
+    private void OnDestroy() 
+    {
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEndFailedCallback;
+    }
+
+    // Might need for future where we implement one game as one prefab so that it won't get destroyed so above OnDestroy will be useless
+    //private void OnDisable()
+    //{
+    //    TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEnd;
+    //}
 }
