@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/System/Main Menu.unity
     guid: 90866303cf5bd5444b1728f5a1131897
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Aim&Shoot.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1

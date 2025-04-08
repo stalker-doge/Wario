@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSwitcher : MonoBehaviour
 {
@@ -26,29 +27,28 @@ public class LevelSwitcher : MonoBehaviour
             scenes = scenesString.Split(',');
         }
 
-        //if there are no scenes in the array, add all scenes except scenes in a folder called systen
+        //if there are no scenes in the array, add all scenes except scenes in a folder called System
         if (scenes.Length == 0)
         {
-            //Get all scenes in the project
-            string[] allScenes = UnityEditor.EditorBuildSettingsScene.GetActiveSceneList(UnityEditor.EditorBuildSettings.scenes);
-            List<string> sceneList = new List<string>();
-            foreach (string scene in allScenes)
+            // Get all scenes in build settings
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+            // Initialize the scenes array with the number of scenes in build settings
+            for (int i = 0; i < sceneCount; i++)
             {
-                //if the scene is not in a folder called system, add it to the list
-                if (!scene.Contains("System"))
-                {
-                    Debug.Log("Adding scene: " + scene);
-                    sceneList.Add(scene);
-                }
-            }
-            scenes = sceneList.ToArray();
-            //saves the scenes to the PlayerPrefs
-            PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
+                string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+                // Check if the scene is in the "System" folder, if so, skip it and shrink the array
 
-            //prints the scenes to the console
-            foreach (string scene in scenes)
-            {
-                Debug.Log("Scene: " + scene);
+                if (scenePath.Contains("System"))
+                {
+                    continue;
+                }
+                // Get the scene name from the path
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+                // Add the scene name to the array
+                List<string> sceneList = new List<string>(scenes);
+                sceneList.Add(sceneName);
+                scenes = sceneList.ToArray();
+
             }
         }
     }
