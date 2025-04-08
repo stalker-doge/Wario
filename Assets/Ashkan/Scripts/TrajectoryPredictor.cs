@@ -36,7 +36,12 @@ public class TrajectoryPredictor : MonoBehaviour
         }
 
         // Hide dots when pressing Space
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    HideDots();
+        //}
+
+        if (Input.GetMouseButtonUp(0))
         {
             HideDots();
         }

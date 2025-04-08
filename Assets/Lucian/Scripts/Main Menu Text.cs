@@ -13,6 +13,9 @@ public class NewBehaviourScript : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI highScore;
+
+    [SerializeField]
+    private TextMeshProUGUI lastScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,7 @@ public class NewBehaviourScript : MonoBehaviour
             PlayerPrefs.SetInt("Score", 0);
             PlayerPrefs.SetInt("Lives", 3);
             highScore.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
+            lastScore.text= "Score: " + PlayerPrefs.GetInt("LastScore", 0).ToString();
             return;
         }
         //gets the score and lives from PlayerPrefs
