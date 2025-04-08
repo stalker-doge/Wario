@@ -15,7 +15,14 @@ public class Bullet : MonoBehaviour
     public int collisionCountMax = 2;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+        //    Vector2 dir = arrow.GetDirection();
+
+        //    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+        //}
+        if (Input.GetMouseButtonUp(0))
         {
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
             Vector2 dir = arrow.GetDirection();
