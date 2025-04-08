@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class LevelSwitcher : MonoBehaviour
@@ -11,6 +12,19 @@ public class LevelSwitcher : MonoBehaviour
     //Array of scenes
     [SerializeField]
     private string[] scenes;
+    [SerializeField]
+    private float timeToWait = 3;
+
+    [SerializeField]
+    private bool loading = false;
+
+    [SerializeField]
+    private TextMeshProUGUI levelName;
+
+    private string sceneName;
+
+
+    private float timer = 0;
     void Start()
     {
         //Get the scenes from PlayerPrefs
@@ -51,27 +65,45 @@ public class LevelSwitcher : MonoBehaviour
 
             }
         }
+
+        if (loading)
+        {
+            FindRandom();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+
+        if (loading)
+        {
+            levelName.text = sceneName;
+            timer += Time.deltaTime;
+            if (timer > timeToWait)
+            {
+                SwitchScene(sceneName);
+            }
+        }
     }
 
-    public void SwitchRandom()
+    public void FindRandom()
     {
         //Get random scene
         int randomIndex = Random.Range(0, scenes.Length);
-        string sceneName = scenes[randomIndex];
+        sceneName = scenes[randomIndex];
         //deletes the scene from the array
         List<string> sceneList = new List<string>(scenes);
         sceneList.RemoveAt(randomIndex);
         scenes = sceneList.ToArray();
         //saves the scenes to the PlayerPrefs
         PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
-        //Load scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
+    public void PlayGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
     }
 
     public void SwitchScene(string sceneName)

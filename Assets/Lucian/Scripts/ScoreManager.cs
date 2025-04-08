@@ -91,7 +91,7 @@ public class ScoreManager : MonoBehaviour
         }
 
         //goes back to the main menu
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
     }
 
 
@@ -107,7 +107,7 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("Score: " + score);
 
             //goes back to the main menu
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
         }
         else
         {
