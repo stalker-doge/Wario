@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
         //}
         if (Input.GetMouseButtonUp(0))
         {
+            SoundManager.Instance.ShootAudioClip();
 
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
             Vector2 dir = arrow.GetDirection();
@@ -35,6 +36,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        SoundManager.Instance.ProjectileBounceAudioClip();
         collisionCount++;
         if ( collisionCount == collisionCountMax)
         {
@@ -45,6 +47,16 @@ public class Bullet : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             gameObject.SetActive(false);
+            //calls the game complete method from the score manager
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.GameComplete();
+            }
+            else
+            {
+                Debug.LogError("ScoreManager not found in the scene.");
+            }
         }
     }
 
