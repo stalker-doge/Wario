@@ -28,6 +28,11 @@ public class NewBehaviourScript : MonoBehaviour
         //gets the score and lives from PlayerPrefs
         score.text = "Score: " + PlayerPrefs.GetInt("Score", 0).ToString();
         lives.text = "Lives: " + PlayerPrefs.GetInt("Lives", 3).ToString();
+        //if lives is less than or equal 0, immediately switch to the end scene
+        if (PlayerPrefs.GetInt("Lives", 3) <= 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
+        }
     }
     // Update is called once per frame
     void Update()
