@@ -1356,7 +1356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dotPrefab: {fileID: 3327319725810970542, guid: f89025a07393eae4eb33ad6bcb923566, type: 3}
   dotCount: 100
-  dotSpacing: 0.01
+  stepDistance: 0.2
   shootPoint: {fileID: 1276213563}
   shootForce: 5
   collisionLayer:
@@ -1373,6 +1373,10 @@ PrefabInstance:
     - target: {fileID: 3327319725810970542, guid: f89025a07393eae4eb33ad6bcb923566, type: 3}
       propertyPath: m_Name
       value: dot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3327319725810970542, guid: f89025a07393eae4eb33ad6bcb923566, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4463736696630708759, guid: f89025a07393eae4eb33ad6bcb923566, type: 3}
       propertyPath: m_LocalPosition.x
