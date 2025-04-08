@@ -63,18 +63,19 @@ public class FindTwoCardGameManager : MonoBehaviour
     private int[] GenerateCardNumbers()
     {
         System.Random rand = new System.Random();
-        int[] numbers = new int[6];
+        int[] numbers = new int[4];
 
         // Step 1: Choose a random number for repetition (between 1 and 5)
-        int repeatedDigit = rand.Next(1, 6);
+        int repeatedDigit = rand.Next(1, 4);
 
         // Step 2: Choose 4 unique numbers for the rest (between 1 and 5)
-        int[] uniqueDigits = new int[4];
+        const int uniqueNumbers = 2;
+        int[] uniqueDigits = new int[uniqueNumbers];
         int index = 0;
 
-        while (index < 4)
+        while (index < uniqueDigits.Length)
         {
-            int randomDigit = rand.Next(1, 6);
+            int randomDigit = rand.Next(1, 4);
             // Ensure we don't repeat the repeatedDigit
             if (Array.IndexOf(uniqueDigits, randomDigit) == -1 && randomDigit != repeatedDigit)
             {
@@ -89,7 +90,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         // Step 4: Place the unique digits in the remaining positions
         int uniqueIndex = 0;
-        for (int i = 2; i < 6; i++)
+        for (int i = 2; i < 4; i++)
         {
             numbers[i] = uniqueDigits[uniqueIndex++];
         }
