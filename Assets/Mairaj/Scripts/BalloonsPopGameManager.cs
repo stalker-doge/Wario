@@ -18,7 +18,7 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     // Adjust this based on your balloon prefab's width/height
     private const float balloonRadius = 50f; // Assuming balloon is 100x100 in size
-    private const float minDistance = balloonRadius * 3f;
+    private const float minDistance = balloonRadius * 4.5f;
     private const int maxAttemptsPerBalloon = 100;
 
     public static System.Action BalloonPopupCompletionCallback = null;
