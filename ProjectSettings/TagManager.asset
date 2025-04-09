@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Goal
   - Target
+  - AnswerPlaceholder
   layers:
   - Default
   - TransparentFX
