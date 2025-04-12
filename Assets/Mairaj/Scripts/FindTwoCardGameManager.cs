@@ -24,7 +24,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void Awake()
     {
-        TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEnd;
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
         if (cards != null && cards.Length > 0)
         {
             InitializeCards();
@@ -63,18 +63,19 @@ public class FindTwoCardGameManager : MonoBehaviour
     private int[] GenerateCardNumbers()
     {
         System.Random rand = new System.Random();
-        int[] numbers = new int[6];
+        int[] numbers = new int[4];
 
         // Step 1: Choose a random number for repetition (between 1 and 5)
-        int repeatedDigit = rand.Next(1, 6);
+        int repeatedDigit = rand.Next(1, 4);
 
         // Step 2: Choose 4 unique numbers for the rest (between 1 and 5)
-        int[] uniqueDigits = new int[4];
+        const int uniqueNumbers = 2;
+        int[] uniqueDigits = new int[uniqueNumbers];
         int index = 0;
 
-        while (index < 4)
+        while (index < uniqueDigits.Length)
         {
-            int randomDigit = rand.Next(1, 6);
+            int randomDigit = rand.Next(1, 4);
             // Ensure we don't repeat the repeatedDigit
             if (Array.IndexOf(uniqueDigits, randomDigit) == -1 && randomDigit != repeatedDigit)
             {
@@ -89,7 +90,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         // Step 4: Place the unique digits in the remaining positions
         int uniqueIndex = 0;
-        for (int i = 2; i < 6; i++)
+        for (int i = 2; i < 4; i++)
         {
             numbers[i] = uniqueDigits[uniqueIndex++];
         }
@@ -135,14 +136,14 @@ public class FindTwoCardGameManager : MonoBehaviour
             SoundManager.Instance.CardMatchAudioClip();
 
             // Match found, end the game
-            GameEnd();
+            Invoke("GameEndSuccessCallback", selectedCards[1].GetRotateTimer() * 2);
 
             Invoke("GameCompleteDelayedSound", 0.5f);
         }
         else
         {
             // No match, shake and reset the cards
-            StartCoroutine(ShakeAndResetCards(selectedCards[0], selectedCards[1]));
+            StartCoroutine(ShakeAndResetCards(selectedCards[0], selectedCards[1], selectedCards[0].GetRotateTimer()));
         }
 
         // Clear the selected cards for the next round
@@ -150,9 +151,9 @@ public class FindTwoCardGameManager : MonoBehaviour
     }
 
     // Game end logic
-    private void GameEnd()
+    private void GameEndSuccessCallback()
     {
-        Debug.Log("Game Over! Cards matched.");
+        Debug.Log("Game Over!");
 
         SuccessCompletionCallback?.Invoke();
 
@@ -168,11 +169,30 @@ public class FindTwoCardGameManager : MonoBehaviour
                 cardButton.interactable = false;
             }
         }
+
+        //calls the game complete method from the score manager
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
+        {
+            scoreManager.GameComplete();
+        }
+        else
+        {
+            Debug.LogError("ScoreManager not found in the scene.");
+        }
+    }
+
+    private void GameEndFailedCallback() 
+    {
+        // All lives gone case
+        Debug.Log("XYZ FindTwoCardsAllLivesGoneCase Callback");
     }
 
     // Coroutine to shake and reset cards
-    private IEnumerator ShakeAndResetCards(Card card1, Card card2)
+    private IEnumerator ShakeAndResetCards(Card card1, Card card2, float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         card1.ShakeCardAndReset();
         card2.ShakeCardAndReset();
 
@@ -189,7 +209,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void OnDestroy() 
     {
-        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEnd;
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEndFailedCallback;
     }
 
     // Might need for future where we implement one game as one prefab so that it won't get destroyed so above OnDestroy will be useless
