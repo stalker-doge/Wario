@@ -12,6 +12,9 @@ public class TimerManager : MonoBehaviour
 
     [SerializeField] TMPro.TextMeshProUGUI timerText;
 
+    //timer image
+    [SerializeField]
+    private GameObject timerImage;
 
 
     // Start is called before the first frame update
@@ -27,6 +30,7 @@ public class TimerManager : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
             UpdateTimerText();
+            UpdateTimerBar();
         }
         else
         {
@@ -61,5 +65,12 @@ public class TimerManager : MonoBehaviour
         // Update the timer text display
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
         timerText.text = string.Format("Remaining time: {0:00}", seconds);
+    }
+
+    public void UpdateTimerBar()
+    {         // Update the timer bar display
+        float fillAmount = timeRemaining / timeLimit;
+        timerImage.GetComponent<UnityEngine.UI.Image>().fillAmount = fillAmount;
+        Debug.Log("Timer fill amount: " + fillAmount);
     }
 }
