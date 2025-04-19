@@ -6,12 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/Scenes/System/Main Menu.unity
     guid: 90866303cf5bd5444b1728f5a1131897
   - enabled: 1
-    path: Assets/Scenes/Aim&Shoot.unity
+    path: Assets/Scenes/Aim and Shoot.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/TestScene.unity
+  - enabled: 0
+    path: Assets/Mairaj/GameScene/FindTwoCardGameScene.unity
     guid: ce22ade831f1b7745a15c3b92aa1c49b
+  - enabled: 0
+    path: Assets/Mairaj/GameScene/BalloonPopGameScene.unity
+    guid: d4ff5d11c17b30f4a8478fdd7da33ac8
+  - enabled: 1
+    path: Assets/Scenes/System/End Scene.unity
+    guid: 1ab287c18ce255b4c86f470287122078
+  - enabled: 1
+    path: Assets/Scenes/System/Loading.unity
+    guid: 5ec284562fa043d45ad56eacf3e1b96e
+  - enabled: 1
+    path: Assets/Scenes/Match the Cards.unity
+    guid: 34565a93c28e11842ae08fab3b57baf4
+  - enabled: 1
+    path: Assets/Scenes/Pop the Balloons.unity
+    guid: 1ff83a57e2f2f1a4ba34146e5dbcb27f
   m_configObjects: {}
