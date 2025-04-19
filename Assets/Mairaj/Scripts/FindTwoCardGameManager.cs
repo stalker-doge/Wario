@@ -136,14 +136,14 @@ public class FindTwoCardGameManager : MonoBehaviour
             SoundManager.Instance.CardMatchAudioClip();
 
             // Match found, end the game
-            GameEndSuccessCallback();
+            Invoke("GameEndSuccessCallback", selectedCards[1].GetRotateTimer() * 2);
 
             Invoke("GameCompleteDelayedSound", 0.5f);
         }
         else
         {
             // No match, shake and reset the cards
-            StartCoroutine(ShakeAndResetCards(selectedCards[0], selectedCards[1]));
+            StartCoroutine(ShakeAndResetCards(selectedCards[0], selectedCards[1], selectedCards[0].GetRotateTimer()));
         }
 
         // Clear the selected cards for the next round
@@ -189,8 +189,10 @@ public class FindTwoCardGameManager : MonoBehaviour
     }
 
     // Coroutine to shake and reset cards
-    private IEnumerator ShakeAndResetCards(Card card1, Card card2)
+    private IEnumerator ShakeAndResetCards(Card card1, Card card2, float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         card1.ShakeCardAndReset();
         card2.ShakeCardAndReset();
 
