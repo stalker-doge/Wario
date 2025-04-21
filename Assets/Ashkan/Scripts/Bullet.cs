@@ -13,49 +13,58 @@ public class Bullet : MonoBehaviour
 
     public int collisionCount = 0;
     public int collisionCountMax = 2;
-    
-    public int maxShots = 2;
-    private int remainingShots;
-    
-    
-    void Start()
-    {
-        remainingShots = maxShots;
-    }
-    
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+        //    Vector2 dir = arrow.GetDirection();
+
+        //    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+        //}
+        if (Input.GetMouseButtonUp(0))
         {
-            Shoot();
+            SoundManager.Instance.ShootAudioClip();
+
+            GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+            Vector2 dir = arrow.GetDirection();
+
+            bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+            //ShootBullet();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        
+        SoundManager.Instance.ProjectileBounceAudioClip();
+        collisionCount++;
+        if (collisionCount == collisionCountMax)
+        {
+            gameObject.SetActive(false);
+        }
+
         if (other.gameObject.CompareTag("Goal"))
         {
             other.gameObject.SetActive(false);
             gameObject.SetActive(false);
+            //calls the game complete method from the score manager
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.GameComplete();
+            }
+            else
+            {
+                Debug.LogError("ScoreManager not found in the scene.");
+            }
         }
     }
-    
-    public void Shoot()
-    {
-        if (remainingShots > 0)
-        {
-            // Do the shooting logic here (e.g., instantiate projectile)
-            Debug.Log("Shoot!");
-            GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-            Vector2 dir = arrow.GetDirection();
 
-            bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
-            remainingShots--;
-        }
-        else
-        {
-            Debug.Log("No shots left!");
-        }
+    public void ShootBullet()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+        Vector2 dir = arrow.GetDirection();
+
+        bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
     }
 }
