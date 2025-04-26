@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
+using UnityEditor;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelSwitcher : MonoBehaviour
 {
@@ -10,38 +12,113 @@ public class LevelSwitcher : MonoBehaviour
     //Array of scenes
     [SerializeField]
     private string[] scenes;
+    [SerializeField]
+    private float timeToWait = 3;
+
+    [SerializeField]
+    private bool loading = false;
+
+    [SerializeField]
+    private TextMeshProUGUI levelName;
+
+    private string sceneName;
+
+    private int gamesPlayed = 0;
+
+
+    private float timer = 0;
     void Start()
     {
-        //if there are no scenes in the array, add all scenes except the current scene
+        //Get the scenes from PlayerPrefs
+        string scenesString = PlayerPrefs.GetString("Scenes", "");
+        //if there are no scenes in PlayerPrefs, set the scenes to an empty array
+        if (string.IsNullOrEmpty(scenesString))
+        {
+            scenes = new string[0];
+
+        }
+        else
+        {
+            //split the scenes string into an array
+            scenes = scenesString.Split(',');
+        }
+
+        //if there are no scenes in the array, add all scenes except scenes in a folder called System
         if (scenes.Length == 0)
         {
-            //Get all scenes
-            scenes = new string[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 1];
-            int index = 0;
-            for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
+            // Get all scenes in build settings
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+            // Initialize the scenes array with the number of scenes in build settings
+            for (int i = 0; i < sceneCount; i++)
             {
-                string scenePath = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i);
-                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-                if (sceneName != UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+                string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+                // Check if the scene is in the "System" folder, if so, skip it and shrink the array
+
+                if (scenePath.Contains("System"))
                 {
-                    scenes[index] = sceneName;
-                    index++;
+                    continue;
                 }
+                // Get the scene name from the path
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+                // Add the scene name to the array
+                List<string> sceneList = new List<string>(scenes);
+                sceneList.Add(sceneName);
+                scenes = sceneList.ToArray();
+
             }
+        }
+
+        if (loading)
+        {
+            FindRandom();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+
+        if (loading)
+        {
+            levelName.text = sceneName;
+            timer += Time.deltaTime;
+            if (timer > timeToWait)
+            {
+                //increment the games played
+                gamesPlayed++;
+                //if games played is greater than 5, reset the games played and up the difficulty
+                if (gamesPlayed > 5)
+                {
+                    gamesPlayed = 0;
+                    //up the difficulty
+                    DifficultyManager.Instance.IncreaseDifficulty();
+                }
+                SwitchScene(sceneName);
+            }
+        }
     }
 
-    public void SwitchRandom()
+    public void FindRandom()
     {
         //Get random scene
         int randomIndex = Random.Range(0, scenes.Length);
-        string sceneName = scenes[randomIndex];
+        sceneName = scenes[randomIndex];
+        //deletes the scene from the array
+        List<string> sceneList = new List<string>(scenes);
+        sceneList.RemoveAt(randomIndex);
+        scenes = sceneList.ToArray();
+        //saves the scenes to the PlayerPrefs
+        PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
+    }
+
+    public void PlayGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
+    }
+
+    public void SwitchScene(string sceneName)
+    {
         //Load scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
