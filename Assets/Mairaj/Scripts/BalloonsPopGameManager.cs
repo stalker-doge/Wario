@@ -3,27 +3,36 @@ using System.Collections.Generic;
 
 public class BalloonsPopGameManager : MonoBehaviour
 {
-    [SerializeField]
-    private RectTransform canvasRect; // Assign your Canvas RectTransform here
+    [SerializeField] private RectTransform canvasRect;
 
-    [SerializeField]
-    public int balloonsCount;
+    [Header("Balloon Counts")]
+    [SerializeField] private int yellowCount;
+    [SerializeField] private int blueCount;
+    [SerializeField] private int redCount;
 
-    [SerializeField]
-    private Balloon yellowBalloonPrefab;  // Assign Yellow Balloon prefab here
-    [SerializeField]
-    private Balloon blueBalloonPrefab;    // Assign Blue Balloon prefab here
-    [SerializeField]
-    private Balloon redBalloonPrefab;     // Assign Red Balloon prefab here
+    [Header("Balloon Prefabs")]
+    [SerializeField] private Balloon yellowBalloonPrefab;
+    [SerializeField] private Balloon blueBalloonPrefab;
+    [SerializeField] private Balloon redBalloonPrefab;
 
-    // Adjust this based on your balloon prefab's width/height
-    private const float balloonRadius = 50f; // Assuming balloon is 100x100 in size
-    private const float minDistance = balloonRadius * 4.5f;
+    [Header("Layout Settings")]
+    [SerializeField] private float leftPadding = 200f;
+    [SerializeField] private float rightPadding = 200f;
+    [SerializeField] private float topPadding = 250f;
+    [SerializeField] private float bottomPadding = 600f;
+
+    [Header("Adjust Radius Distance to Avoid Overlap of Balloons")]
+    [SerializeField] private float adjustRadiusFactor = 4.5f;
+    private const float balloonRadius = 50f;
     private const int maxAttemptsPerBalloon = 100;
+
+    [Header("Balloon Prefab Scale")]
+    [SerializeField] private Vector3 balloonScale = Vector3.one;
 
     public static System.Action BalloonPopupCompletionCallback = null;
 
     private int balloonsPoppedCount = 0;
+    private int totalBalloonsCount;
 
     private void Awake()
     {
@@ -33,14 +42,27 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     void Start()
     {
-        List<Vector2> points = GenerateRandomPoints(canvasRect, balloonsCount);
+        totalBalloonsCount = yellowCount + blueCount + redCount;
+        List<Vector2> points = GenerateRandomPoints(canvasRect, totalBalloonsCount);
 
-        foreach (Vector2 point in points)
-        {
-            // Instantiate a random balloon prefab
-            Balloon balloon = Instantiate(GetRandomBalloonPrefab(), canvasRect);
-            balloon.GetComponent<RectTransform>().anchoredPosition = point;
-        }
+        int pointIndex = 0;
+
+        for (int i = 0; i < yellowCount; i++, pointIndex++)
+            InstantiateBalloonAt(yellowBalloonPrefab, points[pointIndex]);
+
+        for (int i = 0; i < blueCount; i++, pointIndex++)
+            InstantiateBalloonAt(blueBalloonPrefab, points[pointIndex]);
+
+        for (int i = 0; i < redCount; i++, pointIndex++)
+            InstantiateBalloonAt(redBalloonPrefab, points[pointIndex]);
+    }
+
+    private void InstantiateBalloonAt(Balloon prefab, Vector2 position)
+    {
+        Balloon balloon = Instantiate(prefab, canvasRect);
+        RectTransform rect = balloon.GetComponent<RectTransform>();
+        rect.anchoredPosition = position;
+        rect.localScale = balloonScale; // Apply scale here
     }
 
     List<Vector2> GenerateRandomPoints(RectTransform canvas, int count)
@@ -50,13 +72,13 @@ public class BalloonsPopGameManager : MonoBehaviour
         float width = canvas.rect.width;
         float height = canvas.rect.height;
 
-        // Padding values
-        float xMin = -width / 2f + 200f;
-        float xMax = width / 2f - 200f;
+        float xMin = -width / 2f + leftPadding;
+        float xMax = width / 2f - rightPadding;
 
-        // 600 pixels from the bottom means we subtract 600 from the maximum y value
-        float yMin = -height / 2f + 250f;  // Padding from the top (250 pixels)
-        float yMax = height / 2f - 600f;   // Leave 600 pixels from the bottom
+        float yMin = -height / 2f + topPadding;
+        float yMax = height / 2f - bottomPadding;
+
+        float minDistance = balloonRadius * adjustRadiusFactor;
 
         for (int i = 0; i < count; i++)
         {
@@ -97,33 +119,15 @@ public class BalloonsPopGameManager : MonoBehaviour
         return randomPoints;
     }
 
-    private Balloon GetRandomBalloonPrefab()
+    private void BalloonPopEndGameCallback()
     {
-        // Randomly select a balloon prefab
-        int randomIndex = Random.Range(0, 3);  // 0 = Yellow, 1 = Blue, 2 = Red
-
-        switch (randomIndex)
-        {
-            case 0:
-                return yellowBalloonPrefab;
-            case 1:
-                return blueBalloonPrefab;
-            case 2:
-                return redBalloonPrefab;
-            default:
-                return yellowBalloonPrefab; // Default to yellow if anything goes wrong
-        }
-    }
-
-    private void BalloonPopEndGameCallback() {
         Debug.Log("XYZ BalloonsGameAllLivesGoneCase Callback");
-        // All lives gone case
     }
 
     private void BalloonsPopCount()
     {
         balloonsPoppedCount++;
-        if (balloonsCount == balloonsPoppedCount)
+        if (balloonsPoppedCount == totalBalloonsCount)
         {
             BalloonPopupCompletionCallback?.Invoke();
         }
@@ -135,21 +139,16 @@ public class BalloonsPopGameManager : MonoBehaviour
         Balloon.BalloonPoppedCallback -= BalloonsPopCount;
     }
 
-
     private void Update()
     {
-        // Check if all balloons are popped
-        if (balloonsPoppedCount >= balloonsCount)
+        if (balloonsPoppedCount >= totalBalloonsCount)
         {
-
-            // Call the game complete method from the score manager
             EndGame();
-
         }
     }
 
     private void EndGame()
-    {         //calls the game complete method from the score manager
+    {
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
         if (scoreManager != null)
         {
