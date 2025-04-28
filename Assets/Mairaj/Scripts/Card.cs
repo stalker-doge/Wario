@@ -1,4 +1,3 @@
-//Mairaj Muhammad -->2415831
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +7,11 @@ public class Card : MonoBehaviour
 {
     [SerializeField]
     private Text cardNo;
+
+    [Header("One Sided (Back, Front) Rotation Timer")]
+    [Range(0.05f, 0.5f)]
+    [SerializeField]
+    private float rotateTimer = 0.15f;
 
     private int cardNum;
 
@@ -74,9 +78,9 @@ public class Card : MonoBehaviour
         SoundManager.Instance.CardFlipAudioClip();
 
         GetComponent<Button>().enabled = false;
-        transform.DORotate(new Vector3(0, 90, 0), 0.15f, RotateMode.Fast).OnComplete(() => {
+        transform.DORotate(new Vector3(0, 90, 0), rotateTimer, RotateMode.Fast).OnComplete(() => {
             cardNo.gameObject.SetActive(setTextActive);
-            transform.DORotate(new Vector3(0, 0, 0), 0.15f, RotateMode.Fast).OnComplete(() =>
+            transform.DORotate(new Vector3(0, 0, 0), rotateTimer, RotateMode.Fast).OnComplete(() =>
             {
                 GetComponent<Button>().enabled = !setTextActive;
             });
@@ -86,5 +90,10 @@ public class Card : MonoBehaviour
     public void ResetCard()
     {
         Rotate(false);
+    }
+
+    public float GetRotateTimer()
+    {
+        return rotateTimer;
     }
 }
