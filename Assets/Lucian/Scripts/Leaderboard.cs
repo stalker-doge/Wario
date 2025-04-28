@@ -14,6 +14,9 @@ public class Leaderboard : MonoBehaviour
     private List<TextMeshProUGUI> scores;
 
     [SerializeField]
+    private List<TextMeshProUGUI> positions;
+
+    [SerializeField]
     private TMP_InputField usernameInputField;
 
     private string publicLeaderboardKey = "19821531fd2b074aa36f93382a58e5f79132f574fce07c94ec5e8ce2096915cb";
@@ -39,6 +42,7 @@ public class Leaderboard : MonoBehaviour
             {
                 names[i].text = msg[i].Username;
                 scores[i].text = msg[i].Score.ToString();
+                positions[i].text = (i + 1).ToString();
             }
         }));
     }

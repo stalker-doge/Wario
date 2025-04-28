@@ -29,6 +29,12 @@ public class NewBehaviourScript : MonoBehaviour
             lastScore.text= "Score: " + PlayerPrefs.GetInt("LastScore", 0).ToString();
             return;
         }
+        //checks if the score and lives texts are not null
+        if (score == null || lives == null)
+        {
+            return;
+        }
+
         //gets the score and lives from PlayerPrefs
         score.text = "Score: " + PlayerPrefs.GetInt("Score", 0).ToString();
         lives.text = "Lives: " + PlayerPrefs.GetInt("Lives", 3).ToString();
