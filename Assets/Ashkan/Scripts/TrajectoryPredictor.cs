@@ -25,7 +25,32 @@ public class TrajectoryPredictor : MonoBehaviour
 
     void Update()
     {
+        // Start aiming when holding left click
+        if (Input.GetMouseButton(0))
+        {
+            isAiming = true;
+        }
+        else
+        {
+            isAiming = false;
+        }
+
+        // Hide dots when pressing Space
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    HideDots();
+        //}
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            HideDots();
+        }
+
+        // Draw trajectory if aiming
+        if (isAiming)
+        {
             DrawTrajectory();
+        }
     }
 
     void DrawTrajectory()
@@ -36,24 +61,19 @@ public class TrajectoryPredictor : MonoBehaviour
         for (int i = 0; i < dotCount; i++)
         {
             RaycastHit2D hit = Physics2D.Raycast(position, velocity.normalized, stepDistance, collisionLayer);
-
             if (hit.collider != null)
             {
                 position = hit.point;
-                dots[i].transform.position = position;
-                dots[i].SetActive(true); 
-                for (int j = i + 1; j < dots.Count; j++)
-                {
-                    dots[j].SetActive(false);
-                }
-                break;
+                velocity = Vector2.Reflect(velocity, hit.normal);
+                position += velocity.normalized * 0.01f;
             }
             else
             {
                 position += velocity.normalized * stepDistance;
-                dots[i].transform.position = position;
-                dots[i].SetActive(true);
             }
+
+            dots[i].transform.position = position;
+            dots[i].SetActive(true);
         }
     }
 
