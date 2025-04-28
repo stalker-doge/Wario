@@ -122,7 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/System/End Scene.unity
 --- !u!224 &190310768 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5718040672671527385, guid: b9e4844d35cbc6543a0dc9244c465786, type: 3}
@@ -567,9 +566,6 @@ RectTransform:
   m_PrefabInstance: {fileID: 397461869}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1365652825
-========
---- !u!1 &1006773889
->>>>>>>> master:Assets/Scenes/Main Menu.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -680,7 +676,6 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Scenes/System/End Scene.unity
   m_GameObject: {fileID: 1365652825}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -708,9 +703,6 @@ MonoBehaviour:
   loading: 0
   levelName: {fileID: 0}
 --- !u!1 &1400698484
-========
---- !u!1 &1276370240
->>>>>>>> master:Assets/Scenes/Main Menu.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -797,7 +789,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365652829}
     m_Modifications:
-<<<<<<<< HEAD:Assets/Scenes/System/End Scene.unity
     - target: {fileID: 978644392807111628, guid: b9e4844d35cbc6543a0dc9244c465786, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -858,8 +849,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-========
->>>>>>>> master:Assets/Scenes/Main Menu.unity
     - target: {fileID: 5718040672671527385, guid: b9e4844d35cbc6543a0dc9244c465786, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -946,7 +935,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5718040672671527385, guid: b9e4844d35cbc6543a0dc9244c465786, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1209322252}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9e4844d35cbc6543a0dc9244c465786, type: 3}
 --- !u!1 &1836654118
