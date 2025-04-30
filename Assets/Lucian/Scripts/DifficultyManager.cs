@@ -60,7 +60,7 @@ public class DifficultyManager : MonoBehaviour
         switch (currentDifficulty)
         {
             case Difficulty.Level1:
-                difficultyMultiplier = 2.0f;
+                difficultyMultiplier = 1.0f;
                 break;
             case Difficulty.Level2:
                 difficultyMultiplier = 1.5f;

@@ -122,6 +122,7 @@ public class BalloonsPopGameManager : MonoBehaviour
     private void BalloonPopEndGameCallback()
     {
         Debug.Log("XYZ BalloonsGameAllLivesGoneCase Callback");
+        EndGame();
     }
 
     private void BalloonsPopCount()
@@ -130,6 +131,7 @@ public class BalloonsPopGameManager : MonoBehaviour
         if (balloonsPoppedCount == totalBalloonsCount)
         {
             BalloonPopupCompletionCallback?.Invoke();
+            EndGame();
         }
     }
 
