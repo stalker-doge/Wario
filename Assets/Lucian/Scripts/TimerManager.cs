@@ -38,6 +38,8 @@ public class TimerManager : MonoBehaviour
             ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
             if (scoreManager != null)
             {
+                //resets the time remaining to normal
+                timeRemaining = timeLimit;
                 scoreManager.GameFail();
             }
             else
