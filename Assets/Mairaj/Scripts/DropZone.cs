@@ -9,6 +9,13 @@ public class DropZone : MonoBehaviour, IDropHandler
     public delegate void GameEnded(); // Delegate for notifying game end
     public static event GameEnded OnGameEnded; // Event to notify game manager
 
+    private FillTheGapVariant variant;
+
+    private void Awake()
+    {
+        variant = (FillTheGapVariant)(FindObjectOfType<FillTheGapManager>()?.GetVariant());
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         DragDrop dragDrop = eventData.pointerDrag.GetComponent<DragDrop>();
@@ -34,9 +41,10 @@ public class DropZone : MonoBehaviour, IDropHandler
                 // Increment correct match counter
                 correctMatches++;
 
-                // Check if two matches have been made
-                if (correctMatches >= 2)
+                // Check if all matches have been made
+                if (correctMatches >= (int)variant)
                 {
+                    Debug.Log("XYZ Game Ended");
                     // Game has ended, notify FindTheGapManager
                     OnGameEnded?.Invoke();
                 }
