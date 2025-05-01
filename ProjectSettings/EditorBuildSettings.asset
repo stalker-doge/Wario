@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Aim and Shoot.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Mairaj/GameScene/FindTwoCardGameScene.unity
+    path: Assets/Mairaj/GameScene/FindTwoCards/Find Two Card.unity
     guid: ce22ade831f1b7745a15c3b92aa1c49b
   - enabled: 0
     path: Assets/Mairaj/GameScene/BalloonPopGameScene.unity
