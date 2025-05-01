@@ -572,6 +572,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 993533804847636785, guid: fe8b0461458dc3b43ba3f37b3efef6d9, type: 3}
+      propertyPath: variant
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 993533804847636785, guid: fe8b0461458dc3b43ba3f37b3efef6d9, type: 3}
+      propertyPath: cards.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1312085080790759288, guid: fe8b0461458dc3b43ba3f37b3efef6d9, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.0355332
@@ -583,9 +591,6 @@ PrefabInstance:
     - target: {fileID: 1312085080790759288, guid: fe8b0461458dc3b43ba3f37b3efef6d9, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.0355332
-    - target: {fileID: 993533804847636785, guid: fe8b0461458dc3b43ba3f37b3efef6d9, type: 3}
-      propertyPath: cards.Array.size
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1316674762910809373, guid: fe8b0461458dc3b43ba3f37b3efef6d9, type: 3}
       propertyPath: m_IsActive
