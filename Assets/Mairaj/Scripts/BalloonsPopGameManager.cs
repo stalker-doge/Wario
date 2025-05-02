@@ -8,12 +8,12 @@ public class BalloonsPopGameManager : MonoBehaviour
     [Header("Balloon Counts")]
     [SerializeField] private int yellowCount;
     [SerializeField] private int blueCount;
-    //[SerializeField] private int redCount;
+    [SerializeField] private int redCount;
 
     [Header("Balloon Prefabs")]
     [SerializeField] private Balloon yellowBalloonPrefab;
     [SerializeField] private Balloon blueBalloonPrefab;
-    //[SerializeField] private Balloon redBalloonPrefab;
+    [SerializeField] private Balloon redBalloonPrefab;
 
     [Header("Layout Settings")]
     [SerializeField] private float leftPadding = 200f;
@@ -42,7 +42,7 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     void Start()
     {
-        totalBalloonsCount = yellowCount + blueCount  /* + redCount*/;
+        totalBalloonsCount = yellowCount + blueCount + redCount;
         List<Vector2> points = GenerateRandomPoints(canvasRect, totalBalloonsCount);
 
         int pointIndex = 0;
@@ -53,8 +53,8 @@ public class BalloonsPopGameManager : MonoBehaviour
         for (int i = 0; i < blueCount; i++, pointIndex++)
             InstantiateBalloonAt(blueBalloonPrefab, points[pointIndex]);
 
-        //for (int i = 0; i < redCount; i++, pointIndex++)
-        //    InstantiateBalloonAt(redBalloonPrefab, points[pointIndex]);
+        for (int i = 0; i < redCount; i++, pointIndex++)
+            InstantiateBalloonAt(redBalloonPrefab, points[pointIndex]);
     }
 
     private void InstantiateBalloonAt(Balloon prefab, Vector2 position)
