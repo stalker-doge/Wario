@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 309885044874728961, guid: 67d5a32528600a144b83b213dd5a2ee0, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005214839437446873, guid: 67d5a32528600a144b83b213dd5a2ee0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e131d3f5ff927e6479ae65d64b422d0e, type: 3}
     - target: {fileID: 3005214839437446873, guid: 67d5a32528600a144b83b213dd5a2ee0, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -50,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7144848272182723616, guid: 67d5a32528600a144b83b213dd5a2ee0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 107
       objectReference: {fileID: 0}
     - target: {fileID: 7144848272182723616, guid: 67d5a32528600a144b83b213dd5a2ee0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 148
       objectReference: {fileID: 0}
     - target: {fileID: 7144848272182723616, guid: 67d5a32528600a144b83b213dd5a2ee0, type: 3}
       propertyPath: m_LocalPosition.x
