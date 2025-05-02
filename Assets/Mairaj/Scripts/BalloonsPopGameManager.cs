@@ -127,7 +127,7 @@ public class BalloonsPopGameManager : MonoBehaviour
     private void BalloonsPopCount()
     {
         balloonsPoppedCount++;
-        if (balloonsPoppedCount == totalBalloonsCount)
+        if (balloonsPoppedCount == totalBalloonsCount - redCount)
         {
             BalloonPopupCompletionCallback?.Invoke();
         }
@@ -141,7 +141,7 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void Update()
     {
-        if (balloonsPoppedCount >= totalBalloonsCount)
+        if (balloonsPoppedCount >= totalBalloonsCount - redCount)
         {
             EndGame();
         }
