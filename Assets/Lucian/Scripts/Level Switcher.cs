@@ -99,6 +99,11 @@ public class LevelSwitcher : MonoBehaviour
         scenes = sceneList.ToArray();
         //saves the scenes to the PlayerPrefs
         PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
+
+        foreach(string s in scenes)
+        {
+            Debug.Log("XYZ Scene " + s);
+        }
     }
 
     public void PlayGame()

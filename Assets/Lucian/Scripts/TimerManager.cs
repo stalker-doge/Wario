@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 public class TimerManager : MonoBehaviour
 {
@@ -12,12 +14,13 @@ public class TimerManager : MonoBehaviour
 
     [SerializeField] TMPro.TextMeshProUGUI timerText;
 
-
+    private LocalizeStringEvent remainingTimeEvent;
 
     // Start is called before the first frame update
     void Start()
     {
         StartTimer();
+        remainingTimeEvent = timerText.GetComponent<LocalizeStringEvent>();
     }
 
     // Update is called once per frame
@@ -58,8 +61,23 @@ public class TimerManager : MonoBehaviour
 
     public void UpdateTimerText()
     {
-        // Update the timer text display
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
-        timerText.text = string.Format("Remaining time: {0:00}", seconds);
+
+        if (remainingTimeEvent == null)
+            return;
+
+        var smartVars = remainingTimeEvent.StringReference;
+
+        if (!smartVars.ContainsKey("targetValue"))
+        {
+            smartVars.Add("targetValue", new IntVariable());
+        }
+
+        if (smartVars["targetValue"] is IntVariable intVar)
+        {
+            intVar.Value = seconds;
+        }
+
+        remainingTimeEvent.RefreshString();
     }
 }
