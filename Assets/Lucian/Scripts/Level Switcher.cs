@@ -23,6 +23,8 @@ public class LevelSwitcher : MonoBehaviour
 
     private string sceneName;
 
+    private int gamesPlayed = 0;
+
 
     private float timer = 0;
     void Start()
@@ -83,6 +85,15 @@ public class LevelSwitcher : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > timeToWait)
             {
+                //increment the games played
+                gamesPlayed++;
+                //if games played is greater than 5, reset the games played and up the difficulty
+                if (gamesPlayed > 5)
+                {
+                    gamesPlayed = 0;
+                    //up the difficulty
+                    DifficultyManager.Instance.IncreaseDifficulty();
+                }
                 SwitchScene(sceneName);
             }
         }

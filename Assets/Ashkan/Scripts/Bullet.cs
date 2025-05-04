@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
     {
         SoundManager.Instance.ProjectileBounceAudioClip();
         collisionCount++;
-        if ( collisionCount == collisionCountMax)
+        if (collisionCount == collisionCountMax)
         {
             gameObject.SetActive(false);
         }

@@ -131,9 +131,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 407924350}
     m_Modifications:
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
+      propertyPath: redCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
+      propertyPath: blueCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: canvasRect
       value: 
       objectReference: {fileID: 407924350}
+    - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
+      propertyPath: yellowCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3850506414125591602, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -343,6 +355,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2425821795270113180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: timeLimit
+      value: 10000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2425821795270113180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: timerImage
+      value: 
+      objectReference: {fileID: 1486806371}
     - target: {fileID: 5358220602199836166, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_LocalPosition.z
       value: -143
@@ -707,6 +727,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4819649281076337661, guid: 334087acbac8d3b4e84233e471a48135, type: 3}
   m_PrefabInstance: {fileID: 1344928122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1486806371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 966908399474370171, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+  m_PrefabInstance: {fileID: 549337998}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2045219778
 GameObject:
