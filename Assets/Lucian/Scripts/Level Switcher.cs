@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Components;
 
 public class LevelSwitcher : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class LevelSwitcher : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI levelName;
+
+    // Localized String references
+    [SerializeField]
+    private LocalizeStringEvent localizedLevelName;
 
     private string sceneName;
 
@@ -81,7 +86,8 @@ public class LevelSwitcher : MonoBehaviour
 
         if (loading)
         {
-            levelName.text = sceneName;
+            //levelName.text = sceneName;
+            SetLevelTitle(sceneName);
             timer += Time.deltaTime;
             if (timer > timeToWait)
             {
@@ -111,10 +117,7 @@ public class LevelSwitcher : MonoBehaviour
         //saves the scenes to the PlayerPrefs
         PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
 
-        foreach(string s in scenes)
-        {
-            Debug.Log("XYZ Scene " + s);
-        }
+        SetLevelTitle(sceneName);
     }
 
     public void PlayGame()
@@ -127,4 +130,34 @@ public class LevelSwitcher : MonoBehaviour
         //Load scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
+
+    // Function to set the correct localized string for each level
+    public void SetLevelTitle(string level)
+    {
+        switch (level)
+        {
+            case "MathGame":
+                localizedLevelName.StringReference.TableEntryReference = "MathGame_Title";
+                break;
+            case "Pop the Balloons":
+                localizedLevelName.StringReference.TableEntryReference = "PopTheBalloons_Title";
+                break;
+            case "Match the Cards":
+                localizedLevelName.StringReference.TableEntryReference = "MatchTwoCards_Title";
+                break;
+            case "MazeGame":
+                localizedLevelName.StringReference.TableEntryReference = "MazeGame_Title";
+                break;
+            case "Aim and Shoot":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            default:
+                Debug.LogWarning("Level not found in the localization table.");
+                return;
+        }
+
+        // Refresh the string to display the translated text
+        localizedLevelName.RefreshString();
+    }
+
 }

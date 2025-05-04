@@ -77,12 +77,12 @@ public class TimerManager : MonoBehaviour
 
         if (!smartVars.ContainsKey("targetValue"))
         {
-            smartVars.Add("targetValue", new IntVariable());
+            smartVars.Add("targetValue", new StringVariable());
         }
 
-        if (smartVars["targetValue"] is IntVariable intVar)
+        if (smartVars["targetValue"] is StringVariable strVar)
         {
-            intVar.Value = seconds;
+            strVar.Value = seconds.ToString();
         }
 
         remainingTimeEvent.RefreshString();

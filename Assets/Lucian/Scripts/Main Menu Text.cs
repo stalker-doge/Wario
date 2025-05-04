@@ -78,8 +78,8 @@ public class NewBehaviourScript : MonoBehaviour
             localizeEvent.StringReference.Add(variableName, new IntVariable());
         }
 
-        var variable = localizeEvent.StringReference[variableName] as IntVariable;
-        variable.Value = value;
+        var variable = localizeEvent.StringReference[variableName] as StringVariable;
+        variable.Value = value.ToString();
         localizeEvent.RefreshString();
     }
 
