@@ -16,6 +16,10 @@ public class TimerManager : MonoBehaviour
 
     private LocalizeStringEvent remainingTimeEvent;
 
+    //timer image
+    [SerializeField]
+    private GameObject timerImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +34,7 @@ public class TimerManager : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
             UpdateTimerText();
+            UpdateTimerBar();
         }
         else
         {
@@ -37,6 +42,8 @@ public class TimerManager : MonoBehaviour
             ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
             if (scoreManager != null)
             {
+                //resets the time remaining to normal
+                timeRemaining = timeLimit;
                 scoreManager.GameFail();
             }
             else
@@ -79,5 +86,12 @@ public class TimerManager : MonoBehaviour
         }
 
         remainingTimeEvent.RefreshString();
+    }
+
+    public void UpdateTimerBar()
+    {         // Update the timer bar display
+        float fillAmount = timeRemaining / timeLimit;
+        timerImage.GetComponent<UnityEngine.UI.Image>().fillAmount = fillAmount;
+        Debug.Log("Timer fill amount: " + fillAmount);
     }
 }
