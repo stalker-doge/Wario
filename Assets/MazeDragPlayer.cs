@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MazeDragPlayer : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     private Vector3 targetPosition;
     private bool isDragging = false;
     private bool isTouchingWall = false;
@@ -12,7 +12,7 @@ public class MazeDragPlayer : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // this blocks Unity's physics from rotating the object
         targetPosition = transform.position;
     }
@@ -39,8 +39,8 @@ public class MazeDragPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.fixedDeltaTime);
-        Vector2 direction = newPosition - rb.position;
+        Vector3 newPosition = Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.fixedDeltaTime);
+        Vector3 direction = newPosition - rb.position;
 
         // Rotate only if not touching wall
         if (direction.magnitude > 0.01f && !isTouchingWall)
