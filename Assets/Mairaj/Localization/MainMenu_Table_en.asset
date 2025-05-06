@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_Table_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: bcf18317208776648b654261890bf926, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4419644315859681322
+  m_TableData:
+  - m_Id: 177916395520
+    m_Localized: Microgame
+    m_Metadata:
+      m_Items:
+      - rid: 4419644315859681322
+  - m_Id: 292542529536
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362029563904
+    m_Localized: Leaderboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411459436544
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2319007924224
+    m_Localized: Collection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5312549797888
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5616687169536
+    m_Localized: 'Score: {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644315859681322
+  - m_Id: 5722756923392
+    m_Localized: 'Personal Best: {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644315859681322
+  - m_Id: 6168636604416
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46496311721984
+    m_Localized: 'Lives: {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644315859681322
+  - m_Id: 51054605811712
+    m_Localized: 'Remaining Time: {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644315859681322
+  - m_Id: 92102518423552
+    m_Localized: Match the Cards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92181534916608
+    m_Localized: Pop the Balloons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92256533266432
+    m_Localized: Math Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92347696463872
+    m_Localized: Maze Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92383129944064
+    m_Localized: Aim and Shoot
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4419644315859681322
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 46496311721984
+        - id: 51054605811712
+        - id: 5722756923392
+        - id: 5616687169536
+        - id: 177916395520

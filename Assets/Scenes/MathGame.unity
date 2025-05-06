@@ -1002,7 +1002,7 @@ MonoBehaviour:
   - {fileID: 1364438222}
   - {fileID: 1181593470}
   - {fileID: 1414874428}
-  correctAnswer: 0
+  correctAnswer: 1
 --- !u!1 &1007024265
 GameObject:
   m_ObjectHideFlags: 0

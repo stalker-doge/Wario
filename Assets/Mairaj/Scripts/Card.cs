@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class Card : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class Card : MonoBehaviour
 
         // Add the shake position effect after the delay
         shakeSequence.Append(transform.DOShakePosition(0.1f, new Vector3(5f, 0f, 0f), 10, 90, false, true)
-            .SetLoops(Random.Range(3, 3)));  // 3 to x iterations of shake
+            .SetLoops(UnityEngine.Random.Range(3, 3)));  // 3 to x iterations of shake
 
         // Add vibration for Android after the shake
         shakeSequence.OnComplete(() =>
@@ -73,24 +74,25 @@ public class Card : MonoBehaviour
         Rotate(true);
     }
 
-    private void Rotate(bool setTextActive)
+    public void Rotate(bool setTextActive, System.Action CompletionCallback = null, bool rotateInstant = false)
     {
         // Play a flip sound
-        SoundManager.Instance.CardFlipAudioClip();
+        SoundManager.Instance?.CardFlipAudioClip();
 
         GetComponent<Button>().enabled = false;
-        transform.DORotate(new Vector3(0, 90, 0), rotateTimer, RotateMode.Fast).OnComplete(() => {
+        transform.DORotate(new Vector3(0, 90, 0), rotateInstant ? (rotateTimer * 0) : rotateTimer, RotateMode.Fast).OnComplete(() => {
             cardNo.gameObject.SetActive(setTextActive);
-            transform.DORotate(new Vector3(0, 0, 0), rotateTimer, RotateMode.Fast).OnComplete(() =>
+            transform.DORotate(new Vector3(0, 0, 0), rotateInstant ? (rotateTimer * 0) : rotateTimer, RotateMode.Fast).OnComplete(() =>
             {
                 GetComponent<Button>().enabled = !setTextActive;
+                CompletionCallback?.Invoke();
             });
         });
     }
 
-    public void ResetCard()
+    public void ResetCard(System.Action CompletionCallback = null)
     {
-        Rotate(false);
+        Rotate(false, CompletionCallback);
     }
 
     public float GetRotateTimer()

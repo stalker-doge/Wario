@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: redCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: blueCount
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: canvasRect
@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 407924350}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: yellowCount
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: balloonScale.x

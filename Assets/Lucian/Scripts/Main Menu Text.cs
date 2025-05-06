@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Unity.Services.Core;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //checks if the scene is the end scene
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End Scene")
         {
