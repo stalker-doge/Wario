@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4262109147936275589}
   m_Layer: 0
   m_Name: RightWall
-  m_TagString: Untagged
+  m_TagString: MazeWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 7603470369870053819}
   m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Untagged
+  m_TagString: MazeWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 9049457586604433250}
   m_Layer: 0
   m_Name: BackWall
-  m_TagString: Untagged
+  m_TagString: MazeWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 7683522309125434820}
   m_Layer: 0
   m_Name: FrontWall
-  m_TagString: Untagged
+  m_TagString: MazeWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 1632289631595270545}
   m_Layer: 0
   m_Name: Unvisitable
-  m_TagString: Untagged
+  m_TagString: MazeWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 3612864946206323474}
   m_Layer: 0
   m_Name: MazeCell
-  m_TagString: Untagged
+  m_TagString: MazeWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
