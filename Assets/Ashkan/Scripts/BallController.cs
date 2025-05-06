@@ -65,7 +65,11 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Target"))
         {
-            Debug.Log("Game Over");
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.GameComplete();
+            }
         }
     }
 }
