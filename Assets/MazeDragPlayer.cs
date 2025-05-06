@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MazeDragPlayer : MonoBehaviour
@@ -51,31 +52,38 @@ public class MazeDragPlayer : MonoBehaviour
         }
 
         rb.MovePosition(newPosition);
+
+       // rb.velocity = Vector3.ClampMagnitude(rb.velocity, moveSpeed);
     }
 
     // Detect collision with walls
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
             isTouchingWall = true;
         }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("MazeWall"))
         {
-            isTouchingWall = false;
+            moveSpeed = 3;
         }
     }
-    
-    void OnTriggerEnter2D(Collider2D other)
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("MazeWall"))
+        {
+            moveSpeed = 8;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("MazeGoal"))
         {
             Debug.Log("Maze Done");
             // You can also add effects, sounds, or next level logic here
         }
+    
     }
 }

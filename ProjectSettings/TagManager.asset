@@ -9,6 +9,7 @@ TagManager:
   - AnswerPlaceholder
   - Wall
   - MazeGoal
+  - MazeWall
   layers:
   - Default
   - TransparentFX
