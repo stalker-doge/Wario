@@ -457,6 +457,10 @@ PrefabInstance:
       propertyPath: isPaused
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2425821795270113180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: timeLimit
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6122107764772450504, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -693,6 +697,14 @@ PrefabInstance:
     - target: {fileID: 7512536675707010619, guid: 70d7846abc0dd9d4fa407e997d5fbec2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347802625214388182, guid: 70d7846abc0dd9d4fa407e997d5fbec2, type: 3}
+      propertyPath: m_margin.x
+      value: -384.71765
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347802625214388182, guid: 70d7846abc0dd9d4fa407e997d5fbec2, type: 3}
+      propertyPath: m_margin.z
+      value: -356.1089
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

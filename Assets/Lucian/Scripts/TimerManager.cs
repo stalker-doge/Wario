@@ -66,7 +66,7 @@ public class TimerManager : MonoBehaviour
                 if (scoreManager != null)
                 {
                     //resets the time remaining to normal
-                    isPaused = true;
+                    Pause(true);
                     scoreManager.GameFail();
                 }
                 else
@@ -108,7 +108,7 @@ public class TimerManager : MonoBehaviour
         {
             strVar.Value = seconds.ToString();
         }
-
+        Debug.Log(seconds.ToString());
        timerText.text = seconds.ToString();
     }
 
@@ -122,5 +122,10 @@ public class TimerManager : MonoBehaviour
     public void ResetTimer()
     {
         timeRemaining = timeLimit;
+    }
+
+    public void Pause(bool toPause)
+    {
+        isPaused = toPause;
     }
 }
