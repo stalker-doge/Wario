@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Goal
+  - Target
+  - AnswerPlaceholder
+  - Wall
+  - MazeGoal
+  - MazeWall
   layers:
   - Default
   - TransparentFX
