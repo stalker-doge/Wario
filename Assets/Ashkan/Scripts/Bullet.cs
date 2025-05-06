@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         //}
         if (Input.GetMouseButtonUp(0))
         {
-            SoundManager.Instance.ShootAudioClip();
+            //SoundManager.Instance.ShootAudioClip();
 
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
             Vector2 dir = arrow.GetDirection();
@@ -36,12 +36,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        SoundManager.Instance.ProjectileBounceAudioClip();
-        collisionCount++;
+        //SoundManager.Instance.ProjectileBounceAudioClip();
+        /*collisionCount++;
         if (collisionCount == collisionCountMax)
         {
             gameObject.SetActive(false);
-        }
+        }*/
 
         if (other.gameObject.CompareTag("Goal"))
         {
