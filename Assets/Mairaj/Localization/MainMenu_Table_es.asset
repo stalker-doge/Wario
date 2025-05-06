@@ -116,6 +116,10 @@ MonoBehaviour:
     m_Localized: Calidad
     m_Metadata:
       m_Items: []
+  - m_Id: 772531059736576
+    m_Localized: Idiomas
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
