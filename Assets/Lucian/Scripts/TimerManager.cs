@@ -16,9 +16,13 @@ public class TimerManager : MonoBehaviour
 
     private LocalizeStringEvent remainingTimeEvent;
 
+    public bool isPaused=false;
+
     //timer image
     [SerializeField]
     private GameObject timerImage;
+
+    public static TimerManager Instance { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -28,31 +32,48 @@ public class TimerManager : MonoBehaviour
         remainingTimeEvent = timerText.GetComponent<LocalizeStringEvent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Awake is called when the script instance is being loaded
+    void Awake()
     {
-        Debug.Log("Timer Tick");
-        if (timeRemaining > 0)
+        // Singleton pattern to ensure only one instance of DifficultyManager exists
+        if (Instance == null)
         {
-            timeRemaining -= Time.deltaTime;
-            UpdateTimerText();
-            UpdateTimerBar();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            timeRemaining = timeLimit;
+            Destroy(gameObject);
+        }
+    }
 
-            //gets the score manager and calls GameFail
-            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-            if (scoreManager != null)
+    // Update is called once per frame
+    void Update()
+    {
+        if (!isPaused)
+        {
+            if (timeRemaining > 0)
             {
-                //resets the time remaining to normal
-                //Destroy(this);
-                scoreManager.GameFail();
+                timeRemaining -= Time.deltaTime;
+                UpdateTimerText();
+                UpdateTimerBar();
             }
             else
             {
-                Debug.LogError("ScoreManager not found in the scene.");
+                timeRemaining = timeLimit;
+
+                //gets the score manager and calls GameFail
+                ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+                if (scoreManager != null)
+                {
+                    //resets the time remaining to normal
+                    isPaused = true;
+                    scoreManager.GameFail();
+                }
+                else
+                {
+                    Debug.LogError("ScoreManager not found in the scene.");
+                }
             }
         }
     }
@@ -89,7 +110,7 @@ public class TimerManager : MonoBehaviour
             strVar.Value = seconds.ToString();
         }
 
-        remainingTimeEvent.RefreshString();
+       timerText.text = seconds.ToString();
     }
 
     public void UpdateTimerBar()

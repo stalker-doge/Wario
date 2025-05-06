@@ -10,6 +10,9 @@ public class ScoreManager : MonoBehaviour
     public int highScore = 0;
     public int lastScore = 0;
     public int lives = 3;
+
+    public static ScoreManager Instance { get; private set; }
+
     void Start()
     {
         //if in the end scene, reset the score and lives
@@ -24,6 +27,21 @@ public class ScoreManager : MonoBehaviour
         lives = PlayerPrefs.GetInt("Lives", 3);
         Debug.Log("Score: " + score);
         Debug.Log("Lives: " + lives);
+    }
+
+    // Awake is called when the script instance is being loaded
+    void Awake()
+    {
+        // Singleton pattern to ensure only one instance of DifficultyManager exists
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -104,8 +122,8 @@ public class ScoreManager : MonoBehaviour
             float timeLeft = timerManager.GetTimeRemaining();
             int scoreToAdd = Mathf.FloorToInt(timeLeft * 10);
             AddScore(scoreToAdd);
-            Debug.Log("Score: " + score);
 
+            TimerManager.Instance.isPaused = true;
             //goes back to the main menu
             UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
         }
