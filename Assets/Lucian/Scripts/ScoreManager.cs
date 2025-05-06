@@ -124,6 +124,7 @@ public class ScoreManager : MonoBehaviour
             AddScore(scoreToAdd);
 
             TimerManager.Instance.isPaused = true;
+            TimerManager.Instance.ResetTimer();
             //goes back to the main menu
             UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
         }

@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/System/LeaderBoard.unity
     guid: 9d34aeb53fa036f41beaeaae0906a139
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MazeGame.unity
     guid: f62f4ad254165fc43a14592dcd7bc4cd
   - enabled: 1
