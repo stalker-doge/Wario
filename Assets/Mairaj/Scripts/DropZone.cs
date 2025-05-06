@@ -52,6 +52,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     {
                         scoreManager.GameComplete();
                     }
+                    SoundManager.Instance?.GameOverAudioClip();
                 }
             }
             else
