@@ -24,7 +24,7 @@ public class BalloonsPopGameManager : MonoBehaviour
     [Header("Adjust Radius Distance to Avoid Overlap of Balloons")]
     [SerializeField] private float adjustRadiusFactor = 4.5f;
     private const float balloonRadius = 50f;
-    private const int maxAttemptsPerBalloon = 100;
+    private const int maxAttemptsPerBalloon = 500;
 
     [Header("Balloon Prefab Scale")]
     [SerializeField] private Vector3 balloonScale = Vector3.one;
@@ -128,7 +128,7 @@ public class BalloonsPopGameManager : MonoBehaviour
     private void BalloonsPopCount()
     {
         balloonsPoppedCount++;
-        if (balloonsPoppedCount == totalBalloonsCount)
+        if (balloonsPoppedCount == totalBalloonsCount - redCount)
         {
             BalloonPopupCompletionCallback?.Invoke();
             EndGame();
@@ -143,7 +143,7 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void Update()
     {
-        if (balloonsPoppedCount >= totalBalloonsCount)
+        if (balloonsPoppedCount >= totalBalloonsCount - redCount)
         {
             EndGame();
         }
