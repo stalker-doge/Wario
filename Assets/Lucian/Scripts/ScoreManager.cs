@@ -107,7 +107,8 @@ public class ScoreManager : MonoBehaviour
             //loads the end scene
             UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
         }
-
+        TimerManager.Instance.Pause(true);
+        TimerManager.Instance.ResetTimer();
         //goes back to the main menu
         UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
     }
@@ -123,7 +124,7 @@ public class ScoreManager : MonoBehaviour
             int scoreToAdd = Mathf.FloorToInt(timeLeft * 10);
             AddScore(scoreToAdd);
 
-            TimerManager.Instance.isPaused = true;
+            TimerManager.Instance.Pause(true);
             TimerManager.Instance.ResetTimer();
             //goes back to the main menu
             UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
