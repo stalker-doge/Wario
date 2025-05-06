@@ -132,7 +132,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7961548187754792641, guid: 1d1fc2faed3e9d846ba96dab0bec3337, type: 3}
   m_PrefabInstance: {fileID: 2127712576}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 876152588}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -251,6 +251,58 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
+--- !u!1 &876152588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6268407334377420963, guid: 1d1fc2faed3e9d846ba96dab0bec3337, type: 3}
+  m_PrefabInstance: {fileID: 2127712576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &876152589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876152588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:bcf18317208776648b654261890bf926
+    m_TableEntryReference:
+      m_KeyId: 5722756923392
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: targetValue
+      variable:
+        rid: 4419644366566457350
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 321766171}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 4419644366566457350
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 
 --- !u!114 &1355712225 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 252883281453227553, guid: 1d1fc2faed3e9d846ba96dab0bec3337, type: 3}
@@ -1037,6 +1089,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4879281860863364952, guid: 1d1fc2faed3e9d846ba96dab0bec3337, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2127712582}
+    - targetCorrespondingSourceObject: {fileID: 6268407334377420963, guid: 1d1fc2faed3e9d846ba96dab0bec3337, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 876152589}
     - targetCorrespondingSourceObject: {fileID: 464120430021506155, guid: 1d1fc2faed3e9d846ba96dab0bec3337, type: 3}
       insertIndex: -1
       addedObject: {fileID: 680020287}
@@ -1130,7 +1185,10 @@ MonoBehaviour:
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
-    m_LocalVariables: []
+    m_LocalVariables:
+    - name: targetValue
+      variable:
+        rid: 4419644366566457349
   m_FormatArguments: []
   m_UpdateString:
     m_PersistentCalls:
@@ -1149,7 +1207,11 @@ MonoBehaviour:
         m_CallState: 1
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4419644366566457349
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
