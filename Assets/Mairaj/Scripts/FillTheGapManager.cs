@@ -1,56 +1,77 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Linq;
 
 public class FillTheGapManager : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> dropZoneObjects;  // List of DropZone objects
+    private List<GameObject> dropZoneObjects; // List of DropZone objects
+
+    [SerializeField]
+    private FillTheGapVariant variant = FillTheGapVariant.mTwoSlots;
 
     private void Start()
     {
-        // Select two random DropZone objects, set their color to black, and remove DropZone component from unused ones
         SelectRandomDropZonesAndUpdateColor();
+    }
+
+    public FillTheGapVariant GetVariant() {
+        return variant;
     }
 
     private void SelectRandomDropZonesAndUpdateColor()
     {
-        if (dropZoneObjects.Count < 2)
+        int numberToSelect = VariantToCount(variant);
+
+        if (dropZoneObjects.Count < numberToSelect)
         {
             Debug.LogWarning("Not enough DropZone objects in the list.");
             return;
         }
 
-        // Randomly select two different DropZone objects from the list
-        int randomIndex1 = Random.Range(0, dropZoneObjects.Count);
-        int randomIndex2 = randomIndex1;
+        // Randomly select the required number of distinct drop zones
+        List<GameObject> selectedDropZones = dropZoneObjects.OrderBy(x => Random.value).Take(numberToSelect).ToList();
 
-        while (randomIndex2 == randomIndex1)  // Ensure the second index is different from the first
+        // Set their color to black
+        foreach (var dz in selectedDropZones)
         {
-            randomIndex2 = Random.Range(0, dropZoneObjects.Count);
+            SetImageColor(dz);
         }
 
-        // Get the selected DropZone objects
-        GameObject dropZone1 = dropZoneObjects[randomIndex1];
-        GameObject dropZone2 = dropZoneObjects[randomIndex2];
+        // Remove DropZone component from unselected objects
+        foreach (GameObject dz in dropZoneObjects)
+        {
+            if (!selectedDropZones.Contains(dz))
+            {
+                DropZone dropZoneScript = dz.GetComponent<DropZone>();
+                if (dropZoneScript != null)
+                {
+                    Destroy(dropZoneScript);
+                }
+            }
+        }
+    }
 
-        // Set the color of the child image components of the selected DropZone objects to black
-        SetImageColor(dropZone1);
-        SetImageColor(dropZone2);
-
-        // Remove DropZone component from the unselected items
-        RemoveDropZoneComponent(dropZone1, dropZone2);
+    private int VariantToCount(FillTheGapVariant variant)
+    {
+        return variant switch
+        {
+            FillTheGapVariant.mTwoSlots => 2,
+            FillTheGapVariant.mThreeSlots => 3,
+            FillTheGapVariant.mFourSlots => 4,
+            FillTheGapVariant.mFiveSlots => dropZoneObjects.Count,
+            _ => 2
+        };
     }
 
     private void SetImageColor(GameObject dropZone)
     {
-        // Find the child Image component and modify its color to black
-        Transform childTransform = dropZone.transform.GetChild(0); // Assuming the child holding the Image is the first child
+        Transform childTransform = dropZone.transform.GetChild(0);
         Image imageComponent = childTransform.GetComponent<Image>();
 
         if (imageComponent != null)
         {
-            // Set the color of the image to black
             imageComponent.color = Color.black;
         }
         else
@@ -58,20 +79,13 @@ public class FillTheGapManager : MonoBehaviour
             Debug.LogWarning("No Image component found on the child of " + dropZone.name);
         }
     }
-
-    private void RemoveDropZoneComponent(GameObject dropZone1, GameObject dropZone2)
-    {
-        // Loop through all dropZoneObjects and remove the DropZone component if not selected
-        foreach (GameObject dropZone in dropZoneObjects)
-        {
-            if (dropZone != dropZone1 && dropZone != dropZone2)
-            {
-                DropZone dropZoneScript = dropZone.GetComponent<DropZone>();
-                if (dropZoneScript != null)
-                {
-                    Destroy(dropZoneScript); // Remove the DropZone component from the unselected drop zones
-                }
-            }
-        }
-    }
+}
+public enum FillTheGapVariant
+{
+    mZeroSlots,
+    mOneSlots,
+    mTwoSlots,
+    mThreeSlots,
+    mFourSlots,
+    mFiveSlots
 }

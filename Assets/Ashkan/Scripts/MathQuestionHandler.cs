@@ -26,7 +26,7 @@ public class MathQuestionHandler : MonoBehaviour
 
     void GenerateRandomQuestion()
     {
-        string[] operators = { "+", "-", "*", "/" };
+        string[] operators = { "+", "-" }; // Only addition and subtraction allowed
         string operatorSymbol = operators[Random.Range(0, operators.Length)];
 
         int firstNumber = 0;
@@ -36,27 +36,24 @@ public class MathQuestionHandler : MonoBehaviour
         switch (operatorSymbol)
         {
             case "+":
-                firstNumber = Random.Range(10, 100);
-                secondNumber = Random.Range(10, 100);
+                firstNumber = Random.Range(1, 11); // Numbers between 1 and 10
+                secondNumber = Random.Range(1, 11);
                 correctAnswer = firstNumber + secondNumber;
                 break;
 
             case "-":
-                firstNumber = Random.Range(10, 100);
-                secondNumber = Random.Range(10, firstNumber); // ensure positive result
+                firstNumber = Random.Range(1, 11);
+                secondNumber = Random.Range(1, 11);
+
+                // Ensure positive result
+                if (secondNumber > firstNumber)
+                {
+                    int temp = firstNumber;
+                    firstNumber = secondNumber;
+                    secondNumber = temp;
+                }
+
                 correctAnswer = firstNumber - secondNumber;
-                break;
-
-            case "*":
-                firstNumber = Random.Range(2, 10);
-                secondNumber = Random.Range(2, 10);
-                correctAnswer = firstNumber * secondNumber;
-                break;
-
-            case "/":
-                secondNumber = Random.Range(2, 10);
-                correctAnswer = Random.Range(2, 10);
-                firstNumber = secondNumber * correctAnswer; // ensure integer division
                 break;
         }
 
@@ -72,10 +69,10 @@ public class MathQuestionHandler : MonoBehaviour
         List<int> options = new List<int> { correctAnswer };
 
         // Generate additional unique wrong answers
-        while (options.Count < 5)
+        while (options.Count < 3) // Only 3 options now
         {
-            int fakeAnswer = correctAnswer + Random.Range(-10, 10);
-            if (fakeAnswer != correctAnswer && !options.Contains(fakeAnswer))
+            int fakeAnswer = correctAnswer + Random.Range(-5, 6); // Smaller range for fake answers
+            if (fakeAnswer != correctAnswer && !options.Contains(fakeAnswer) && fakeAnswer >= 0)
                 options.Add(fakeAnswer);
         }
 
