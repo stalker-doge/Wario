@@ -23,6 +23,7 @@ public class TimerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Timer Starting!");
         StartTimer();
         remainingTimeEvent = timerText.GetComponent<LocalizeStringEvent>();
     }
@@ -30,6 +31,7 @@ public class TimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Timer Tick");
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
@@ -38,12 +40,14 @@ public class TimerManager : MonoBehaviour
         }
         else
         {
+            timeRemaining = timeLimit;
+
             //gets the score manager and calls GameFail
             ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
             if (scoreManager != null)
             {
                 //resets the time remaining to normal
-                timeRemaining = timeLimit;
+                //Destroy(this);
                 scoreManager.GameFail();
             }
             else
@@ -92,6 +96,6 @@ public class TimerManager : MonoBehaviour
     {         // Update the timer bar display
         float fillAmount = timeRemaining / timeLimit;
         timerImage.GetComponent<UnityEngine.UI.Image>().fillAmount = fillAmount;
-        Debug.Log("Timer fill amount: " + fillAmount);
+        //Debug.Log("Timer fill amount: " + fillAmount);
     }
 }
