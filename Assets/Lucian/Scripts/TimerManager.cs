@@ -118,4 +118,9 @@ public class TimerManager : MonoBehaviour
         timerImage.GetComponent<UnityEngine.UI.Image>().fillAmount = fillAmount;
         //Debug.Log("Timer fill amount: " + fillAmount);
     }
+
+    public void ResetTimer()
+    {
+        timeRemaining = timeLimit;
+    }
 }

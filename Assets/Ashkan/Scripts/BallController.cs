@@ -65,6 +65,7 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Target"))
         {
+            SoundManager.Instance.MiniGameCompleteAudioClip();
             ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
             if (scoreManager != null)
             {
