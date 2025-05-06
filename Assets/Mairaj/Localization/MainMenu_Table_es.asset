@@ -88,6 +88,38 @@ MonoBehaviour:
     m_Localized: Apunta y dispara
     m_Metadata:
       m_Items: []
+  - m_Id: 767845770510336
+    m_Localized: "L\xEDder de Proyecto"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768073407971328
+    m_Localized: "Dise\xF1o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768276311621632
+    m_Localized: "Programaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770343860224000
+    m_Localized: Opciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770394586136576
+    m_Localized: Volumen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770411300438016
+    m_Localized: Frecuencia de Fotogramas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770428144762880
+    m_Localized: Calidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 772531059736576
+    m_Localized: Idiomas
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
