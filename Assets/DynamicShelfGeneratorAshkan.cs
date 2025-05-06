@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class DynamicShelfGenerator : MonoBehaviour
+public class DynamicShelfGeneratorAshkan : MonoBehaviour
 {
     public enum Difficulty { Easy, Medium, Hard }
     public Difficulty currentDifficulty = Difficulty.Medium;
 
     [Header("Prefabs")]
     public GameObject wallPrefab; // Vertical wall prefab (used for sides & shelves)
+    public GameObject targetPrefab; // Target prefab (e.g., capsule)
 
     [Header("Settings")]
     public float wallThickness = 0.5f;
@@ -17,12 +18,14 @@ public class DynamicShelfGenerator : MonoBehaviour
 
     private float screenWidth;
     private float screenHeight;
+    private GameObject highestShelf = null;
 
     private void Start()
     {
         CalculateScreenSize();
         CreateFrameWalls();
         CreateShelves();
+        PlaceTargetOnTopShelf();
     }
 
     void CalculateScreenSize()
@@ -56,7 +59,7 @@ public class DynamicShelfGenerator : MonoBehaviour
         Instantiate(wallPrefab, new Vector3(0, halfHeight - halfThickness, 0), Quaternion.identity, transform)
             .transform.localScale = new Vector3(screenWidth, wallThickness, 1);
 
-        // Bottom Wall (adjusted to fit within camera frame)
+        // Bottom Wall (adjusted)
         Instantiate(wallPrefab, new Vector3(0, -halfHeight + wallThickness * 2f, 0), Quaternion.identity, transform)
             .transform.localScale = new Vector3(screenWidth, wallThickness, 1);
     }
@@ -68,10 +71,9 @@ public class DynamicShelfGenerator : MonoBehaviour
         float leftX = -screenWidth / 2f + wallThickness;
         float rightX = screenWidth / 2f - wallThickness;
 
-        float currentY = bottomY + shelfSpacingStart;
         string lastSide = "";
-
         int shelfCount = 3;
+
         switch (currentDifficulty)
         {
             case Difficulty.Easy:
@@ -85,9 +87,14 @@ public class DynamicShelfGenerator : MonoBehaviour
                 break;
         }
 
+        float availableHeight = topY - bottomY;
+        float shelfHeightStep = availableHeight / (shelfCount + 1);
+        float highestY = float.MinValue;
+
         for (int i = 0; i < shelfCount; i++)
         {
-            if (currentY > topY - 2f) break;
+            float offsetMultiplier = (i == 0) ? 1.5f : 1f; // More gap for the first shelf (bottom-most)
+            float currentY = bottomY + shelfHeightStep * (i + offsetMultiplier);
 
             string side = Random.Range(0, 2) == 0 ? "left" : "right";
             if (side == lastSide) side = side == "left" ? "right" : "left";
@@ -100,9 +107,27 @@ public class DynamicShelfGenerator : MonoBehaviour
             GameObject shelf = Instantiate(wallPrefab, new Vector3(x + shelfWidth / 2f, currentY, 0), Quaternion.identity, transform);
             shelf.transform.localScale = new Vector3(shelfWidth, wallThickness * shelfHeightScale, 1);
 
-            float spacingVariance = Random.Range(0.5f, 1.2f);
-            currentY += shelfSpacingMin + spacingVariance;
+            if (currentY > highestY)
+            {
+                highestY = currentY;
+                highestShelf = shelf;
+            }
+
             lastSide = side;
         }
+    }
+
+    void PlaceTargetOnTopShelf()
+    {
+        if (highestShelf == null || targetPrefab == null) return;
+
+        float shelfTopY = highestShelf.transform.position.y + (highestShelf.transform.localScale.y / 2f);
+        Vector3 targetPosition = new Vector3(
+            highestShelf.transform.position.x,
+            shelfTopY + 0.5f, // Slightly above shelf
+            highestShelf.transform.position.z
+        );
+
+        Instantiate(targetPrefab, targetPosition, Quaternion.identity, transform);
     }
 }
