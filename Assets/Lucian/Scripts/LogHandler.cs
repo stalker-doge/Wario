@@ -11,6 +11,10 @@ public class LogHandler : MonoBehaviour
     void Awake()
     {
         Application.logMessageReceived += OnLogMessageReceived;
+
+#if !(DEVELOPMENT_BUILD || UNITY_EDITOR)
+        Destroy(gameObject);
+#endif
     }
 
     void OnLogMessageReceived(string condition, string stacktrace, LogType type)

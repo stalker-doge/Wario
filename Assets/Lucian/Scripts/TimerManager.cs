@@ -27,7 +27,6 @@ public class TimerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Timer Starting!");
         StartTimer();
         remainingTimeEvent = timerText.GetComponent<LocalizeStringEvent>();
     }

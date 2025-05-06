@@ -37,6 +37,11 @@ public class AnswerOption : MonoBehaviour
             {
                 // Snap to placeholder if correct
                 transform.position = placeholderTransform.position;
+                ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+                if (scoreManager != null)
+                {
+                    scoreManager.GameComplete();
+                }
                 // Optional: disable further dragging if needed
             }
             else
