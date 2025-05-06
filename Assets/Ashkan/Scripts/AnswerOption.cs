@@ -37,6 +37,7 @@ public class AnswerOption : MonoBehaviour
             {
                 // Snap to placeholder if correct
                 transform.position = placeholderTransform.position;
+                SoundManager.Instance.CardMatchAudioClip();
                 ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
                 if (scoreManager != null)
                 {
@@ -48,6 +49,7 @@ public class AnswerOption : MonoBehaviour
             {
                 // Wrong answer dropped on placeholder, return to original
                 transform.position = startPosition;
+                SoundManager.Instance.CardMismatchAudioClip();
             }
         }
         else
