@@ -91,6 +91,16 @@ public class LevelSwitcher : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > timeToWait)
             {
+                //gives the player a score based on the time left
+                TimerManager timerManager = FindObjectOfType<TimerManager>();
+                if (timerManager != null)
+                {
+                    TimerManager.Instance.isPaused = false;
+                }
+                else
+                {
+                    Debug.LogError("TimerManager not found in the scene.");
+                }
                 //increment the games played
                 gamesPlayed++;
                 //if games played is greater than 5, reset the games played and up the difficulty
