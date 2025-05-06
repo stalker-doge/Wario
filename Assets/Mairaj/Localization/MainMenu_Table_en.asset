@@ -88,6 +88,38 @@ MonoBehaviour:
     m_Localized: Aim and Shoot
     m_Metadata:
       m_Items: []
+  - m_Id: 767845770510336
+    m_Localized: Project Lead
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768073407971328
+    m_Localized: Design
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768276311621632
+    m_Localized: Programming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770343860224000
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770394586136576
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770411300438016
+    m_Localized: Frame Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770428144762880
+    m_Localized: Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 772531059736576
+    m_Localized: Languages
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
