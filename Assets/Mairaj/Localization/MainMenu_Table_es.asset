@@ -100,6 +100,22 @@ MonoBehaviour:
     m_Localized: "Programaci\xF3n"
     m_Metadata:
       m_Items: []
+  - m_Id: 770343860224000
+    m_Localized: Opciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770394586136576
+    m_Localized: Volumen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770411300438016
+    m_Localized: Frecuencia de Fotogramas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770428144762880
+    m_Localized: Calidad
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
