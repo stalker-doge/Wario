@@ -88,13 +88,13 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
         }
 
         float availableHeight = topY - bottomY;
-        float shelfHeightStep = availableHeight / (shelfCount + 1);
+        float baseGap = 2.5f; // move shelves slightly lower
+        float shelfHeightStep = (availableHeight - baseGap) / (shelfCount + 1);
         float highestY = float.MinValue;
 
         for (int i = 0; i < shelfCount; i++)
         {
-            float offsetMultiplier = (i == 0) ? 1.5f : 1f; // More gap for the first shelf (bottom-most)
-            float currentY = bottomY + shelfHeightStep * (i + offsetMultiplier);
+            float currentY = bottomY + baseGap + ((i + 1) * shelfHeightStep);
 
             string side = Random.Range(0, 2) == 0 ? "left" : "right";
             if (side == lastSide) side = side == "left" ? "right" : "left";
