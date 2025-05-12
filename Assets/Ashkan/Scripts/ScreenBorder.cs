@@ -5,6 +5,7 @@ public class ScreenBorders : MonoBehaviour
     public enum Difficulty { Easy, Medium, Hard }
     public Difficulty currentDifficulty = Difficulty.Medium;
 
+    public Transform Parent;
     public GameObject borderPrefab; // White border prefab with SpriteRenderer + BoxCollider2D
     public GameObject midRectPrefab; // Rect prefab to be placed at specific points
     public GameObject circleObject; // The circle prefab to place in top-right corner
@@ -67,18 +68,22 @@ public class ScreenBorders : MonoBehaviour
             CreateMidRect(pos, rectWidth, rectHeight, alignRight, alignLeft);
         }
 
-        // Circle target (top-right)
-        float circleOffset = 0.3f;
+        // Circle target (top-right corner, slightly inside the frame)
+        float circleOffset = borderThickness / 2f + 2f;
         Vector2 circlePos = new Vector2(
-            halfWidth - borderThickness - circleOffset,
-            halfHeight - borderThickness - circleOffset
+            halfWidth - circleOffset,
+            halfHeight - circleOffset
         );
         CreateCircle(circlePos);
+
+        // Scale and position parent container
+        Parent.localScale = new Vector3(1, 0.9f, 1);
+        Parent.position = new Vector3(0, -0.6f, 0);
     }
 
     void CreateBorder(Vector2 position, Vector2 size)
     {
-        GameObject border = Instantiate(borderPrefab, position, Quaternion.identity);
+        GameObject border = Instantiate(borderPrefab, position, Quaternion.identity, Parent);
         border.transform.localScale = size;
 
         BoxCollider2D col = border.GetComponent<BoxCollider2D>();
@@ -88,7 +93,7 @@ public class ScreenBorders : MonoBehaviour
 
     void CreateMidRect(Vector2 anchorPos, float width, float height, bool alignRight = false, bool alignLeft = false)
     {
-        GameObject rect = Instantiate(midRectPrefab);
+        GameObject rect = Instantiate(midRectPrefab, Parent);
         rect.transform.localScale = new Vector2(width, height);
 
         Vector2 finalPos = anchorPos;
@@ -104,6 +109,9 @@ public class ScreenBorders : MonoBehaviour
     void CreateCircle(Vector2 position)
     {
         if (circleObject == null) return;
-        Instantiate(circleObject, position, Quaternion.identity);
+
+        // Instantiate inside parent so scaling is applied
+        GameObject circle = Instantiate(circleObject, position, Quaternion.identity);
+        circle.transform.localScale = Vector3.one; // Ensure consistent scale
     }
 }
