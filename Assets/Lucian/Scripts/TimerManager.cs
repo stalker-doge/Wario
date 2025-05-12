@@ -22,6 +22,9 @@ public class TimerManager : MonoBehaviour
     [SerializeField]
     private GameObject timerImage;
 
+    [SerializeField]
+    private GameObject timerBackground;
+
     public static TimerManager Instance { get; private set; }
 
     // Start is called before the first frame update
@@ -75,6 +78,9 @@ public class TimerManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+        }
     }
 
 
@@ -127,5 +133,21 @@ public class TimerManager : MonoBehaviour
     public void Pause(bool toPause)
     {
         isPaused = toPause;
+
+        if (toPause)
+        {
+            //hides all the timer UI
+            timerText.gameObject.SetActive(false);
+            timerImage.SetActive(false);
+            timerBackground.SetActive(false);
+
+        }
+        else
+        {
+            //shows all the timer UI
+            timerText.gameObject.SetActive(true);
+            timerImage.SetActive(true);
+            timerBackground.SetActive(true);
+        }
     }
 }
