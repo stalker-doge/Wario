@@ -53,7 +53,7 @@ public class CurtainAnimController : MonoBehaviour
     {
         if (!isAtCenter)
         {
-            Debug.Log("XYZ Return");
+            //Debug.Log("XYZ Return");
             return;
         }
 
