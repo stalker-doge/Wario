@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
@@ -144,7 +145,16 @@ public class TimerManager : MonoBehaviour
     {
         Debug.Log("XYZ Scene loaded successfully: " + scene.name);
         // Do your setup here after scene is fully loaded
-        StartCoroutine(CurtainAnimCoroutine(0.5f));
+        if (scene.name != "End Scene")
+        {
+            StartCoroutine(CurtainAnimCoroutine(0.5f));
+        } else {
+            CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+            if (anim != null)
+            {
+                Destroy(anim.gameObject.transform.parent.gameObject);
+            }
+        }
     }
 
     private IEnumerator CurtainAnimCoroutine(float animTimer)
