@@ -28,28 +28,47 @@ public class CurtainAnimController : MonoBehaviour
         RectTransform leftRect = leftImage.GetComponent<RectTransform>();
         RectTransform rightRect = rightImage.GetComponent<RectTransform>();
 
+        KillAnimations(leftRect, rightRect);
+
+        isAtCenter = true;
+
         leftRect.DOAnchorPosX(-200f, animTimer).SetEase(Ease.Linear);
-        rightRect.DOAnchorPosX(400f, animTimer).SetEase(Ease.Linear).OnComplete(() => { 
+        rightRect.DOAnchorPosX(600f, animTimer).SetEase(Ease.Linear).OnComplete(() => {
             CompletionCallback?.Invoke();
-            isAtCenter = true;
         });
+    }
+
+    private void KillAnimations(RectTransform leftRect, RectTransform rightRect)
+    {
+        leftRect.DOKill();
+        rightRect.DOKill();
+    }
+
+    public void ResetAnims()
+    {
+        isAtCenter=false;
     }
 
     public void AnimateAwayFromCenter(float animTimer, System.Action CompletionCallback)
     {
         if (!isAtCenter)
         {
+            Debug.Log("XYZ Return");
             return;
         }
 
         RectTransform leftRect = leftImage.GetComponent<RectTransform>();
         RectTransform rightRect = rightImage.GetComponent<RectTransform>();
 
+        KillAnimations(leftRect, rightRect);
+
+        isAtCenter = false;
+
         leftRect.DOAnchorPosX(-1350f, animTimer).SetEase(Ease.Linear);
         rightRect.DOAnchorPosX(1570f, animTimer).SetEase(Ease.Linear).OnComplete(() =>
         {
             CompletionCallback?.Invoke();
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
         });
     }
 }
