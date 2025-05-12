@@ -640,6 +640,7 @@ MonoBehaviour:
   timerText: {fileID: 1099477147381679776}
   isPaused: 0
   timerImage: {fileID: 966908399474370171}
+  timerBackground: {fileID: 5902543681999099006}
 --- !u!114 &9221002324298961705
 MonoBehaviour:
   m_ObjectHideFlags: 0

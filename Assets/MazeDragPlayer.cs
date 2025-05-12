@@ -79,10 +79,17 @@ public class MazeDragPlayer : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag("MazeGoal"))
         {
             Debug.Log("Maze Done");
             // You can also add effects, sounds, or next level logic here
+            //SoundManager.Instance.MiniGameCompleteAudioClip();
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.GameComplete();
+            }
         }
     
     }
