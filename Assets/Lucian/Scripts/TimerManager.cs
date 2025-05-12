@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.SceneManagement;
 
 public class TimerManager : MonoBehaviour
 {
@@ -127,5 +128,35 @@ public class TimerManager : MonoBehaviour
     public void Pause(bool toPause)
     {
         isPaused = toPause;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("XYZ Scene loaded successfully: " + scene.name);
+        // Do your setup here after scene is fully loaded
+        StartCoroutine(CurtainAnimCoroutine(0.5f));
+    }
+
+    private IEnumerator CurtainAnimCoroutine(float animTimer)
+    {
+        CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+        if (anim)
+        {
+            Debug.Log("XYZ Found Anim Controller");
+            anim.AnimateAwayFromCenter(animTimer, () => { 
+                isPaused = false; 
+            });
+        }
+        yield return null;
     }
 }
