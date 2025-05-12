@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class ScreenBorders : MonoBehaviour
 {
+    public enum Difficulty { Easy, Medium, Hard }
+    public Difficulty currentDifficulty = Difficulty.Medium;
+
     public GameObject borderPrefab; // White border prefab with SpriteRenderer + BoxCollider2D
     public GameObject midRectPrefab; // Rect prefab to be placed at specific points
+    public GameObject circleObject; // The circle prefab to place in top-right corner
+
     public float borderThickness = 1f; // Thickness of the border
     public float rectHeight = 1f; // Height of each mid rectangle
-    public GameObject circleObject; // The circle prefab to place in top-right corner
+
     void Start()
     {
         CreateBordersAndRects();
@@ -16,7 +21,6 @@ public class ScreenBorders : MonoBehaviour
     {
         Camera cam = Camera.main;
 
-        // Screen size in world units
         float height = 2f * cam.orthographicSize;
         float width = height * cam.aspect;
 
@@ -29,32 +33,42 @@ public class ScreenBorders : MonoBehaviour
         CreateBorder(new Vector2(halfWidth - borderThickness / 2f, 0), new Vector2(borderThickness, height)); // Right
         CreateBorder(new Vector2(-halfWidth + borderThickness / 2f, 0), new Vector2(borderThickness, height)); // Left
 
-        // Rects
-        float rectWidth = width  * 2f / 3f;
+        // Horizontal Rectangles
+        float rectWidth = width * 2f / 3f;
 
-        // Rect 1 (attached to center of upper half of right border)
-        Vector2 rect1Pos = new Vector2(
-            halfWidth - borderThickness,               // Stick right edge to border
-            halfHeight / 2f                            // Center of upper half
-        );
-        CreateMidRect(rect1Pos, rectWidth, rectHeight, alignRight: true);
+        Vector2[] horizontalRects = null;
 
-        // Rect 2 (attached to center of lower half of right border)
-        Vector2 rect2Pos = new Vector2(
-            halfWidth - borderThickness,
-            -halfHeight / 2f                           // Center of lower half
-        );
-        CreateMidRect(rect2Pos, rectWidth, rectHeight, alignRight: true);
+        if (currentDifficulty == Difficulty.Easy)
+        {
+            horizontalRects = new Vector2[] {
+                new Vector2(halfWidth - borderThickness, 0)
+            };
+        }
+        else if (currentDifficulty == Difficulty.Medium)
+        {
+            horizontalRects = new Vector2[] {
+                new Vector2(halfWidth - borderThickness, halfHeight / 2f),
+                new Vector2(halfWidth - borderThickness, -halfHeight / 2f)
+            };
+        }
+        else if (currentDifficulty == Difficulty.Hard)
+        {
+            horizontalRects = new Vector2[] {
+                new Vector2(halfWidth - borderThickness, halfHeight / 2f),
+                new Vector2(halfWidth - borderThickness, -halfHeight / 2f),
+                new Vector2(-halfWidth + borderThickness, 0)
+            };
+        }
 
-        // Rect 3 (attached to center of left border)
-        Vector2 rect3Pos = new Vector2(
-            -halfWidth + borderThickness,              // Stick left edge to border
-            0
-        );
-        CreateMidRect(rect3Pos, rectWidth, rectHeight, alignLeft: true);
-        
-        // Circle spawn position INSIDE top-right corner
-        float circleOffset = 0.3f; // Adjust this based on circle size (half of its width/height)
+        foreach (var pos in horizontalRects)
+        {
+            bool alignRight = pos.x > 0;
+            bool alignLeft = pos.x < 0;
+            CreateMidRect(pos, rectWidth, rectHeight, alignRight, alignLeft);
+        }
+
+        // Circle target (top-right)
+        float circleOffset = 0.3f;
         Vector2 circlePos = new Vector2(
             halfWidth - borderThickness - circleOffset,
             halfHeight - borderThickness - circleOffset
@@ -80,18 +94,16 @@ public class ScreenBorders : MonoBehaviour
         Vector2 finalPos = anchorPos;
 
         if (alignRight)
-            finalPos.x -= width / 2f; // Align right edge to anchor
+            finalPos.x -= width / 2f;
         else if (alignLeft)
-            finalPos.x += width / 2f; // Align left edge to anchor
+            finalPos.x += width / 2f;
 
         rect.transform.position = finalPos;
     }
-    
+
     void CreateCircle(Vector2 position)
     {
         if (circleObject == null) return;
-
-        GameObject circle = Instantiate(circleObject, position, Quaternion.identity);
+        Instantiate(circleObject, position, Quaternion.identity);
     }
-
 }
