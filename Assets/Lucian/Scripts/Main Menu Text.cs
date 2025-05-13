@@ -70,7 +70,6 @@ public class NewBehaviourScript : MonoBehaviour
     }
     private void SetSmartInt(LocalizeStringEvent localizeEvent, string variableName, int value)
     {
-        Debug.Log("HEY");
         if (localizeEvent == null) return;
 
         if (!localizeEvent.StringReference.ContainsKey(variableName))
@@ -80,7 +79,6 @@ public class NewBehaviourScript : MonoBehaviour
 
         var variable = localizeEvent.StringReference[variableName] as StringVariable;
         variable.Value = value.ToString();
-        Debug.Log(variable.Value);
         localizeEvent.RefreshString();
     }
 }
