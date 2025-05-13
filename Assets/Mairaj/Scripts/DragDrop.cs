@@ -1,6 +1,6 @@
+//Mairaj Muhammad ->2415831
 using UnityEngine;
 using UnityEngine.EventSystems;
-
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public ShapeType shapeType; // Assign in Inspector
@@ -32,19 +32,20 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         canvasGroup.blocksRaycasts = true;
 
-        Debug.Log("XYZ1 " + !eventData.pointerEnter);
-        Debug.Log("XYZ2 " + eventData.pointerEnter?.GetComponent<DropZone>() == null);
+        //Debug.Log("XYZ1 " + !eventData.pointerEnter);
+        //Debug.Log("XYZ2 " + eventData.pointerEnter?.GetComponent<DropZone>() == null);
+
         if (!eventData.pointerEnter || eventData.pointerEnter?.GetComponent<DropZone>() == null)
         {
             // If not dropped on a valid slot, return to original position
-            Debug.Log("XYZ ResetPosition If");
+            // Debug.Log("XYZ ResetPosition If");
             ResetPosition();
         }
     }
 
     public void ResetPosition()
     {
-        Debug.Log("XYZ Reset Position Called");
+        // Debug.Log("XYZ Reset Position Called");
         rectTransform.anchoredPosition = originalPosition;
     }
 }

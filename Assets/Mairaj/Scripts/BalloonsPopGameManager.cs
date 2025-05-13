@@ -1,6 +1,6 @@
+//Mairaj Muhammad ->2415831
 using UnityEngine;
 using System.Collections.Generic;
-
 public class BalloonsPopGameManager : MonoBehaviour
 {
     [SerializeField] private RectTransform canvasRect;
@@ -123,7 +123,7 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void BalloonPopEndGameCallback()
     {
-        Debug.Log("XYZ BalloonsGameAllLivesGoneCase Callback");
+        //Debug.Log("XYZ BalloonsGameAllLivesGoneCase Callback");
         EndGame();
     }
 
