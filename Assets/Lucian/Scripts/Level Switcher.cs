@@ -30,7 +30,7 @@ public class LevelSwitcher : MonoBehaviour
     private CurtainAnimController curtainAnimController;
 
     [SerializeField]
-    private float curtainAnimTimer;
+    private float curtainAnimTimer =  0.5f;
 
     private string sceneName;
 
