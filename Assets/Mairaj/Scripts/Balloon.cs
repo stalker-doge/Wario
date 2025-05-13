@@ -1,4 +1,4 @@
-using System.Collections;
+//Mairaj Muhammad ->2415831
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -36,11 +36,6 @@ public class Balloon : MonoBehaviour
     private void OnDestroy()
     {
         allBalloons.Remove(this);
-    }
-
-    private void Start()
-    {
-        // Nothing needed for now
     }
 
     private void Update()

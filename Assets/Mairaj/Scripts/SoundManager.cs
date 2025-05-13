@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-
+﻿//Mairaj Muhammad ->2415831
+using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }

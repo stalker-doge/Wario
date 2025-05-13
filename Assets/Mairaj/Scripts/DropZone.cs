@@ -1,3 +1,4 @@
+//Mairaj Muhammad ->2415831
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,12 +23,12 @@ public class DropZone : MonoBehaviour, IDropHandler
 
         if (dragDrop != null)
         {
-            Debug.Log("XYZ Found Shape Overlap " + dragDrop.shapeType + " " + acceptedShapeType);
+            // Debug.Log("XYZ Found Shape Overlap " + dragDrop.shapeType + " " + acceptedShapeType);
 
             if (dragDrop.shapeType == acceptedShapeType)
             {
                 // Correct Shape - Update position and parent
-                Debug.Log("XYZ If DropZone " + dragDrop.GetComponent<RectTransform>().anchoredPosition + " " + GetComponent<RectTransform>().anchoredPosition);
+                // Debug.Log("XYZ If DropZone " + dragDrop.GetComponent<RectTransform>().anchoredPosition + " " + GetComponent<RectTransform>().anchoredPosition);
 
                 // Update the parent of the DragDrop object to be the same as the parent of the DropZone
                 dragDrop.transform.SetParent(transform.parent); // Set the parent to the parent of this DropZone
@@ -58,7 +59,7 @@ public class DropZone : MonoBehaviour, IDropHandler
             else
             {
                 // Wrong Shape - Reset to original position
-                Debug.Log("XYZ Else DropZone");
+                // Debug.Log("XYZ Else DropZone");
                 dragDrop.ResetPosition();
             }
         }
