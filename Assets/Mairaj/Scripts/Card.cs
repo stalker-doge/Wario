@@ -1,8 +1,8 @@
+//Mairaj Muhammad ->2415831
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
 public class Card : MonoBehaviour
 {
     [SerializeField] private Image cardImage;

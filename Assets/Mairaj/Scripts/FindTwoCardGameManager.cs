@@ -1,3 +1,4 @@
+//Mairaj Muhammad ->2415831
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -162,7 +163,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void GameEndSuccessCallback()
     {
-        Debug.Log("Game Over!");
+        // Debug.Log("XYZ Game Over!");
 
         SuccessCompletionCallback?.Invoke();
 
@@ -196,7 +197,7 @@ public class FindTwoCardGameManager : MonoBehaviour
         //Debug.Log("XYZ QuickTutorialCoroutine Called");
         foreach (Card cd in cards)
         {
-            Debug.Log("XYZ Cards Rotation");
+            //Debug.Log("XYZ Cards Rotation");
             cd.Rotate(true, () => { }, true);
         }
 
