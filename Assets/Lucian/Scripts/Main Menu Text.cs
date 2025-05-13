@@ -11,8 +11,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI score;
-    [SerializeField]
-    private TextMeshProUGUI lives;
+    //[SerializeField]
+    //private TextMeshProUGUI lives;
 
     [SerializeField]
     private TextMeshProUGUI highScore;
@@ -44,12 +44,13 @@ public class NewBehaviourScript : MonoBehaviour
             lastScoreEvent = lastScore.GetComponent<LocalizeStringEvent>();
 
             // Apply them to the localized UI
+            SetSmartInt(currentScoreEvent, "targetValue", PlayerPrefs.GetInt("Score", 0));
             SetSmartInt(highScoreEvent, "targetValue", PlayerPrefs.GetInt("HighScore", 0));
             SetSmartInt(lastScoreEvent, "targetValue", PlayerPrefs.GetInt("LastScore", 0));
             return;
         }
         //checks if the score and lives texts are not null
-        if (score == null || lives == null)
+        if (score == null)
         {
             return;
         }
@@ -58,9 +59,9 @@ public class NewBehaviourScript : MonoBehaviour
         //score.text = "Score: " + PlayerPrefs.GetInt("Score", 0).ToString();
         //lives.text = "Lives: " + PlayerPrefs.GetInt("Lives", 3).ToString();
         currentScoreEvent = score.GetComponent<LocalizeStringEvent>();
-        livesCountEvent = lives.GetComponent<LocalizeStringEvent>();
+        //livesCountEvent = lives.GetComponent<LocalizeStringEvent>();
         SetSmartInt(currentScoreEvent, "targetValue", PlayerPrefs.GetInt("Score", 0));
-        SetSmartInt(livesCountEvent, "targetValue", PlayerPrefs.GetInt("Lives", 3));
+        //SetSmartInt(livesCountEvent, "targetValue", PlayerPrefs.GetInt("Lives", 3));
         //if lives is less than or equal 0, immediately switch to the end scene
         if (PlayerPrefs.GetInt("Lives", 3) <= 0)
         {

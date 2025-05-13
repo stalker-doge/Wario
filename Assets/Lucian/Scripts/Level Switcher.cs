@@ -30,7 +30,7 @@ public class LevelSwitcher : MonoBehaviour
     private CurtainAnimController curtainAnimController;
 
     [SerializeField]
-    private float curtainAnimTimer;
+    private float curtainAnimTimer =  0.5f;
 
     private string sceneName;
 
@@ -174,6 +174,24 @@ public class LevelSwitcher : MonoBehaviour
                 break;
             case "Aim and Shoot":
                 localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim and Shoot 1":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim and Shoot 2":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim and Shoot 3":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim&Shoot":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Hole in One":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "GyroscopGame":
+                localizedLevelName.StringReference.TableEntryReference = "RollingTheBall_Title";
                 break;
             case "Fill The Gap":
                 localizedLevelName.StringReference.TableEntryReference = "FillTheGap_Title";
