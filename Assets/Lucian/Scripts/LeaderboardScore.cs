@@ -14,6 +14,13 @@ public class LeaderboardScore : MonoBehaviour
 
     public UnityEvent<string, int> SubmitScoreEvent;
 
+
+    private void Start()
+    {
+        //loads the current score from playerprefs
+        inputScore.text =PlayerPrefs.GetInt("CurrentScore").ToString();
+    }
+
     public void SubmitScore()
     {
         SubmitScoreEvent.Invoke(inputName.text, int.Parse(inputScore.text));

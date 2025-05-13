@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.SceneManagement;
 
 public class TimerManager : MonoBehaviour
 {
@@ -21,6 +23,9 @@ public class TimerManager : MonoBehaviour
     //timer image
     [SerializeField]
     private GameObject timerImage;
+
+    [SerializeField]
+    private GameObject timerBackground;
 
     public static TimerManager Instance { get; private set; }
 
@@ -75,6 +80,24 @@ public class TimerManager : MonoBehaviour
                 }
             }
         }
+
+
+        if (isPaused)
+        {
+            //hides all the timer UI
+            timerText.gameObject.SetActive(false);
+            timerImage.SetActive(false);
+            timerBackground.SetActive(false);
+
+        }
+        else
+        {
+            //shows all the timer UI
+            timerText.gameObject.SetActive(true);
+            timerImage.SetActive(true);
+            timerBackground.SetActive(true);
+        }
+
     }
 
 
@@ -127,5 +150,45 @@ public class TimerManager : MonoBehaviour
     public void Pause(bool toPause)
     {
         isPaused = toPause;
+
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //Debug.Log("XYZ Scene loaded successfully: " + scene.name);
+        // Do your setup here after scene is fully loaded
+        if (scene.name != "End Scene")
+        {
+            StartCoroutine(CurtainAnimCoroutine(0.5f));
+        } else {
+            CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+            if (anim != null)
+            {
+                Destroy(anim.gameObject.transform.parent.gameObject);
+            }
+        }
+    }
+
+    private IEnumerator CurtainAnimCoroutine(float animTimer)
+    {
+        CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+        if (anim)
+        {
+            //Debug.Log("XYZ Found Anim Controller");
+            anim.AnimateAwayFromCenter(animTimer, () => { 
+                isPaused = false; 
+            });
+        }
+        yield return null;
     }
 }
