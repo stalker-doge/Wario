@@ -521,9 +521,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2916633681076234537, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1775.367
+      objectReference: {fileID: 0}
+    - target: {fileID: 2916633681076234537, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -158.40515
+      objectReference: {fileID: 0}
     - target: {fileID: 6258624435876072317, guid: e449d598d375089419b84a7873821ba9, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519664148276225768, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_text
+      value: 'personal best : '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519664148276225768, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_fontSize
+      value: 183.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519664148276225768, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
