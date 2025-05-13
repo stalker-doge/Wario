@@ -63,7 +63,8 @@ public class MazeGenerator : MonoBehaviour
 
         if (MazeDifficulty.Easy == _difficulty)
         {
-            Parent.transform.position = new Vector3(-1.5f, 4, 0f);
+            Parent.localScale = new Vector3(1.3f, 1, 1.2f);
+            Parent.transform.position = new Vector3(-1.95f, 4, 0f);
         }
         else if (MazeDifficulty.Medium == _difficulty)
         {
@@ -284,4 +285,4 @@ public class MazeGenerator : MonoBehaviour
             Instantiate(destinationMarker, farthest.transform.position, Quaternion.identity);
         }
     }
-}
+} 
