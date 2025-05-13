@@ -73,6 +73,7 @@ public class TimerManager : MonoBehaviour
                     //resets the time remaining to normal
                     Pause(true);
                     scoreManager.GameFail();
+                    
                 }
                 else
                 {
@@ -96,6 +97,14 @@ public class TimerManager : MonoBehaviour
             timerText.gameObject.SetActive(true);
             timerImage.SetActive(true);
             timerBackground.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt("Lives") <= 0)
+        {
+            if (!(SceneManager.GetActiveScene().name == "End Scene"))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
+            }
         }
 
     }
@@ -131,7 +140,6 @@ public class TimerManager : MonoBehaviour
         {
             strVar.Value = seconds.ToString();
         }
-        Debug.Log(seconds.ToString());
        timerText.text = seconds.ToString();
     }
 
