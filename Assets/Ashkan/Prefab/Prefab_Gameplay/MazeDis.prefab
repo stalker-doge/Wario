@@ -45,10 +45,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3828879308536681871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c371fc7ef727e4bbfa51bf90922cf1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f62f97cff1de3d4f8d44f7de67d7a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 10
   rotationSpeed: 5
 --- !u!23 &2419351220032497346
 MeshRenderer:
