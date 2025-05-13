@@ -34,6 +34,8 @@ public class BalloonsPopGameManager : MonoBehaviour
     private int balloonsPoppedCount = 0;
     private int totalBalloonsCount;
 
+    private bool hasEndGameFired = false;
+
     private void Awake()
     {
         TimeAndLifeManager.BallonPopGameEndCallback += BalloonPopEndGameCallback;
@@ -139,14 +141,6 @@ public class BalloonsPopGameManager : MonoBehaviour
     {
         TimeAndLifeManager.BallonPopGameEndCallback -= BalloonPopEndGameCallback;
         Balloon.BalloonPoppedCallback -= BalloonsPopCount;
-    }
-
-    private void Update()
-    {
-        if (balloonsPoppedCount >= totalBalloonsCount - redCount)
-        {
-            EndGame();
-        }
     }
 
     private void EndGame()
