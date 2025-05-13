@@ -165,7 +165,7 @@ public class TimerManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("XYZ Scene loaded successfully: " + scene.name);
+        // Debug.Log("XYZ Scene loaded successfully: " + scene.name);
         // Do your setup here after scene is fully loaded
         if (scene.name != "End Scene")
         {
@@ -184,7 +184,7 @@ public class TimerManager : MonoBehaviour
         CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
         if (anim)
         {
-            //Debug.Log("XYZ Found Anim Controller");
+            // Debug.Log("XYZ Found Anim Controller");
             anim.AnimateAwayFromCenter(animTimer, () => { 
                 isPaused = false; 
             });
