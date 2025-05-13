@@ -1,5 +1,3 @@
-//Mairaj Muhammad -->2415831
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,23 +5,39 @@ using UnityEngine.UI;
 
 public class FindTwoCardGameManager : MonoBehaviour
 {
-    [SerializeField]
-    private Card[] cards;
+    [SerializeField] private Card[] cards;
+    [SerializeField] private Sprite backCardSprite;
 
-    [SerializeField]
-    private FindTwoCardsVariant variant = FindTwoCardsVariant.mFindTwoCardsNormal;
-
-    [SerializeField]
-    private float tutorialTimerForVariantMode = 0.0f;
-
-    private List<Card> selectedCards = new List<Card>();
-    private Coroutine countDownCoroutine = null;
+    [System.Serializable]
+    public struct CardSpriteMap
+    {
+        public CardType cardType;
+        public Sprite cardSprite;
+    }
 
     public static System.Action SuccessCompletionCallback = null;
+
+    [SerializeField] private CardSpriteMap[] cardSpriteMappings;
+
+    [SerializeField] private FindTwoCardsVariant variant = FindTwoCardsVariant.mFindTwoCardsNormal;
+    [SerializeField] private float tutorialTimerForVariantMode = 0.0f;
+
+    private Dictionary<CardType, Sprite> cardSpriteDict;
+    private List<Card> selectedCards = new List<Card>();
+    private Coroutine countDownCoroutine = null;
 
     private void Awake()
     {
         TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
+
+        // Map sprites
+        cardSpriteDict = new Dictionary<CardType, Sprite>();
+        foreach (var map in cardSpriteMappings)
+        {
+            if (!cardSpriteDict.ContainsKey(map.cardType))
+                cardSpriteDict.Add(map.cardType, map.cardSprite);
+        }
+
         if (cards != null && cards.Length > 0)
         {
             InitializeCards();
@@ -32,79 +46,43 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void InitializeCards()
     {
-        int[] cardNumbers = GenerateCardNumbers();
+        CardType[] types = GenerateCardTypes();
+
         for (int i = 0; i < cards.Length; i++)
         {
-            cards[i].InitializeCardNumber(cardNumbers[i]);
+            var type = types[i];
+            cards[i].InitializeCard(type, cardSpriteDict[type], backCardSprite);
         }
 
         if (variant == FindTwoCardsVariant.mFindTwoCardsSwapAndTutorialMode)
-        {
             StartCoroutine(QuickTutorialCoroutine());
-        }
     }
 
-    private IEnumerator QuickTutorialCoroutine()
+    private CardType[] GenerateCardTypes()
     {
-        Debug.Log("XYZ QuickTutorialCoroutine Called");
-        foreach (Card cd in cards)
-        {
-            Debug.Log("XYZ Cards Rotation");
-            cd.Rotate(true, () => { }, true);
-        }
+        CardType repeated = CardType.mTwoClub;
+        CardType[] unique = { CardType.mFiveDiamond, CardType.mQueenSpade };
 
-        yield return new WaitForSeconds(tutorialTimerForVariantMode);
+        CardType[] result = new CardType[4];
+        result[0] = repeated;
+        result[1] = repeated;
+        result[2] = unique[0];
+        result[3] = unique[1];
 
-        foreach (Card cd in cards)
-        {
-            cd.Rotate(false, () => { }, false);
-        }
+        Shuffle(result);
+        return result;
     }
 
-    private int[] GenerateCardNumbers()
-    {
-        System.Random rand = new System.Random();
-        int[] numbers = new int[4];
-
-        int repeatedDigit = rand.Next(1, 4);
-        const int uniqueNumbers = 2;
-        int[] uniqueDigits = new int[uniqueNumbers];
-        int index = 0;
-
-        while (index < uniqueDigits.Length)
-        {
-            int randomDigit = rand.Next(1, 4);
-            if (Array.IndexOf(uniqueDigits, randomDigit) == -1 && randomDigit != repeatedDigit)
-            {
-                uniqueDigits[index] = randomDigit;
-                index++;
-            }
-        }
-
-        numbers[0] = repeatedDigit;
-        numbers[1] = repeatedDigit;
-
-        int uniqueIndex = 0;
-        for (int i = 2; i < 4; i++)
-        {
-            numbers[i] = uniqueDigits[uniqueIndex++];
-        }
-
-        Shuffle(numbers);
-        return numbers;
-    }
-
-    private void Shuffle(int[] array)
+    private void Shuffle(CardType[] array)
     {
         System.Random rand = new System.Random();
         int n = array.Length;
         while (n > 1)
         {
-            n--;
-            int k = rand.Next(n + 1);
-            int value = array[k];
-            array[k] = array[n];
-            array[n] = value;
+            int k = rand.Next(n--);
+            var temp = array[n];
+            array[n] = array[k];
+            array[k] = temp;
         }
     }
 
@@ -117,39 +95,70 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         if (selectedCards.Count == 2)
         {
-            CheckForMatch();
+            StartCoroutine(CheckForMatch());
         }
     }
 
-    private void CheckForMatch()
+    private IEnumerator CheckForMatch()
     {
-        if (selectedCards[0].GetCardNumber() == selectedCards[1].GetCardNumber())
+        yield return new WaitForSeconds(cards[0].GetRotateTimer() + 0.1f);
+
+        Card card1 = selectedCards[0];
+        Card card2 = selectedCards[1];
+
+        bool isMatch = card1.GetCardType() == card2.GetCardType();
+
+        if (isMatch)
         {
             SoundManager.Instance.CardMatchAudioClip();
+            card1.GetComponent<Button>().interactable = false;
+            card2.GetComponent<Button>().interactable = false;
+            SuccessCompletionCallback?.Invoke();
             Invoke("GameEndSuccessCallback", selectedCards[1].GetRotateTimer() * 2);
             Invoke("GameCompleteDelayedSound", 0.5f);
         }
         else
         {
-            StartCoroutine(ShakeAndResetCards(selectedCards[0], selectedCards[1], selectedCards[0].GetRotateTimer()));
-        }
-    }
+            SoundManager.Instance.CardMismatchAudioClip();
+            card1.ShakeCardAndReset();
+            card2.ShakeCardAndReset();
 
-    // Returns all cards except the two specified ones
-    private Card[] GetCardsExcluding(Card cardA, Card cardB)
-    {
-        List<Card> result = new List<Card>();
-        foreach (var card in cards)
-        {
-            if (card != cardA && card != cardB)
+            yield return new WaitForSeconds(0.3f);
+
+            card1.ResetCard();
+            card2.ResetCard();
+
+            if (variant != FindTwoCardsVariant.mFindTwoCardsNormal)
             {
-                result.Add(card);
+                Card wrongCard = card2;
+                List<Card> nonSelected = new List<Card>();
+
+                foreach (var card in cards)
+                {
+                    if (card != card1 && card != card2)
+                        nonSelected.Add(card);
+                }
+
+                if (nonSelected.Count > 0)
+                {
+                    Card swapTarget = nonSelected[Random.Range(0, nonSelected.Count)];
+
+                    var tempType = wrongCard.GetCardType();
+                    var tempSprite = wrongCard.GetFrontSprite();
+
+                    wrongCard.InitializeCard(swapTarget.GetCardType(), swapTarget.GetFrontSprite(), backCardSprite);
+                    swapTarget.InitializeCard(tempType, tempSprite, backCardSprite);
+                }
             }
         }
-        return result.ToArray();
+
+        selectedCards.Clear();
     }
 
-
+    private void GameCompleteDelayedSound()
+    {
+        SoundManager.Instance.MiniGameCompleteAudioClip();
+    }
 
     private void GameEndSuccessCallback()
     {
@@ -182,51 +191,41 @@ public class FindTwoCardGameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator QuickTutorialCoroutine()
+    {
+        //Debug.Log("XYZ QuickTutorialCoroutine Called");
+        foreach (Card cd in cards)
+        {
+            Debug.Log("XYZ Cards Rotation");
+            cd.Rotate(true, () => { }, true);
+        }
+
+        yield return new WaitForSeconds(tutorialTimerForVariantMode);
+
+        foreach (Card cd in cards)
+        {
+            cd.Rotate(false, () => { }, false);
+        }
+    }
+
     private void GameEndFailedCallback()
     {
-        Debug.Log("XYZ FindTwoCardsAllLivesGoneCase Callback");
+        StopAllCoroutines();
     }
+}
 
-    private IEnumerator ShakeAndResetCards(Card card1, Card card2, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        card1.ShakeCardAndReset();
-        card2.ShakeCardAndReset();
-
-        yield return new WaitForSeconds(0.5f);
-
-        card1.ResetCard();
-        card2.ResetCard(() =>
-        {
-            // Now deal the code according to variants
-            if (variant != FindTwoCardsVariant.mFindTwoCardsNormal)
-            {
-                Card wrongCard = selectedCards[1];
-                Card[] nonSelectedCards = GetCardsExcluding(selectedCards[0], selectedCards[1]);
-
-                if (nonSelectedCards.Length > 0)
-                {
-                    Card swapTarget = nonSelectedCards[UnityEngine.Random.Range(0, nonSelectedCards.Length)];
-                    int temp = wrongCard.GetCardNumber();
-                    wrongCard.InitializeCardNumber(swapTarget.GetCardNumber());
-                    swapTarget.InitializeCardNumber(temp);
-                }
-            }
-
-            selectedCards.Clear();
-        });
-    }
-
-    private void GameCompleteDelayedSound()
-    {
-        SoundManager.Instance.MiniGameCompleteAudioClip();
-    }
-
-    private void OnDestroy()
-    {
-        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEndFailedCallback;
-    }
+public enum CardType
+{
+    mTwoClub,
+    mTwoDiamond,
+    mFiveClub,
+    mFiveDiamond,
+    mAceClub,
+    mAceDiamond,
+    mKingDiamond,
+    mKingHeart,
+    mQueenDiamond,
+    mQueenSpade
 }
 
 public enum FindTwoCardsVariant
