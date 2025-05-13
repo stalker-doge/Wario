@@ -14,9 +14,9 @@ public class TimerManager : MonoBehaviour
 
     private float timeRemaining;
 
-    [SerializeField] TMPro.TextMeshProUGUI timerText;
+    //[SerializeField] TMPro.TextMeshProUGUI timerText;
 
-    private LocalizeStringEvent remainingTimeEvent;
+    //private LocalizeStringEvent remainingTimeEvent;
 
     public bool isPaused=false;
 
@@ -33,7 +33,7 @@ public class TimerManager : MonoBehaviour
     void Start()
     {
         StartTimer();
-        remainingTimeEvent = timerText.GetComponent<LocalizeStringEvent>();
+        //remainingTimeEvent = timerText.GetComponent<LocalizeStringEvent>();
     }
 
     // Awake is called when the script instance is being loaded
@@ -59,7 +59,7 @@ public class TimerManager : MonoBehaviour
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                UpdateTimerText();
+               // UpdateTimerText();
                 UpdateTimerBar();
             }
             else
@@ -86,7 +86,7 @@ public class TimerManager : MonoBehaviour
         if (isPaused)
         {
             //hides all the timer UI
-            timerText.gameObject.SetActive(false);
+            //timerText.gameObject.SetActive(false);
             timerImage.SetActive(false);
             timerBackground.SetActive(false);
 
@@ -94,7 +94,7 @@ public class TimerManager : MonoBehaviour
         else
         {
             //shows all the timer UI
-            timerText.gameObject.SetActive(true);
+            //timerText.gameObject.SetActive(true);
             timerImage.SetActive(true);
             timerBackground.SetActive(true);
         }
@@ -105,7 +105,7 @@ public class TimerManager : MonoBehaviour
     public void StartTimer()
     {
         timeRemaining = timeLimit;
-        UpdateTimerText();
+        //UpdateTimerText();
     }
 
 
@@ -114,26 +114,26 @@ public class TimerManager : MonoBehaviour
         return timeRemaining;
     }
 
-    public void UpdateTimerText()
-    {
-        int seconds = Mathf.FloorToInt(timeRemaining % 60);
+    //public void UpdateTimerText()
+    //{
+    //    int seconds = Mathf.FloorToInt(timeRemaining % 60);
 
-        if (remainingTimeEvent == null)
-            return;
+    //    if (remainingTimeEvent == null)
+    //        return;
 
-        var smartVars = remainingTimeEvent.StringReference;
+    //    var smartVars = remainingTimeEvent.StringReference;
 
-        if (!smartVars.ContainsKey("targetValue"))
-        {
-            smartVars.Add("targetValue", new StringVariable());
-        }
+    //    if (!smartVars.ContainsKey("targetValue"))
+    //    {
+    //        smartVars.Add("targetValue", new StringVariable());
+    //    }
 
-        if (smartVars["targetValue"] is StringVariable strVar)
-        {
-            strVar.Value = seconds.ToString();
-        }
-       timerText.text = seconds.ToString();
-    }
+    //    if (smartVars["targetValue"] is StringVariable strVar)
+    //    {
+    //        strVar.Value = seconds.ToString();
+    //    }
+    //   timerText.text = seconds.ToString();
+    //}
 
     public void UpdateTimerBar()
     {         // Update the timer bar display
