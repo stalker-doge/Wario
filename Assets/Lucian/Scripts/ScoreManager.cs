@@ -15,18 +15,7 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        //if in the end scene, reset the score and lives
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End Scene")
-        {
-            PlayerPrefs.SetInt("Score", 0);
-            PlayerPrefs.SetInt("Lives", 3);
-            return;
-        }
-        //loads the score and lives from PlayerPrefs
-        score = PlayerPrefs.GetInt("Score", 0);
-        lives = PlayerPrefs.GetInt("Lives", 3);
-        Debug.Log("Score: " + score);
-        Debug.Log("Lives: " + lives);
+
     }
 
     // Awake is called when the script instance is being loaded
@@ -37,6 +26,18 @@ public class ScoreManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            //if in the end scene, reset the score and lives
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End Scene")
+            {
+                PlayerPrefs.SetInt("Score", 0);
+                PlayerPrefs.SetInt("Lives", 3);
+                return;
+            }
+            //loads the score and lives from PlayerPrefs
+            score = PlayerPrefs.GetInt("Score", 0);
+            lives = PlayerPrefs.GetInt("Lives", 3);
+            Debug.Log("Score: " + score);
+            Debug.Log("Lives: " + lives);
         }
         else
         {
@@ -103,8 +104,10 @@ public class ScoreManager : MonoBehaviour
             //sets the last score
             lastScore = score;
             PlayerPrefs.SetInt("LastScore", lastScore);
-
             //loads the end scene
+            Debug.Log("You lost :c");
+            lives = 3;
+            score= 0;
             UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
         }
         TimerManager.Instance.Pause(true);

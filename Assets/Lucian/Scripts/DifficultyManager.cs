@@ -87,7 +87,7 @@ public class DifficultyManager : MonoBehaviour
         else
         {
             // If already at max difficulty, do nothing
-            Debug.Log("Already at max difficulty!");
+            //Debug.Log("Already at max difficulty!");
         }
     }
 }
