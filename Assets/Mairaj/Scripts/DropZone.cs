@@ -15,6 +15,7 @@ public class DropZone : MonoBehaviour, IDropHandler
     private void Awake()
     {
         variant = (FillTheGapVariant)(FindObjectOfType<FillTheGapManager>()?.GetVariant());
+        correctMatches = 0;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -41,6 +42,8 @@ public class DropZone : MonoBehaviour, IDropHandler
 
                 // Increment correct match counter
                 correctMatches++;
+
+                Debug.Log("XYZ CorrectMatches " + correctMatches + " " + (int)(variant));
 
                 // Check if all matches have been made
                 if (correctMatches >= (int)variant)
