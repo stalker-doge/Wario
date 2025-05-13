@@ -1016,7 +1016,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 397607671}
-  lives: {fileID: 1450174455}
   highScore: {fileID: 0}
   lastScore: {fileID: 0}
 --- !u!1 &1276370240
@@ -1217,6 +1216,7 @@ GameObject:
   - component: {fileID: 1400163108}
   - component: {fileID: 1400163107}
   - component: {fileID: 1400163110}
+  - component: {fileID: 1400163111}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1286,8 +1286,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a120d729a8447e5b857e8b5ded478ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consoleOutput: {fileID: 0}
-  consoleScrollRect: {fileID: 0}
+  consoleOutput: {fileID: 1592674740}
+  consoleScrollRect: {fileID: 1729140308}
+--- !u!114 &1400163111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400163106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f7cdc031e67744b886d2cbc1774a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1450174454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1456,28 @@ RectTransform:
   m_AnchoredPosition: {x: -336.99988, y: 531}
   m_SizeDelta: {x: -1419, y: -2917.6333}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1592674740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3489679396819346016, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
+  m_PrefabInstance: {fileID: 6735843232417157174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1729140308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 635981135193475120, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
+  m_PrefabInstance: {fileID: 6735843232417157174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1803121200 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8897662172677310435, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
@@ -2029,27 +2063,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8298138772345369821, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8298138772345369821, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8298138772345369821, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 708
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8298138772345369821, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 36
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8298138772345369821, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 374
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8298138772345369821, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -38
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8897662172677310435, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
       propertyPath: m_Pivot.x
