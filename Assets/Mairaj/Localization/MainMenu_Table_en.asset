@@ -128,6 +128,10 @@ MonoBehaviour:
     m_Localized: Rolling the Ball
     m_Metadata:
       m_Items: []
+  - m_Id: 3312934514376704
+    m_Localized: Enter Name!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
