@@ -99,14 +99,6 @@ public class TimerManager : MonoBehaviour
             timerBackground.SetActive(true);
         }
 
-        if (PlayerPrefs.GetInt("Lives") <= 0)
-        {
-            if (!(SceneManager.GetActiveScene().name == "End Scene"))
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
-            }
-        }
-
     }
 
 
