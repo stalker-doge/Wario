@@ -103,7 +103,7 @@ public class ScoreManager : MonoBehaviour
             //sets the last score
             lastScore = score;
             PlayerPrefs.SetInt("LastScore", lastScore);
-
+            Debug.Log("HEY");
             //loads the end scene
             UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
         }
