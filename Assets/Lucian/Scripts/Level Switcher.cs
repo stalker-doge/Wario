@@ -26,10 +26,17 @@ public class LevelSwitcher : MonoBehaviour
     [SerializeField]
     private LocalizeStringEvent localizedLevelName;
 
+    [SerializeField]
+    private CurtainAnimController curtainAnimController;
+
+    [SerializeField]
+    private float curtainAnimTimer;
+
     private string sceneName;
 
     private int gamesPlayed = 0;
 
+    private bool isSwitchingScene = false;
 
     private float timer = 0;
     void Start()
@@ -95,7 +102,7 @@ public class LevelSwitcher : MonoBehaviour
                 TimerManager timerManager = FindObjectOfType<TimerManager>();
                 if (timerManager != null)
                 {
-                    TimerManager.Instance.isPaused = false;
+                    TimerManager.Instance.isPaused = true;
                 }
                 else
                 {
@@ -110,7 +117,14 @@ public class LevelSwitcher : MonoBehaviour
                     //up the difficulty
                     DifficultyManager.Instance.IncreaseDifficulty();
                 }
-                SwitchScene(sceneName);
+
+                if (!isSwitchingScene)
+                {
+                    isSwitchingScene = true;
+                    curtainAnimController.AnimateTowardsCenter(curtainAnimTimer, () => {
+                        SwitchScene(sceneName);
+                    });
+                }
             }
         }
     }
