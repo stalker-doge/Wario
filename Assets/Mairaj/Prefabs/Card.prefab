@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardImage: {fileID: 5877245105795953016}
-  rotateTimer: 0.15
+  rotateTimer: 0.05
 --- !u!114 &3011168792874914374
 MonoBehaviour:
   m_ObjectHideFlags: 0
