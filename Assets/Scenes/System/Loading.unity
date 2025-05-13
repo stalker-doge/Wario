@@ -139,6 +139,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: curtainAnimTimer
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: curtainAnimController
       value: 
       objectReference: {fileID: 448798726}
