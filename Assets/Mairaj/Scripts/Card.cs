@@ -14,6 +14,7 @@ public class Card : MonoBehaviour
 
     private void Awake()
     {
+        FindTwoCardGameManager.EnableCardClicking += ActivateButtonClicking; 
         if (cardImage)
             cardImage.sprite = backSprite;
     }
@@ -83,5 +84,15 @@ public class Card : MonoBehaviour
     public float GetRotateTimer()
     {
         return rotateTimer;
+    }
+
+    private void ActivateButtonClicking(bool activate)
+    {
+        GetComponent<Button>().enabled = activate;
+    }
+
+    private void OnDestroy()
+    {
+        FindTwoCardGameManager.EnableCardClicking -= ActivateButtonClicking;
     }
 }
