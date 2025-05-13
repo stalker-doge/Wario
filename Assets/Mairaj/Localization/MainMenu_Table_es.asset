@@ -124,6 +124,10 @@ MonoBehaviour:
     m_Localized: "Rellena el vac\xEDo"
     m_Metadata:
       m_Items: []
+  - m_Id: 3306049870544896
+    m_Localized: Rodando la pelota
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
