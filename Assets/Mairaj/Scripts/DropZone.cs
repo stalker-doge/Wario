@@ -52,7 +52,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     {
                         scoreManager.GameComplete();
                     }
-                    SoundManager.Instance?.GameOverAudioClip();
+                    SoundManager.Instance?.CardMatchAudioClip();
                 }
             }
             else
