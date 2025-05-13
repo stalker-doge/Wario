@@ -27,19 +27,47 @@ public class MazeGenerator : MonoBehaviour
     {
         if (MazeDifficulty.Easy == _difficulty)
         {
-            _mazeWidth = 4;
-            _mazeDepth = 7;
+            if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
+            {
+                _mazeWidth = 6;
+                _mazeDepth = 7;
+            }
+            else
+            {
+                _mazeWidth = 4;
+                _mazeDepth = 7;
+            }
+
+            
         }
         else if (MazeDifficulty.Medium == _difficulty)
         {
-            _mazeWidth = 5;
-            _mazeDepth = 8;
+            if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
+            {
+                _mazeWidth = 7;
+                _mazeDepth = 8;
+            }
+            else
+            {
+                _mazeWidth = 5;
+                _mazeDepth = 8;
+            }
+
+           
 
         }
         else if (MazeDifficulty.Hard == _difficulty)
         {
-            _mazeWidth = 8;
-            _mazeDepth = 12;
+            if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
+            {
+                _mazeWidth = 11;
+                _mazeDepth = 12;
+            }
+            else
+            {
+                _mazeWidth = 6;
+                _mazeDepth = 12;
+            }
         }
 
         _mazeGrid = new MazeCell[_mazeWidth, _mazeDepth];
@@ -63,17 +91,43 @@ public class MazeGenerator : MonoBehaviour
 
         if (MazeDifficulty.Easy == _difficulty)
         {
-            Parent.localScale = new Vector3(1.3f, 1, 1.2f);
-            Parent.transform.position = new Vector3(-1.95f, 4, 0f);
+            if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
+            {
+                Parent.localScale = new Vector3(1.1f, 1, 1.2f);
+                Parent.transform.position = new Vector3(-2.8f, 4, 0f);
+            }
+            else
+            {
+                Parent.localScale = new Vector3(0.875f, 1, 1.2f);
+                Parent.transform.position = new Vector3(-1.65f, 4, 0f);
+            }
+
         }
         else if (MazeDifficulty.Medium == _difficulty)
         {
             Parent.transform.position = new Vector3(-2f, 4, 0f);
+            if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
+            {
+                Parent.transform.position = new Vector3(-2.98f, 4, 0f);
+            }
+            else
+            {
+                Parent.transform.position = new Vector3(-1.77f, 4, 0f);
+                Parent.localScale = new Vector3(0.875f, 1, 1f);
+
+            }
         }
         else if (MazeDifficulty.Hard == _difficulty)
         {
-            Parent.localScale = new Vector3(0.63f, 0.63f, 0.63f);
-            Parent.transform.position = new Vector3(-2.22f, 4.3f, 0f);
+           
+            if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
+            {
+                Parent.localScale = new Vector3(0.63f, 0.63f, 0.63f);
+                Parent.transform.position = new Vector3(-3.15f, 4.3f, 0f);            }
+            else
+            {
+                Parent.localScale = new Vector3(0.63f, 0.63f, 0.63f);
+                Parent.transform.position = new Vector3(-1.7f, 4.3f, 0f);            }
         }
 
         if (_difficulty == MazeDifficulty.Hard)
@@ -81,6 +135,7 @@ public class MazeGenerator : MonoBehaviour
 
         PlacePlayerAndDestination();
     }
+
 
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)
     {
