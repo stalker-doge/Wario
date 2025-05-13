@@ -80,9 +80,24 @@ public class TimerManager : MonoBehaviour
                 }
             }
         }
+
+
+        if (isPaused)
+        {
+            //hides all the timer UI
+            timerText.gameObject.SetActive(false);
+            timerImage.SetActive(false);
+            timerBackground.SetActive(false);
+
+        }
         else
         {
+            //shows all the timer UI
+            timerText.gameObject.SetActive(true);
+            timerImage.SetActive(true);
+            timerBackground.SetActive(true);
         }
+
     }
 
 
@@ -136,21 +151,6 @@ public class TimerManager : MonoBehaviour
     {
         isPaused = toPause;
 
-        if (toPause)
-        {
-            //hides all the timer UI
-            timerText.gameObject.SetActive(false);
-            timerImage.SetActive(false);
-            timerBackground.SetActive(false);
-
-        }
-        else
-        {
-            //shows all the timer UI
-            timerText.gameObject.SetActive(true);
-            timerImage.SetActive(true);
-            timerBackground.SetActive(true);
-        }
     }
 
     private void OnEnable()
