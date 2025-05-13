@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3798200493046738101, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: curtainAnimController
+      value: 
+      objectReference: {fileID: 448798726}
     - target: {fileID: 6012319814508859400, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: m_Pivot.x
       value: 0
