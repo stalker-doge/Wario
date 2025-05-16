@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class ScoreManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             //if in the end scene, reset the score and lives
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance.GetSceneString(SceneType.EndScene))
+            if (SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance.GetSceneString(SceneType.EndScene))
             {
                 PlayerPrefs.SetInt("Score", 0);
                 PlayerPrefs.SetInt("Lives", 3);
@@ -108,12 +109,12 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("You lost :c");
             lives = 3;
             score= 0;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.EndScene));
+            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.EndScene));
         }
         TimerManager.Instance.Pause(true);
         TimerManager.Instance.ResetTimer();
         //goes back to the main menu
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
+        SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
     }
 
 
@@ -129,7 +130,7 @@ public class ScoreManager : MonoBehaviour
             TimerManager.Instance.Pause(true);
             TimerManager.Instance.ResetTimer();
             //goes back to the main menu
-            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
+            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
         }
         else
         {
