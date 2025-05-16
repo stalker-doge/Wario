@@ -184,7 +184,7 @@ public class FindTwoCardGameManager : MonoBehaviour
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
         if (scoreManager != null)
         {
-            scoreManager.GameComplete();
+            StartCoroutine(scoreManager.GameComplete());
         }
         else
         {

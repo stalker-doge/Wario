@@ -51,7 +51,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
                     if (scoreManager != null)
                     {
-                        scoreManager.GameComplete();
+                        StartCoroutine(scoreManager.GameComplete());
                     }
                     SoundManager.Instance?.CardMatchAudioClip();
                 }

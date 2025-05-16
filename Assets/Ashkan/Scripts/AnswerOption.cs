@@ -41,7 +41,7 @@ public class AnswerOption : MonoBehaviour
                 ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
                 if (scoreManager != null)
                 {
-                    scoreManager.GameComplete();
+                    StartCoroutine(scoreManager.GameComplete());
                 }
                 // Optional: disable further dragging if needed
             }
