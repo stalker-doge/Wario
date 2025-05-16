@@ -60,7 +60,7 @@ public class Card : MonoBehaviour
     public void OnButtonClicked()
     {
         SoundManager.Instance.CardFlipAudioClip();
-        FindObjectOfType<FindTwoCardGameManager>().OnCardClicked(this);
+        FindTwoCardGameManager.OnCardClickedCallback?.Invoke(this);
         Rotate(true);
     }
 
