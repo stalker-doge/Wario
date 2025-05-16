@@ -38,7 +38,7 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Main Menu")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance.GetSceneString(SceneType.MainMenu))
         {
             musicSource.clip = musicClip1;
 
