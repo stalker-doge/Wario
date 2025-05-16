@@ -142,7 +142,7 @@ public class LevelSwitcher : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
     }
 
     public void SwitchScene(string sceneName)
