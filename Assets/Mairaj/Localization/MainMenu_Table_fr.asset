@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_Table_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: bcf18317208776648b654261890bf926, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4419644595372818456
+  m_TableData:
+  - m_Id: 177916395520
+    m_Localized: Micro-jeu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292542529536
+    m_Localized: Jouer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362029563904
+    m_Localized: Classement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411459436544
+    m_Localized: "Cr\xE9dits"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2319007924224
+    m_Localized: Collection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5312549797888
+    m_Localized: Fin de la partie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5616687169536
+    m_Localized: 'Score : {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644595372818456
+  - m_Id: 5722756923392
+    m_Localized: 'Meilleur score : {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644595372818456
+  - m_Id: 6168636604416
+    m_Localized: Menu Principal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46496311721984
+    m_Localized: 'Vies : {targetValue}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51054605811712
+    m_Localized: 'Temps restant : {targetValue}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92102518423552
+    m_Localized: Associez les cartes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92181534916608
+    m_Localized: "Faites \xE9clater les ballons"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92256533266432
+    m_Localized: "Jeu de math\xE9matiques"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92347696463872
+    m_Localized: Jeu de labyrinthe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92383129944064
+    m_Localized: Visez et tirez
+    m_Metadata:
+      m_Items: []
+  - m_Id: 767845770510336
+    m_Localized: Chef de projet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768073407971328
+    m_Localized: Design
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768276311621632
+    m_Localized: Programmation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770343860224000
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770394586136576
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770411300438016
+    m_Localized: "Fr\xE9quence d\u2019images"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770428144762880
+    m_Localized: "Qualit\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 772531059736576
+    m_Localized: Langues
+    m_Metadata:
+      m_Items: []
+  - m_Id: 809816627134464
+    m_Localized: Comblez le vide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3306049870544896
+    m_Localized: Faire rouler la balle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3312934514376704
+    m_Localized: Entrez votre nom !
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4419644595372818456
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 5616687169536
+        - id: 5722756923392

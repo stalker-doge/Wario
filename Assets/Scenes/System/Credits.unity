@@ -873,7 +873,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 0}
-  lives: {fileID: 0}
   highScore: {fileID: 0}
   lastScore: {fileID: 0}
 --- !u!114 &1365652831
@@ -1253,6 +1252,54 @@ PrefabInstance:
     - target: {fileID: 4502301222069097290, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610097706621040671, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610097706621040671, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610097706621040671, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_overflowMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610097706621040671, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296241895247264459, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296241895247264459, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296241895247264459, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_overflowMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296241895247264459, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_overflowMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -6,6 +6,8 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using System.Linq;
+using UnityEngine.UI;
+using System;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -14,22 +16,47 @@ public class LanguageManager : MonoBehaviour
 
     [SerializeField]
     private LanguageData languageData;
+
+    private const string LANGUAGE_INDEX_PREF_KEY = "SelectedDropdownIndexLanguages";
+
+    private const string LANGUAGE_SAVED_PREF_KEY = "SelectedLanguage";
     private void Start()
     {
+        // Handles the case where drop down option is set as last selected one instead by default
+        int savedValue = PlayerPrefs.GetInt(LANGUAGE_INDEX_PREF_KEY, 0); // 0 is default
+
+        if (myDropdown)
+        {
+            myDropdown.value = savedValue;
+            myDropdown.RefreshShownValue(); // update UI
+        } else
+        {
+            string savedLanguage = PlayerPrefs.GetString(LANGUAGE_SAVED_PREF_KEY, "en");
+                    ChangeLanguage(savedLanguage);
+        }
+
+
         myDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
     }
 
     void OnDropdownValueChanged(int selectedIndex)
     {
+        PlayerPrefs.SetInt(LANGUAGE_INDEX_PREF_KEY, selectedIndex);
+
         string selectedText = myDropdown.options[selectedIndex].text;
 
-        ChangeLanguage(languageData.data.Where(data => data.language == selectedText).FirstOrDefault().languageCode);
+        string languageCode = languageData.data.Where(data => data.language == selectedText).FirstOrDefault().languageCode;
+
+        PlayerPrefs.SetString(LANGUAGE_SAVED_PREF_KEY, languageCode);
+
+        PlayerPrefs.Save();
+
+        ChangeLanguage(languageCode);
     }
 
     // Call this to change language, e.g., "en", "es", "fr", etc.
     public void ChangeLanguage(string localeCode)
     {
-        Debug.Log("XYZ Code " + localeCode);
         StartCoroutine(SetLocale(localeCode));
     }
 
