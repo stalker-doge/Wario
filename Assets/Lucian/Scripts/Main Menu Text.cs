@@ -31,7 +31,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
 
         //checks if the scene is the end scene
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End Scene")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance.GetSceneString(SceneType.EndScene))
         {
             //resets the score and lives
             PlayerPrefs.SetInt("Score", 0);
@@ -65,7 +65,7 @@ public class NewBehaviourScript : MonoBehaviour
         //if lives is less than or equal 0, immediately switch to the end scene
         if (PlayerPrefs.GetInt("Lives", 3) <= 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.EndScene));
         }
     }
     private void SetSmartInt(LocalizeStringEvent localizeEvent, string variableName, int value)
