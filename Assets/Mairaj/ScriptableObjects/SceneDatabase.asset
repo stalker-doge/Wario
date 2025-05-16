@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699e1b21e79a04f478a579f96d5c1083, type: 3}
+  m_Name: SceneDatabase
+  m_EditorClassIdentifier: 
+  scenes:
+  - sceneName: MainMenu
+    sceneType: 0
+  - sceneName: Options
+    sceneType: 1
+  - sceneName: End Scene
+    sceneType: 2
+  - sceneName: Loading
+    sceneType: 3
+  - sceneName: Credits
+    sceneType: 4
+  - sceneName: Leaderboard
+    sceneType: 5
+  - sceneName: Match the Cards
+    sceneType: 6
+  - sceneName: Find Two CardVariant1
+    sceneType: 7
+  - sceneName: Find Two CardVariant2
+    sceneType: 8
+  - sceneName: MazeGame
+    sceneType: 10
+  - sceneName: Aim&Shoot
+    sceneType: 11
+  - sceneName: Aim and Shoot 1
+    sceneType: 12
+  - sceneName: Aim and Shoot 2
+    sceneType: 13
+  - sceneName: Aim and Shoot 3
+    sceneType: 14

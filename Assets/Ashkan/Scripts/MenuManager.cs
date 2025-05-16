@@ -23,13 +23,13 @@ public class MenuManager : MonoBehaviour
 
   public void LeaderBoardswitch()
   {
-    if (SceneManager.GetActiveScene().name == "MainMenu")
+    if (SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance.GetSceneString(SceneType.MainMenu))
     {
-      SceneManager.LoadScene("LeaderBoard");
+      SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Leaderboard));
     }
-    else if (SceneManager.GetActiveScene().name == "LeaderBoard")
+    else if (SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance.GetSceneString(SceneType.Leaderboard))
     {
-      SceneManager.LoadScene("MainMenu");
+      SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.MainMenu));
     }
   }
 }
