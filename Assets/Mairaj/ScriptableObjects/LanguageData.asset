@@ -17,3 +17,9 @@ MonoBehaviour:
     languageCode: en
   - language: "Espa\xF1ol"
     languageCode: es
+  - language: "Fran\xE7ais"
+    languageCode: fr
+  - language: Italiano
+    languageCode: de
+  - language: Deutsch
+    languageCode: it
