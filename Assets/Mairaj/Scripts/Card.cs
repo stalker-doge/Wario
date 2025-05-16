@@ -12,6 +12,11 @@ public class Card : MonoBehaviour
     private Sprite frontSprite;
     private Sprite backSprite;
 
+    [SerializeField]
+    float defaultWidth = 200f;
+    [SerializeField]
+    float newWidth = 150f;
+
     private void Awake()
     {
         FindTwoCardGameManager.EnableCardClicking += ActivateButtonClicking; 
@@ -68,11 +73,16 @@ public class Card : MonoBehaviour
         {
             cardImage.sprite = showFront ? frontSprite : backSprite;
 
+            RectTransform rect = cardImage.transform as RectTransform;
+            Vector2 size = rect.sizeDelta;
+            size.x = showFront ? newWidth : defaultWidth;
+            rect.sizeDelta = size;
+
             transform.DORotate(new Vector3(0, 0, 0), rotateInstant ? 0 : rotateTimer, RotateMode.Fast).OnComplete(() =>
-            {
-                GetComponent<Button>().enabled = !showFront;
-                CompletionCallback?.Invoke();
-            });
+                {
+                    GetComponent<Button>().enabled = !showFront;
+                    CompletionCallback?.Invoke();
+                });
         });
     }
 
