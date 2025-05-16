@@ -30,6 +30,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     public static System.Action <bool> EnableCardClicking = null;
 
+    public static System.Action<Card> OnCardClickedCallback = null;
     private void Awake()
     {
         TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
@@ -46,6 +47,8 @@ public class FindTwoCardGameManager : MonoBehaviour
         {
             InitializeCards();
         }
+
+        OnCardClickedCallback += OnCardClicked;
     }
 
     private void InitializeCards()
@@ -214,10 +217,10 @@ public class FindTwoCardGameManager : MonoBehaviour
             }
         }
 
-        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-        if (scoreManager != null)
+        if (ScoreManager.Instance)
         {
-            scoreManager.GameComplete();
+            //scoreManager.GameComplete();
+            ScoreManager.Instance.GameComplete();
         }
         else
         {
@@ -245,6 +248,11 @@ public class FindTwoCardGameManager : MonoBehaviour
     private void GameEndFailedCallback()
     {
         StopAllCoroutines();
+    }
+
+    private void OnDestroy()
+    {
+        OnCardClickedCallback-= OnCardClicked;
     }
 }
 

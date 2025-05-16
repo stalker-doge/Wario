@@ -27,9 +27,6 @@ public class LevelSwitcher : MonoBehaviour
     private LocalizeStringEvent localizedLevelName;
 
     [SerializeField]
-    private CurtainAnimController curtainAnimController;
-
-    [SerializeField]
     private float curtainAnimTimer =  0.5f;
 
     private string sceneName;
@@ -99,8 +96,7 @@ public class LevelSwitcher : MonoBehaviour
             if (timer > timeToWait)
             {
                 //gives the player a score based on the time left
-                TimerManager timerManager = FindObjectOfType<TimerManager>();
-                if (timerManager != null)
+                if (TimerManager.Instance)
                 {
                     TimerManager.Instance.isPaused = true;
                 }
@@ -121,7 +117,7 @@ public class LevelSwitcher : MonoBehaviour
                 if (!isSwitchingScene)
                 {
                     isSwitchingScene = true;
-                    curtainAnimController.AnimateTowardsCenter(curtainAnimTimer, () => {
+                    CurtainAnimController.Instance?.AnimateTowardsCenter(curtainAnimTimer, () => {
                         SwitchScene(sceneName);
                     });
                 }

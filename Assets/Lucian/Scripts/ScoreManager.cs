@@ -120,10 +120,9 @@ public class ScoreManager : MonoBehaviour
     public void GameComplete()
     {
         //gives the player a score based on the time left
-        TimerManager timerManager = FindObjectOfType<TimerManager>();
-        if (timerManager != null)
+        if (TimerManager.Instance)
         {
-            float timeLeft = timerManager.GetTimeRemaining();
+            float timeLeft = TimerManager.Instance.GetTimeRemaining();
             int scoreToAdd = Mathf.FloorToInt(timeLeft * 10);
             AddScore(scoreToAdd);
 

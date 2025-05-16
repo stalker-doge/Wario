@@ -29,14 +29,12 @@ public class LanguageManager : MonoBehaviour
         {
             myDropdown.value = savedValue;
             myDropdown.RefreshShownValue(); // update UI
+            myDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         } else
         {
             string savedLanguage = PlayerPrefs.GetString(LANGUAGE_SAVED_PREF_KEY, "en");
-                    ChangeLanguage(savedLanguage);
+            ChangeLanguage(savedLanguage);
         }
-
-
-        myDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
     }
 
     void OnDropdownValueChanged(int selectedIndex)

@@ -38,11 +38,7 @@ public class AnswerOption : MonoBehaviour
                 // Snap to placeholder if correct
                 transform.position = placeholderTransform.position;
                 SoundManager.Instance.CardMatchAudioClip();
-                ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-                if (scoreManager != null)
-                {
-                    scoreManager.GameComplete();
-                }
+                ScoreManager.Instance?.GameComplete();
                 // Optional: disable further dragging if needed
             }
             else
