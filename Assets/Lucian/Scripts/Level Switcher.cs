@@ -142,13 +142,13 @@ public class LevelSwitcher : MonoBehaviour
 
     public void PlayGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
+        SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
     }
 
     public void SwitchScene(string sceneName)
     {
         //Load scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     // Function to set the correct localized string for each level
