@@ -250,16 +250,10 @@ public class FindTwoCardGameManager : MonoBehaviour
 
 public enum CardType
 {
-    mTwoClub,
-    mTwoDiamond,
-    mFiveClub,
-    mFiveDiamond,
-    mAceClub,
-    mAceDiamond,
-    mKingDiamond,
-    mKingHeart,
-    mQueenDiamond,
-    mQueenSpade
+    mTwoClub, mThreeClub, mFourClub, mFiveClub, mSixClub, mSevenClub, mEightClub, mNineClub, mTenClub, mAClub, mJClub, mKClub, mQClub
+    //mTwoDiamond, mThreeDiamond, mFourDiamond, mFiveDiamond, mSixDiamond, mSevenDiamond, mEightDiamond, mNineDiamond, mTenDiamond, mADiamond, mJDiamond, mKDiamond, mQDiamond,
+    //mTwoHeart, mThreeHeart, mFourHeart, mFiveHeart, mSixHeart, mSevenHeart, mEightHeart, mNineHeart, mTenHeart, mAHeart, mJHeart, mKHeart, mQHeart,
+    //mTwoSpade, mThreeSpade, mFourSpade, mFiveSpade, mSixSpade, mSevenSpade, mEightSpade, mNineSpade, mTenSpade, mASpade, mJSpade, mKSpade, mQSpade
 }
 
 public enum FindTwoCardsVariant
