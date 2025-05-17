@@ -26,10 +26,16 @@ public class Bullet : MonoBehaviour
         {
             //SoundManager.Instance.ShootAudioClip();
 
-            GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-            Vector2 dir = arrow.GetDirection();
+            if (shootPoint != null)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+                Vector2 dir = arrow.GetDirection();
+            
+                if(bullet != null )
+                    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+            }
 
-            bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+           
             //ShootBullet();
         }
     }
@@ -45,17 +51,19 @@ public class Bullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("Goal"))
         {
-            other.gameObject.SetActive(false);
-            gameObject.SetActive(false);
+          
             //calls the game complete method from the score manager
-            if (ScoreManager.Instance)
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
             {
-                ScoreManager.Instance.GameComplete();
+                StartCoroutine(scoreManager.GameComplete());
             }
             else
             {
                 Debug.LogError("ScoreManager not found in the scene.");
             }
+            other.gameObject.SetActive(false);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 

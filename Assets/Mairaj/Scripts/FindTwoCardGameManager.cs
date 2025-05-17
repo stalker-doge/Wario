@@ -1,7 +1,6 @@
 //Mairaj Muhammad ->2415831
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,9 +27,6 @@ public class FindTwoCardGameManager : MonoBehaviour
     private List<Card> selectedCards = new List<Card>();
     private Coroutine countDownCoroutine = null;
 
-    public static System.Action <bool> EnableCardClicking = null;
-
-    public static System.Action<Card> OnCardClickedCallback = null;
     private void Awake()
     {
         TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
@@ -47,8 +43,6 @@ public class FindTwoCardGameManager : MonoBehaviour
         {
             InitializeCards();
         }
-
-        OnCardClickedCallback += OnCardClicked;
     }
 
     private void InitializeCards()
@@ -67,58 +61,31 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private CardType[] GenerateCardTypes()
     {
-        // Get all possible card types
-        CardType[] allTypes = (CardType[])System.Enum.GetValues(typeof(CardType));
-        System.Random rng = new System.Random();
-
-        // Pick the repeated card randomly
-        CardType repeated = allTypes[rng.Next(allTypes.Length)];
-
-        // Create a list of remaining types excluding the repeated one
-        List<CardType> remaining = allTypes.Where(c => c != repeated).ToList();
-
-        // Shuffle the remaining list and pick two unique ones
-        for (int i = 0; i < remaining.Count; i++)
-        {
-            int swapIndex = rng.Next(i, remaining.Count);
-            (remaining[i], remaining[swapIndex]) = (remaining[swapIndex], remaining[i]);
-        }
+        CardType repeated = CardType.mTwoClub;
+        CardType[] unique = { CardType.mFiveDiamond, CardType.mQueenSpade };
 
         CardType[] result = new CardType[4];
         result[0] = repeated;
         result[1] = repeated;
-        result[2] = remaining[0];
-        result[3] = remaining[1];
+        result[2] = unique[0];
+        result[3] = unique[1];
 
-        // Shuffle the final result
         Shuffle(result);
-
         return result;
     }
 
-    //private void Shuffle(CardType[] array)
-    //{
-    //    System.Random rand = new System.Random();
-    //    int n = array.Length;
-    //    while (n > 1)
-    //    {
-    //        int k = rand.Next(n--);
-    //        var temp = array[n];
-    //        array[n] = array[k];
-    //        array[k] = temp;
-    //    }
-    //}
-
-    private void Shuffle<T>(T[] array)
+    private void Shuffle(CardType[] array)
     {
-        System.Random rng = new System.Random();
-        for (int i = array.Length - 1; i > 0; i--)
+        System.Random rand = new System.Random();
+        int n = array.Length;
+        while (n > 1)
         {
-            int j = rng.Next(i + 1);
-            (array[i], array[j]) = (array[j], array[i]);
+            int k = rand.Next(n--);
+            var temp = array[n];
+            array[n] = array[k];
+            array[k] = temp;
         }
     }
-
 
     public void OnCardClicked(Card clickedCard)
     {
@@ -129,7 +96,6 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         if (selectedCards.Count == 2)
         {
-            EnableCardClicking?.Invoke(false);
             StartCoroutine(CheckForMatch());
         }
     }
@@ -162,8 +128,6 @@ public class FindTwoCardGameManager : MonoBehaviour
 
             card1.ResetCard();
             card2.ResetCard();
-
-            EnableCardClicking?.Invoke(true);
 
             if (variant != FindTwoCardsVariant.mFindTwoCardsNormal)
             {
@@ -217,10 +181,10 @@ public class FindTwoCardGameManager : MonoBehaviour
             }
         }
 
-        if (ScoreManager.Instance)
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
         {
-            //scoreManager.GameComplete();
-            ScoreManager.Instance.GameComplete();
+            StartCoroutine(scoreManager.GameComplete());
         }
         else
         {
@@ -249,19 +213,20 @@ public class FindTwoCardGameManager : MonoBehaviour
     {
         StopAllCoroutines();
     }
-
-    private void OnDestroy()
-    {
-        OnCardClickedCallback-= OnCardClicked;
-    }
 }
 
 public enum CardType
 {
-    mTwoClub, mThreeClub, mFourClub, mFiveClub, mSixClub, mSevenClub, mEightClub, mNineClub, mTenClub, mAClub, mJClub, mKClub, mQClub
-    //mTwoDiamond, mThreeDiamond, mFourDiamond, mFiveDiamond, mSixDiamond, mSevenDiamond, mEightDiamond, mNineDiamond, mTenDiamond, mADiamond, mJDiamond, mKDiamond, mQDiamond,
-    //mTwoHeart, mThreeHeart, mFourHeart, mFiveHeart, mSixHeart, mSevenHeart, mEightHeart, mNineHeart, mTenHeart, mAHeart, mJHeart, mKHeart, mQHeart,
-    //mTwoSpade, mThreeSpade, mFourSpade, mFiveSpade, mSixSpade, mSevenSpade, mEightSpade, mNineSpade, mTenSpade, mASpade, mJSpade, mKSpade, mQSpade
+    mTwoClub,
+    mTwoDiamond,
+    mFiveClub,
+    mFiveDiamond,
+    mAceClub,
+    mAceDiamond,
+    mKingDiamond,
+    mKingHeart,
+    mQueenDiamond,
+    mQueenSpade
 }
 
 public enum FindTwoCardsVariant
