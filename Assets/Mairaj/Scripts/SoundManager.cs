@@ -39,6 +39,12 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip balloonPopAudioClip;
 
+    private string GAME_VOLUME_KEY = "GameVolume";
+
+    public string GetGameVolumeKey
+    {
+        get {  return GAME_VOLUME_KEY; }
+    }
     private void Awake()
     {
         // Singleton pattern
@@ -50,11 +56,18 @@ public class SoundManager : MonoBehaviour
 
         Instance = this;
         audioSource = GetComponent<AudioSource>();
+        LoadSavedVolume();
         DontDestroyOnLoad(gameObject);
     }
 
-    // Declare a function for each audio clip
+    private void LoadSavedVolume()
+    {
+        // Load saved volume or default to full volume
+        float savedVolume = PlayerPrefs.GetFloat(GAME_VOLUME_KEY, 1f);
+        audioSource.volume = savedVolume;
+    }
 
+    // Declare a function for each audio clip
     public void GameStartAudioClip()
     {
         Instance.audioSource.PlayOneShot(gameStartAudioClip);
@@ -108,4 +121,12 @@ public class SoundManager : MonoBehaviour
     {
         Instance.audioSource.PlayOneShot(balloonPopAudioClip);
     }
+
+    public void SetVolume(float volume)
+    {
+        audioSource.volume = volume;
+
+        PlayerPrefs.SetFloat(GAME_VOLUME_KEY, volume);
+    }
+
 }

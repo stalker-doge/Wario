@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class ScoreManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             //if in the end scene, reset the score and lives
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End Scene")
+            if (SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance?.GetSceneString(SceneType.EndScene))
             {
                 PlayerPrefs.SetInt("Score", 0);
                 PlayerPrefs.SetInt("Lives", 3);
@@ -108,29 +109,28 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("You lost :c");
             lives = 3;
             score= 0;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
+            SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.EndScene));
         }
         TimerManager.Instance.Pause(true);
         TimerManager.Instance.ResetTimer();
         //goes back to the main menu
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
     }
 
 
     public void GameComplete()
     {
         //gives the player a score based on the time left
-        TimerManager timerManager = FindObjectOfType<TimerManager>();
-        if (timerManager != null)
+        if (TimerManager.Instance)
         {
-            float timeLeft = timerManager.GetTimeRemaining();
+            float timeLeft = TimerManager.Instance.GetTimeRemaining();
             int scoreToAdd = Mathf.FloorToInt(timeLeft * 10);
             AddScore(scoreToAdd);
 
             TimerManager.Instance.Pause(true);
             TimerManager.Instance.ResetTimer();
             //goes back to the main menu
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
+            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
         }
         else
         {

@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_Table_de
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: de
+  m_SharedData: {fileID: 11400000, guid: bcf18317208776648b654261890bf926, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4419644595372818454
+  m_TableData:
+  - m_Id: 177916395520
+    m_Localized: Mikrospiel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292542529536
+    m_Localized: Spielen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362029563904
+    m_Localized: Bestenliste
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411459436544
+    m_Localized: Abspann
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2319007924224
+    m_Localized: Sammlung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5312549797888
+    m_Localized: Spielende
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5616687169536
+    m_Localized: 'Punktestand: {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644595372818454
+  - m_Id: 5722756923392
+    m_Localized: "Pers\xF6nlicher Rekord: {targetValue}"
+    m_Metadata:
+      m_Items:
+      - rid: 4419644595372818454
+  - m_Id: 6168636604416
+    m_Localized: "Hauptmen\xFC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46496311721984
+    m_Localized: 'Leben: {targetValue}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51054605811712
+    m_Localized: 'Verbleibende Zeit: {targetValue}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92102518423552
+    m_Localized: Karten zuordnen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92181534916608
+    m_Localized: Ballons platzen lassen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92256533266432
+    m_Localized: Mathe-Spiel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92347696463872
+    m_Localized: Labyrinth-Spiel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92383129944064
+    m_Localized: "Zielen und Schie\xDFen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 767845770510336
+    m_Localized: Projektleiter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768073407971328
+    m_Localized: Gestaltung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768276311621632
+    m_Localized: Programmierung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770343860224000
+    m_Localized: Optionen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770394586136576
+    m_Localized: "Lautst\xE4rke"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770411300438016
+    m_Localized: Bildrate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770428144762880
+    m_Localized: "Qualit\xE4t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 772531059736576
+    m_Localized: Sprachen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 809816627134464
+    m_Localized: "L\xFCcke f\xFCllen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3306049870544896
+    m_Localized: Den Ball rollen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3312934514376704
+    m_Localized: Namen eingeben!
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4419644595372818454
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 5616687169536
+        - id: 5722756923392
