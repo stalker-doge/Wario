@@ -145,10 +145,10 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void EndGame()
     {
-        if (ScoreManager.Instance)
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
         {
-            //scoreManager.GameComplete();
-            ScoreManager.Instance.GameComplete();
+            StartCoroutine(scoreManager.GameComplete());
         }
         else
         {

@@ -44,10 +44,10 @@ public class GolfBall : MonoBehaviour
             other.gameObject.SetActive(false);
             gameObject.SetActive(false);
             //calls the game complete method from the score manager
-            if (ScoreManager.Instance)
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
             {
-                //scoreManager.GameComplete();
-                ScoreManager.Instance.GameComplete();
+                StartCoroutine(scoreManager.GameComplete());
             }
             else
             {
