@@ -1,4 +1,4 @@
-//Mairaj Muhammad ->2415831
+// Mairaj Muhammad -> 2415831
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -6,18 +6,41 @@ using System.Linq;
 
 public class FillTheGapManager : MonoBehaviour
 {
+    // Singleton instance
+    public static FillTheGapManager Instance { get; private set; }
+
     [SerializeField]
     private List<GameObject> dropZoneObjects; // List of DropZone objects
 
     [SerializeField]
     private FillTheGapVariant variant = FillTheGapVariant.mTwoSlots;
 
+    private void Awake()
+    {
+        // Singleton pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void Start()
     {
         SelectRandomDropZonesAndUpdateColor();
     }
 
-    public FillTheGapVariant GetVariant() {
+    public FillTheGapVariant GetVariant()
+    {
         return variant;
     }
 
@@ -32,7 +55,10 @@ public class FillTheGapManager : MonoBehaviour
         }
 
         // Randomly select the required number of distinct drop zones
-        List<GameObject> selectedDropZones = dropZoneObjects.OrderBy(x => Random.value).Take(numberToSelect).ToList();
+        List<GameObject> selectedDropZones = dropZoneObjects
+            .OrderBy(x => Random.value)
+            .Take(numberToSelect)
+            .ToList();
 
         // Set their color to black
         foreach (var dz in selectedDropZones)
@@ -81,6 +107,7 @@ public class FillTheGapManager : MonoBehaviour
         }
     }
 }
+
 public enum FillTheGapVariant
 {
     mZeroSlots,

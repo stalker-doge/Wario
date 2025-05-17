@@ -67,12 +67,11 @@ public class TimerManager : MonoBehaviour
                 timeRemaining = timeLimit;
 
                 //gets the score manager and calls GameFail
-                ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-                if (scoreManager != null)
+                if (ScoreManager.Instance)
                 {
                     //resets the time remaining to normal
                     Pause(true);
-                    scoreManager.GameFail();
+                    ScoreManager.Instance.GameFail();
                     
                 }
                 else
@@ -171,21 +170,16 @@ public class TimerManager : MonoBehaviour
         {
             StartCoroutine(CurtainAnimCoroutine(0.5f));
         } else {
-            CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
-            if (anim != null)
-            {
-                Destroy(anim.gameObject.transform.parent.gameObject);
-            }
+            CurtainAnimController.DestroyParentCallback?.Invoke();
         }
     }
 
     private IEnumerator CurtainAnimCoroutine(float animTimer)
     {
-        CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
-        if (anim)
+        if (CurtainAnimController.Instance)
         {
             // Debug.Log("XYZ Found Anim Controller");
-            anim.AnimateAwayFromCenter(animTimer, () => { 
+            CurtainAnimController.Instance.AnimateAwayFromCenter(animTimer, () => { 
                 isPaused = false; 
             });
         }

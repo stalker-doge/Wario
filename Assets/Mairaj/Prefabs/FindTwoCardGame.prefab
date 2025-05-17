@@ -57,25 +57,31 @@ MonoBehaviour:
   backCardSprite: {fileID: 21300000, guid: 78411ebc445128c44bb4caf3af0c3594, type: 3}
   cardSpriteMappings:
   - cardType: 0
-    cardSprite: {fileID: 21300000, guid: 86388cd2b45eb0240a56a0db91e5da6f, type: 3}
+    cardSprite: {fileID: 21300000, guid: 6ff2764853012e742973ce25d55f2c34, type: 3}
   - cardType: 1
-    cardSprite: {fileID: 21300000, guid: 9eb4f328490c8dd4a8862bb12b1c6ede, type: 3}
+    cardSprite: {fileID: 21300000, guid: e87e6b9aa65160e41bd64ef55947d5f6, type: 3}
   - cardType: 2
-    cardSprite: {fileID: 21300000, guid: 98b7147126a0b9941b4e66d9094cd7c4, type: 3}
+    cardSprite: {fileID: 21300000, guid: 9424100a0e258a449a199347654589b3, type: 3}
   - cardType: 3
-    cardSprite: {fileID: 21300000, guid: 7485d1e9713d1964a8a5aaaf405d463f, type: 3}
+    cardSprite: {fileID: 21300000, guid: 61d8a6f2059beb24d9914dabc3793e7a, type: 3}
   - cardType: 4
-    cardSprite: {fileID: 21300000, guid: 1c3a1f6bc2f02dc40a3e6d190b77d321, type: 3}
+    cardSprite: {fileID: 21300000, guid: 92f1ec9d49ffd82409d0a0236dfcc4f8, type: 3}
   - cardType: 5
-    cardSprite: {fileID: 21300000, guid: f279e722551bd474983b464c39daf83e, type: 3}
+    cardSprite: {fileID: 21300000, guid: 4354af9c23529874c9a3168a51c5f84f, type: 3}
   - cardType: 6
-    cardSprite: {fileID: 21300000, guid: 3dc15fcb42fe52442884ff2e1e75c23f, type: 3}
+    cardSprite: {fileID: 21300000, guid: 767087b8e01b60d449193b08981ed0b4, type: 3}
   - cardType: 7
-    cardSprite: {fileID: 21300000, guid: c91c12c1ae9471647ae07f43b4e398d9, type: 3}
+    cardSprite: {fileID: 21300000, guid: e81b613415a79ed4eb39cb5a8d47c2d5, type: 3}
   - cardType: 8
-    cardSprite: {fileID: 21300000, guid: c99570b450751b347b3c2123ff7eecc9, type: 3}
+    cardSprite: {fileID: 21300000, guid: d445747c9566f7244b03b305340a0695, type: 3}
   - cardType: 9
-    cardSprite: {fileID: 21300000, guid: 5ad91a2811a17044aaa9cf331a52c2ea, type: 3}
+    cardSprite: {fileID: 21300000, guid: a4fc6b6199c42a444a334a1a36d2aa6b, type: 3}
+  - cardType: 10
+    cardSprite: {fileID: 21300000, guid: 492c1229cee1acd4690ad86cd200a6f5, type: 3}
+  - cardType: 11
+    cardSprite: {fileID: 21300000, guid: 02d955eb92cace64c8794e0db5acdf84, type: 3}
+  - cardType: 12
+    cardSprite: {fileID: 21300000, guid: e6c7574260e6a2640a1b61a877083ba4, type: 3}
   variant: 0
   tutorialTimerForVariantMode: 0.35
 --- !u!1 &1640468347747460102
