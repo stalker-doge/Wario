@@ -35,6 +35,22 @@ public class Leaderboard : MonoBehaviour
 
     public void GetLeaderboard()
     {
+
+        //checks that there is an internet connection
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("No internet connection, loading leaderboard from file");
+            //load the leaderboard from a file
+            string[] lines = System.IO.File.ReadAllLines(Application.persistentDataPath + "/leaderboard.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string[] line = lines[i].Split(',');
+                names[i].text = line[0];
+                scores[i].text = line[1];
+                positions[i].text = (i + 1).ToString();
+            }
+            return;
+        }
         LeaderboardCreator.GetLeaderboard(publicLeaderboardKey, ((msg) =>
         {
             int loopLength = (msg.Length < names.Count) ? msg.Length : names.Count;
@@ -44,6 +60,15 @@ public class Leaderboard : MonoBehaviour
                 scores[i].text = msg[i].Score.ToString();
                 positions[i].text = (i + 1).ToString();
             }
+
+            //save the leaderboard to a file
+            string[] lines = new string[msg.Length];
+            for (int i = 0; i < msg.Length; i++)
+            {
+                lines[i] = msg[i].Username + "," + msg[i].Score;
+            }
+            System.IO.File.WriteAllLines(Application.persistentDataPath + "/leaderboard.txt", lines);
+            Debug.Log("Leaderboard loaded from server");
         }));
     }
 
@@ -54,4 +79,6 @@ public class Leaderboard : MonoBehaviour
             Debug.Log(msg);
         }));
     }
+
+
 }
