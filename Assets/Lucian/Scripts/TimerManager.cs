@@ -27,6 +27,7 @@ public class TimerManager : MonoBehaviour
     [SerializeField]
     private GameObject timerBackground;
 
+    public GameObject WinPage,LosePage;
     public static TimerManager Instance { get; private set; }
 
     // Start is called before the first frame update
@@ -54,33 +55,8 @@ public class TimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused)
-        {
-            if (timeRemaining > 0)
-            {
-                timeRemaining -= Time.deltaTime;
-               // UpdateTimerText();
-                UpdateTimerBar();
-            }
-            else
-            {
-                timeRemaining = timeLimit;
 
-                //gets the score manager and calls GameFail
-                if (ScoreManager.Instance)
-                {
-                    //resets the time remaining to normal
-                    Pause(true);
-                    ScoreManager.Instance.GameFail();
-                    
-                }
-                else
-                {
-                    Debug.LogError("ScoreManager not found in the scene.");
-                }
-            }
-        }
-
+        StartCoroutine(Timer());
 
         if (isPaused)
         {
@@ -100,10 +76,47 @@ public class TimerManager : MonoBehaviour
 
     }
 
+    IEnumerator Timer()
+    {
+       
+            if (!isPaused)
+            {
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                    // UpdateTimerText();
+                    UpdateTimerBar();
+                }
+                else
+                {
+                    
+                    timeRemaining = timeLimit;
+
+                    //gets the score manager and calls GameFail
+                    ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+                    if (scoreManager != null)
+                    {
+                        LosePage.SetActive(true);
+                        //resets the time remaining to normal
+                        Pause(true);
+                        yield return new WaitForSeconds(1);
+                        scoreManager.GameFail();
+                        LosePage.SetActive(false);
+
+                    }
+                    else
+                    {
+                        Debug.LogError("ScoreManager not found in the scene.");
+                    }
+                }
+            }
+      
+    }
 
     public void StartTimer()
     {
         timeRemaining = timeLimit;
+        Timer();
         //UpdateTimerText();
     }
 
@@ -170,16 +183,21 @@ public class TimerManager : MonoBehaviour
         {
             StartCoroutine(CurtainAnimCoroutine(0.5f));
         } else {
-            CurtainAnimController.DestroyParentCallback?.Invoke();
+            CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+            if (anim != null)
+            {
+                Destroy(anim.gameObject.transform.parent.gameObject);
+            }
         }
     }
 
     private IEnumerator CurtainAnimCoroutine(float animTimer)
     {
-        if (CurtainAnimController.Instance)
+        CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+        if (anim)
         {
             // Debug.Log("XYZ Found Anim Controller");
-            CurtainAnimController.Instance.AnimateAwayFromCenter(animTimer, () => { 
+            anim.AnimateAwayFromCenter(animTimer, () => { 
                 isPaused = false; 
             });
         }
