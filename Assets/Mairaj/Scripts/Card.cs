@@ -12,8 +12,14 @@ public class Card : MonoBehaviour
     private Sprite frontSprite;
     private Sprite backSprite;
 
+    [SerializeField]
+    float defaultWidth = 200f;
+    [SerializeField]
+    float newWidth = 150f;
+
     private void Awake()
     {
+        FindTwoCardGameManager.EnableCardClicking += ActivateButtonClicking; 
         if (cardImage)
             cardImage.sprite = backSprite;
     }
@@ -54,7 +60,7 @@ public class Card : MonoBehaviour
     public void OnButtonClicked()
     {
         SoundManager.Instance.CardFlipAudioClip();
-        FindObjectOfType<FindTwoCardGameManager>().OnCardClicked(this);
+        FindTwoCardGameManager.OnCardClickedCallback?.Invoke(this);
         Rotate(true);
     }
 
@@ -67,11 +73,16 @@ public class Card : MonoBehaviour
         {
             cardImage.sprite = showFront ? frontSprite : backSprite;
 
+            RectTransform rect = cardImage.transform as RectTransform;
+            Vector2 size = rect.sizeDelta;
+            size.x = showFront ? newWidth : defaultWidth;
+            rect.sizeDelta = size;
+
             transform.DORotate(new Vector3(0, 0, 0), rotateInstant ? 0 : rotateTimer, RotateMode.Fast).OnComplete(() =>
-            {
-                GetComponent<Button>().enabled = !showFront;
-                CompletionCallback?.Invoke();
-            });
+                {
+                    GetComponent<Button>().enabled = !showFront;
+                    CompletionCallback?.Invoke();
+                });
         });
     }
 
@@ -83,5 +94,15 @@ public class Card : MonoBehaviour
     public float GetRotateTimer()
     {
         return rotateTimer;
+    }
+
+    private void ActivateButtonClicking(bool activate)
+    {
+        GetComponent<Button>().enabled = activate;
+    }
+
+    private void OnDestroy()
+    {
+        FindTwoCardGameManager.EnableCardClicking -= ActivateButtonClicking;
     }
 }

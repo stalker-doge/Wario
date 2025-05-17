@@ -14,7 +14,13 @@ public class DropZone : MonoBehaviour, IDropHandler
 
     private void Awake()
     {
-        variant = (FillTheGapVariant)(FindObjectOfType<FillTheGapManager>()?.GetVariant());
+        Invoke("InitializeVariantAfterDelay", 0.1f);
+        correctMatches = 0;
+    }
+
+    private void InitializeVariantAfterDelay()
+    {
+        variant = FillTheGapManager.Instance.GetVariant();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -42,17 +48,15 @@ public class DropZone : MonoBehaviour, IDropHandler
                 // Increment correct match counter
                 correctMatches++;
 
+                Debug.Log("XYZ CorrectMatches " + correctMatches + " " + (int)(variant));
+
                 // Check if all matches have been made
                 if (correctMatches >= (int)variant)
                 {
                     Debug.Log("XYZ Game Ended");
                     // Game has ended, notify FindTheGapManager
                     OnGameEnded?.Invoke();
-                    ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-                    if (scoreManager != null)
-                    {
-                        scoreManager.GameComplete();
-                    }
+                    ScoreManager.Instance?.GameComplete();
                     SoundManager.Instance?.CardMatchAudioClip();
                 }
             }
