@@ -14,6 +14,7 @@ public class DropZone : MonoBehaviour, IDropHandler
 
     private void Awake()
     {
+        correctMatches = 0; // Initialize the correct matches counter
         variant = (FillTheGapVariant)(FindObjectOfType<FillTheGapManager>()?.GetVariant());
     }
 
@@ -45,6 +46,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                 // Check if all matches have been made
                 if (correctMatches >= (int)variant)
                 {
+                    correctMatches=0; // Reset the counter for the next game
                     Debug.Log("XYZ Game Ended");
                     // Game has ended, notify FindTheGapManager
                     OnGameEnded?.Invoke();

@@ -11,7 +11,7 @@ public class PanelHider : MonoBehaviour
     {
         //waits for 1 second before hiding the panel
 
-        HidePanelCoroutine(1f);
+        HidePanelCoroutine(1.5f);
         if (panel != null)
         {
             panel.SetActive(false);
