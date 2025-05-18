@@ -18,9 +18,6 @@ public class BallController : MonoBehaviour
     {
         DetectSwipeInput();
 
-        // Optional: clamp X position if needed
-        float clampedX = Mathf.Clamp(transform.position.x, -maxX, maxX);
-        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
 
     void DetectSwipeInput()
