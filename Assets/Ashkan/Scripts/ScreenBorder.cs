@@ -112,6 +112,5 @@ public class ScreenBorders : MonoBehaviour
 
         // Instantiate inside parent so scaling is applied
         GameObject circle = Instantiate(circleObject, position, Quaternion.identity);
-        circle.transform.localScale = Vector3.one; // Ensure consistent scale
     }
 }
