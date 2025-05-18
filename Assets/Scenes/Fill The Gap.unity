@@ -1313,32 +1313,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2340325252509201493, guid: 95618def3e01789429d6c10ce6aa229d, type: 3}
   m_PrefabInstance: {fileID: 826452508}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &894319025 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8145460884968114676, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
-  m_PrefabInstance: {fileID: 8543478798418665418}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &894319029
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894319025}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b443566e00c712c479c6f8da918f4087, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1057379428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2689,6 +2663,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5130546747746962038, guid: 1f81019a5acd1ee45aa67af8920a84f1, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130546747746962038, guid: 1f81019a5acd1ee45aa67af8920a84f1, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 329b0fa2432b22b4da8f345abeb70567, type: 3}
     - target: {fileID: 8661077612005455371, guid: 1f81019a5acd1ee45aa67af8920a84f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 540
@@ -2834,14 +2816,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7334260545410459245, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7770895642735496931, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8642385231477856762, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_Name
       value: Timer Canvas
@@ -2849,10 +2823,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8145460884968114676, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 894319029}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

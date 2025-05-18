@@ -48,10 +48,9 @@ public class DropZone : MonoBehaviour, IDropHandler
                     Debug.Log("XYZ Game Ended");
                     // Game has ended, notify FindTheGapManager
                     OnGameEnded?.Invoke();
-                    ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-                    if (scoreManager != null)
+                    if (ScoreManager.Instance)
                     {
-                        StartCoroutine(scoreManager.GameComplete());
+                        StartCoroutine(ScoreManager.Instance.GameComplete());
                     }
                     SoundManager.Instance?.CardMatchAudioClip();
                 }

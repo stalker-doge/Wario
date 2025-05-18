@@ -145,14 +145,9 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void EndGame()
     {
-        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-        if (scoreManager != null)
+        if (ScoreManager.Instance)
         {
-            StartCoroutine(scoreManager.GameComplete());
-        }
-        else
-        {
-            Debug.LogError("ScoreManager not found in the scene.");
-        }
+            StartCoroutine(ScoreManager.Instance.GameComplete());
+        }    
     }
 }
