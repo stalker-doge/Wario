@@ -6968,6 +6968,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Name Input
       objectReference: {fileID: 0}
+    - target: {fileID: 4167934855814679602, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167934855814679602, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 46496311721984
+      objectReference: {fileID: 0}
     - target: {fileID: 4520410014185681399, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -7139,6 +7147,18 @@ PrefabInstance:
     - target: {fileID: 8188496991111389652, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648891398204862600, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648891398204862600, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 3312934514376704
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648891398204862600, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:bcf18317208776648b654261890bf926
       objectReference: {fileID: 0}
     - target: {fileID: 8873497041386234479, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: SubmitScoreEvent.m_PersistentCalls.m_Calls.Array.size
