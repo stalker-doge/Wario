@@ -3477,7 +3477,6 @@ MonoBehaviour:
   loading: 0
   levelName: {fileID: 0}
   localizedLevelName: {fileID: 0}
-  curtainAnimController: {fileID: 0}
   curtainAnimTimer: 0
 --- !u!1 &1387073184
 GameObject:
@@ -6961,9 +6960,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365652829}
     m_Modifications:
+    - target: {fileID: 1304976558368512658, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2466185301172256776, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_Name
       value: Name Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520410014185681399, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5465658145048601311, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -6987,7 +6994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5465658145048601311, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GetLeaderboard
+      value: RefreshLeaderboard
       objectReference: {fileID: 0}
     - target: {fileID: 5465658145048601311, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -7031,7 +7038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5589093454121438668, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GetLeaderboard
+      value: RefreshLeaderboard
       objectReference: {fileID: 0}
     - target: {fileID: 5589093454121438668, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
