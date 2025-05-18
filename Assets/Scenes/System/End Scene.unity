@@ -441,6 +441,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1243462029982399092, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -955
+      objectReference: {fileID: 0}
     - target: {fileID: 2828888607116606166, guid: e449d598d375089419b84a7873821ba9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -529,9 +533,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -158.40515
       objectReference: {fileID: 0}
+    - target: {fileID: 6118444351112299185, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 6258624435876072317, guid: e449d598d375089419b84a7873821ba9, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050460602361240125, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -673
       objectReference: {fileID: 0}
     - target: {fileID: 8519664148276225768, guid: e449d598d375089419b84a7873821ba9, type: 3}
       propertyPath: m_text
