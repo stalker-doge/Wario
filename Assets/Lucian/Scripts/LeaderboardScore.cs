@@ -36,6 +36,7 @@ public class LeaderboardScore : MonoBehaviour
         {
             Debug.Log("Internet connection available, submitting score to leaderboard");
             SubmitScoreEvent.Invoke(inputName.text, int.Parse(inputScore.text));
+
         }
     }
 }

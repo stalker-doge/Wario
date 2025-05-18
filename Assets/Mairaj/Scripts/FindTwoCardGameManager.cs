@@ -220,7 +220,7 @@ public class FindTwoCardGameManager : MonoBehaviour
         if (ScoreManager.Instance)
         {
             //scoreManager.GameComplete();
-            ScoreManager.Instance.GameComplete();
+           StartCoroutine( ScoreManager.Instance.GameComplete());
         }
         else
         {

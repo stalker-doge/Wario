@@ -51,16 +51,10 @@ public class Bullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("Goal"))
         {
-          
-            //calls the game complete method from the score manager
-            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-            if (scoreManager != null)
+            SoundManager.Instance.MiniGameCompleteAudioClip();
+            if(ScoreManager.Instance)
             {
-                StartCoroutine(scoreManager.GameComplete());
-            }
-            else
-            {
-                Debug.LogError("ScoreManager not found in the scene.");
+                StartCoroutine(ScoreManager.Instance.GameComplete());
             }
             other.gameObject.SetActive(false);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;

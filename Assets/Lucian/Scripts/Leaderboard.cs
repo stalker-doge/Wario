@@ -29,7 +29,7 @@ public class Leaderboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -51,14 +51,20 @@ public class Leaderboard : MonoBehaviour
             }
             return;
         }
+        else
+        {
+            Debug.Log("Internet connection available, loading leaderboard from server");
+        }
         LeaderboardCreator.GetLeaderboard(publicLeaderboardKey, ((msg) =>
         {
+            Debug.Log("BRUH");
             int loopLength = (msg.Length < names.Count) ? msg.Length : names.Count;
             for (int i = 0; i < loopLength; i++)
             {
                 names[i].text = msg[i].Username;
                 scores[i].text = msg[i].Score.ToString();
                 positions[i].text = (i + 1).ToString();
+                Debug.Log(msg[i].Username + " " + msg[i].Score);
             }
 
             //save the leaderboard to a file
@@ -77,8 +83,13 @@ public class Leaderboard : MonoBehaviour
         LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, username, score, ((msg) =>
         {
             Debug.Log(msg);
+            Debug.Log("Leaderboard entry set");
+            GetLeaderboard();
         }));
     }
 
+    public void RefreshLeaderboard()
+    {
+    }
 
 }
