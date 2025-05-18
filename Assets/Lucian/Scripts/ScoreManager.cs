@@ -120,9 +120,11 @@ public class ScoreManager : MonoBehaviour
 
     public IEnumerator GameComplete()
     {
+        Debug.Log("HEY");
         //gives the player a score based on the time left
         if (TimerManager.Instance)
         {
+            Debug.Log("Game Complete");
             float timeLeft = TimerManager.Instance.GetTimeRemaining();
             int scoreToAdd = Mathf.FloorToInt(timeLeft * 10);
             AddScore(scoreToAdd);
@@ -134,7 +136,7 @@ public class ScoreManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             TimerManager.Instance.WinPage.SetActive(false);
             //goes back to the main menu
-            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.Loading));
+            SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
         }
         else
         {
