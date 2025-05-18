@@ -78,38 +78,47 @@ public class TimerManager : MonoBehaviour
 
     IEnumerator Timer()
     {
-       
-            if (!isPaused)
+
+        if (!isPaused)
+        {
+            if (timeRemaining > 0)
             {
-                if (timeRemaining > 0)
-                {
-                    timeRemaining -= Time.deltaTime;
-                    // UpdateTimerText();
-                    UpdateTimerBar();
-                }
-                else
-                {
-                    
-                    timeRemaining = timeLimit;
+                timeRemaining -= Time.deltaTime;
+                // UpdateTimerText();
+                UpdateTimerBar();
+            }
+            else
+            {
 
-                    //gets the score manager and calls GameFail
-                    ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-                    if (scoreManager != null)
-                    {
-                        LosePage.SetActive(true);
-                        //resets the time remaining to normal
-                        Pause(true);
-                        yield return new WaitForSeconds(1);
-                        scoreManager.GameFail();
-                        LosePage.SetActive(false);
+                timeRemaining = timeLimit;
 
-                    }
-                    else
-                    {
-                        Debug.LogError("ScoreManager not found in the scene.");
-                    }
+                //gets the score manager and calls GameFail
+                //ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+                //if (scoreManager != null)
+                //{
+                //    LosePage.SetActive(true);
+                //    //resets the time remaining to normal
+                //    Pause(true);
+                //    yield return new WaitForSeconds(1);
+                //    scoreManager.GameFail();
+                //    LosePage.SetActive(false);
+
+                //}
+                //else
+                //{
+                //    Debug.LogError("ScoreManager not found in the scene.");
+                //}
+
+                if (ScoreManager.Instance)
+                {
+                    LosePage.SetActive(true);
+                    Pause(true);
+                    yield return new WaitForSeconds(1);
+                    ScoreManager.Instance.GameFail();
+                    LosePage.SetActive(false);
                 }
             }
+        }
       
     }
 
@@ -183,23 +192,35 @@ public class TimerManager : MonoBehaviour
         {
             StartCoroutine(CurtainAnimCoroutine(0.5f));
         } else {
-            CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
-            if (anim != null)
-            {
-                Destroy(anim.gameObject.transform.parent.gameObject);
-            }
+            //CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+            //if (anim != null)
+            //{
+            //    Destroy(anim.gameObject.transform.parent.gameObject);
+            //}
+            CurtainAnimController.DestroyParentCallback?.Invoke();
         }
     }
 
     private IEnumerator CurtainAnimCoroutine(float animTimer)
     {
-        CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
-        if (anim)
-        {
-            // Debug.Log("XYZ Found Anim Controller");
-            anim.AnimateAwayFromCenter(animTimer, () => { 
-                isPaused = false; 
+        //CurtainAnimController anim = FindObjectOfType<CurtainAnimController>();
+        //if (anim)
+        //{
+        //    // Debug.Log("XYZ Found Anim Controller");
+        //    anim.AnimateAwayFromCenter(animTimer, () => { 
+        //        isPaused = false; 
+        //    });
+        //}
+
+        if(CurtainAnimController.Instance)
+        { CurtainAnimController.Instance.AnimateAwayFromCenter(animTimer, () =>
+            {
+                isPaused = false;
             });
+        }
+        else
+        {
+            Debug.LogError("CurtainAnimController not found in the scene.");
         }
         yield return null;
     }
