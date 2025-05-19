@@ -620,7 +620,8 @@ PrefabInstance:
       value: MenuCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4006369386072011325, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
@@ -1476,6 +1477,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1604097011722862621, guid: 2fd149a4bab0f354a85bf3aa01eb6606, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1758393075}
     - target: {fileID: 3088354673402872885, guid: 2fd149a4bab0f354a85bf3aa01eb6606, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.20604342
@@ -1608,6 +1613,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1758393075 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5130546747746962038, guid: 1f81019a5acd1ee45aa67af8920a84f1, type: 3}
+  m_PrefabInstance: {fileID: 1711511435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1803121200 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8897662172677310435, guid: e84fdf9386db053459bfc67b63ddebd4, type: 3}
