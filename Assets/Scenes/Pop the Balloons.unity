@@ -132,19 +132,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: redCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: blueCount
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: canvasRect
       value: 
       objectReference: {fileID: 407924350}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
+      propertyPath: topPadding
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
+      propertyPath: leftPadding
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: yellowCount
-      value: 2
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
+      propertyPath: rightPadding
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
+      propertyPath: balloonRadius
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: bottomPadding
@@ -152,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1441392399628186835, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: adjustRadiusFactor
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3850506414125591602, guid: e159e7e3d0ea42b478cc4b3daac85126, type: 3}
       propertyPath: m_IsActive
@@ -422,7 +438,7 @@ Canvas:
   m_GameObject: {fileID: 407924346}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 745303913}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
