@@ -38,6 +38,7 @@ public class MiniGameAudioController : MonoBehaviour
 
             if (!audioSource.isPlaying || audioSource.clip != SoundManager.Instance.MinigameMusicAudioClip)
             {
+                audioSource.Stop();
                 audioSource.clip = SoundManager.Instance.MinigameMusicAudioClip;
                 audioSource.loop = true;
                 audioSource.Play();
