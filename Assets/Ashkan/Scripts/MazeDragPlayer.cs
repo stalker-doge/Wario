@@ -85,10 +85,9 @@ public class MazeDragPlayer : MonoBehaviour
             Debug.Log("Maze Done");
             // You can also add effects, sounds, or next level logic here
             //SoundManager.Instance.MiniGameCompleteAudioClip();
-            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-            if (scoreManager != null)
+            if (ScoreManager.Instance)
             {
-                StartCoroutine(scoreManager.GameComplete());
+                StartCoroutine(ScoreManager.Instance.GameComplete());
             }
         }
     

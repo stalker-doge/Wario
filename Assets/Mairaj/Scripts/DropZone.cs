@@ -15,7 +15,12 @@ public class DropZone : MonoBehaviour, IDropHandler
     private void Awake()
     {
         correctMatches = 0; // Initialize the correct matches counter
-        variant = (FillTheGapVariant)(FindObjectOfType<FillTheGapManager>()?.GetVariant());
+        Invoke("InitializeVariantAfterDelay", 0.1f);
+    }
+
+    private void InitializeVariantAfterDelay()
+    {
+        variant = FillTheGapManager.Instance.GetVariant();
     }
 
     public void OnDrop(PointerEventData eventData)
