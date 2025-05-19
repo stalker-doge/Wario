@@ -16,14 +16,15 @@ public class BalloonsPopGameManager : MonoBehaviour
     [SerializeField] private Balloon redBalloonPrefab;
 
     [Header("Layout Settings")]
-    [SerializeField] private float leftPadding = 200f;
-    [SerializeField] private float rightPadding = 200f;
-    [SerializeField] private float topPadding = 250f;
-    [SerializeField] private float bottomPadding = 600f;
+    [SerializeField] private float leftPadding = 150f;
+    [SerializeField] private float rightPadding = 150f;
+    [SerializeField] private float topPadding = 200f;
+    [SerializeField] private float bottomPadding = 400f;
 
     [Header("Adjust Radius Distance to Avoid Overlap of Balloons")]
-    [SerializeField] private float adjustRadiusFactor = 4.5f;
-    private const float balloonRadius = 50f;
+    [SerializeField] private float adjustRadiusFactor;
+    [SerializeField] private float balloonRadius;
+
     private const int maxAttemptsPerBalloon = 500;
 
     [Header("Balloon Prefab Scale")]
@@ -33,8 +34,6 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private int balloonsPoppedCount = 0;
     private int totalBalloonsCount;
-
-    private bool hasEndGameFired = false;
 
     private void Awake()
     {

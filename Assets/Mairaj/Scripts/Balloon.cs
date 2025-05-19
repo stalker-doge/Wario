@@ -1,7 +1,9 @@
 //Mairaj Muhammad ->2415831
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Balloon : MonoBehaviour
 {
@@ -20,6 +22,9 @@ public class Balloon : MonoBehaviour
     [SerializeField] private float topPadding = 250f;
     [SerializeField] private float bottomPadding = 600f;
 
+    [SerializeField]
+    private Animator animator;
+
     private RectTransform rect;
     private RectTransform canvasRect;
     private Vector2 direction;
@@ -29,6 +34,7 @@ public class Balloon : MonoBehaviour
         rect = GetComponent<RectTransform>();
         canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         direction = Random.insideUnitCircle.normalized;
+        animator.enabled = false;
 
         allBalloons.Add(this);
     }
@@ -81,7 +87,7 @@ public class Balloon : MonoBehaviour
 
             Vector2 diff = rect.anchoredPosition - other.rect.anchoredPosition;
             float distance = diff.magnitude;
-            float minDist = rect.rect.width * 2.0f; // ~10% extra space
+            float minDist = rect.rect.width * 1.15f; // ~10% extra space
 
             if (distance < minDist && distance > 0.01f)
             {
@@ -112,9 +118,17 @@ public class Balloon : MonoBehaviour
         else
         {
             BalloonPoppedCallback?.Invoke();
+            GetComponent<Image>().enabled = false;
+            StartCoroutine(DestroyAfterAnimation());
+            animator.enabled = true;
             SoundManager.Instance.BalloonPopAudioClip();
-            Destroy(gameObject);
         }
+    }
+
+    private IEnumerator DestroyAfterAnimation()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject);
     }
 
     public enum BalloonType
