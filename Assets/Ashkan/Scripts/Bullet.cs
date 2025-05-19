@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed = 10f;
 
     public int collisionCount = 0;
-    public int collisionCountMax = 2;
+    public int collisionCountMax = 4;
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Space))
