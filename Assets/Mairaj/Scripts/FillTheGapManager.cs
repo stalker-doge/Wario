@@ -83,6 +83,7 @@ public class FillTheGapManager : MonoBehaviour
     {
         return variant switch
         {
+            FillTheGapVariant.mOneSlots => 1,
             FillTheGapVariant.mTwoSlots => 2,
             FillTheGapVariant.mThreeSlots => 3,
             FillTheGapVariant.mFourSlots => 4,
