@@ -30,11 +30,15 @@ public class TimerManager : MonoBehaviour
     public GameObject WinPage,LosePage;
     public static TimerManager Instance { get; private set; }
 
+    public bool winloseState = false;
+
     // Start is called before the first frame update
     void Start()
     {
         StartTimer();
         //remainingTimeEvent = timerText.GetComponent<LocalizeStringEvent>();
+        
+        winloseState = false;
     }
 
     // Awake is called when the script instance is being loaded
@@ -112,10 +116,12 @@ public class TimerManager : MonoBehaviour
                 if (ScoreManager.Instance)
                 {
                     LosePage.SetActive(true);
+                    winloseState = true;
                     Pause(true);
                     yield return new WaitForSeconds(1);
                     ScoreManager.Instance.GameFail();
                     LosePage.SetActive(false);
+                    winloseState = false;
                 }
             }
         }

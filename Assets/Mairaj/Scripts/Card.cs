@@ -59,9 +59,12 @@ public class Card : MonoBehaviour
 
     public void OnButtonClicked()
     {
-        SoundManager.Instance.CardFlipAudioClip();
-        FindTwoCardGameManager.OnCardClickedCallback?.Invoke(this);
-        Rotate(true);
+        if ( !TimerManager.Instance.winloseState)
+        {
+            SoundManager.Instance.CardFlipAudioClip();
+            FindTwoCardGameManager.OnCardClickedCallback?.Invoke(this);
+            Rotate(true);
+        }
     }
 
     public void Rotate(bool showFront, Action CompletionCallback = null, bool rotateInstant = false)
