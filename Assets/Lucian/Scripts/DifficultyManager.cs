@@ -25,6 +25,8 @@ public class DifficultyManager : MonoBehaviour
     public float difficultyMultiplier = 1.0f;
     public float difficultyIncreaseRate = 0.1f;
 
+    public int gamesPlayed=0;
+
     public static DifficultyManager Instance { get; private set; }
 
     void Start()
@@ -100,6 +102,7 @@ public class DifficultyManager : MonoBehaviour
         // Increase the difficulty level
         if (currentDifficulty < Difficulty.Level4)
         {
+            Debug.Log("LET'S RAMP IT UP");
             currentDifficulty++;
             SetDifficulty(currentDifficulty);
             //saves the difficulty to PlayerPrefs
