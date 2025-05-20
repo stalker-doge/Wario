@@ -17,14 +17,18 @@ public class AnswerOption : MonoBehaviour
 
     void OnMouseDown()
     {
-        dragging = true;
+        if(!TimerManager.Instance.winloseState)
+            dragging = true;
     }
 
     void OnMouseDrag()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        transform.position = mousePos;
+        if (!TimerManager.Instance.winloseState)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            transform.position = mousePos;   
+        }
     }
 
     void OnMouseUp()

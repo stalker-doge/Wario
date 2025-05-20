@@ -30,11 +30,14 @@ public class MazeDragPlayer : MonoBehaviour
 
     void Update()
     {
-        if (isDragging)
+        if (!TimerManager.Instance.winloseState)
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0f;
-            targetPosition = mousePos;
+            if (isDragging)
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mousePos.z = 0f;
+                targetPosition = mousePos;
+            }
         }
     }
 
