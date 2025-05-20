@@ -132,6 +132,10 @@ MonoBehaviour:
     m_Localized: "\xA1Ingresa el nombre!"
     m_Metadata:
       m_Items: []
+  - m_Id: 5865157744181248
+    m_Localized: "Pr\xF3ximo juego:"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

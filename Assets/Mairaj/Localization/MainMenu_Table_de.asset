@@ -129,6 +129,10 @@ MonoBehaviour:
     m_Localized: Namen eingeben!
     m_Metadata:
       m_Items: []
+  - m_Id: 5865157744181248
+    m_Localized: "N\xE4chstes Spiel:"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

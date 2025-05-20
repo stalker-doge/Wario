@@ -892,8 +892,8 @@ MonoBehaviour:
   loading: 0
   levelName: {fileID: 0}
   localizedLevelName: {fileID: 0}
-  curtainAnimController: {fileID: 0}
   curtainAnimTimer: 0
+  difficultyIncreased: 0
 --- !u!1 &1389080210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1258,10 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6610097706621040671, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_margin.z
+      value: 4.445587
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610097706621040671, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_fontSizeMax
       value: 130
       objectReference: {fileID: 0}
@@ -1288,6 +1292,10 @@ PrefabInstance:
     - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_fontSize
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_margin.z
+      value: 0.88446033
       objectReference: {fileID: 0}
     - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_fontSizeMax
