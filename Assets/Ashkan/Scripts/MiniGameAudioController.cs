@@ -36,13 +36,18 @@ public class MiniGameAudioController : MonoBehaviour
                 gameStartPlayed = true;
             }
 
-            if (!audioSource.isPlaying || audioSource.clip != SoundManager.Instance.MinigameMusicAudioClip)
+            if (audioSource != null)
             {
-                audioSource.Stop();
-                audioSource.clip = SoundManager.Instance.MinigameMusicAudioClip;
-                audioSource.loop = true;
-                audioSource.Play();
+                
+                if (!audioSource.isPlaying || audioSource.clip != SoundManager.Instance.MinigameMusicAudioClip)
+                {
+                    audioSource.Stop();
+                    audioSource.clip = SoundManager.Instance.MinigameMusicAudioClip;
+                    audioSource.loop = true;
+                    audioSource.Play();
+                }
             }
+
         }
         else if (menuSceneName.Contains(scene.name))
         {
