@@ -129,6 +129,10 @@ MonoBehaviour:
     m_Localized: Entrez votre nom !
     m_Metadata:
       m_Items: []
+  - m_Id: 5865157744181248
+    m_Localized: 'Prochain jeu :'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
