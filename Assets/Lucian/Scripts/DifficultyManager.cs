@@ -19,6 +19,8 @@ public class DifficultyManager : MonoBehaviour
         Level2,
         Level3,
         Level4,
+        Level5,
+        Level6,
     }
 
     public Difficulty currentDifficulty;
@@ -93,6 +95,13 @@ public class DifficultyManager : MonoBehaviour
                 break;
             case Difficulty.Level4:
                 difficultyMultiplier = 2.5f;
+                break;
+
+            case Difficulty.Level5:
+                difficultyMultiplier = 3.0f;
+                break;
+            case Difficulty.Level6:
+                difficultyMultiplier = 3.5f;
                 break;
         }
     }

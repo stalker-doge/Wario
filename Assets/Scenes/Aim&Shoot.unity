@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8565d47f6b7ef6849b38d43780838905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 0
+  currentDifficulty: 2
   wallPrefab: {fileID: 5953998334766058555, guid: 0a908e381443fe1499e3f5e147c6b42d, type: 3}
   targetPrefab: {fileID: 4738629679734193953, guid: 38d8c3b11078ed444b4123a2e0ebc360, type: 3}
   wallThickness: 0.5
