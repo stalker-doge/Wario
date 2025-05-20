@@ -272,6 +272,22 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 71
       objectReference: {fileID: 0}
+    - target: {fileID: 6380657676236635722, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_text
+      value: Theatre
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380657676236635722, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_fontSize
+      value: 71
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380657676236635722, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_margin.w
+      value: 28.009403
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380657676236635722, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_margin.y
+      value: -28.480492
+      objectReference: {fileID: 0}
     - target: {fileID: 6740506382551480670, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
       propertyPath: m_Pivot.x
       value: 0

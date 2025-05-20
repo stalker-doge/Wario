@@ -1958,7 +1958,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Collection
+  m_text: Theatre
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 248f4f36224fa8247b070f2d36180cd8, type: 2}
   m_sharedMaterial: {fileID: -7345043563604526463, guid: 248f4f36224fa8247b070f2d36180cd8, type: 2}
@@ -1985,7 +1985,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.95
+  m_fontSize: 71
   m_fontSizeBase: 71.03
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7362892045349372075}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
   m_Name: 
