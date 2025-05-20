@@ -31,9 +31,10 @@ public class LevelSwitcher : MonoBehaviour
 
     private string sceneName;
 
-    private int gamesPlayed = 0;
-
     private bool isSwitchingScene = false;
+
+    [SerializeField]
+    private bool difficultyIncreased = false;
 
     private float timer = 0;
     void Start()
@@ -79,6 +80,7 @@ public class LevelSwitcher : MonoBehaviour
 
         if (loading)
         {
+            difficultyIncreased = false;
             FindRandom();
         }
     }
@@ -104,18 +106,23 @@ public class LevelSwitcher : MonoBehaviour
                 {
                     Debug.LogError("TimerManager not found in the scene.");
                 }
-                //increment the games played
-                gamesPlayed++;
-                //if games played is greater than 5, reset the games played and up the difficulty
-                if (gamesPlayed > 5)
-                {
-                    gamesPlayed = 0;
-                    //up the difficulty
-                    DifficultyManager.Instance.IncreaseDifficulty();
-                }
+               
 
                 if (!isSwitchingScene)
                 {
+                    //increment the games played
+                   DifficultyManager.Instance.gamesPlayed++;
+                    //if games played is greater than 5, reset the games played and up the difficulty
+                    if (DifficultyManager.Instance.gamesPlayed > 5)
+                    {
+                        if (!difficultyIncreased)
+                        {
+                            DifficultyManager.Instance.gamesPlayed = 0;
+                            //up the difficulty
+                            DifficultyManager.Instance.IncreaseDifficulty();
+                            difficultyIncreased = true;
+                        }
+                    }
                     isSwitchingScene = true;
                     CurtainAnimController.Instance?.AnimateTowardsCenter(curtainAnimTimer, () => {
                         SwitchScene(sceneName);
