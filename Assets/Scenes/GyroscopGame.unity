@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ce8a13c8179bb42b07f620cd0a7640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 2
+  currentDifficulty: 1
   Parent: {fileID: 1890735339}
   borderPrefab: {fileID: 1229464140075382160, guid: 89195ab01f73d9a4ab94a58b43ac7630, type: 3}
   midRectPrefab: {fileID: 1229464140075382160, guid: 89195ab01f73d9a4ab94a58b43ac7630, type: 3}
@@ -922,6 +922,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2854017229222349246, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 2146171040}
     - target: {fileID: 3910064548202439562, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5

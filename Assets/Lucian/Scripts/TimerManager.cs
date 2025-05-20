@@ -171,7 +171,11 @@ public class TimerManager : MonoBehaviour
     public void Pause(bool toPause)
     {
         isPaused = toPause;
-
+        //if unpausing, put the music back to game
+        if (!isPaused)
+        {
+            SoundManager.Instance.MinigameMusic();
+        }
     }
 
     private void OnEnable()
