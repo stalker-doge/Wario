@@ -770,6 +770,10 @@ PrefabInstance:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2854017229222349246, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 5181776489213024471}
     - target: {fileID: 3219583692776612025, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1

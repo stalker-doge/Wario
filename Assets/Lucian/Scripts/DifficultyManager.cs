@@ -6,6 +6,13 @@ public class DifficultyManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    // This script manages the difficulty levels in the game
+
+    //audio source
+
+    [SerializeField] private AudioSource musicSource;
+
+    // Enum to represent different difficulty levels
     public enum Difficulty
     {
         Level1,
@@ -50,7 +57,21 @@ public class DifficultyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //check if the music is playing
+        if (musicSource.isPlaying)
+        {
+            // If the music is playing, set the pitch based on the difficulty multiplier
+            musicSource.pitch = difficultyMultiplier;
+            // Adjust the time scale based on the difficulty multiplier
+            Time.timeScale = difficultyMultiplier;
+        }
+        else
+        {
+            // If the music is not playing, set the time scale to 1
+            Time.timeScale = 1;
+            // Set the pitch to 1
+            musicSource.pitch = 1;
+        }
     }
 
     public void SetDifficulty(Difficulty newDifficulty)
