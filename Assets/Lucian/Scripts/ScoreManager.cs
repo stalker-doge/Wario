@@ -97,6 +97,7 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("Lives", lives);
         if (lives <= 0)
         {
+            highScore = PlayerPrefs.GetInt("HighScore", 0);
             //sets the high score if the current score is higher
             if (score > highScore)
             {
