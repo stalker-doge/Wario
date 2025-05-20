@@ -61,20 +61,23 @@ public class DifficultyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //check if the music is playing
-        if (musicSource.isPlaying)
+        if (musicSource)
         {
-            // If the music is playing, set the pitch based on the difficulty multiplier
-            musicSource.pitch = difficultyMultiplier;
-            // Adjust the time scale based on the difficulty multiplier
-            Time.timeScale = difficultyMultiplier;
-        }
-        else
-        {
-            // If the music is not playing, set the time scale to 1
-            Time.timeScale = 1;
-            // Set the pitch to 1
-            musicSource.pitch = 1;
+            //check if the music is playing
+            if (musicSource.isPlaying)
+            {
+                // If the music is playing, set the pitch based on the difficulty multiplier
+                musicSource.pitch = difficultyMultiplier;
+                // Adjust the time scale based on the difficulty multiplier
+                Time.timeScale = difficultyMultiplier;
+            }
+            else
+            {
+                // If the music is not playing, set the time scale to 1
+                Time.timeScale = 1;
+                // Set the pitch to 1
+                musicSource.pitch = 1;
+            }
         }
     }
 
