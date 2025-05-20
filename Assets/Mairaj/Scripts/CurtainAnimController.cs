@@ -73,8 +73,8 @@ public class CurtainAnimController : MonoBehaviour
 
         isAtCenter = false;
 
-        leftRect.DOAnchorPosX(-2000f, animTimer).SetEase(Ease.Linear);
-        rightRect.DOAnchorPosX(2000f, animTimer).SetEase(Ease.Linear)
+        leftRect.DOAnchorPosX(-2000f, animTimer).SetEase(Ease.Linear).SetDelay(0.2f);
+        rightRect.DOAnchorPosX(2000f, animTimer).SetEase(Ease.Linear).SetDelay(0.2f)
             .OnComplete(() =>
             {
                 CompletionCallback?.Invoke();
