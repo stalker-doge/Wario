@@ -150,6 +150,30 @@ PrefabInstance:
       propertyPath: curtainAnimController
       value: 
       objectReference: {fileID: 448798726}
+    - target: {fileID: 4421705707056293677, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421705707056293677, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421705707056293677, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421705707056293677, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_overflowMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421705707056293677, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4421705707056293677, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6012319814508859400, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -245,6 +269,14 @@ PrefabInstance:
     - target: {fileID: 6343919029526820777, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9113791978249676616, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -1812.6152
+      objectReference: {fileID: 0}
+    - target: {fileID: 9113791978249676616, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 9217529805143768922, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: m_Enabled
