@@ -123,6 +123,10 @@ MonoBehaviour:
     m_Key: EnterName_Title
     m_Metadata:
       m_Items: []
+  - m_Id: 5865157744181248
+    m_Key: NextGame_Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
