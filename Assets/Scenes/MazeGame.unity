@@ -155,7 +155,7 @@ MonoBehaviour:
   Parent: {fileID: 1565088135}
   _mazeWidth: 7
   _mazeDepth: 8
-  _difficulty: 3
+  _difficulty: 1
   destinationMarker: {fileID: 3828879308536681871, guid: 0ef2eaedca2f66047b250f8d90013eb8, type: 3}
   playerPrefab: {fileID: 3828879308536681871, guid: feae4c44b9b315446b59553da4faaf99, type: 3}
 --- !u!4 &202258087
