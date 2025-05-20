@@ -15,6 +15,9 @@ public class FillTheGapManager : MonoBehaviour
     [SerializeField]
     private FillTheGapVariant variant = FillTheGapVariant.mTwoSlots;
 
+    [SerializeField]
+    private NewFillTheGapVariant newVariant = NewFillTheGapVariant.mXTwoSlots;
+
     private void Awake()
     {
         // Singleton pattern
@@ -44,9 +47,22 @@ public class FillTheGapManager : MonoBehaviour
         return variant;
     }
 
+    public NewFillTheGapVariant GetNewVariant()
+    {
+        return newVariant;
+    }
+
     private void SelectRandomDropZonesAndUpdateColor()
     {
-        int numberToSelect = VariantToCount(variant);
+        int numberToSelect = 0;
+        if (newVariant == NewFillTheGapVariant.mXZeroSlots)
+        {
+            numberToSelect = VariantToCount(variant);
+        } else
+        {
+            numberToSelect = NewVariantToCount(newVariant);
+        }
+            
 
         if (dropZoneObjects.Count < numberToSelect)
         {
@@ -87,7 +103,19 @@ public class FillTheGapManager : MonoBehaviour
             FillTheGapVariant.mTwoSlots => 2,
             FillTheGapVariant.mThreeSlots => 3,
             FillTheGapVariant.mFourSlots => 4,
-            FillTheGapVariant.mFiveSlots => dropZoneObjects.Count,
+            FillTheGapVariant.mFiveSlots => 5,
+            _ => 2
+        };
+    }
+
+    private int NewVariantToCount(NewFillTheGapVariant variant)
+    {
+        return variant switch
+        {
+            NewFillTheGapVariant.mXTwoSlots => 2,
+            NewFillTheGapVariant.mXThreeSlots => 3,
+            NewFillTheGapVariant.mXFourSlots => 4,
+            NewFillTheGapVariant.mXFiveSlots => 5,
             _ => 2
         };
     }
@@ -99,12 +127,21 @@ public class FillTheGapManager : MonoBehaviour
 
         if (imageComponent != null)
         {
-            imageComponent.color = Color.black;
+            if (newVariant == NewFillTheGapVariant.mXZeroSlots)
+            {
+                imageComponent.color = Color.black;
+            } else
+            {
+                Color currentColor = imageComponent.color;
+                currentColor.a = 0f; // Set alpha to 0 (fully transparent)
+                imageComponent.color = currentColor;
+            }
         }
         else
         {
             Debug.LogWarning("No Image component found on the child of " + dropZone.name);
         }
+
     }
 }
 
@@ -115,5 +152,15 @@ public enum FillTheGapVariant
     mTwoSlots,
     mThreeSlots,
     mFourSlots,
-    mFiveSlots
+    mFiveSlots,
+}
+
+public enum NewFillTheGapVariant
+{
+    mXZeroSlots,
+    mXOneSlots,
+    mXTwoSlots,
+    mXThreeSlots,
+    mXFourSlots,
+    mXFiveSlots
 }
