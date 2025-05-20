@@ -55,9 +55,9 @@ public class Leaderboard : MonoBehaviour
         {
             Debug.Log("Internet connection available, loading leaderboard from server");
         }
+
         LeaderboardCreator.GetLeaderboard(publicLeaderboardKey, ((msg) =>
         {
-            Debug.Log("BRUH");
             int loopLength = (msg.Length < names.Count) ? msg.Length : names.Count;
             for (int i = 0; i < loopLength; i++)
             {
@@ -80,16 +80,22 @@ public class Leaderboard : MonoBehaviour
 
     public void SetLeaderboardEntry(string username, int score)
     {
-        LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, username, score, ((msg) =>
-        {
-            Debug.Log(msg);
-            Debug.Log("Leaderboard entry set");
-            GetLeaderboard();
-        }));
-    }
 
-    public void RefreshLeaderboard()
-    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            string[] lines = new string[username.Length];
+            lines[0]=username + "," +score.ToString();
+            System.IO.File.WriteAllLines(Application.persistentDataPath + "/leaderboard.txt",lines);
+        }
+        else
+        {
+            LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, username, score, ((msg) =>
+            {
+                Debug.Log(msg);
+                Debug.Log("Leaderboard entry set");
+                GetLeaderboard();
+            }));
+        }
     }
 
 }
