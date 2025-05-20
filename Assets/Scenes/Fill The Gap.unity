@@ -587,11 +587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_LocalPosition.x
@@ -623,11 +623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 176
+      value: 146
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 77
+      value: 280
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1468,11 +1468,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1684,11 +1684,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1724,7 +1724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 80
+      value: 280
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2472,11 +2472,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2590,11 +2590,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 7426653606558817248, guid: 8cad9654afea47143a0c6c9ba2f0ff29, type: 3}
       propertyPath: m_LocalPosition.x
