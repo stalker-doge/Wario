@@ -955,6 +955,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1198567008031281055, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198567008031281055, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2854017229222349246, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: musicSource
       value: 
@@ -1038,6 +1046,18 @@ PrefabInstance:
     - target: {fileID: 6122107764772450504, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701413163237703180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701413163237703180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708836841249906932, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8642385231477856762, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_Name

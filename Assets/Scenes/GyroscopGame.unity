@@ -791,13 +791,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ce8a13c8179bb42b07f620cd0a7640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDifficulty: 1
+  currentDifficulty: 0
   Parent: {fileID: 1890735339}
   borderPrefab: {fileID: 1229464140075382160, guid: 89195ab01f73d9a4ab94a58b43ac7630, type: 3}
   midRectPrefab: {fileID: 1229464140075382160, guid: 89195ab01f73d9a4ab94a58b43ac7630, type: 3}
   circleObject: {fileID: 2469081243350233474, guid: 5f4ebb1dbb0d9f3428287d5ffe021f47, type: 3}
   borderThickness: 0.5
   rectHeight: 1
+  rnd: 0
 --- !u!4 &1611178490
 Transform:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ public class FillTheGapManager : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> dropZoneObjects; // List of DropZone objects
-
     [SerializeField]
     private FillTheGapVariant variant = FillTheGapVariant.mTwoSlots;
 

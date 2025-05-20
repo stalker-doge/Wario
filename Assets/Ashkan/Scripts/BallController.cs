@@ -16,7 +16,8 @@ public class BallController : MonoBehaviour
 
     void Update()
     {
-        DetectSwipeInput();
+        if(!TimerManager.Instance.winloseState)
+            DetectSwipeInput();
 
     }
 
