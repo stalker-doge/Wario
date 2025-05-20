@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.UIElements.ToolbarMenu;
 
 public class DynamicShelfGeneratorAshkan : MonoBehaviour
 {
@@ -20,8 +21,24 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
     private float screenHeight;
     private GameObject highestShelf = null;
 
+    [SerializeField]
+    private int randomVariant;
+
     private void Start()
     {
+        randomVariant = Random.Range(0, 3);
+        switch (randomVariant)
+        {
+            case 0:
+                currentDifficulty = Difficulty.Easy;
+                break;
+            case 1:
+                currentDifficulty = Difficulty.Medium;
+                break;
+            case 2:
+                currentDifficulty = Difficulty.Hard;
+                break;
+        }
         CalculateScreenSize();
         CreateFrameWalls();
         CreateShelves();

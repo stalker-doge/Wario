@@ -15,7 +15,7 @@ public class DropZone : MonoBehaviour, IDropHandler
     private void Awake()
     {
         correctMatches = 0; // Initialize the correct matches counter
-        Invoke("InitializeVariantAfterDelay", 0.1f);
+        Invoke("InitializeVariantAfterDelay", 0.3f);
     }
 
     private void InitializeVariantAfterDelay()
@@ -33,6 +33,7 @@ public class DropZone : MonoBehaviour, IDropHandler
 
             if (dragDrop.shapeType == acceptedShapeType)
             {
+                
                 // Correct Shape - Update position and parent
                 // Debug.Log("XYZ If DropZone " + dragDrop.GetComponent<RectTransform>().anchoredPosition + " " + GetComponent<RectTransform>().anchoredPosition);
 
@@ -47,9 +48,8 @@ public class DropZone : MonoBehaviour, IDropHandler
 
                 // Increment correct match counter
                 correctMatches++;
-
                 // Check if all matches have been made
-                if (correctMatches >= (int)variant)
+                if (correctMatches >= (int)variant+1)
                 {
                     correctMatches=0; // Reset the counter for the next game
                     Debug.Log("XYZ Game Ended");
