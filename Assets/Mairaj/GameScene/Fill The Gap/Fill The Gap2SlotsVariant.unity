@@ -1004,6 +1004,7 @@ MonoBehaviour:
   - {fileID: 274157193}
   - {fileID: 826452510}
   variant: 2
+  newVariant: 0
 --- !u!1 &729117968
 GameObject:
   m_ObjectHideFlags: 0

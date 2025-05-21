@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class FillTheGapManager : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class FillTheGapManager : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> dropZoneObjects; // List of DropZone objects
+
+    [SerializeField]
+    private List<GameObject> dragZoneObjects; // List of Draggable objects, needed for selecting 5 at random out of which x should have a drop slot
+
+    [SerializeField]
+    private List<RectTransform> dragZoneRects;
+
     [SerializeField]
     private FillTheGapVariant variant = FillTheGapVariant.mTwoSlots;
 
@@ -40,7 +48,7 @@ public class FillTheGapManager : MonoBehaviour
 
     private void Start()
     {
-        randomVariant= Random.Range(0, 3);
+        randomVariant= UnityEngine.Random.Range(0, 3);
         switch(randomVariant)
         {
             case 0:variant= FillTheGapVariant.mOneSlots;
@@ -85,9 +93,45 @@ public class FillTheGapManager : MonoBehaviour
 
         // Randomly select the required number of distinct drop zones
         List<GameObject> selectedDropZones = dropZoneObjects
-            .OrderBy(x => Random.value)
+            .OrderBy(x => UnityEngine.Random.value)
             .Take(numberToSelect)
             .ToList();
+
+        if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+        {
+            var matchingDragObjects = dragZoneObjects
+            .Where(drag =>
+            {
+                var dragType = drag.GetComponent<DragDrop>()?.newAcceptedShapeType;
+                return selectedDropZones.Any(dz =>
+                    dz.GetComponent<DropZone>()?.GetNewAcceptedShapeType() == dragType);
+            })
+            .ToList();
+
+            // Calculate how many more we need to add
+            int remainingToAdd = (int)GetLastEnumValue<NewFillTheGapVariant>() - numberToSelect;
+
+            // Find the remaining dragZoneObjects that are NOT in matchingDragObjects
+            var remainingDragObjects = dragZoneObjects
+                .Except(matchingDragObjects)
+                .OrderBy(x => UnityEngine.Random.value) // Shuffle randomly
+                .Take(remainingToAdd)       // Take as many as needed
+                .ToList();
+
+            // Combine both matching and random distractors
+            var finalDragObjects = matchingDragObjects
+                .Concat(remainingDragObjects)
+                .ToList();
+
+            // Activate only these 5 final drag objects and assign to dragZoneRects
+            for (int i = 0; i < dragZoneRects.Count; i++)
+            {
+                GameObject drag = finalDragObjects[i];
+                drag.SetActive(true);
+                drag.GetComponent<RectTransform>().anchoredPosition = dragZoneRects[i].anchoredPosition;
+                drag.GetComponent<DragDrop>().SetOriginalPosition(dragZoneRects[i].anchoredPosition);
+            }
+        }
 
         // Set their color to black
         foreach (var dz in selectedDropZones)
@@ -157,6 +201,12 @@ public class FillTheGapManager : MonoBehaviour
         }
 
     }
+    public static TEnum GetLastEnumValue<TEnum>() where TEnum : Enum
+    {
+        var values = (TEnum[])Enum.GetValues(typeof(TEnum));
+        return values[^1]; // ^1 is the last element (C# 8+)
+    }
+
 }
 
 public enum FillTheGapVariant

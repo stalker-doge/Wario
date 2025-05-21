@@ -23,6 +23,11 @@ public class DropZone : MonoBehaviour, IDropHandler
         Invoke("InitializeVariantAfterDelay", 0.3f);
     }
 
+    public NewAcceptedShapeType GetNewAcceptedShapeType()
+    {
+        return newAcceptedShapeType;
+    }
+
     private void InitializeVariantAfterDelay()
     {
         newVariant = FillTheGapManager.Instance.GetNewVariant();
