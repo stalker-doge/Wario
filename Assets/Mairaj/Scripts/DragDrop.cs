@@ -20,6 +20,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         originalPosition = rectTransform.anchoredPosition;
     }
 
+    public void SetOriginalPosition(Vector2 pos)
+    {
+        originalPosition = pos;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
