@@ -19,6 +19,10 @@ public class ArrowController : MonoBehaviour
 
     void Update()
     {
+        
+        if(TimerManager.Instance.winloseState)
+            return;
+        
         // 🖱 Mouse Input
         if (Input.GetMouseButtonDown(0))
         {

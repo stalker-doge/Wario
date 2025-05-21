@@ -11,12 +11,13 @@ public class FillTheGapManager : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> dropZoneObjects; // List of DropZone objects
-
     [SerializeField]
     private FillTheGapVariant variant = FillTheGapVariant.mTwoSlots;
 
     [SerializeField]
     private NewFillTheGapVariant newVariant = NewFillTheGapVariant.mXTwoSlots;
+
+    private int randomVariant;
 
     private void Awake()
     {
@@ -39,6 +40,18 @@ public class FillTheGapManager : MonoBehaviour
 
     private void Start()
     {
+        randomVariant= Random.Range(0, 3);
+        switch(randomVariant)
+        {
+            case 0:variant= FillTheGapVariant.mOneSlots;
+                break;
+            case 1: variant = FillTheGapVariant.mTwoSlots;
+                break;
+            case 2:
+                variant = FillTheGapVariant.mThreeSlots;
+                break;
+        }
+        Debug.Log("POLO");
         SelectRandomDropZonesAndUpdateColor();
     }
 
@@ -100,6 +113,7 @@ public class FillTheGapManager : MonoBehaviour
     {
         return variant switch
         {
+            FillTheGapVariant.mOneSlots => 1,
             FillTheGapVariant.mTwoSlots => 2,
             FillTheGapVariant.mThreeSlots => 3,
             FillTheGapVariant.mFourSlots => 4,
@@ -147,7 +161,7 @@ public class FillTheGapManager : MonoBehaviour
 
 public enum FillTheGapVariant
 {
-    mZeroSlots,
+    //mZeroSlots,
     mOneSlots,
     mTwoSlots,
     mThreeSlots,

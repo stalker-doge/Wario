@@ -44,11 +44,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8a50610a4cdc1ee4e92ff088ec6e733f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -153,6 +153,8 @@ MonoBehaviour:
   projectileBounceAudioClip: {fileID: 8300000, guid: 6bf7a6640ca8f76448487cf8041c8c6b, type: 3}
   shootAudioClip: {fileID: 8300000, guid: 8b7349bf65b2d7e4982a9023c22404d8, type: 3}
   balloonPopAudioClip: {fileID: 8300000, guid: 6bf7a6640ca8f76448487cf8041c8c6b, type: 3}
+  MinigameMusicAudioClip: {fileID: 8300000, guid: dfca38a936fb3ea49bfc00e643c592fa, type: 3}
+  MenuMusicAudioClip: {fileID: 8300000, guid: 8a50610a4cdc1ee4e92ff088ec6e733f, type: 3}
 --- !u!114 &4976062257117289611
 MonoBehaviour:
   m_ObjectHideFlags: 0

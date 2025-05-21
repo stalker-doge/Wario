@@ -38,6 +38,11 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private AudioClip balloonPopAudioClip;
+    
+    public AudioClip MinigameMusicAudioClip;
+    
+    [SerializeField]
+    private AudioClip MenuMusicAudioClip;
 
     private string GAME_VOLUME_KEY = "GameVolume";
 
@@ -120,6 +125,16 @@ public class SoundManager : MonoBehaviour
     public void BalloonPopAudioClip() 
     {
         Instance.audioSource.PlayOneShot(balloonPopAudioClip);
+    }
+    
+    public void MinigameMusic() 
+    {
+        Instance.audioSource.PlayOneShot(MinigameMusicAudioClip);
+    }
+
+    public void MenuMusic()
+    {
+        Instance.audioSource.PlayOneShot(MenuMusicAudioClip);
     }
 
     public void SetVolume(float volume)

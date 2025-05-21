@@ -99,29 +99,32 @@ public class Balloon : MonoBehaviour
 
     public void OnBalloonClicked()
     {
-        if (type == BalloonType.Red)
+        if (!TimerManager.Instance.winloseState)
         {
-            SoundManager.Instance.CardMismatchAudioClip();
-
-            Sequence shakeSequence = DOTween.Sequence();
-            shakeSequence.Append(transform.DOShakePosition(0.1f, new Vector3(20f, 0f, 0f), 10, 90, false, true)
-                .SetLoops(UnityEngine.Random.Range(3, 3)));
-
-            shakeSequence.OnComplete(() =>
+            if (type == BalloonType.Red)
             {
-                if (Application.platform == RuntimePlatform.Android)
+                SoundManager.Instance.CardMismatchAudioClip();
+
+                Sequence shakeSequence = DOTween.Sequence();
+                shakeSequence.Append(transform.DOShakePosition(0.1f, new Vector3(20f, 0f, 0f), 10, 90, false, true)
+                    .SetLoops(UnityEngine.Random.Range(3, 3)));
+
+                shakeSequence.OnComplete(() =>
                 {
-                    Handheld.Vibrate();
-                }
-            });
-        }
-        else
-        {
-            BalloonPoppedCallback?.Invoke();
-            GetComponent<Image>().enabled = false;
-            StartCoroutine(DestroyAfterAnimation());
-            animator.enabled = true;
-            SoundManager.Instance.BalloonPopAudioClip();
+                    if (Application.platform == RuntimePlatform.Android)
+                    {
+                        Handheld.Vibrate();
+                    }
+                });
+            }
+            else
+            {
+                BalloonPoppedCallback?.Invoke();
+                GetComponent<Image>().enabled = false;
+                StartCoroutine(DestroyAfterAnimation());
+                animator.enabled = true;
+                SoundManager.Instance.BalloonPopAudioClip();
+            }
         }
     }
 

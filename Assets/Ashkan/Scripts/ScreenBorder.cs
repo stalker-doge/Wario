@@ -13,13 +13,30 @@ public class ScreenBorders : MonoBehaviour
     public float borderThickness = 1f; // Thickness of the border
     public float rectHeight = 1f; // Height of each mid rectangle
 
+    public float rnd ;
     void Start()
     {
+        
         CreateBordersAndRects();
+     
     }
 
     void CreateBordersAndRects()
     {
+        rnd = Mathf.RoundToInt(Random.Range(0f, 3f));
+        switch (rnd)
+        {
+            case 0 :
+                currentDifficulty = Difficulty.Easy;
+                break;
+            case 1 :
+                currentDifficulty = Difficulty.Medium;
+                break;
+            case 2 : 
+                currentDifficulty = Difficulty.Hard;
+                break;
+        }
+        
         Camera cam = Camera.main;
 
         float height = 2f * cam.orthographicSize;

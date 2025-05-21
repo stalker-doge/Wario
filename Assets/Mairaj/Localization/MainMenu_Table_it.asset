@@ -129,6 +129,26 @@ MonoBehaviour:
     m_Localized: Inserisci il nome!
     m_Metadata:
       m_Items: []
+  - m_Id: 5865157744181248
+    m_Localized: 'Prossima partita:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907791095316480
+    m_Localized: INVIA !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907937522663424
+    m_Localized: NON INVIARE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5908481855242240
+    m_Localized: Teatro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5909062296584192
+    m_Localized: Inserisci il testo...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -132,6 +132,26 @@ MonoBehaviour:
     m_Localized: Enter Name!
     m_Metadata:
       m_Items: []
+  - m_Id: 5865157744181248
+    m_Localized: 'Next Game:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907791095316480
+    m_Localized: SUBMIT !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907937522663424
+    m_Localized: DON'T SUBMIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5908481855242240
+    m_Localized: Theatre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5909062296584192
+    m_Localized: Enter text...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
