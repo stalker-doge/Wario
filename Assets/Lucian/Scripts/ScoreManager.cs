@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -96,6 +97,7 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("Lives", lives);
         if (lives <= 0)
         {
+            highScore = PlayerPrefs.GetInt("HighScore", 0);
             //sets the high score if the current score is higher
             if (score > highScore)
             {
@@ -130,11 +132,13 @@ public class ScoreManager : MonoBehaviour
             AddScore(scoreToAdd);
 
             TimerManager.Instance.WinPage.SetActive(true);
+            TimerManager.Instance.winloseState = true;
             TimerManager.Instance.Pause(true);
             TimerManager.Instance.ResetTimer();
 
             yield return new WaitForSeconds(1);
             TimerManager.Instance.WinPage.SetActive(false);
+            TimerManager.Instance.winloseState = false;
             //goes back to the main menu
             SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
         }

@@ -34,9 +34,10 @@ public class NewBehaviourScript : MonoBehaviour
         //checks if the scene is the end scene
         if (SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance?.GetSceneString(SceneType.EndScene))
         {
-            //resets the score and lives
+            //resets the score and lives and difficulty
             PlayerPrefs.SetInt("Score", 0);
             PlayerPrefs.SetInt("Lives", 3);
+            PlayerPrefs.SetInt("Difficulty", 0);
             //highScore.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
             //lastScore.text= "Score: " + PlayerPrefs.GetInt("LastScore", 0).ToString();
 

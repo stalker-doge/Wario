@@ -2854,6 +2854,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166067033}
   m_CullTransparentMesh: 1
+--- !u!114 &1179354362 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2917700713232769663, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+  m_PrefabInstance: {fileID: 5234989192379112636}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179354363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1179354363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 331339733351414510, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+  m_PrefabInstance: {fileID: 5234989192379112636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1179354364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179354363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:bcf18317208776648b654261890bf926
+    m_TableEntryReference:
+      m_KeyId: 5909062296584192
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1179354362}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1201375462
 GameObject:
   m_ObjectHideFlags: 0
@@ -3478,6 +3534,7 @@ MonoBehaviour:
   levelName: {fileID: 0}
   localizedLevelName: {fileID: 0}
   curtainAnimTimer: 0
+  difficultyIncreased: 0
 --- !u!1 &1387073184
 GameObject:
   m_ObjectHideFlags: 0
@@ -6964,17 +7021,57 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2033877029755108864, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_fontSize
+      value: 66.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033877029755108864, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 66.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033877029755108864, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033877029755108864, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_overflowMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033877029755108864, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2466185301172256776, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_Name
       value: Name Input
       objectReference: {fileID: 0}
+    - target: {fileID: 3075733112455206357, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_fontSize
+      value: 66.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075733112455206357, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 66.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075733112455206357, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075733112455206357, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_overflowMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075733112455206357, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4167934855814679602, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4167934855814679602, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 46496311721984
+      value: 5907937522663424
       objectReference: {fileID: 0}
     - target: {fileID: 4520410014185681399, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_Enabled
@@ -7150,11 +7247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8648891398204862600, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8648891398204862600, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 3312934514376704
+      value: 5907791095316480
       objectReference: {fileID: 0}
     - target: {fileID: 8648891398204862600, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
@@ -7196,6 +7293,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 331339733351414510, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1179354364}
     - targetCorrespondingSourceObject: {fileID: 6295709061758277271, guid: 99ba17818183c0447925f3a6f91cd7eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5234989192379112639}

@@ -123,6 +123,26 @@ MonoBehaviour:
     m_Key: EnterName_Title
     m_Metadata:
       m_Items: []
+  - m_Id: 5865157744181248
+    m_Key: NextGame_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907791095316480
+    m_Key: Submit_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907937522663424
+    m_Key: DontSubmit_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5908481855242240
+    m_Key: Theatre_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5909062296584192
+    m_Key: EnterText_Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

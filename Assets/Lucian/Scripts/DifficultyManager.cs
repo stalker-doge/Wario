@@ -6,17 +6,28 @@ public class DifficultyManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    // This script manages the difficulty levels in the game
+
+    //audio source
+
+    [SerializeField] private AudioSource musicSource;
+
+    // Enum to represent different difficulty levels
     public enum Difficulty
     {
         Level1,
         Level2,
         Level3,
         Level4,
+        Level5,
+        Level6,
     }
 
     public Difficulty currentDifficulty;
     public float difficultyMultiplier = 1.0f;
     public float difficultyIncreaseRate = 0.1f;
+
+    public int gamesPlayed=0;
 
     public static DifficultyManager Instance { get; private set; }
 
@@ -50,7 +61,24 @@ public class DifficultyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (musicSource)
+        {
+            //check if the music is playing
+            if (musicSource.isPlaying)
+            {
+                // If the music is playing, set the pitch based on the difficulty multiplier
+                musicSource.pitch = difficultyMultiplier;
+                // Adjust the time scale based on the difficulty multiplier
+                Time.timeScale = difficultyMultiplier;
+            }
+            else
+            {
+                // If the music is not playing, set the time scale to 1
+                Time.timeScale = 1;
+                // Set the pitch to 1
+                musicSource.pitch = 1;
+            }
+        }
     }
 
     public void SetDifficulty(Difficulty newDifficulty)
@@ -71,6 +99,13 @@ public class DifficultyManager : MonoBehaviour
             case Difficulty.Level4:
                 difficultyMultiplier = 2.5f;
                 break;
+
+            case Difficulty.Level5:
+                difficultyMultiplier = 3.0f;
+                break;
+            case Difficulty.Level6:
+                difficultyMultiplier = 3.5f;
+                break;
         }
     }
 
@@ -79,6 +114,7 @@ public class DifficultyManager : MonoBehaviour
         // Increase the difficulty level
         if (currentDifficulty < Difficulty.Level4)
         {
+            Debug.Log("LET'S RAMP IT UP");
             currentDifficulty++;
             SetDifficulty(currentDifficulty);
             //saves the difficulty to PlayerPrefs

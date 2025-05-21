@@ -13,6 +13,14 @@ public class Bullet : MonoBehaviour
 
     public int collisionCount = 0;
     public int collisionCountMax = 4;
+
+    public int bulletLimit = 0;
+
+    private void Start()
+    {
+        bulletLimit = 0;
+    }
+
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Space))
@@ -22,20 +30,27 @@ public class Bullet : MonoBehaviour
 
         //    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
         //}
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
         {
-            //SoundManager.Instance.ShootAudioClip();
-
-            if (shootPoint != null)
+            if (bulletLimit < 3)
             {
-                GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-                Vector2 dir = arrow.GetDirection();
-            
-                if(bullet != null )
-                    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
-            }
+                bulletLimit += 1;
+                SoundManager.Instance.ShootAudioClip();
 
-           
+                if (shootPoint != null)
+                {
+                    GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+                    Vector2 dir = arrow.GetDirection();
+
+                    if (bullet != null)
+                        bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+                }
+
+            }
+            else
+            {
+               // SoundManager.Instance.CardMismatchAudioClip();
+            }
             //ShootBullet();
         }
     }
@@ -49,7 +64,7 @@ public class Bullet : MonoBehaviour
             gameObject.SetActive(false);
         }*/
 
-        if (other.gameObject.CompareTag("Goal"))
+        if (other.gameObject.CompareTag("Goal") && !TimerManager.Instance.winloseState)
         {
             SoundManager.Instance.MiniGameCompleteAudioClip();
             if(ScoreManager.Instance)

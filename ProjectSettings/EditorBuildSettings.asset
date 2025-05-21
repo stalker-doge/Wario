@@ -47,15 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GyroscopGame.unity
     guid: 6ae0807ea1ff29749b230de1ceb51382
-  - enabled: 0
-    path: Assets/Scenes/Aim and Shoot 1.unity
-    guid: 860223cc649751e4284f19ad0ff4c1f0
-  - enabled: 0
-    path: Assets/Scenes/Aim and Shoot 2.unity
-    guid: b59e98db2b7db4642b5aada398441d72
-  - enabled: 0
-    path: Assets/Scenes/Aim and Shoot 3.unity
-    guid: 4e6d2793d873f8a46872693480c17469
+  - enabled: 1
+    path: Assets/Scenes/System/LeaderboardMenu.unity
+    guid: 6f6206aa1f8b881489025ced062e45a5
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 4aa7c3f9030201849bf36a465e2a82cd, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: e7d46872a448f3d4596eae07fa7d5fb7, type: 2}

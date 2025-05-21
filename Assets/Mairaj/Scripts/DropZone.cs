@@ -20,7 +20,7 @@ public class DropZone : MonoBehaviour, IDropHandler
     private void Awake()
     {
         correctMatches = 0; // Initialize the correct matches counter
-        Invoke("InitializeVariantAfterDelay", 0.1f);
+        Invoke("InitializeVariantAfterDelay", 0.3f);
     }
 
     private void InitializeVariantAfterDelay()
@@ -58,19 +58,37 @@ public class DropZone : MonoBehaviour, IDropHandler
 
                     // Increment correct match counter
                     correctMatches++;
-
                     // Check if all matches have been made
-                    if (correctMatches >= (int)variant)
+                    if (correctMatches >= (int)variant + 1)
                     {
-                        correctMatches = 0; // Reset the counter for the next game
-                        Debug.Log("XYZ Game Ended");
-                        // Game has ended, notify FindTheGapManager
-                        OnGameEnded?.Invoke();
-                        if (ScoreManager.Instance)
+                        // Correct Shape - Update position and parent
+                        // Debug.Log("XYZ If DropZone " + dragDrop.GetComponent<RectTransform>().anchoredPosition + " " + GetComponent<RectTransform>().anchoredPosition);
+
+                        // Update the parent of the DragDrop object to be the same as the parent of the DropZone
+                        dragDrop.transform.SetParent(transform.parent); // Set the parent to the parent of this DropZone
+
+                        // Update position to match the DropZone
+                        dragDrop.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+
+                        // Optionally, adjust any other properties of the DragDrop after the drop (e.g., lock its position)
+                        dragDrop.GetComponent<DragDrop>().enabled = false; // Disable dragging after successful drop (if required)
+
+                        // Increment correct match counter
+                        correctMatches++;
+
+                        // Check if all matches have been made
+                        if (correctMatches >= (int)variant)
                         {
-                            StartCoroutine(ScoreManager.Instance.GameComplete());
+                            correctMatches = 0; // Reset the counter for the next game
+                            Debug.Log("XYZ Game Ended");
+                            // Game has ended, notify FindTheGapManager
+                            OnGameEnded?.Invoke();
+                            if (ScoreManager.Instance)
+                            {
+                                StartCoroutine(ScoreManager.Instance.GameComplete());
+                            }
+                            SoundManager.Instance?.CardMatchAudioClip();
                         }
-                        SoundManager.Instance?.CardMatchAudioClip();
                     }
                 }
                 else
