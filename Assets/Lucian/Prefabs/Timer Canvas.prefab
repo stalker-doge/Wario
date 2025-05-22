@@ -1062,12 +1062,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c8739767a2b9846ab5a8d373d7d8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 6
+  timeLimit: 8
   isPaused: 0
   timerImage: {fileID: 966908399474370171}
   timerBackground: {fileID: 4300670272165197052}
   WinPage: {fileID: 7919092413257901819}
   LosePage: {fileID: 7334260545410459245}
+  winloseState: 0
 --- !u!114 &9221002324298961705
 MonoBehaviour:
   m_ObjectHideFlags: 0
