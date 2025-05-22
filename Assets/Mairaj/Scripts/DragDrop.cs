@@ -10,12 +10,19 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private CanvasGroup canvasGroup;
     private Vector2 originalPosition;
 
+    public NewAcceptedShapeType newAcceptedShapeType;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>();
         originalPosition = rectTransform.anchoredPosition;
+    }
+
+    public void SetOriginalPosition(Vector2 pos)
+    {
+        originalPosition = pos;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -56,5 +63,26 @@ public enum ShapeType
     ReverseLBlock,
     TBlock,
     YellowSquareBlock,
-    ZBlock
+    ZBlock,
+    None
+}
+
+public enum NewAcceptedShapeType
+{
+    mShape1,
+    mShape2,
+    mShape3,
+    mShape4,
+    mShape5,
+    mShape6,
+    mShape7,
+    mShape8,
+    mShape9,
+    mShape10,
+    mShape11,
+    mShape12,
+    mShape13,
+    mShape14,
+    mShape15,
+    mShape16,
 }

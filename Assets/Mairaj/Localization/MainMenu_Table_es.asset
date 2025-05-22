@@ -136,6 +136,22 @@ MonoBehaviour:
     m_Localized: "Pr\xF3ximo juego:"
     m_Metadata:
       m_Items: []
+  - m_Id: 5907791095316480
+    m_Localized: "\xA1ENVIAR !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907937522663424
+    m_Localized: NO ENVIAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5908481855242240
+    m_Localized: Teatro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5909062296584192
+    m_Localized: Introduce texto...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
