@@ -69,7 +69,7 @@ public class TimeAndLifeManager : MonoBehaviour
     private void HandleLifeLossOrGameOver()
     {
         // Play life lost audio clip
-        SoundManager.Instance.LifeLostAudioClip();
+        SoundManager.Instance?.LifeLostAudioClip();
 
         if (currentLifeIndex < lives.Length)
         {
@@ -84,7 +84,7 @@ public class TimeAndLifeManager : MonoBehaviour
         else
         {
             // Play game over audio clip
-            SoundManager.Instance.GameOverAudioClip();
+            SoundManager.Instance?.GameOverAudioClip();
 
             // No lives left, end game
             if (gameType == GameType.mFindTwoCardsGame) {

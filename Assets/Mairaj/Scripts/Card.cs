@@ -46,7 +46,7 @@ public class Card : MonoBehaviour
 
     public void ShakeCardAndReset()
     {
-        SoundManager.Instance.CardMismatchAudioClip();
+        SoundManager.Instance?.CardMismatchAudioClip();
         Sequence shakeSequence = DOTween.Sequence();
         shakeSequence.AppendInterval(0.3f);
         shakeSequence.Append(transform.DOShakePosition(0.1f, new Vector3(5f, 0f, 0f), 10, 90, false, true));
@@ -61,7 +61,7 @@ public class Card : MonoBehaviour
     {
         if ( !TimerManager.Instance.winloseState)
         {
-            SoundManager.Instance.CardFlipAudioClip();
+            SoundManager.Instance?.CardFlipAudioClip();
             FindTwoCardGameManager.OnCardClickedCallback?.Invoke(this);
             Rotate(true);
         }

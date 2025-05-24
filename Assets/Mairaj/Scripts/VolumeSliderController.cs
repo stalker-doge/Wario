@@ -10,7 +10,7 @@ public class VolumeSliderController : MonoBehaviour
     void Start()
     {
         // Load saved volume and set slider
-        float savedVolume = PlayerPrefs.GetFloat(SoundManager.Instance.GetGameVolumeKey, 1f);
+        float savedVolume = PlayerPrefs.GetFloat(SoundManager.Instance?.GetGameVolumeKey, 1f);
         volumeSlider.value = savedVolume;
 
         // Add listener
