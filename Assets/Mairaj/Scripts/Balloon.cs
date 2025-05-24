@@ -103,7 +103,7 @@ public class Balloon : MonoBehaviour
         {
             if (type == BalloonType.Red)
             {
-                SoundManager.Instance.CardMismatchAudioClip();
+                SoundManager.Instance?.CardMismatchAudioClip();
 
                 Sequence shakeSequence = DOTween.Sequence();
                 shakeSequence.Append(transform.DOShakePosition(0.1f, new Vector3(20f, 0f, 0f), 10, 90, false, true)
@@ -123,7 +123,7 @@ public class Balloon : MonoBehaviour
                 GetComponent<Image>().enabled = false;
                 StartCoroutine(DestroyAfterAnimation());
                 animator.enabled = true;
-                SoundManager.Instance.BalloonPopAudioClip();
+                SoundManager.Instance?.BalloonPopAudioClip();
             }
         }
     }

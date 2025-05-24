@@ -41,14 +41,14 @@ public class AnswerOption : MonoBehaviour
             {
                 // Snap to placeholder if correct
                 transform.position = placeholderTransform.position;
-                SoundManager.Instance.CardMatchAudioClip();
+                SoundManager.Instance?.CardMatchAudioClip();
                 StartCoroutine(ScoreManager.Instance?.GameComplete());
             }
             else
             {
                 // Wrong answer dropped on placeholder, return to original
                 transform.position = startPosition;
-                SoundManager.Instance.CardMismatchAudioClip();
+                    SoundManager.Instance?.CardMismatchAudioClip();
             }
         }
         else

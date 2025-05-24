@@ -145,7 +145,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         if (isMatch)
         {
-            SoundManager.Instance.CardMatchAudioClip();
+            SoundManager.Instance?.CardMatchAudioClip();
             card1.GetComponent<Button>().interactable = false;
             card2.GetComponent<Button>().interactable = false;
             SuccessCompletionCallback?.Invoke();
@@ -154,7 +154,7 @@ public class FindTwoCardGameManager : MonoBehaviour
         }
         else
         {
-            SoundManager.Instance.CardMismatchAudioClip();
+            SoundManager.Instance?.CardMismatchAudioClip();
             card1.ShakeCardAndReset();
             card2.ShakeCardAndReset();
 
@@ -194,7 +194,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void GameCompleteDelayedSound()
     {
-        SoundManager.Instance.MiniGameCompleteAudioClip();
+        SoundManager.Instance?.MiniGameCompleteAudioClip();
     }
 
     private void GameEndSuccessCallback()
