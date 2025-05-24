@@ -66,9 +66,9 @@ public class DifficultyManager : MonoBehaviour
             //check if the music is playing
             if (musicSource.isPlaying)
             {
-                // If the music is playing, set the pitch based on the difficulty multiplier
-                musicSource.pitch = difficultyMultiplier;
-                // Adjust the time scale based on the difficulty multiplier
+                //if the music is playing, set the pitch a percentage of the difficulty multiplier so it scales but isn't too fast
+                musicSource.pitch = 1 + (difficultyMultiplier - 1) * 0.5f;
+                // Set the time scale to the difficulty multiplier
                 Time.timeScale = difficultyMultiplier;
             }
             else
@@ -91,20 +91,19 @@ public class DifficultyManager : MonoBehaviour
                 difficultyMultiplier = 1.0f;
                 break;
             case Difficulty.Level2:
-                difficultyMultiplier = 1.5f;
+                difficultyMultiplier = 1.4f;
                 break;
             case Difficulty.Level3:
-                difficultyMultiplier = 2.0f;
+                difficultyMultiplier = 1.6f;
                 break;
             case Difficulty.Level4:
-                difficultyMultiplier = 2.5f;
+                difficultyMultiplier = 1.8f;
                 break;
-
             case Difficulty.Level5:
-                difficultyMultiplier = 3.0f;
+                difficultyMultiplier = 2.0f;
                 break;
             case Difficulty.Level6:
-                difficultyMultiplier = 3.5f;
+                difficultyMultiplier = 2.2f;
                 break;
         }
     }

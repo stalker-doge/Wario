@@ -19,7 +19,7 @@ public class Leaderboard : MonoBehaviour
     [SerializeField]
     private TMP_InputField usernameInputField;
 
-    private string publicLeaderboardKey = "19821531fd2b074aa36f93382a58e5f79132f574fce07c94ec5e8ce2096915cb";
+    private string publicLeaderboardKey = "68d09b3fa88d5c14271fdf77b3789df32e2d9d2c33061c0f5d96addc2e8ad374";
     // Start is called before the first frame update
     void Start()
     {

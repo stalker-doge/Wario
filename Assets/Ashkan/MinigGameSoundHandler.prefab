@@ -53,6 +53,7 @@ MonoBehaviour:
   - MathGame
   - MazeGame
   - Pop the Balloons
+  - Loading
   menuSceneName:
   - Credits
   - End Scene
