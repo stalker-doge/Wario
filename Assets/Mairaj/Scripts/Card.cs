@@ -17,11 +17,22 @@ public class Card : MonoBehaviour
     [SerializeField]
     float newWidth = 150f;
 
+    [Header("Card Size Increase % Upon Match")]
+    [Range(2f, 2.5f)]
+    [SerializeField]
+    private float cardSizeScaleValue;
+
     private void Awake()
     {
         FindTwoCardGameManager.EnableCardClicking += ActivateButtonClicking; 
         if (cardImage)
             cardImage.sprite = backSprite;
+        gameObject.transform.localScale = new Vector3(cardSizeScaleValue, cardSizeScaleValue, cardSizeScaleValue);
+    }
+
+    public float GetScaleValue()
+    {
+        return cardSizeScaleValue;
     }
 
     public void InitializeCard(CardType type, Sprite front, Sprite back)
@@ -49,7 +60,7 @@ public class Card : MonoBehaviour
         SoundManager.Instance?.CardMismatchAudioClip();
         Sequence shakeSequence = DOTween.Sequence();
         shakeSequence.AppendInterval(0.3f);
-        shakeSequence.Append(transform.DOShakePosition(0.1f, new Vector3(5f, 0f, 0f), 10, 90, false, true));
+        shakeSequence.Append(transform.DOShakePosition(0.2f, new Vector3(15f, 0f, 0f), 10, 90, false, true));
         shakeSequence.OnComplete(() =>
         {
             if (Application.platform == RuntimePlatform.Android)

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -145,9 +146,14 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         if (isMatch)
         {
-            SoundManager.Instance?.CardMatchAudioClip();
+            float animTimer = 0.25f;
+            float upscaleValue = 0.2f;
             card1.GetComponent<Button>().interactable = false;
             card2.GetComponent<Button>().interactable = false;
+            card1.gameObject.transform.DOScale(new Vector3(card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + 0.25f), animTimer).SetEase(Ease.OutBack);
+            card2.gameObject.transform.DOScale(new Vector3(card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + 0.25f), animTimer).SetEase(Ease.OutBack);
+            yield return new WaitForSeconds(animTimer);
+            SoundManager.Instance?.CardMatchAudioClip();
             SuccessCompletionCallback?.Invoke();
             Invoke("GameEndSuccessCallback", selectedCards[1].GetRotateTimer() * 2);
             Invoke("GameCompleteDelayedSound", 0.5f);
@@ -158,7 +164,7 @@ public class FindTwoCardGameManager : MonoBehaviour
             card1.ShakeCardAndReset();
             card2.ShakeCardAndReset();
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.55f);
 
             card1.ResetCard();
             card2.ResetCard();
