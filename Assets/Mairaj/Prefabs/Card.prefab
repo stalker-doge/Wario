@@ -153,6 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardImage: {fileID: 5877245105795953016}
   rotateTimer: 0.05
+  defaultWidth: 200
+  newWidth: 150
+  cardSizeScaleValue: 2.25
 --- !u!114 &3011168792874914374
 MonoBehaviour:
   m_ObjectHideFlags: 0

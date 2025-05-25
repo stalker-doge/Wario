@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3f6c9264d1a9db140bfa635dc4b6778c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -125,7 +125,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRect: {fileID: 0}
-  balloonsCount: 10
+  yellowCount: 0
+  blueCount: 0
+  redCount: 0
   yellowBalloonPrefab: {fileID: 821717609380085722, guid: 44e64bc2bbb54714fb62fe5075a9310f, type: 3}
   blueBalloonPrefab: {fileID: 309885044874728961, guid: 67d5a32528600a144b83b213dd5a2ee0, type: 3}
   redBalloonPrefab: {fileID: 821717609380085722, guid: 30de5db946bc9e441b9828ba3f6758ad, type: 3}
+  leftPadding: 150
+  rightPadding: 150
+  topPadding: 200
+  bottomPadding: 400
+  adjustRadiusFactor: 0
+  balloonRadius: 0
+  balloonScale: {x: 1, y: 1, z: 1}
