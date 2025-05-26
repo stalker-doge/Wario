@@ -25,7 +25,7 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
 
     private void Start()
     {
-        randomVariant = Random.Range(0, 3);
+        randomVariant = Random.Range(0, 2);
         switch (randomVariant)
         {
             case 0:
@@ -33,9 +33,6 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
                 break;
             case 1:
                 currentDifficulty = Difficulty.Medium;
-                break;
-            case 2:
-                currentDifficulty = Difficulty.Hard;
                 break;
         }
         CalculateScreenSize();
