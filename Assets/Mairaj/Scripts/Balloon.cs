@@ -103,6 +103,8 @@ public class Balloon : MonoBehaviour
         {
             if (type == BalloonType.Red)
             {
+                FlashBoundaryManager.OnFlashRequested?.Invoke();
+
                 SoundManager.Instance?.CardMismatchAudioClip();
 
                 Sequence shakeSequence = DOTween.Sequence();

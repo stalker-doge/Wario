@@ -49,6 +49,7 @@ public class AnswerOption : MonoBehaviour
                 // Wrong answer dropped on placeholder, return to original
                 transform.position = startPosition;
                     SoundManager.Instance?.CardMismatchAudioClip();
+                FlashBoundaryManager.OnFlashRequested?.Invoke();
             }
         }
         else
