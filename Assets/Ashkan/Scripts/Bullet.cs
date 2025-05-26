@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour
 
         //    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
         //}
+        
         if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
         {
             if (bulletLimit < 3)
