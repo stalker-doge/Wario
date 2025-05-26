@@ -159,6 +159,7 @@ MonoBehaviour:
   shelfSpacingStart: 3
   shelfWidthFactorMin: 0.25
   shelfWidthFactorMax: 0.45
+  randomVariant: 0
 --- !u!4 &165935401
 Transform:
   m_ObjectHideFlags: 0
@@ -717,6 +718,7 @@ MonoBehaviour:
   bulletSpeed: 20
   collisionCount: 0
   collisionCountMax: 15
+  bulletLimit: 0
 --- !u!4 &1603550379
 Transform:
   m_ObjectHideFlags: 0
@@ -796,8 +798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8d39e3f1d57904ea481fefe27869e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepAngle: 10
-  swipeThreshold: 10
+  stepAngle: 1
+  swipeThreshold: 0.1
   minAngle: 0
   maxAngle: 180
 --- !u!61 &1826225500
