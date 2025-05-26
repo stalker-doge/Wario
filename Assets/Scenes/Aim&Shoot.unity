@@ -713,6 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3962812470986539896, guid: f2863e641e6ef1242bcfc2e5c39761f1, type: 3}
+  collisionAnimationObject: {fileID: 6920630786378737263, guid: c088dd4967d06044286045e2e1662da0, type: 3}
   shootPoint: {fileID: 1276213563}
   arrow: {fileID: 1826225499}
   bulletSpeed: 20
