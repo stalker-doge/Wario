@@ -21,9 +21,10 @@ public class FindTwoCardGameManager : MonoBehaviour
     public static System.Action SuccessCompletionCallback = null;
 
     [SerializeField] private CardSpriteMap[] cardSpriteMappings;
-
+    [SerializeField] private GridLayoutGroup gridLayoutGroup;
     [SerializeField] private FindTwoCardsVariant variant = FindTwoCardsVariant.mFindTwoCardsNormal;
     [SerializeField] private float tutorialTimerForVariantMode = 0.0f;
+    [SerializeField] private float swapAnimTimer = 0.5f;
 
     private Dictionary<CardType, Sprite> cardSpriteDict;
     private List<Card> selectedCards = new List<Card>();
@@ -186,17 +187,57 @@ public class FindTwoCardGameManager : MonoBehaviour
                 {
                     Card swapTarget = nonSelected[Random.Range(0, nonSelected.Count)];
 
-                    var tempType = wrongCard.GetCardType();
-                    var tempSprite = wrongCard.GetFrontSprite();
+                    //var tempType = wrongCard.GetCardType();
+                    //var tempSprite = wrongCard.GetFrontSprite();
 
-                    wrongCard.InitializeCard(swapTarget.GetCardType(), swapTarget.GetFrontSprite(), backCardSprite);
-                    swapTarget.InitializeCard(tempType, tempSprite, backCardSprite);
+                    //wrongCard.InitializeCard(swapTarget.GetCardType(), swapTarget.GetFrontSprite(), backCardSprite);
+                    //swapTarget.InitializeCard(tempType, tempSprite, backCardSprite);
+
+                    gridLayoutGroup.enabled = false;
+                    wrongCard.GetComponent<Button>().interactable = false;
+                    swapTarget.GetComponent<Button>().interactable = false;
+                    StartCoroutine(SwapPositionsAndSiblings(wrongCard.transform, swapTarget.transform, swapAnimTimer));
                 }
             }
         }
 
         selectedCards.Clear();
     }
+
+    private IEnumerator SwapPositionsAndSiblings(Transform a, Transform b, float duration)
+    {
+        Vector3 startPosA = a.position;
+        Vector3 startPosB = b.position;
+
+        int indexA = a.GetSiblingIndex();
+        int indexB = b.GetSiblingIndex();
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            a.position = Vector3.Lerp(startPosA, startPosB, t);
+            b.position = Vector3.Lerp(startPosB, startPosA, t);
+
+            yield return null;
+        }
+
+        // Final snap to ensure exact positions
+        a.position = startPosB;
+        b.position = startPosA;
+
+        // Swap sibling indices
+        a.SetSiblingIndex(indexB);
+        b.SetSiblingIndex(indexA);
+
+        gridLayoutGroup.enabled = true;
+        a.gameObject.GetComponent<Button>().interactable = true;
+        b.gameObject.GetComponent<Button>().interactable = true;
+    }
+
 
     private void GameCompleteDelayedSound()
     {
