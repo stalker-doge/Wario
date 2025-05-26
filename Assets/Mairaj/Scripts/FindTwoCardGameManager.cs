@@ -194,8 +194,7 @@ public class FindTwoCardGameManager : MonoBehaviour
                     //swapTarget.InitializeCard(tempType, tempSprite, backCardSprite);
 
                     gridLayoutGroup.enabled = false;
-                    wrongCard.GetComponent<Button>().interactable = false;
-                    swapTarget.GetComponent<Button>().interactable = false;
+                    EnableCardClicking.Invoke(false);
                     StartCoroutine(SwapPositionsAndSiblings(wrongCard.transform, swapTarget.transform, swapAnimTimer));
                 }
             }
@@ -236,6 +235,7 @@ public class FindTwoCardGameManager : MonoBehaviour
         gridLayoutGroup.enabled = true;
         a.gameObject.GetComponent<Button>().interactable = true;
         b.gameObject.GetComponent<Button>().interactable = true;
+        EnableCardClicking.Invoke(true);
     }
 
 
