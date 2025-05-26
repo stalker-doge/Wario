@@ -85,7 +85,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                         if (correctMatches >= (int)variant)
                         {
                             correctMatches = 0; // Reset the counter for the next game
-                            Debug.Log("XYZ Game Ended");
+                            //Debug.Log("XYZ Game Ended");
                             // Game has ended, notify FindTheGapManager
                             OnGameEnded?.Invoke();
                             if (ScoreManager.Instance)
@@ -101,6 +101,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     // Wrong Shape - Reset to original position
                     // Debug.Log("XYZ Else DropZone");
                     dragDrop.ResetPosition();
+                    FlashBoundaryManager.OnFlashRequested?.Invoke();
                 }
             } else
             {
@@ -125,7 +126,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     if (correctMatches >= (int)newVariant)
                     {
                         correctMatches = 0; // Reset the counter for the next game
-                        Debug.Log("XYZ Game Ended");
+                        //Debug.Log("XYZ Game Ended");
                         // Game has ended, notify FindTheGapManager
                         OnGameEnded?.Invoke();
                         if (ScoreManager.Instance)
@@ -140,6 +141,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     // Wrong Shape - Reset to original position
                     // Debug.Log("XYZ Else DropZone");
                     dragDrop.ResetPosition();
+                    FlashBoundaryManager.OnFlashRequested?.Invoke();
                 }
             }
             
