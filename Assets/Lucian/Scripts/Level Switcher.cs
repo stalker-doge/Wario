@@ -33,8 +33,17 @@ public class LevelSwitcher : MonoBehaviour
 
     private bool isSwitchingScene = false;
 
+
+    [SerializeField]
+    private int gamesToPlay = 5;
+
     [SerializeField]
     private bool difficultyIncreased = false;
+
+    private bool increasedDifficulty = false;
+
+    [SerializeField]
+    private GameObject difficultyText;
 
     private float timer = 0;
     void Start()
@@ -95,6 +104,18 @@ public class LevelSwitcher : MonoBehaviour
             //levelName.text = sceneName;
             SetLevelTitle(sceneName);
             timer += Time.deltaTime;
+
+            //increments the games played counter only once per scene switch
+          if (!increasedDifficulty && TimerManager.Instance && TimerManager.Instance.isPaused)
+            {
+                increasedDifficulty = true;
+                DifficultyManager.Instance.gamesPlayed++;
+                if (DifficultyManager.Instance.gamesPlayed >= gamesToPlay)
+                {
+                    DifficultyManager.Instance.IncreaseDifficulty();
+                    difficultyText.SetActive(true);
+                }
+            }
             if (timer > timeToWait)
             {
                 //gives the player a score based on the time left
@@ -110,19 +131,6 @@ public class LevelSwitcher : MonoBehaviour
 
                 if (!isSwitchingScene)
                 {
-                    //increment the games played
-                   DifficultyManager.Instance.gamesPlayed++;
-                    //if games played is greater than 5, reset the games played and up the difficulty
-                    if (DifficultyManager.Instance.gamesPlayed > 5)
-                    {
-                        if (!difficultyIncreased)
-                        {
-                            DifficultyManager.Instance.gamesPlayed = 0;
-                            //up the difficulty
-                            DifficultyManager.Instance.IncreaseDifficulty();
-                            difficultyIncreased = true;
-                        }
-                    }
                     isSwitchingScene = true;
                     CurtainAnimController.Instance?.AnimateTowardsCenter(curtainAnimTimer, () => {
                         SwitchScene(sceneName);
