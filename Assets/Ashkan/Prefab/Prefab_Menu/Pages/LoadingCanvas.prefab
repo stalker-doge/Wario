@@ -579,6 +579,9 @@ MonoBehaviour:
   levelName: {fileID: 8720118879515922628}
   localizedLevelName: {fileID: 6555168260961005853}
   curtainAnimTimer: 0
+  gamesToPlay: 5
+  difficultyIncreased: 0
+  difficultyText: {fileID: 0}
 --- !u!114 &8835571210273731902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,15 +1265,15 @@ RectTransform:
   m_GameObject: {fileID: 8953485200374177944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1125891, y: 1.1125891, z: 1.1125891}
+  m_LocalScale: {x: 1.112589, y: 1.112589, z: 1.112589}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6012319814508859400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11, y: 6}
-  m_SizeDelta: {x: -491.5718, y: -1978.0494}
+  m_AnchoredPosition: {x: -11, y: 6.0000033}
+  m_SizeDelta: {x: -491.57178, y: -1978.0494}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1841561466562443308
 CanvasRenderer:
@@ -1377,7 +1380,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8953485200374177944}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 28bece995909e52428a381623859916b, type: 2}
   m_CullingMode: 0
@@ -1397,7 +1400,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8953485200374177944}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
   m_Name: 
