@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public GameObject collisionAnimationObject;
     public Transform shootPoint;
     public ArrowController arrow;
 
@@ -57,12 +58,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //SoundManager.Instance.ProjectileBounceAudioClip();
-        /*collisionCount++;
-        if (collisionCount == collisionCountMax)
+        if (other.gameObject.CompareTag("Wall"))
         {
-            gameObject.SetActive(false);
-        }*/
+            GameObject effect = Instantiate(collisionAnimationObject, transform.position, Quaternion.identity);
+            Destroy(effect, 0.3f);
+        }
+
 
         if (other.gameObject.CompareTag("Goal") && !TimerManager.Instance.winloseState)
         {
@@ -73,6 +74,7 @@ public class Bullet : MonoBehaviour
             }
             other.gameObject.SetActive(false);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            Destroy(gameObject, 0.3f);
         }
     }
 
