@@ -445,6 +445,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -955
       objectReference: {fileID: 0}
+    - target: {fileID: 2092476403084864161, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2092476403084864161, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2092476403084864161, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:bcf18317208776648b654261890bf926
+      objectReference: {fileID: 0}
     - target: {fileID: 2828888607116606166, guid: e449d598d375089419b84a7873821ba9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -532,6 +544,18 @@ PrefabInstance:
     - target: {fileID: 2916633681076234537, guid: e449d598d375089419b84a7873821ba9, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.000045776
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599383065839463441, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_text
+      value: Submit Score!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599383065839463441, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_margin.x
+      value: -24.51059
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599383065839463441, guid: e449d598d375089419b84a7873821ba9, type: 3}
+      propertyPath: m_margin.z
+      value: -3.6044922
       objectReference: {fileID: 0}
     - target: {fileID: 6118444351112299185, guid: e449d598d375089419b84a7873821ba9, type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -228,7 +228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: gamesToPlay
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: difficultyText
