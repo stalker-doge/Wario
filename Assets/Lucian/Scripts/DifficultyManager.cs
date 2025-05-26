@@ -25,7 +25,7 @@ public class DifficultyManager : MonoBehaviour
 
     public Difficulty currentDifficulty;
     public float difficultyMultiplier = 1.0f;
-    public float difficultyIncreaseRate = 0.1f;
+    public float difficultyIncreaseRate = 0.2f;
 
     public int gamesPlayed=0;
 
@@ -61,24 +61,8 @@ public class DifficultyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (musicSource)
-        {
-            //check if the music is playing
-            if (musicSource.isPlaying)
-            {
-                //if the music is playing, set the pitch a percentage of the difficulty multiplier so it scales but isn't too fast
-                musicSource.pitch = 1 + (difficultyMultiplier - 1) * 0.5f;
-                // Set the time scale to the difficulty multiplier
-                Time.timeScale = difficultyMultiplier;
-            }
-            else
-            {
-                // If the music is not playing, set the time scale to 1
-                Time.timeScale = 1;
-                // Set the pitch to 1
-                musicSource.pitch = 1;
-            }
-        }
+        // Update the time scale based on the difficulty multiplier
+        Time.timeScale = difficultyMultiplier;
     }
 
     public void SetDifficulty(Difficulty newDifficulty)
@@ -111,13 +95,14 @@ public class DifficultyManager : MonoBehaviour
     public void IncreaseDifficulty()
     {
         // Increase the difficulty level
-        if (currentDifficulty < Difficulty.Level4)
+        if (currentDifficulty < Difficulty.Level6)
         {
-            Debug.Log("LET'S RAMP IT UP");
             currentDifficulty++;
             SetDifficulty(currentDifficulty);
             //saves the difficulty to PlayerPrefs
             PlayerPrefs.SetInt("Difficulty", (int)currentDifficulty);
+            gamesPlayed = 0; // Reset games played after increasing difficulty
+            SoundManager.Instance.audioSource.pitch += difficultyIncreaseRate; // Increase pitch for sound effects
         }
         else
         {

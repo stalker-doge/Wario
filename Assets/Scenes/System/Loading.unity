@@ -130,6 +130,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_text
+      value: Speed it up!
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontSize
+      value: 231.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_margin.w
+      value: -46.558426
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_margin.x
+      value: -481.2697
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_margin.y
+      value: 46.818253
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_margin.z
+      value: -496.61792
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontStyle
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.1512549
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8015642
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 231.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 220.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280798456
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087811505309562686, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707808211523335950, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3798200493046738101, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: m_Name
       value: LoadingCanvas
@@ -138,10 +202,38 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3825886414616011885, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.32007337
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825886414616011885, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.48365495
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825886414616011885, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.36204833
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825886414616011885, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -7.025111
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825886414616011885, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: timeToWait
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: gamesToPlay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: difficultyText
+      value: 
+      objectReference: {fileID: 1222562077}
     - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: curtainAnimTimer
       value: 0.5
@@ -270,6 +362,10 @@ PrefabInstance:
       propertyPath: m_enableAutoSizing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6859913447429869883, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ee545414fa663c240a92ca6c82720213, type: 2}
     - target: {fileID: 9113791978249676616, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: m_SizeDelta.y
       value: -1812.6152
@@ -1379,7 +1475,9 @@ MonoBehaviour:
   levelName: {fileID: 1512819103}
   localizedLevelName: {fileID: 1512819104}
   curtainAnimTimer: 0.5
+  gamesToPlay: 5
   difficultyIncreased: 0
+  difficultyText: {fileID: 0}
 --- !u!114 &905947835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1784,6 +1882,11 @@ MonoBehaviour:
       type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: 
+--- !u!1 &1222562077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2707808211523335950, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+  m_PrefabInstance: {fileID: 49066464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1506481210
 GameObject:
   m_ObjectHideFlags: 0
