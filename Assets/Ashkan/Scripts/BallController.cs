@@ -20,7 +20,6 @@ public class BallController : MonoBehaviour
     {
         if(!TimerManager.Instance.winloseState)
             DetectSwipeInput();
-
     }
 
     void DetectSwipeInput()
@@ -63,15 +62,8 @@ public class BallController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Target"))
+        if (other.gameObject.CompareTag("Target") && !TimerManager.Instance.LosePage.activeSelf)
         {
-            //SoundManager.Instance.MiniGameCompleteAudioClip();
-            //ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-            //if (scoreManager != null)
-            //{
-            //    StartCoroutine(scoreManager.GameComplete());
-            //}
-
             StartCoroutine(ScoreManager.Instance?.GameComplete());
         }
 
@@ -88,6 +80,8 @@ public class BallController : MonoBehaviour
 
                 // Destroy after 0.3 seconds
                 Destroy(dust, 0.3f);
+                
+                SoundManager.Instance.ShootAudioClip();
             }
         }
     }
