@@ -37,19 +37,28 @@ public class AnswerOption : MonoBehaviour
 
         if (isOverPlaceholder)
         {
-            if (isCorrect)
+            if (!TimerManager.Instance.LosePage)
             {
-                // Snap to placeholder if correct
-                transform.position = placeholderTransform.position;
-                SoundManager.Instance?.CardMatchAudioClip();
-                StartCoroutine(ScoreManager.Instance?.GameComplete());
+                if (isCorrect)
+                {
+                    // Snap to placeholder if correct
+                    transform.position = placeholderTransform.position;
+                    SoundManager.Instance?.CardMatchAudioClip();
+                    StartCoroutine(ScoreManager.Instance?.GameComplete());
+                }
+                else
+                {
+                    // Wrong answer dropped on placeholder, return to original
+                    transform.position = startPosition;
+                    SoundManager.Instance?.CardMismatchAudioClip();
+                }
             }
             else
             {
-                // Wrong answer dropped on placeholder, return to original
                 transform.position = startPosition;
-                    SoundManager.Instance?.CardMismatchAudioClip();
+                SoundManager.Instance?.CardMismatchAudioClip();
             }
+
         }
         else
         {
