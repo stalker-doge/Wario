@@ -4,7 +4,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     [SerializeField]
     private AudioClip gameStartAudioClip;
