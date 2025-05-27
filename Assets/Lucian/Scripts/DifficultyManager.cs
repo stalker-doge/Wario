@@ -63,6 +63,11 @@ public class DifficultyManager : MonoBehaviour
     {
         // Update the time scale based on the difficulty multiplier
         Time.timeScale = difficultyMultiplier;
+        if (currentDifficulty == Difficulty.Level1)
+        {
+            if(SoundManager.Instance != null)
+            SoundManager.Instance.audioSource.pitch = 1.0f;
+        }
     }
 
     public void SetDifficulty(Difficulty newDifficulty)

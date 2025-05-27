@@ -124,6 +124,8 @@ public class DropZone : MonoBehaviour, IDropHandler
                     // Increment correct match counter
                     correctMatches++;
 
+                    Debug.Log("CorrectMatches= " +correctMatches);
+                    Debug.Log("Matches needed= +" + (int)newVariant);
                     // Check if all matches have been made
                     if (correctMatches >= (int)newVariant)
                     {
