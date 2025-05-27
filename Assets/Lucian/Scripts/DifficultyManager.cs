@@ -75,19 +75,19 @@ public class DifficultyManager : MonoBehaviour
                 difficultyMultiplier = 1.0f;
                 break;
             case Difficulty.Level2:
-                difficultyMultiplier = 1.4f;
+                difficultyMultiplier = 1.2f;
                 break;
             case Difficulty.Level3:
-                difficultyMultiplier = 1.6f;
+                difficultyMultiplier = 1.4f;
                 break;
             case Difficulty.Level4:
-                difficultyMultiplier = 1.8f;
+                difficultyMultiplier = 1.6f;
                 break;
             case Difficulty.Level5:
-                difficultyMultiplier = 2.0f;
+                difficultyMultiplier = 1.8f;
                 break;
             case Difficulty.Level6:
-                difficultyMultiplier = 2.2f;
+                difficultyMultiplier = 2.0f;
                 break;
         }
     }

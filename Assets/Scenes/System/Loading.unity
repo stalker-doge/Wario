@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4365217332252862576, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
+      propertyPath: gamesToPlay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6012319814508859400, guid: 832626fec41fb3b49b2b11ec2df74c60, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -793,10 +797,6 @@ PrefabInstance:
     - target: {fileID: 2425821795270113180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: isPaused
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2425821795270113180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
-      propertyPath: timeLimit
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2854017229222349246, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: musicSource
