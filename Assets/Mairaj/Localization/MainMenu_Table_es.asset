@@ -152,6 +152,16 @@ MonoBehaviour:
     m_Localized: Introduce texto...
     m_Metadata:
       m_Items: []
+  - m_Id: 8380987816067072
+    m_Localized: 'Microjuego
+
+      Teatro'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8381375214567424
+    m_Localized: "\xA1Date prisa!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

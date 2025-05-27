@@ -502,9 +502,17 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8101501642716198593, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -362.20276
+      objectReference: {fileID: 0}
+    - target: {fileID: 8122398824731666561, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8122398824731666561, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 5908481855242240
+      value: 8380987816067072
       objectReference: {fileID: 0}
     - target: {fileID: 8381096888821785712, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
       propertyPath: m_Name

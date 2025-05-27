@@ -62,13 +62,12 @@ public class MazeDragPlayer : MonoBehaviour
     // Detect collision with walls
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            isTouchingWall = true;
-        }
+   
         if (collision.gameObject.CompareTag("MazeWall"))
         {
-            moveSpeed = 3;
+            moveSpeed = 6;
+            isTouchingWall = true;
+
         }
     }
 

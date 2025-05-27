@@ -152,6 +152,16 @@ MonoBehaviour:
     m_Localized: Enter text...
     m_Metadata:
       m_Items: []
+  - m_Id: 8380987816067072
+    m_Localized: 'Microgame
+
+      Theatre'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8381375214567424
+    m_Localized: Speed it up!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
