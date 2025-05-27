@@ -23,7 +23,7 @@ public class LoadScript : MonoBehaviour
         AsyncOperation asyncload = SceneManager.LoadSceneAsync("Main Menu");
         while(!asyncload.isDone)
         {
-            yield return null;
+            yield return new WaitForSeconds(2);
         }
     }
 }
