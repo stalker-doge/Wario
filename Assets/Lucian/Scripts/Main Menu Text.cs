@@ -38,6 +38,7 @@ public class NewBehaviourScript : MonoBehaviour
             PlayerPrefs.SetInt("Score", 0);
             PlayerPrefs.SetInt("Lives", 3);
             PlayerPrefs.SetInt("Difficulty", 0);
+            DifficultyManager.Instance?.SetDifficulty(DifficultyManager.Difficulty.Level1);
             //highScore.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
             //lastScore.text= "Score: " + PlayerPrefs.GetInt("LastScore", 0).ToString();
 
