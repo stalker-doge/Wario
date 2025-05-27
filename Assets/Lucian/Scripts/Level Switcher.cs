@@ -207,6 +207,9 @@ public class LevelSwitcher : MonoBehaviour
             case "Fill The Gap":
                 localizedLevelName.StringReference.TableEntryReference = "FillTheGap_Title";
                 break;
+            case "Fill The GapNewVariant":
+                localizedLevelName.StringReference.TableEntryReference = "FillTheGap_Title";
+                break;
             default:
                 Debug.LogWarning("Level not found in the localization table.");
                 return;
