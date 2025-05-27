@@ -90,10 +90,10 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
         switch (currentDifficulty)
         {
             case Difficulty.Easy:
-                shelfCount = 2;
+                shelfCount = 1;
                 break;
             case Difficulty.Medium:
-                shelfCount = 3;
+                shelfCount = 2;
                 break;
             case Difficulty.Hard:
                 shelfCount = 4;
