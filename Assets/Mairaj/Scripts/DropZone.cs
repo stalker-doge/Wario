@@ -125,7 +125,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     correctMatches++;
 
                     // Check if all matches have been made
-                    if (correctMatches >= (int)newVariant +1)
+                    if (correctMatches >= (int)newVariant)
                     {
                         correctMatches = 0; // Reset the counter for the next game
                         //Debug.Log("XYZ Game Ended");
