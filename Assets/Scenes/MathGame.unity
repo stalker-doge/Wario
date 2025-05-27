@@ -1207,6 +1207,10 @@ PrefabInstance:
       propertyPath: isPaused
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2425821795270113180, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: timeLimit
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2854017229222349246, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: musicSource
       value: 
