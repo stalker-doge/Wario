@@ -53,15 +53,15 @@ public class FillTheGapManager : MonoBehaviour
         {
             case 0:
                 variant = FillTheGapVariant.mOneSlots;
-                newVariant = NewFillTheGapVariant.mXOneSlots;
+                //newVariant = NewFillTheGapVariant.mXOneSlots;
                 break;
             case 1: 
                 variant = FillTheGapVariant.mTwoSlots;
-                newVariant = NewFillTheGapVariant.mXTwoSlots;
+                //newVariant = NewFillTheGapVariant.mXTwoSlots;
                 break;
             case 2:
                 variant = FillTheGapVariant.mThreeSlots;
-                newVariant = NewFillTheGapVariant.mXThreeSlots;
+                //newVariant = NewFillTheGapVariant.mXThreeSlots;
                 break;
         }
         Debug.Log("POLO");
