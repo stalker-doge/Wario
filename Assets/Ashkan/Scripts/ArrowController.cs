@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
-    public float moveSpeed = 100f;       // Speed of rotation in degrees per second
-    public float minAngle = 0f;           // Minimum allowed angle (left limit)
-    public float maxAngle = 180f;         // Maximum allowed angle (right limit)
+    public float rotationSensitivity = 0.3f;  // Sensitivity based on distance
+    public float minAngle = 0f;               // Minimum allowed angle (left limit)
+    public float maxAngle = 180f;             // Maximum allowed angle (right limit)
+    public float minDistanceThreshold = 1f;   // Minimum distance before offset is applied
+    public float offsetDistance = 3f;       // Vertical offset added when input is too close
 
-    public GameObject threeRemaining;    // UI for 3 remaining
-    public GameObject twoRemaining;      // UI for 2 remaining
-    public GameObject oneRemaining;      // UI for 1 remaining
+    public GameObject threeRemaining;         // UI for 3 remaining
+    public GameObject twoRemaining;           // UI for 2 remaining
+    public GameObject oneRemaining;           // UI for 1 remaining
 
-    private Vector2 lastPosition;
-    private bool isDragging = false;
     [SerializeField] private int shootCount = 0; // Counts how many times player has shot
 
     void Start()
@@ -29,59 +29,52 @@ public class ArrowController : MonoBehaviour
         if (TimerManager.Instance.winloseState)
             return;
 
-        // 🖱 Mouse Input
-        if (Input.GetMouseButtonDown(0))
+        Vector3 inputPosition = Vector3.zero;
+        bool isTouching = false;
+
+        // Mouse
+        if (Input.GetMouseButton(0))
         {
-            lastPosition = Input.mousePosition;
-            isDragging = true;
+            inputPosition = Input.mousePosition;
+            isTouching = true;
         }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-            HandleShot();
-        }
-
-        if (isDragging && Input.touchCount == 0)
-        {
-            Vector2 currentPosition = Input.mousePosition;
-            float deltaX = currentPosition.x - lastPosition.x;
-            RotateArrow(deltaX);
-            lastPosition = currentPosition;
-        }
-
-        // 📱 Touch Input
+        // Touch
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
+            inputPosition = Input.GetTouch(0).position;
+            isTouching = true;
+        }
 
-            if (touch.phase == TouchPhase.Began)
-            {
-                lastPosition = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                float deltaX = touch.position.x - lastPosition.x;
-                RotateArrow(deltaX);
-                lastPosition = touch.position;
-            }
+        if (isTouching)
+        {
+            RotateTowardsInput(inputPosition);
+        }
+
+        // Shoot on release
+        if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
+        {
+            HandleShot();
         }
     }
 
-    void RotateArrow(float deltaX)
+    void RotateTowardsInput(Vector3 inputScreenPosition)
     {
-        float rotationAmount = -deltaX * moveSpeed * Time.deltaTime;
-        float currentAngle = transform.eulerAngles.z;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(inputScreenPosition.x, inputScreenPosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
+        Vector2 direction = (Vector2)(worldPosition - transform.position);
 
-        // Normalize current angle to range [0, 360)
-        currentAngle = (currentAngle + 360f) % 360f;
+        // If touch/mouse is too close, apply upward offset
+        if (direction.magnitude < minDistanceThreshold)
+        {
+            worldPosition += Vector3.up * offsetDistance;
+            direction = (Vector2)(worldPosition - transform.position);
+        }
 
-        float newAngle = currentAngle + rotationAmount;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (targetAngle < 0) targetAngle += 360f;
+        targetAngle = Mathf.Clamp(targetAngle, minAngle, maxAngle);
 
-        // Clamp new angle to [minAngle, maxAngle]
-        newAngle = Mathf.Clamp(newAngle, minAngle, maxAngle);
-
-        transform.rotation = Quaternion.Euler(0, 0, newAngle);
+        transform.rotation = Quaternion.Euler(0, 0, targetAngle);
     }
 
     public Vector2 GetDirection()
