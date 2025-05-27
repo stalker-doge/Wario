@@ -48,23 +48,32 @@ public class FillTheGapManager : MonoBehaviour
 
     private void Start()
     {
-        randomVariant= UnityEngine.Random.Range(0, 3);
-        switch(randomVariant)
-        {
-            case 0:
-                variant = FillTheGapVariant.mOneSlots;
-                //newVariant = NewFillTheGapVariant.mXOneSlots;
-                break;
-            case 1: 
-                variant = FillTheGapVariant.mTwoSlots;
-                //newVariant = NewFillTheGapVariant.mXTwoSlots;
-                break;
-            case 2:
-                variant = FillTheGapVariant.mThreeSlots;
-                //newVariant = NewFillTheGapVariant.mXThreeSlots;
-                break;
-        }
-        Debug.Log("POLO");
+        randomVariant= UnityEngine.Random.Range(0, 2);
+        //switch (randomVariant)
+        //{
+        //    case 0:
+        //        variant = FillTheGapVariant.mOneSlots;
+        //        if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+        //        {
+        //            newVariant = NewFillTheGapVariant.mXOneSlots;
+        //            Debug.Log("You will need this many matches=+ " + (int)newVariant);
+
+        //        }
+        //        break;
+        //    case 1:
+        //        variant = FillTheGapVariant.mTwoSlots;
+        //        if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+        //        {
+        //            newVariant = NewFillTheGapVariant.mXTwoSlots;
+        //            Debug.Log("You will need this many matches=+ " + (int)newVariant);
+
+        //        }
+        //        break;
+        //    case 2:
+        //        variant = FillTheGapVariant.mThreeSlots;
+        //        //newVariant = NewFillTheGapVariant.mXThreeSlots;
+        //        break;
+        //}
         SelectRandomDropZonesAndUpdateColor();
     }
 
@@ -200,6 +209,7 @@ public class FillTheGapManager : MonoBehaviour
     {
         return variant switch
         {
+            NewFillTheGapVariant.mXOneSlots => 1,
             NewFillTheGapVariant.mXTwoSlots => 2,
             NewFillTheGapVariant.mXThreeSlots => 3,
             NewFillTheGapVariant.mXFourSlots => 4,
