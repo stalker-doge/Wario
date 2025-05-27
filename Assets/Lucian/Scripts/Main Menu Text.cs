@@ -30,10 +30,10 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Start()
     {
-
         //checks if the scene is the end scene
         if (SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance?.GetSceneString(SceneType.EndScene))
         {
+            Debug.Log("TEST");
             //resets the score and lives and difficulty
             PlayerPrefs.SetInt("Score", 0);
             PlayerPrefs.SetInt("Lives", 3);
@@ -46,7 +46,6 @@ public class NewBehaviourScript : MonoBehaviour
             lastScoreEvent = lastScore.GetComponent<LocalizeStringEvent>();
 
             // Apply them to the localized UI
-            SetSmartInt(currentScoreEvent, "targetValue", PlayerPrefs.GetInt("Score", 0));
             SetSmartInt(highScoreEvent, "targetValue", PlayerPrefs.GetInt("HighScore", 0));
             SetSmartInt(lastScoreEvent, "targetValue", PlayerPrefs.GetInt("LastScore", 0));
             return;
@@ -72,10 +71,10 @@ public class NewBehaviourScript : MonoBehaviour
     }
     private void SetSmartInt(LocalizeStringEvent localizeEvent, string variableName, int value)
     {
-        if (localizeEvent == null) return;
-
+        Debug.Log("SCORE: " + value.ToString());
         if (!localizeEvent.StringReference.ContainsKey(variableName))
         {
+            Debug.Log("SCORE:!!!! " + value.ToString());
             localizeEvent.StringReference.Add(variableName, new IntVariable());
         }
 
