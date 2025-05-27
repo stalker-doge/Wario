@@ -69,13 +69,10 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Goal") && !TimerManager.Instance.winloseState)
         {
             SoundManager.Instance.MiniGameCompleteAudioClip();
-            if(ScoreManager.Instance)
-            {
-                StartCoroutine(ScoreManager.Instance.GameComplete());
-            }
+            StartCoroutine(ScoreManager.Instance?.GameComplete());
             other.gameObject.SetActive(false);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(gameObject, 0.3f);
+            Destroy(gameObject, 1.3f);
         }
     }
 

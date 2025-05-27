@@ -37,10 +37,11 @@ public class AnswerOption : MonoBehaviour
 
         if (isOverPlaceholder)
         {
-            if (!TimerManager.Instance.LosePage)
+            if (!TimerManager.Instance.LosePage.activeSelf)
             {
                 if (isCorrect)
                 {
+                    Debug.Log("HEYYYY");
                     // Snap to placeholder if correct
                     transform.position = placeholderTransform.position;
                     SoundManager.Instance?.CardMatchAudioClip();
@@ -51,6 +52,8 @@ public class AnswerOption : MonoBehaviour
                     // Wrong answer dropped on placeholder, return to original
                     transform.position = startPosition;
                     SoundManager.Instance?.CardMismatchAudioClip();
+                    FlashBoundaryManager.OnFlashRequested?.Invoke();
+
                 }
             }
             else
