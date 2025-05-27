@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2408997870132880361}
   - component: {fileID: -3284261907677616846}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: RollingBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,5 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac128789960d977498e9ccb8461390d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dustAnimationObject: {fileID: 7957629349684000664, guid: 5c546e016873a844d892281aefb3a347, type: 3}
+  minImpactForce: 4
   forceMultiplier: 10
   maxX: 3

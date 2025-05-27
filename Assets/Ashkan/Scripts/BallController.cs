@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+    public GameObject dustAnimationObject;
+    public float minImpactForce = 2f; // Minimum collision force to trigger effect
     public float forceMultiplier = 10f;
     public float maxX = 1.5f;
 
@@ -18,7 +20,6 @@ public class BallController : MonoBehaviour
     {
         if(!TimerManager.Instance.winloseState)
             DetectSwipeInput();
-
     }
 
     void DetectSwipeInput()
@@ -61,16 +62,27 @@ public class BallController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Target"))
+        if (other.gameObject.CompareTag("Target") && !TimerManager.Instance.LosePage.activeSelf)
         {
-            //SoundManager.Instance.MiniGameCompleteAudioClip();
-            //ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-            //if (scoreManager != null)
-            //{
-            //    StartCoroutine(scoreManager.GameComplete());
-            //}
-
             StartCoroutine(ScoreManager.Instance?.GameComplete());
+        }
+
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            // Check impact force
+            if (other.relativeVelocity.magnitude > minImpactForce)
+            {
+                // Get collision contact point
+                Vector3 contactPoint = other.GetContact(0).point;
+
+                // Instantiate the effect at the contact point
+                GameObject dust = Instantiate(dustAnimationObject, contactPoint, Quaternion.identity);
+
+                // Destroy after 0.3 seconds
+                Destroy(dust, 0.3f);
+                
+                SoundManager.Instance.ShootAudioClip();
+            }
         }
     }
 }

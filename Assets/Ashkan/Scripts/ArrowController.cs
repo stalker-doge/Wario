@@ -7,22 +7,31 @@ public class ArrowController : MonoBehaviour
     public int minAngle = 0;            // limit (left)
     public int maxAngle = 180;          // limit (right)
 
+    public GameObject threeRemaining;   // UI for 3 remaining
+    public GameObject twoRemaining;     // UI for 2 remaining
+    public GameObject oneRemaining;     // UI for 1 remaining
+
     private Vector2 lastPosition;
     private bool isDragging = false;
-    private float accumulatedDelta = 0f; // to accumulate drag distance
+    private float accumulatedDelta = 0f;
+
+    [SerializeField]private int shootCount = 0; // Counts how many times player has shot
 
     void Start()
     {
-        // Make sure arrow starts at center (90 degrees)
         transform.rotation = Quaternion.Euler(0, 0, 90);
+
+        // Make sure all indicators are active at the beginning
+        threeRemaining?.SetActive(true);
+        twoRemaining?.SetActive(true);
+        oneRemaining?.SetActive(true);
     }
 
     void Update()
     {
-        
-        if(TimerManager.Instance.winloseState)
+        if (TimerManager.Instance.winloseState)
             return;
-        
+
         // 🖱 Mouse Input
         if (Input.GetMouseButtonDown(0))
         {
@@ -34,6 +43,9 @@ public class ArrowController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
+
+            // Simulate a shoot when user releases input
+            HandleShot();
         }
 
         if (isDragging && Input.touchCount == 0)
@@ -60,6 +72,11 @@ public class ArrowController : MonoBehaviour
                 HandleStepRotation(deltaX);
                 lastPosition = touch.position;
             }
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                // Simulate a shoot when touch ends
+               // HandleShot();
+            }
         }
     }
 
@@ -69,12 +86,11 @@ public class ArrowController : MonoBehaviour
 
         if (Mathf.Abs(accumulatedDelta) >= swipeThreshold)
         {
-            int stepDirection = accumulatedDelta > 0 ? -1 : 1; // right swipe = rotate left
+            int stepDirection = accumulatedDelta > 0 ? -1 : 1;
             float currentAngle = transform.eulerAngles.z;
             float newAngle = currentAngle + stepAngle * stepDirection;
 
-            // Clamp to range between 0 and 180
-            if (newAngle < 0) newAngle += 360; // normalize angle
+            if (newAngle < 0) newAngle += 360;
             if (newAngle >= 360) newAngle -= 360;
 
             if (newAngle >= minAngle && newAngle <= maxAngle)
@@ -82,7 +98,7 @@ public class ArrowController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, newAngle);
             }
 
-            accumulatedDelta = 0f; // reset after each step
+            accumulatedDelta = 0f;
         }
     }
 
@@ -90,5 +106,16 @@ public class ArrowController : MonoBehaviour
     {
         float angle = transform.eulerAngles.z * Mathf.Deg2Rad;
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+    }
+
+    void HandleShot()
+    {
+        shootCount++;
+        if (shootCount == 1 && threeRemaining != null)
+            threeRemaining.SetActive(false);
+        else if (shootCount == 2 && twoRemaining != null)
+            twoRemaining.SetActive(false);
+        else if (shootCount == 3 && oneRemaining != null)
+            oneRemaining.SetActive(false);
     }
 }
