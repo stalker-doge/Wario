@@ -967,8 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8d39e3f1d57904ea481fefe27869e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepAngle: 3
-  swipeThreshold: 10
+  moveSpeed: 20
   minAngle: 0
   maxAngle: 180
   threeRemaining: {fileID: 1248311555}

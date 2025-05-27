@@ -2,20 +2,17 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
-    public int stepAngle = 10;          // step size in degrees
-    public float swipeThreshold = 10f;  // how much to drag to trigger one step
-    public int minAngle = 0;            // limit (left)
-    public int maxAngle = 180;          // limit (right)
+    public float moveSpeed = 100f;       // Speed of rotation in degrees per second
+    public float minAngle = 0f;           // Minimum allowed angle (left limit)
+    public float maxAngle = 180f;         // Maximum allowed angle (right limit)
 
-    public GameObject threeRemaining;   // UI for 3 remaining
-    public GameObject twoRemaining;     // UI for 2 remaining
-    public GameObject oneRemaining;     // UI for 1 remaining
+    public GameObject threeRemaining;    // UI for 3 remaining
+    public GameObject twoRemaining;      // UI for 2 remaining
+    public GameObject oneRemaining;      // UI for 1 remaining
 
     private Vector2 lastPosition;
     private bool isDragging = false;
-    private float accumulatedDelta = 0f;
-
-    [SerializeField]private int shootCount = 0; // Counts how many times player has shot
+    [SerializeField] private int shootCount = 0; // Counts how many times player has shot
 
     void Start()
     {
@@ -37,14 +34,11 @@ public class ArrowController : MonoBehaviour
         {
             lastPosition = Input.mousePosition;
             isDragging = true;
-            accumulatedDelta = 0f;
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
-
-            // Simulate a shoot when user releases input
             HandleShot();
         }
 
@@ -52,7 +46,7 @@ public class ArrowController : MonoBehaviour
         {
             Vector2 currentPosition = Input.mousePosition;
             float deltaX = currentPosition.x - lastPosition.x;
-            HandleStepRotation(deltaX);
+            RotateArrow(deltaX);
             lastPosition = currentPosition;
         }
 
@@ -64,42 +58,30 @@ public class ArrowController : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 lastPosition = touch.position;
-                accumulatedDelta = 0f;
             }
             else if (touch.phase == TouchPhase.Moved)
             {
                 float deltaX = touch.position.x - lastPosition.x;
-                HandleStepRotation(deltaX);
+                RotateArrow(deltaX);
                 lastPosition = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                // Simulate a shoot when touch ends
-               // HandleShot();
             }
         }
     }
 
-    void HandleStepRotation(float deltaX)
+    void RotateArrow(float deltaX)
     {
-        accumulatedDelta += deltaX;
+        float rotationAmount = -deltaX * moveSpeed * Time.deltaTime;
+        float currentAngle = transform.eulerAngles.z;
 
-        if (Mathf.Abs(accumulatedDelta) >= swipeThreshold)
-        {
-            int stepDirection = accumulatedDelta > 0 ? -1 : 1;
-            float currentAngle = transform.eulerAngles.z;
-            float newAngle = currentAngle + stepAngle * stepDirection;
+        // Normalize current angle to range [0, 360)
+        currentAngle = (currentAngle + 360f) % 360f;
 
-            if (newAngle < 0) newAngle += 360;
-            if (newAngle >= 360) newAngle -= 360;
+        float newAngle = currentAngle + rotationAmount;
 
-            if (newAngle >= minAngle && newAngle <= maxAngle)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, newAngle);
-            }
+        // Clamp new angle to [minAngle, maxAngle]
+        newAngle = Mathf.Clamp(newAngle, minAngle, maxAngle);
 
-            accumulatedDelta = 0f;
-        }
+        transform.rotation = Quaternion.Euler(0, 0, newAngle);
     }
 
     public Vector2 GetDirection()

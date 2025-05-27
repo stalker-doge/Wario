@@ -165,7 +165,7 @@ MonoBehaviour:
   collisionAnimationObject: {fileID: 6920630786378737263, guid: c088dd4967d06044286045e2e1662da0, type: 3}
   shootPoint: {fileID: 0}
   arrow: {fileID: 0}
-  bulletSpeed: 10
+  bulletSpeed: 20
   collisionCount: 0
   collisionCountMax: 4
   bulletLimit: 0
