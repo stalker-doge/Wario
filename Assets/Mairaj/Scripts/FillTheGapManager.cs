@@ -92,21 +92,33 @@ public class FillTheGapManager : MonoBehaviour
         }
 
         // Randomly select the required number of distinct drop zones
-        List<GameObject> selectedDropZones = dropZoneObjects
-            .OrderBy(x => UnityEngine.Random.value)
-            .Take(numberToSelect)
-            .ToList();
+        List<GameObject> selectedDropZones;
+        List<NewAcceptedShapeType?> selectedTypes;
+        do
+        {
+            selectedDropZones = dropZoneObjects
+                .OrderBy(x => UnityEngine.Random.value)
+                .Take(numberToSelect)
+                .ToList();
+
+            // Get the selected types to check the shape constraint
+            selectedTypes = selectedDropZones
+                .Select(dz => dz.GetComponent<DropZone>()?.GetNewAcceptedShapeType())
+                .ToList();
+
+        } while (selectedTypes.Contains(NewAcceptedShapeType.mShape10) &&
+                 selectedTypes.Contains(NewAcceptedShapeType.mShape16));
 
         if (newVariant != NewFillTheGapVariant.mXZeroSlots)
         {
             var matchingDragObjects = dragZoneObjects
-            .Where(drag =>
-            {
-                var dragType = drag.GetComponent<DragDrop>()?.newAcceptedShapeType;
-                return selectedDropZones.Any(dz =>
-                    dz.GetComponent<DropZone>()?.GetNewAcceptedShapeType() == dragType);
-            })
-            .ToList();
+                .Where(drag =>
+                {
+                    var dragType = drag.GetComponent<DragDrop>()?.newAcceptedShapeType;
+                    return selectedDropZones.Any(dz =>
+                        dz.GetComponent<DropZone>()?.GetNewAcceptedShapeType() == dragType);
+                })
+                .ToList();
 
             // Calculate how many more we need to add
             int remainingToAdd = (int)GetLastEnumValue<NewFillTheGapVariant>() - numberToSelect;
@@ -114,16 +126,29 @@ public class FillTheGapManager : MonoBehaviour
             // Find the remaining dragZoneObjects that are NOT in matchingDragObjects
             var remainingDragObjects = dragZoneObjects
                 .Except(matchingDragObjects)
-                .OrderBy(x => UnityEngine.Random.value) // Shuffle randomly
-                .Take(remainingToAdd)       // Take as many as needed
+                .OrderBy(x => UnityEngine.Random.value)
                 .ToList();
 
-            // Combine both matching and random distractors
-            var finalDragObjects = matchingDragObjects
-                .Concat(remainingDragObjects)
-                .ToList();
+            // Filter out mShape10 if mShape16 is already in matching, and vice versa because both shapes are same with different colors and user can get confused
+            bool has10 = matchingDragObjects.Any(d => d.GetComponent<DragDrop>()?.newAcceptedShapeType == NewAcceptedShapeType.mShape10);
+            bool has16 = matchingDragObjects.Any(d => d.GetComponent<DragDrop>()?.newAcceptedShapeType == NewAcceptedShapeType.mShape16);
 
-            // Activate only these 5 final drag objects and assign to dragZoneRects
+            if (has10)
+                remainingDragObjects = remainingDragObjects
+                    .Where(d => d.GetComponent<DragDrop>()?.newAcceptedShapeType != NewAcceptedShapeType.mShape16)
+                    .ToList();
+            else if (has16)
+                remainingDragObjects = remainingDragObjects
+                    .Where(d => d.GetComponent<DragDrop>()?.newAcceptedShapeType != NewAcceptedShapeType.mShape10)
+                    .ToList();
+
+            // Add the required number of distractors
+            var distractors = remainingDragObjects.Take(remainingToAdd).ToList();
+
+            // Combine both matching and distractors
+            var finalDragObjects = matchingDragObjects.Concat(distractors).ToList();
+
+            // Activate and position them
             for (int i = 0; i < dragZoneRects.Count; i++)
             {
                 GameObject drag = finalDragObjects[i];
