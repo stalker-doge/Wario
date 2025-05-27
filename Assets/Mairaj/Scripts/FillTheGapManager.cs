@@ -187,6 +187,7 @@ public class FillTheGapManager : MonoBehaviour
             if (!selectedDropZones.Contains(dz))
             {
                 DropZone dropZoneScript = dz.GetComponent<DropZone>();
+                dz.GetComponent<Image>().enabled = false;
                 if (dropZoneScript != null)
                 {
                     Destroy(dropZoneScript);
