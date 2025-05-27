@@ -88,7 +88,10 @@ public class DropZone : MonoBehaviour, IDropHandler
                             OnGameEnded?.Invoke();
                             if (ScoreManager.Instance)
                             {
-                                StartCoroutine(ScoreManager.Instance.GameComplete());
+                                if (!TimerManager.Instance.LosePage.activeSelf)
+                                {
+                                    StartCoroutine(ScoreManager.Instance.GameComplete());
+                                }
                             }
                             SoundManager.Instance?.CardMatchAudioClip();
                         }
@@ -126,7 +129,10 @@ public class DropZone : MonoBehaviour, IDropHandler
                         OnGameEnded?.Invoke();
                         if (ScoreManager.Instance)
                         {
-                            StartCoroutine(ScoreManager.Instance.GameComplete());
+                            if (!TimerManager.Instance.LosePage.activeSelf)
+                            {
+                                StartCoroutine(ScoreManager.Instance.GameComplete());
+                            }
                         }
                         SoundManager.Instance?.CardMatchAudioClip();
                     }

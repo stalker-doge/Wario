@@ -145,7 +145,7 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         bool isMatch = card1.GetCardType() == card2.GetCardType();
 
-        if (isMatch)
+        if (isMatch && !TimerManager.Instance.LosePage.activeSelf)
         {
             float animTimer = 0.25f;
             float upscaleValue = 0.2f;
