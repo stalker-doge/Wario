@@ -36,6 +36,7 @@ public class DropZone : MonoBehaviour, IDropHandler
             variant = FillTheGapManager.Instance.GetVariant();
         }
     }
+    
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -62,6 +63,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     dragDrop.GetComponent<DragDrop>().enabled = false; // Disable dragging after successful drop (if required)
 
                     // Increment correct match counter
+                    correctMatches++;
                     correctMatches++;
                     // Check if all matches have been made
                     if (correctMatches >= (int)variant + 1)
@@ -123,7 +125,7 @@ public class DropZone : MonoBehaviour, IDropHandler
                     correctMatches++;
 
                     // Check if all matches have been made
-                    if (correctMatches >= (int)newVariant)
+                    if (correctMatches >= (int)newVariant +1)
                     {
                         correctMatches = 0; // Reset the counter for the next game
                         //Debug.Log("XYZ Game Ended");
