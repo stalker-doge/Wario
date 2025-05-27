@@ -264,7 +264,7 @@ public class FindTwoCardGameManager : MonoBehaviour
             }
         }
 
-        if (ScoreManager.Instance)
+        if (ScoreManager.Instance && !TimerManager.Instance.LosePage.activeSelf)
         {
             //scoreManager.GameComplete();
            StartCoroutine( ScoreManager.Instance.GameComplete());
