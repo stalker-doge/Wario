@@ -153,7 +153,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8380987816067072
-    m_Localized: Microgame Theatre
+    m_Localized: 'Microgame
+
+      Theatre'
     m_Metadata:
       m_Items: []
   - m_Id: 8381375214567424
