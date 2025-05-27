@@ -14,8 +14,13 @@ public class HeartScript : MonoBehaviour
     [SerializeField]
     Image Heart2;
     [SerializeField]
-    Image Heart3;
-
+    Image Heart3;  
+    [SerializeField]
+    Image cross1;
+    [SerializeField]
+    Image cross2;
+    [SerializeField]
+    Image cross3;
     [SerializeField]
     Sprite HeartEmpty;
     // Start is called before the first frame update
@@ -26,10 +31,13 @@ public class HeartScript : MonoBehaviour
         {
             case 2: 
                 Heart3.sprite = HeartEmpty;
+                cross3.gameObject.SetActive(true);
                 break;
             case 1:
                 Heart3.sprite = HeartEmpty;
                 Heart2.sprite = HeartEmpty;
+                cross3.gameObject.SetActive(true);
+                cross2.gameObject.SetActive(true);
                 break;
         }
 
