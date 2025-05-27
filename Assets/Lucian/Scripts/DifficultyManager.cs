@@ -78,6 +78,7 @@ public class DifficultyManager : MonoBehaviour
         {
             case Difficulty.Level1:
                 difficultyMultiplier = 1.0f;
+                gamesPlayed = 0;
                 break;
             case Difficulty.Level2:
                 difficultyMultiplier = 1.2f;
