@@ -48,32 +48,35 @@ public class FillTheGapManager : MonoBehaviour
 
     private void Start()
     {
-        randomVariant= UnityEngine.Random.Range(0, 2);
-        //switch (randomVariant)
-        //{
-        //    case 0:
-        //        variant = FillTheGapVariant.mOneSlots;
-        //        if (newVariant != NewFillTheGapVariant.mXZeroSlots)
-        //        {
-        //            newVariant = NewFillTheGapVariant.mXOneSlots;
-        //            Debug.Log("You will need this many matches=+ " + (int)newVariant);
-
-        //        }
-        //        break;
-        //    case 1:
-        //        variant = FillTheGapVariant.mTwoSlots;
-        //        if (newVariant != NewFillTheGapVariant.mXZeroSlots)
-        //        {
-        //            newVariant = NewFillTheGapVariant.mXTwoSlots;
-        //            Debug.Log("You will need this many matches=+ " + (int)newVariant);
-
-        //        }
-        //        break;
-        //    case 2:
-        //        variant = FillTheGapVariant.mThreeSlots;
-        //        //newVariant = NewFillTheGapVariant.mXThreeSlots;
-        //        break;
-        //}
+        randomVariant = UnityEngine.Random.Range(0, 2);
+        switch (randomVariant)
+        {
+            case 0:
+                variant = FillTheGapVariant.mOneSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXOneSlots;
+                break;
+            case 1:
+                variant = FillTheGapVariant.mTwoSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXTwoSlots;
+                break;
+            case 2:
+                variant = FillTheGapVariant.mThreeSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXThreeSlots;
+                break;
+            case 3:
+                variant = FillTheGapVariant.mFourSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXFourSlots;
+                break;
+            case 4:
+                variant = FillTheGapVariant.mFiveSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXFiveSlots;
+                break;
+        }
         SelectRandomDropZonesAndUpdateColor();
     }
 

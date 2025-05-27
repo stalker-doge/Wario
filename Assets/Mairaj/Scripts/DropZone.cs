@@ -51,7 +51,6 @@ public class DropZone : MonoBehaviour, IDropHandler
                 if (dragDrop.shapeType == acceptedShapeType)
                 {
                     // Correct Shape - Update position and parent
-                    // Debug.Log("XYZ If DropZone " + dragDrop.GetComponent<RectTransform>().anchoredPosition + " " + GetComponent<RectTransform>().anchoredPosition);
 
                     // Update the parent of the DragDrop object to be the same as the parent of the DropZone
                     dragDrop.transform.SetParent(transform.parent); // Set the parent to the parent of this DropZone
@@ -64,12 +63,10 @@ public class DropZone : MonoBehaviour, IDropHandler
 
                     // Increment correct match counter
                     correctMatches++;
-                    correctMatches++;
                     // Check if all matches have been made
                     if (correctMatches >= (int)variant + 1)
                     {
                         // Correct Shape - Update position and parent
-                        // Debug.Log("XYZ If DropZone " + dragDrop.GetComponent<RectTransform>().anchoredPosition + " " + GetComponent<RectTransform>().anchoredPosition);
 
                         // Update the parent of the DragDrop object to be the same as the parent of the DropZone
                         dragDrop.transform.SetParent(transform.parent); // Set the parent to the parent of this DropZone
@@ -87,7 +84,6 @@ public class DropZone : MonoBehaviour, IDropHandler
                         if (correctMatches >= (int)variant)
                         {
                             correctMatches = 0; // Reset the counter for the next game
-                            //Debug.Log("XYZ Game Ended");
                             // Game has ended, notify FindTheGapManager
                             OnGameEnded?.Invoke();
                             if (ScoreManager.Instance)
@@ -101,7 +97,6 @@ public class DropZone : MonoBehaviour, IDropHandler
                 else
                 {
                     // Wrong Shape - Reset to original position
-                    // Debug.Log("XYZ Else DropZone");
                     dragDrop.ResetPosition();
                     FlashBoundaryManager.OnFlashRequested?.Invoke();
                 }
@@ -110,7 +105,6 @@ public class DropZone : MonoBehaviour, IDropHandler
                 if (dragDrop.newAcceptedShapeType == newAcceptedShapeType)
                 {
                     // Correct Shape - Update position and parent
-                    // Debug.Log("XYZ If DropZone " + dragDrop.GetComponent<RectTransform>().anchoredPosition + " " + GetComponent<RectTransform>().anchoredPosition);
 
                     // Update the parent of the DragDrop object to be the same as the parent of the DropZone
                     dragDrop.transform.SetParent(transform.parent); // Set the parent to the parent of this DropZone
@@ -124,13 +118,10 @@ public class DropZone : MonoBehaviour, IDropHandler
                     // Increment correct match counter
                     correctMatches++;
 
-                    Debug.Log("CorrectMatches= " +correctMatches);
-                    Debug.Log("Matches needed= +" + (int)newVariant);
                     // Check if all matches have been made
                     if (correctMatches >= (int)newVariant)
                     {
                         correctMatches = 0; // Reset the counter for the next game
-                        //Debug.Log("XYZ Game Ended");
                         // Game has ended, notify FindTheGapManager
                         OnGameEnded?.Invoke();
                         if (ScoreManager.Instance)
@@ -143,7 +134,6 @@ public class DropZone : MonoBehaviour, IDropHandler
                 else
                 {
                     // Wrong Shape - Reset to original position
-                    // Debug.Log("XYZ Else DropZone");
                     dragDrop.ResetPosition();
                     FlashBoundaryManager.OnFlashRequested?.Invoke();
                 }
