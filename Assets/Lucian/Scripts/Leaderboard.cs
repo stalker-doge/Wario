@@ -89,6 +89,7 @@ public class Leaderboard : MonoBehaviour
         }
         else
         {
+            Leaderboards.DemoSceneLeaderboard.ResetPlayer();
             LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, username, score, ((msg) =>
             {
                 Debug.Log(msg);
