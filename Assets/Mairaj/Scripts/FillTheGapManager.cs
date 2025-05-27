@@ -51,12 +51,17 @@ public class FillTheGapManager : MonoBehaviour
         randomVariant= UnityEngine.Random.Range(0, 3);
         switch(randomVariant)
         {
-            case 0:variant= FillTheGapVariant.mOneSlots;
+            case 0:
+                variant = FillTheGapVariant.mOneSlots;
+                newVariant = NewFillTheGapVariant.mXOneSlots;
                 break;
-            case 1: variant = FillTheGapVariant.mTwoSlots;
+            case 1: 
+                variant = FillTheGapVariant.mTwoSlots;
+                newVariant = NewFillTheGapVariant.mXTwoSlots;
                 break;
             case 2:
                 variant = FillTheGapVariant.mThreeSlots;
+                newVariant = NewFillTheGapVariant.mXThreeSlots;
                 break;
         }
         Debug.Log("POLO");

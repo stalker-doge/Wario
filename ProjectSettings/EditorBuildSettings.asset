@@ -50,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/System/LeaderboardMenu.unity
     guid: 6f6206aa1f8b881489025ced062e45a5
+  - enabled: 1
+    path: Assets/Scenes/Fill The GapNewVariant.unity
+    guid: 5c8a0dc4b55dec149acb7ad79dcc1f76
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 4aa7c3f9030201849bf36a465e2a82cd, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: e7d46872a448f3d4596eae07fa7d5fb7, type: 2}
