@@ -149,6 +149,14 @@ MonoBehaviour:
     m_Localized: Saisissez du texte...
     m_Metadata:
       m_Items: []
+  - m_Id: 8380987816067072
+    m_Localized: "Microjeu\nTh\xE9\xE2tre"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8381375214567424
+    m_Localized: "Acc\xE9l\xE8re!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
