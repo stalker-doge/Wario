@@ -19,6 +19,9 @@ public class Leaderboard : MonoBehaviour
     [SerializeField]
     private TMP_InputField usernameInputField;
 
+    private string playerName = "Player";
+
+
     private string publicLeaderboardKey = "68d09b3fa88d5c14271fdf77b3789df32e2d9d2c33061c0f5d96addc2e8ad374";
     // Start is called before the first frame update
     void Start()
@@ -58,15 +61,33 @@ public class Leaderboard : MonoBehaviour
 
         LeaderboardCreator.GetLeaderboard(publicLeaderboardKey, ((msg) =>
         {
-            int loopLength = (msg.Length < names.Count) ? msg.Length : names.Count;
-            for (int i = 0; i < loopLength; i++)
+            //if the leaderboard is too big to show the player's name, show it in the last position along with the score
+            if (msg.Length > names.Count)
             {
-                names[i].text = msg[i].Username;
-                scores[i].text = msg[i].Score.ToString();
-                positions[i].text = (i + 1).ToString();
-                Debug.Log(msg[i].Username + " " + msg[i].Score);
-            }
+                Debug.Log("Leaderboard is too big to show the player's name, showing it in the last position");
+                for (int i = 0; i < names.Count; i++)
+                {
+                    names[i].text = msg[i].Username;
+                    scores[i].text = msg[i].Score.ToString();
+                    positions[i].text = (i + 1).ToString();
+                }
+                //show the player's name and score in the last position
+                names[names.Count - 1].text = playerName;
+                scores[scores.Count - 1].text = msg[msg.Length - 1].Score.ToString();
+                positions[positions.Count - 1].text = msg.Length.ToString();
 
+            }
+            else
+            {
+                int loopLength = (msg.Length < names.Count) ? msg.Length : names.Count;
+                for (int i = 0; i < loopLength; i++)
+                {
+                    names[i].text = msg[i].Username;
+                    scores[i].text = msg[i].Score.ToString();
+                    positions[i].text = (i + 1).ToString();
+                    Debug.Log(msg[i].Username + " " + msg[i].Score);
+                }
+            }
             //save the leaderboard to a file
             string[] lines = new string[msg.Length];
             for (int i = 0; i < msg.Length; i++)
@@ -76,7 +97,9 @@ public class Leaderboard : MonoBehaviour
             System.IO.File.WriteAllLines(Application.persistentDataPath + "/leaderboard.txt", lines);
             Debug.Log("Leaderboard loaded from server");
         }));
+        
     }
+
 
     public void SetLeaderboardEntry(string username, int score)
     {
@@ -92,6 +115,7 @@ public class Leaderboard : MonoBehaviour
 
             LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, username, score, ((msg) =>
             {
+                playerName = usernameInputField.text;
                 Leaderboards.DemoSceneLeaderboard.ResetPlayer();
                 Debug.Log(msg);
                 Debug.Log("Leaderboard entry set");
