@@ -17,6 +17,19 @@ public class Bullet : MonoBehaviour
 
     public int bulletLimit = 0;
 
+    [SerializeField]
+    private PlayerType playerType;
+
+    public static System.Action ShootBulletLogicAICallback = null;
+
+    private void Awake()
+    {
+        if (playerType == PlayerType.mAI)
+        {
+            ShootBulletLogicAICallback += ShootBulletLogic;
+        }
+    }
+
     private void Start()
     {
         bulletLimit = 0;
@@ -31,30 +44,18 @@ public class Bullet : MonoBehaviour
 
         //    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
         //}
-        
-        if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
+
+        if (playerType == PlayerType.mUser)
         {
-            if (bulletLimit < 3)
+            if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
             {
-                bulletLimit += 1;
-                SoundManager.Instance.ShootAudioClip();
-
-                if (shootPoint != null)
-                {
-                    GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-                    Vector2 dir = arrow.GetDirection();
-
-                    if (bullet != null)
-                        bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
-                }
-
+                ShootBulletLogic();
             }
-            else
-            {
-               // SoundManager.Instance.CardMismatchAudioClip();
-            }
-            //ShootBullet();
-        }
+        } 
+        //else if (playerType == PlayerType.mAI)
+        //{
+            //Invoke("ShootBulletLogic", 2f);
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -65,15 +66,25 @@ public class Bullet : MonoBehaviour
             Destroy(effect, 0.3f);
         }
 
-
-        if (other.gameObject.CompareTag("Goal") && !TimerManager.Instance.winloseState)
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
         {
-            SoundManager.Instance.MiniGameCompleteAudioClip();
-            StartCoroutine(ScoreManager.Instance?.GameComplete());
-            other.gameObject.SetActive(false);
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(gameObject, 1.3f);
+            if (other.gameObject.CompareTag("Goal") && !TimerManager.Instance.winloseState)
+            {
+                SoundManager.Instance.MiniGameCompleteAudioClip();
+                StartCoroutine(ScoreManager.Instance?.GameComplete());
+                other.gameObject.SetActive(false);
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                Destroy(gameObject, 1.3f);
+            }
+        } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            //SoundManager.Instance.MiniGameCompleteAudioClip();
+            //StartCoroutine(ScoreManager.Instance?.GameComplete());
+            //other.gameObject.SetActive(false);
+            //gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            //Destroy(gameObject, 1.3f);
         }
+        
     }
 
     public void ShootBullet()
@@ -83,4 +94,42 @@ public class Bullet : MonoBehaviour
 
         bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
     }
+
+    public void ShootBulletLogic()
+    {
+        if (bulletLimit < 3)
+        {
+            bulletLimit += 1;
+            SoundManager.Instance.ShootAudioClip();
+
+            if (shootPoint != null)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+                Vector2 dir = arrow.GetDirection();
+
+                if (bullet != null)
+                    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
+            }
+
+        }
+        else
+        {
+            // SoundManager.Instance.CardMismatchAudioClip();
+        }
+        //ShootBullet();
+    }
+
+    private void OnDestroy()
+    {
+        if (playerType == PlayerType.mAI)
+        {
+            ShootBulletLogicAICallback -= ShootBulletLogic;
+        }
+    }
+}
+
+public enum PlayerType
+{
+    mUser,
+    mAI
 }

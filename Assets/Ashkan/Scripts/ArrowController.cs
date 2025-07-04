@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class ArrowController : MonoBehaviour
@@ -13,6 +14,7 @@ public class ArrowController : MonoBehaviour
     public GameObject oneRemaining;           // UI for 1 remaining
 
     [SerializeField] private int shootCount = 0; // Counts how many times player has shot
+    [SerializeField] private PlayerType playerType;
 
     void Start()
     {
@@ -26,35 +28,47 @@ public class ArrowController : MonoBehaviour
 
     void Update()
     {
-        if (TimerManager.Instance.winloseState)
+        if (TimerManager.Instance && TimerManager.Instance.winloseState)
             return;
 
-        Vector3 inputPosition = Vector3.zero;
-        bool isTouching = false;
-
-        // Mouse
-        if (Input.GetMouseButton(0))
+        if (playerType == PlayerType.mUser)
         {
-            inputPosition = Input.mousePosition;
-            isTouching = true;
-        }
+            Vector3 inputPosition = Vector3.zero;
+            bool isTouching = false;
 
-        // Touch
-        if (Input.touchCount > 0)
-        {
-            inputPosition = Input.GetTouch(0).position;
-            isTouching = true;
-        }
+            // Mouse
+            if (Input.GetMouseButton(0))
+            {
+                inputPosition = Input.mousePosition;
+                isTouching = true;
+            }
 
-        if (isTouching)
-        {
-            RotateTowardsInput(inputPosition);
-        }
+            // Touch
+            if (Input.touchCount > 0)
+            {
+                inputPosition = Input.GetTouch(0).position;
+                isTouching = true;
+            }
 
-        // Shoot on release
-        if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
+            if (isTouching)
+            {
+                RotateTowardsInput(inputPosition);
+            }
+
+            // Shoot on release
+            if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
+            {
+                Debug.Log("XYZ HandleShot Called");
+                HandleShot();
+            }
+        } else if (playerType == PlayerType.mAI)
         {
-            HandleShot();
+            GameManager.Instance.ExecuteAIMove(gameObject);
+            //if (!DOTween.IsTweening(transform) && !hasAIFoundTarget)
+            //{
+            //    hasAIFoundTarget = true;
+            //    FindTarget();
+            //}
         }
     }
 
@@ -83,7 +97,7 @@ public class ArrowController : MonoBehaviour
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
     }
 
-    void HandleShot()
+    public void HandleShot()
     {
         shootCount++;
         if (shootCount == 1 && threeRemaining != null)
@@ -92,5 +106,10 @@ public class ArrowController : MonoBehaviour
             twoRemaining.SetActive(false);
         else if (shootCount == 3 && oneRemaining != null)
             oneRemaining.SetActive(false);
+    }
+
+    public bool HasFiredAllShots()
+    {
+        return oneRemaining.activeInHierarchy == false;
     }
 }
