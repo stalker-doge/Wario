@@ -41,3 +41,5 @@ MonoBehaviour:
     sceneType: 13
   - sceneName: Aim and Shoot 3
     sceneType: 14
+  - sceneName: Aim&ShootOnline
+    sceneType: 15
