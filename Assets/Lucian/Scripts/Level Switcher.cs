@@ -169,8 +169,11 @@ public class LevelSwitcher : MonoBehaviour
 
     public void OnAimAndShootPressed()
     {
-        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.AimAndShootOnline));
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
         GameManager.Instance.SetCurrentGame(GameType.AimShoot);
+        GameManager.Instance.InitializePlayers();
+        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.SceneToLoad = SceneType.AimAndShootOnline;
     }
 
     public void SwitchScene(string sceneName)
@@ -222,6 +225,9 @@ public class LevelSwitcher : MonoBehaviour
                 break;
             case "Fill The GapNewVariant":
                 localizedLevelName.StringReference.TableEntryReference = "FillTheGap_Title";
+                break;
+            case "Aim&ShootOnline":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
                 break;
             default:
                 Debug.LogWarning("Level not found in the localization table.");

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a500c189700f748a5cf23cb2b6d55c, type: 3}
+  m_Name: OpponentNamesList
+  m_EditorClassIdentifier: 
+  opponentNames:
+  - ShadowSniper
+  - LunaByte
+  - PixelCrusher
+  - BlazeBot_47
+  - SneakySloth
+  - GhostyGoat
+  - NovaStrike
+  - AFKWizard
+  - BitNinja
+  - NoScopeNelly
+  - Toxic_Tiger
+  - RubberDuck1337
+  - RespawnRex
+  - WaffleDestroyer
+  - xX_Blobfish_Xx
+  - RapidPigeon
+  - GlitchWarden
+  - TheLagKing
+  - CringeCrusher
+  - AimGodess
+  - Lagzilla
+  - Error404Wins
+  - PotatoChamp
+  - QuantumMoose
+  - LootGoblin
+  - BunnySlayer
+  - SweatModeOn
+  - FireAnt420
+  - BannedUser9
+  - GameOverlord
+  - TeaBagTitan
+  - xKillJoyx
+  - PhantomLlama
+  - RageQuitter
+  - GG_N00b
+  - FluffySavage
+  - BoomHeadshot
+  - SussySoldier
+  - GigaGranny
+  - TurboTurtle
+  - CrackedKoala
+  - AFKChampion
+  - YeetMachine
+  - BananaSniper
+  - OneTapTimmy
+  - UltraDadJokes
+  - CampfireCarl
+  - Xx_PinkPwnz_xX
+  - CursedHamster
+  - InstaLoser
