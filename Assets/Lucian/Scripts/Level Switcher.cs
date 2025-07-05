@@ -163,9 +163,14 @@ public class LevelSwitcher : MonoBehaviour
 
     public void OnOnlinePlayPressed()
     {
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPGameSelection));
+        GameManager.Instance.SetGameMode(GameMode.Online);
+    }
+
+    public void OnAimAndShootPressed()
+    {
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.AimAndShootOnline));
         GameManager.Instance.SetCurrentGame(GameType.AimShoot);
-        GameManager.Instance.SetGameMode(GameMode.Online);
     }
 
     public void SwitchScene(string sceneName)
