@@ -2,15 +2,53 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private OpponentNameListSO opponentNameList;
+
+    private Player user = new Player();
+    private Player opponent = new Player();
+    private string levelTitle;
+    private SceneType sceneType;
+
     private GameMode gameMode;
 
     private GameAIBase currentGameAI;
     public static GameManager Instance { get; private set; }
+
+    public Player User { get { return user; } }
+
+    public Player Opponent { get { return opponent; } }
+
+    public string LevelTitle { 
+        get { return levelTitle; }
+        set { levelTitle = value; }
+    }
+
+    public SceneType SceneToLoad {
+        get { return sceneType; }
+        set { sceneType = value; } 
+    }
+
+    public string GameName {  get { return gameMode.ToString(); } }
     public GameMode CurrentGameMode { get => gameMode;
         private set
-        { 
+        {
             gameMode = value;
         } 
+    }
+
+    public void InitializePlayers()
+    {
+        user.SetPlayerName("You");
+        opponent.SetPlayerName(GetRandomOpponentName(opponentNameList));
+        user.PlayerWins = 0;
+        opponent.PlayerWins = 0;
+    }
+
+    public string GetRandomOpponentName(OpponentNameListSO nameListSO)
+    {
+        int index = Random.Range(0, nameListSO.opponentNames.Count);
+        return nameListSO.opponentNames[index];
     }
 
     private void Awake()

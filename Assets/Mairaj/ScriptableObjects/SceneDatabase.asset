@@ -45,3 +45,5 @@ MonoBehaviour:
     sceneType: 15
   - sceneName: Multiplayer Game Selection
     sceneType: 16
+  - sceneName: Opponent Selection Screen
+    sceneType: 17
