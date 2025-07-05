@@ -57,6 +57,9 @@ EditorBuildSettings:
     path: Assets/Scenes/System/LeaderboardMenu.unity
     guid: 6f6206aa1f8b881489025ced062e45a5
   - enabled: 1
+    path: Assets/Scenes/System/Multiplayer Game Selection.unity
+    guid: b03b9bfda450f7547a622ddb4024fd1e
+  - enabled: 1
     path: Assets/Scenes/Fill The GapNewVariant.unity
     guid: 5c8a0dc4b55dec149acb7ad79dcc1f76
   m_configObjects:
