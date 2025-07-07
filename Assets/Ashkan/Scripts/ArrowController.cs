@@ -28,8 +28,11 @@ public class ArrowController : MonoBehaviour
 
     void Update()
     {
-        if (TimerManager.Instance && TimerManager.Instance.winloseState)
-            return;
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        {
+            if (TimerManager.Instance && TimerManager.Instance.winloseState)
+                return;
+        }
 
         if (playerType == PlayerType.mUser)
         {
