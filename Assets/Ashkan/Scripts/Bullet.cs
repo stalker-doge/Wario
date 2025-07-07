@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bullet : MonoBehaviour
 {
@@ -22,17 +23,34 @@ public class Bullet : MonoBehaviour
 
     public static System.Action ShootBulletLogicAICallback = null;
 
+    //private static System.Action DestroyAllBulletsAICallback = null;
+
     private void Awake()
     {
-        if (playerType == PlayerType.mAI)
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
-            ShootBulletLogicAICallback += ShootBulletLogic;
+            if (playerType == PlayerType.mAI)
+            {
+                ShootBulletLogicAICallback += ShootBulletLogic;
+            }
+            //DestroyAllBulletsAICallback += OnBulletDestroy;
         }
     }
+
+    //private void OnBulletDestroy()
+    //{
+    //    if (gameObject != null)
+    //        Destroy(gameObject);
+    //}
 
     private void Start()
     {
         bulletLimit = 0;
+    }
+
+    public void InitializePlayerType (PlayerType playerType)
+    {
+        this.playerType = playerType;
     }
 
     void Update()
@@ -47,10 +65,20 @@ public class Bullet : MonoBehaviour
 
         if (playerType == PlayerType.mUser)
         {
-            if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
+            if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
             {
-                ShootBulletLogic();
+                if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
+                {
+                    ShootBulletLogic();
+                }
+            } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+            {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    ShootBulletLogic();
+                }
             }
+            
         } 
         //else if (playerType == PlayerType.mAI)
         //{
@@ -78,6 +106,23 @@ public class Bullet : MonoBehaviour
             }
         } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
+            if (other.gameObject.CompareTag("Goal"))
+            {
+                SoundManager.Instance.MiniGameCompleteAudioClip();
+                if (playerType == PlayerType.mUser)
+                {
+                    GameManager.Instance.User.PlayerWins++;
+                } else if (playerType == PlayerType.mAI)
+                {
+                    GameManager.Instance.Opponent.PlayerWins++;
+                }
+
+                other.gameObject.SetActive(false);
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                Destroy(gameObject, 1.3f);
+
+                GameManager.Instance.UpdateScoreAndLoadScene();
+            }
             //SoundManager.Instance.MiniGameCompleteAudioClip();
             //StartCoroutine(ScoreManager.Instance?.GameComplete());
             //other.gameObject.SetActive(false);
@@ -106,6 +151,7 @@ public class Bullet : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
                 Vector2 dir = arrow.GetDirection();
+                bullet.GetComponent<Bullet>()?.InitializePlayerType(playerType);
 
                 if (bullet != null)
                     bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
@@ -121,9 +167,14 @@ public class Bullet : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (playerType == PlayerType.mAI)
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
-            ShootBulletLogicAICallback -= ShootBulletLogic;
+            //DestroyAllBulletsAICallback?.Invoke();
+            //DestroyAllBulletsAICallback -= OnBulletDestroy;
+            if (playerType == PlayerType.mAI)
+            {
+                ShootBulletLogicAICallback -= ShootBulletLogic;
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SceneDatabase
   m_EditorClassIdentifier: 
   scenes:
-  - sceneName: MainMenu
+  - sceneName: Main Menu
     sceneType: 0
   - sceneName: Options
     sceneType: 1
@@ -47,3 +47,7 @@ MonoBehaviour:
     sceneType: 16
   - sceneName: Opponent Selection Screen
     sceneType: 17
+  - sceneName: TransitionScreenMultiplayer
+    sceneType: 18
+  - sceneName: EndGameMultiplayer
+    sceneType: 19

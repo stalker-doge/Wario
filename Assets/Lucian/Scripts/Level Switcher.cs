@@ -171,7 +171,7 @@ public class LevelSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
         GameManager.Instance.SetCurrentGame(GameType.AimShoot);
-        GameManager.Instance.InitializePlayers();
+        GameManager.Instance.InitializeGame();
         GameManager.Instance.LevelTitle = "Hardcoded";
         GameManager.Instance.SceneToLoad = SceneType.AimAndShootOnline;
     }

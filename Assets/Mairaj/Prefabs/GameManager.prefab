@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602167062185624175}
   - component: {fileID: 8592833379865343223}
+  - component: {fileID: 2559603164177791237}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,3 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opponentNameList: {fileID: 11400000, guid: ff3f4495f400b3a40a87ec8ce2aa013c, type: 2}
+  totalRounds: 9
+  nextGameStartingIn: 5
+--- !u!114 &2559603164177791237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870567732041208672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6cd6941f5a19f42bf12c046322783a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -80,6 +80,7 @@ public class TrajectoryPredictor : MonoBehaviour
                 // Optional perfect shot logic
                 if (GameManager.Instance.IsTakingAPerfectShot())
                 {
+                    //Debug.Log("XYZ IsTakingAPerfectShot " + isEligibleToShoot);
                     if (hit.collider.gameObject.CompareTag("Goal") && IsEligibleToShoot)
                     {
                         GameManager.Instance.ChargeAndShoot(gameObject);
