@@ -113,10 +113,12 @@ public class Balloon : MonoBehaviour
 
                 shakeSequence.OnComplete(() =>
                 {
+                    #if UNITY_ANDROID
                     if (Application.platform == RuntimePlatform.Android)
                     {
                         Handheld.Vibrate();
                     }
+                    #endif
                 });
             }
             else
