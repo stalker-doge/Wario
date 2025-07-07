@@ -1,12 +1,10 @@
-- uses: game-ci/unity-test-runner@v4
-  env:
-    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-    UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-    UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-  with:
-    projectPath: path/to/your/project
-    githubToken: ${{ secrets.GITHUB_TOKEN }}
-    
+name: Test and Build
+
+on: push
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  
  jobs:
   testRunner:
     name: Test in ${{ matrix.testMode }} ✨
