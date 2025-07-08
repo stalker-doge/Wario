@@ -37,4 +37,5 @@ sysinfo.txt
 /Logs
 UserSettings/Layouts/default-2022.dwlt
 /UserSettings
-Wario.code-workspace
+*.code-workspace
+
