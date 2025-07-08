@@ -132,11 +132,6 @@ public class Bullet : MonoBehaviour
 
                 GameManager.Instance.UpdateScoreAndLoadScene();
             }
-            //SoundManager.Instance.MiniGameCompleteAudioClip();
-            //StartCoroutine(ScoreManager.Instance?.GameComplete());
-            //other.gameObject.SetActive(false);
-            //gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            //Destroy(gameObject, 1.3f);
         }
         
     }
