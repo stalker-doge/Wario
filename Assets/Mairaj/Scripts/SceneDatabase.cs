@@ -31,6 +31,11 @@ public enum SceneType
     AimAndShootVariant1,
     AimAndShootVariant2,
     AimAndShootVariant3,
-    AimAndShootVariant4
+    AimAndShootVariant4,
+    AimAndShootOnline,
+    MPGameSelection,
+    MPOpponentSelection,
+    MPGameTransition,
+    MPWinLoss
 }
 

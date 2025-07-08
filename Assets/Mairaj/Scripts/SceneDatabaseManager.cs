@@ -43,10 +43,8 @@ public class SceneDatabaseManager : MonoBehaviour
     // Returns the scene name string associated with the given SceneType.
     public string GetSceneString(SceneType type)
     {
-        Debug.Log("BOO");
         if (sceneLookup.TryGetValue(type, out var data))
         {
-            Debug.Log(data.sceneName);
             return data.sceneName;
         }
         return null;
