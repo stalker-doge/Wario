@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - MazeGoal
   - MazeWall
+  - Ground
   layers:
   - Default
   - TransparentFX
