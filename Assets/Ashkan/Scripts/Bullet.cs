@@ -51,6 +51,15 @@ public class Bullet : MonoBehaviour
     public void InitializePlayerType (PlayerType playerType)
     {
         this.playerType = playerType;
+        if (playerType == PlayerType.mAI)
+        {
+            Color redColor = new Color32(0xFF, 0x00, 0x00, 0xFF);
+            GetComponent<SpriteRenderer>().color = redColor;
+        } else if (playerType == PlayerType.mUser)
+        {
+            Color blueColor = new Color32(0x00, 0x00, 0xFF, 0xFF);
+            GetComponent<SpriteRenderer>().color = blueColor;
+        }
     }
 
     void Update()
@@ -151,7 +160,10 @@ public class Bullet : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
                 Vector2 dir = arrow.GetDirection();
-                bullet.GetComponent<Bullet>()?.InitializePlayerType(playerType);
+                if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+                {
+                    bullet.GetComponent<Bullet>()?.InitializePlayerType(playerType);
+                }
 
                 if (bullet != null)
                     bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
