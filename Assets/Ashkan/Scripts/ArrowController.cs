@@ -2,89 +2,95 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
-    public int stepAngle = 10;          // step size in degrees
-    public float swipeThreshold = 10f;  // how much to drag to trigger one step
-    public int minAngle = 0;            // limit (left)
-    public int maxAngle = 180;          // limit (right)
+    public float rotationSensitivity = 0.3f;  // Sensitivity based on distance
+    public float minAngle = 0f;               // Minimum allowed angle (left limit)
+    public float maxAngle = 180f;             // Maximum allowed angle (right limit)
+    public float minDistanceThreshold = 1f;   // Minimum distance before offset is applied
+    public float offsetDistance = 3f;       // Vertical offset added when input is too close
 
-    private Vector2 lastPosition;
-    private bool isDragging = false;
-    private float accumulatedDelta = 0f; // to accumulate drag distance
+    public GameObject threeRemaining;         // UI for 3 remaining
+    public GameObject twoRemaining;           // UI for 2 remaining
+    public GameObject oneRemaining;           // UI for 1 remaining
+
+    [SerializeField] private int shootCount = 0; // Counts how many times player has shot
 
     void Start()
     {
-        // Make sure arrow starts at center (90 degrees)
         transform.rotation = Quaternion.Euler(0, 0, 90);
+
+        // Make sure all indicators are active at the beginning
+        threeRemaining?.SetActive(true);
+        twoRemaining?.SetActive(true);
+        oneRemaining?.SetActive(true);
     }
 
     void Update()
     {
-        // 🖱 Mouse Input
-        if (Input.GetMouseButtonDown(0))
+        if (TimerManager.Instance.winloseState)
+            return;
+
+        Vector3 inputPosition = Vector3.zero;
+        bool isTouching = false;
+
+        // Mouse
+        if (Input.GetMouseButton(0))
         {
-            lastPosition = Input.mousePosition;
-            isDragging = true;
-            accumulatedDelta = 0f;
+            inputPosition = Input.mousePosition;
+            isTouching = true;
         }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-        }
-
-        if (isDragging && Input.touchCount == 0)
-        {
-            Vector2 currentPosition = Input.mousePosition;
-            float deltaX = currentPosition.x - lastPosition.x;
-            HandleStepRotation(deltaX);
-            lastPosition = currentPosition;
-        }
-
-        // 📱 Touch Input
+        // Touch
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
+            inputPosition = Input.GetTouch(0).position;
+            isTouching = true;
+        }
 
-            if (touch.phase == TouchPhase.Began)
-            {
-                lastPosition = touch.position;
-                accumulatedDelta = 0f;
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                float deltaX = touch.position.x - lastPosition.x;
-                HandleStepRotation(deltaX);
-                lastPosition = touch.position;
-            }
+        if (isTouching)
+        {
+            RotateTowardsInput(inputPosition);
+        }
+
+        // Shoot on release
+        if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
+        {
+            HandleShot();
         }
     }
 
-    void HandleStepRotation(float deltaX)
+    void RotateTowardsInput(Vector3 inputScreenPosition)
     {
-        accumulatedDelta += deltaX;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(inputScreenPosition.x, inputScreenPosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
+        Vector2 direction = (Vector2)(worldPosition - transform.position);
 
-        if (Mathf.Abs(accumulatedDelta) >= swipeThreshold)
+        // If touch/mouse is too close, apply upward offset
+        if (direction.magnitude < minDistanceThreshold)
         {
-            int stepDirection = accumulatedDelta > 0 ? -1 : 1; // right swipe = rotate left
-            float currentAngle = transform.eulerAngles.z;
-            float newAngle = currentAngle + stepAngle * stepDirection;
-
-            // Clamp to range between 0 and 180
-            if (newAngle < 0) newAngle += 360; // normalize angle
-            if (newAngle >= 360) newAngle -= 360;
-
-            if (newAngle >= minAngle && newAngle <= maxAngle)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, newAngle);
-            }
-
-            accumulatedDelta = 0f; // reset after each step
+            worldPosition += Vector3.up * offsetDistance;
+            direction = (Vector2)(worldPosition - transform.position);
         }
+
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (targetAngle < 0) targetAngle += 360f;
+        targetAngle = Mathf.Clamp(targetAngle, minAngle, maxAngle);
+
+        transform.rotation = Quaternion.Euler(0, 0, targetAngle);
     }
 
     public Vector2 GetDirection()
     {
         float angle = transform.eulerAngles.z * Mathf.Deg2Rad;
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+    }
+
+    void HandleShot()
+    {
+        shootCount++;
+        if (shootCount == 1 && threeRemaining != null)
+            threeRemaining.SetActive(false);
+        else if (shootCount == 2 && twoRemaining != null)
+            twoRemaining.SetActive(false);
+        else if (shootCount == 3 && oneRemaining != null)
+            oneRemaining.SetActive(false);
     }
 }

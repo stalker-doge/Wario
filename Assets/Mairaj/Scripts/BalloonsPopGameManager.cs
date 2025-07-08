@@ -1,6 +1,6 @@
+//Mairaj Muhammad ->2415831
 using UnityEngine;
 using System.Collections.Generic;
-
 public class BalloonsPopGameManager : MonoBehaviour
 {
     [SerializeField] private RectTransform canvasRect;
@@ -16,15 +16,16 @@ public class BalloonsPopGameManager : MonoBehaviour
     [SerializeField] private Balloon redBalloonPrefab;
 
     [Header("Layout Settings")]
-    [SerializeField] private float leftPadding = 200f;
-    [SerializeField] private float rightPadding = 200f;
-    [SerializeField] private float topPadding = 250f;
-    [SerializeField] private float bottomPadding = 600f;
+    [SerializeField] private float leftPadding = 150f;
+    [SerializeField] private float rightPadding = 150f;
+    [SerializeField] private float topPadding = 200f;
+    [SerializeField] private float bottomPadding = 400f;
 
     [Header("Adjust Radius Distance to Avoid Overlap of Balloons")]
-    [SerializeField] private float adjustRadiusFactor = 4.5f;
-    private const float balloonRadius = 50f;
-    private const int maxAttemptsPerBalloon = 100;
+    [SerializeField] private float adjustRadiusFactor;
+    [SerializeField] private float balloonRadius;
+
+    private const int maxAttemptsPerBalloon = 500;
 
     [Header("Balloon Prefab Scale")]
     [SerializeField] private Vector3 balloonScale = Vector3.one;
@@ -121,15 +122,17 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void BalloonPopEndGameCallback()
     {
-        Debug.Log("XYZ BalloonsGameAllLivesGoneCase Callback");
+        //Debug.Log("XYZ BalloonsGameAllLivesGoneCase Callback");
+        EndGame();
     }
 
     private void BalloonsPopCount()
     {
         balloonsPoppedCount++;
-        if (balloonsPoppedCount == totalBalloonsCount)
+        if (balloonsPoppedCount == totalBalloonsCount - redCount)
         {
             BalloonPopupCompletionCallback?.Invoke();
+            EndGame();
         }
     }
 
@@ -139,24 +142,11 @@ public class BalloonsPopGameManager : MonoBehaviour
         Balloon.BalloonPoppedCallback -= BalloonsPopCount;
     }
 
-    private void Update()
-    {
-        if (balloonsPoppedCount >= totalBalloonsCount)
-        {
-            EndGame();
-        }
-    }
-
     private void EndGame()
     {
-        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-        if (scoreManager != null)
+        if (ScoreManager.Instance)
         {
-            scoreManager.GameComplete();
-        }
-        else
-        {
-            Debug.LogError("ScoreManager not found in the scene.");
-        }
+            StartCoroutine(ScoreManager.Instance.GameComplete());
+        }    
     }
 }

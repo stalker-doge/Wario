@@ -17,14 +17,18 @@ public class AnswerOption : MonoBehaviour
 
     void OnMouseDown()
     {
-        dragging = true;
+        if(!TimerManager.Instance.winloseState)
+            dragging = true;
     }
 
     void OnMouseDrag()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        transform.position = mousePos;
+        if (!TimerManager.Instance.winloseState)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            transform.position = mousePos;   
+        }
     }
 
     void OnMouseUp()
@@ -33,17 +37,32 @@ public class AnswerOption : MonoBehaviour
 
         if (isOverPlaceholder)
         {
-            if (isCorrect)
+            if (!TimerManager.Instance.LosePage.activeSelf)
             {
-                // Snap to placeholder if correct
-                transform.position = placeholderTransform.position;
-                // Optional: disable further dragging if needed
+                if (isCorrect)
+                {
+                    Debug.Log("HEYYYY");
+                    // Snap to placeholder if correct
+                    transform.position = placeholderTransform.position;
+                    SoundManager.Instance?.CardMatchAudioClip();
+                    StartCoroutine(ScoreManager.Instance?.GameComplete());
+                }
+                else
+                {
+                    // Wrong answer dropped on placeholder, return to original
+                    transform.position = startPosition;
+                    SoundManager.Instance?.CardMismatchAudioClip();
+                    FlashBoundaryManager.OnFlashRequested?.Invoke();
+
+                }
             }
             else
             {
-                // Wrong answer dropped on placeholder, return to original
                 transform.position = startPosition;
+                SoundManager.Instance?.CardMismatchAudioClip();
+                FlashBoundaryManager.OnFlashRequested?.Invoke();
             }
+
         }
         else
         {

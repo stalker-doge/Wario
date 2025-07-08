@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,20 +12,39 @@ public class ScoreManager : MonoBehaviour
     public int highScore = 0;
     public int lastScore = 0;
     public int lives = 3;
+
+    public static ScoreManager Instance { get; private set; }
+
     void Start()
     {
-        //if in the end scene, reset the score and lives
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "End Scene")
+
+    }
+
+    // Awake is called when the script instance is being loaded
+    void Awake()
+    {
+        // Singleton pattern to ensure only one instance of DifficultyManager exists
+        if (Instance == null)
         {
-            PlayerPrefs.SetInt("Score", 0);
-            PlayerPrefs.SetInt("Lives", 3);
-            return;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            //if in the end scene, reset the score and lives
+            if (SceneManager.GetActiveScene().name == SceneDatabaseManager.Instance?.GetSceneString(SceneType.EndScene))
+            {
+                PlayerPrefs.SetInt("Score", 0);
+                PlayerPrefs.SetInt("Lives", 3);
+                return;
+            }
+            //loads the score and lives from PlayerPrefs
+            score = PlayerPrefs.GetInt("Score", 0);
+            lives = PlayerPrefs.GetInt("Lives", 3);
+            Debug.Log("Score: " + score);
+            Debug.Log("Lives: " + lives);
         }
-        //loads the score and lives from PlayerPrefs
-        score = PlayerPrefs.GetInt("Score", 0);
-        lives = PlayerPrefs.GetInt("Lives", 3);
-        Debug.Log("Score: " + score);
-        Debug.Log("Lives: " + lives);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -76,6 +97,7 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("Lives", lives);
         if (lives <= 0)
         {
+            highScore = PlayerPrefs.GetInt("HighScore", 0);
             //sets the high score if the current score is higher
             if (score > highScore)
             {
@@ -85,29 +107,39 @@ public class ScoreManager : MonoBehaviour
             //sets the last score
             lastScore = score;
             PlayerPrefs.SetInt("LastScore", lastScore);
-
             //loads the end scene
-            UnityEngine.SceneManagement.SceneManager.LoadScene("End Scene");
+            Debug.Log("You lost :c");
+            lives = 3;
+            score= 0;
+            SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.EndScene));
         }
-
+        TimerManager.Instance.Pause(true);
+        TimerManager.Instance.ResetTimer();
         //goes back to the main menu
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
     }
 
 
-    public void GameComplete()
+    public IEnumerator GameComplete()
     {
+        Debug.Log("HEY");
         //gives the player a score based on the time left
-        TimerManager timerManager = FindObjectOfType<TimerManager>();
-        if (timerManager != null)
+        if (TimerManager.Instance)
         {
-            float timeLeft = timerManager.GetTimeRemaining();
+            Debug.Log("Game Complete");
+            float timeLeft = TimerManager.Instance.GetTimeRemaining();
             int scoreToAdd = Mathf.FloorToInt(timeLeft * 10);
             AddScore(scoreToAdd);
-            Debug.Log("Score: " + score);
 
+            TimerManager.Instance.WinPage.SetActive(true);
+            TimerManager.Instance.winloseState = true;
+            TimerManager.Instance.Pause(true);
+            TimerManager.Instance.ResetTimer();
+            yield return new WaitForSeconds(1);
+            TimerManager.Instance.WinPage.SetActive(false);
+            TimerManager.Instance.winloseState = false;
             //goes back to the main menu
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
+            SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
         }
         else
         {

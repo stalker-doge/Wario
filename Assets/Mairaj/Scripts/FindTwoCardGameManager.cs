@@ -1,166 +1,260 @@
-//Mairaj Muhammad -->2415831
-using System;
+//Mairaj Muhammad ->2415831
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FindTwoCardGameManager : MonoBehaviour
 {
-    [SerializeField]
-    private Card[] cards;
+    [SerializeField] private Card[] cards;
+    [SerializeField] private Sprite backCardSprite;
 
-    //[SerializeField]
-    //private Text counterText; // Text component to display the countdown
+    [System.Serializable]
+    public struct CardSpriteMap
+    {
+        public CardType cardType;
+        public Sprite cardSprite;
+    }
 
-    //private float countdownTime = 10.0f; // Start time for countdown
-
-    private List<Card> selectedCards = new List<Card>();  // Keep track of selected cards
-
-    private Coroutine countDownCoroutine = null;
-
-    // Successful completion of game to stop timer
     public static System.Action SuccessCompletionCallback = null;
 
+    [SerializeField] private CardSpriteMap[] cardSpriteMappings;
+    [SerializeField] private GridLayoutGroup gridLayoutGroup;
+    [SerializeField] private FindTwoCardsVariant variant = FindTwoCardsVariant.mFindTwoCardsNormal;
+    [SerializeField] private float tutorialTimerForVariantMode = 0.0f;
+    [SerializeField] private float swapAnimTimer = 0.5f;
+
+    private Dictionary<CardType, Sprite> cardSpriteDict;
+    private List<Card> selectedCards = new List<Card>();
+    private Coroutine countDownCoroutine = null;
+
+    public static System.Action <bool> EnableCardClicking = null;
+
+    public static System.Action<Card> OnCardClickedCallback = null;
     private void Awake()
     {
         TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
+
+        // Map sprites
+        cardSpriteDict = new Dictionary<CardType, Sprite>();
+        foreach (var map in cardSpriteMappings)
+        {
+            if (!cardSpriteDict.ContainsKey(map.cardType))
+                cardSpriteDict.Add(map.cardType, map.cardSprite);
+        }
+
         if (cards != null && cards.Length > 0)
         {
             InitializeCards();
         }
+
+        OnCardClickedCallback += OnCardClicked;
     }
 
-    /*private void Start()
-    {
-        countDownCoroutine = StartCoroutine(StartCountdown());
-    }*/
-
-    /*private IEnumerator StartCountdown()
-    {
-        while (countdownTime > 0)
-        {
-            counterText.text = countdownTime.ToString("F1"); // Update the counter text with 1 decimal place
-            countdownTime -= Time.deltaTime; // Decrease the countdown time by the time passed since last frame
-            yield return null; // Wait for the next frame
-        }
-
-        counterText.text = "0.0"; // Ensure it shows 0.0 when finished
-        GameEnd(); // Trigger game end when countdown finishes
-    }*/
     private void InitializeCards()
     {
-        // Generate the card numbers
-        int[] cardNumbers = GenerateCardNumbers();
+        CardType[] types = GenerateCardTypes();
 
-        // Initialize the cards with these numbers
         for (int i = 0; i < cards.Length; i++)
         {
-            cards[i].InitializeCardNumber(cardNumbers[i]);
+            var type = types[i];
+            cards[i].InitializeCard(type, cardSpriteDict[type], backCardSprite);
         }
+
+        if (variant == FindTwoCardsVariant.mFindTwoCardsSwapAndTutorialMode)
+            StartCoroutine(QuickTutorialCoroutine());
     }
 
-    private int[] GenerateCardNumbers()
+    private CardType[] GenerateCardTypes()
     {
-        System.Random rand = new System.Random();
-        int[] numbers = new int[4];
+        // Get all possible card types
+        CardType[] allTypes = (CardType[])System.Enum.GetValues(typeof(CardType));
+        System.Random rng = new System.Random();
 
-        // Step 1: Choose a random number for repetition (between 1 and 5)
-        int repeatedDigit = rand.Next(1, 4);
+        // Pick the repeated card randomly
+        CardType repeated = allTypes[rng.Next(allTypes.Length)];
 
-        // Step 2: Choose 4 unique numbers for the rest (between 1 and 5)
-        const int uniqueNumbers = 2;
-        int[] uniqueDigits = new int[uniqueNumbers];
-        int index = 0;
+        // Create a list of remaining types excluding the repeated one
+        List<CardType> remaining = allTypes.Where(c => c != repeated).ToList();
 
-        while (index < uniqueDigits.Length)
+        // Shuffle the remaining list and pick two unique ones
+        for (int i = 0; i < remaining.Count; i++)
         {
-            int randomDigit = rand.Next(1, 4);
-            // Ensure we don't repeat the repeatedDigit
-            if (Array.IndexOf(uniqueDigits, randomDigit) == -1 && randomDigit != repeatedDigit)
-            {
-                uniqueDigits[index] = randomDigit;
-                index++;
-            }
+            int swapIndex = rng.Next(i, remaining.Count);
+            (remaining[i], remaining[swapIndex]) = (remaining[swapIndex], remaining[i]);
         }
 
-        // Step 3: Place the repeated digit in two random positions
-        numbers[0] = repeatedDigit;
-        numbers[1] = repeatedDigit;
+        CardType[] result = new CardType[4];
+        result[0] = repeated;
+        result[1] = repeated;
+        result[2] = remaining[0];
+        result[3] = remaining[1];
 
-        // Step 4: Place the unique digits in the remaining positions
-        int uniqueIndex = 0;
-        for (int i = 2; i < 4; i++)
-        {
-            numbers[i] = uniqueDigits[uniqueIndex++];
-        }
+        // Shuffle the final result
+        Shuffle(result);
 
-        // Step 5: Shuffle the numbers to randomize their order
-        Shuffle(numbers);
-
-        return numbers;
+        return result;
     }
 
-    private void Shuffle(int[] array)
+    //private void Shuffle(CardType[] array)
+    //{
+    //    System.Random rand = new System.Random();
+    //    int n = array.Length;
+    //    while (n > 1)
+    //    {
+    //        int k = rand.Next(n--);
+    //        var temp = array[n];
+    //        array[n] = array[k];
+    //        array[k] = temp;
+    //    }
+    //}
+
+    private void Shuffle<T>(T[] array)
     {
-        System.Random rand = new System.Random();
-        int n = array.Length;
-        while (n > 1)
+        System.Random rng = new System.Random();
+        for (int i = array.Length - 1; i > 0; i--)
         {
-            n--;
-            int k = rand.Next(n + 1);
-            int value = array[k];
-            array[k] = array[n];
-            array[n] = value;
+            int j = rng.Next(i + 1);
+            (array[i], array[j]) = (array[j], array[i]);
         }
     }
 
-    // Call this method when a card is clicked
+
     public void OnCardClicked(Card clickedCard)
     {
+        if (selectedCards.Contains(clickedCard) || selectedCards.Count >= 2)
+            return;
+
         selectedCards.Add(clickedCard);
 
-        // If we have selected two cards, check if they match
         if (selectedCards.Count == 2)
         {
-            CheckForMatch();
+            EnableCardClicking?.Invoke(false);
+            StartCoroutine(CheckForMatch());
         }
     }
 
-    // Check if the selected cards match
-    private void CheckForMatch()
+    private IEnumerator CheckForMatch()
     {
-        if (selectedCards[0].GetCardNumber() == selectedCards[1].GetCardNumber())
+        yield return new WaitForSeconds(cards[0].GetRotateTimer() + 0.1f);
+
+        Card card1 = selectedCards[0];
+        Card card2 = selectedCards[1];
+
+        bool isMatch = card1.GetCardType() == card2.GetCardType();
+
+        if (isMatch && !TimerManager.Instance.LosePage.activeSelf)
         {
-            // Card match audio clip
-            SoundManager.Instance.CardMatchAudioClip();
-
-            // Match found, end the game
+            float animTimer = 0.25f;
+            float upscaleValue = 0.2f;
+            card1.GetComponent<Button>().interactable = false;
+            card2.GetComponent<Button>().interactable = false;
+            card1.gameObject.transform.DOScale(new Vector3(card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + 0.25f), animTimer).SetEase(Ease.OutBack);
+            card2.gameObject.transform.DOScale(new Vector3(card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + 0.25f), animTimer).SetEase(Ease.OutBack);
+            yield return new WaitForSeconds(animTimer);
+            SoundManager.Instance?.CardMatchAudioClip();
+            SuccessCompletionCallback?.Invoke();
             Invoke("GameEndSuccessCallback", selectedCards[1].GetRotateTimer() * 2);
-
             Invoke("GameCompleteDelayedSound", 0.5f);
         }
         else
         {
-            // No match, shake and reset the cards
-            StartCoroutine(ShakeAndResetCards(selectedCards[0], selectedCards[1], selectedCards[0].GetRotateTimer()));
+            SoundManager.Instance?.CardMismatchAudioClip();
+            card1.ShakeCardAndReset();
+            card2.ShakeCardAndReset();
+
+            yield return new WaitForSeconds(0.55f);
+
+            card1.ResetCard();
+            card2.ResetCard();
+
+            EnableCardClicking?.Invoke(true);
+
+            if (variant != FindTwoCardsVariant.mFindTwoCardsNormal)
+            {
+                Card wrongCard = card2;
+                List<Card> nonSelected = new List<Card>();
+
+                foreach (var card in cards)
+                {
+                    if (card != card1 && card != card2)
+                        nonSelected.Add(card);
+                }
+
+                if (nonSelected.Count > 0)
+                {
+                    Card swapTarget = nonSelected[Random.Range(0, nonSelected.Count)];
+
+                    //var tempType = wrongCard.GetCardType();
+                    //var tempSprite = wrongCard.GetFrontSprite();
+
+                    //wrongCard.InitializeCard(swapTarget.GetCardType(), swapTarget.GetFrontSprite(), backCardSprite);
+                    //swapTarget.InitializeCard(tempType, tempSprite, backCardSprite);
+
+                    gridLayoutGroup.enabled = false;
+                    EnableCardClicking.Invoke(false);
+                    StartCoroutine(SwapPositionsAndSiblings(wrongCard.transform, swapTarget.transform, swapAnimTimer));
+                }
+            }
         }
 
-        // Clear the selected cards for the next round
         selectedCards.Clear();
     }
 
-    // Game end logic
+    private IEnumerator SwapPositionsAndSiblings(Transform a, Transform b, float duration)
+    {
+        Vector3 startPosA = a.position;
+        Vector3 startPosB = b.position;
+
+        int indexA = a.GetSiblingIndex();
+        int indexB = b.GetSiblingIndex();
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            a.position = Vector3.Lerp(startPosA, startPosB, t);
+            b.position = Vector3.Lerp(startPosB, startPosA, t);
+
+            yield return null;
+        }
+
+        // Final snap to ensure exact positions
+        a.position = startPosB;
+        b.position = startPosA;
+
+        // Swap sibling indices
+        a.SetSiblingIndex(indexB);
+        b.SetSiblingIndex(indexA);
+
+        gridLayoutGroup.enabled = true;
+        a.gameObject.GetComponent<Button>().interactable = true;
+        b.gameObject.GetComponent<Button>().interactable = true;
+        EnableCardClicking.Invoke(true);
+    }
+
+
+    private void GameCompleteDelayedSound()
+    {
+        SoundManager.Instance?.MiniGameCompleteAudioClip();
+    }
+
     private void GameEndSuccessCallback()
     {
-        Debug.Log("Game Over!");
+        // Debug.Log("XYZ Game Over!");
 
         SuccessCompletionCallback?.Invoke();
 
-        if (countDownCoroutine != null) { 
+        if (countDownCoroutine != null)
+        {
             StopCoroutine(countDownCoroutine);
         }
-        // Disable buttons for only the selected cards
+
         foreach (var card in cards)
         {
             Button cardButton = card.GetComponent<Button>();
@@ -170,11 +264,10 @@ public class FindTwoCardGameManager : MonoBehaviour
             }
         }
 
-        //calls the game complete method from the score manager
-        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-        if (scoreManager != null)
+        if (ScoreManager.Instance && !TimerManager.Instance.LosePage.activeSelf)
         {
-            scoreManager.GameComplete();
+            //scoreManager.GameComplete();
+           StartCoroutine( ScoreManager.Instance.GameComplete());
         }
         else
         {
@@ -182,39 +275,45 @@ public class FindTwoCardGameManager : MonoBehaviour
         }
     }
 
-    private void GameEndFailedCallback() 
+    private IEnumerator QuickTutorialCoroutine()
     {
-        // All lives gone case
-        Debug.Log("XYZ FindTwoCardsAllLivesGoneCase Callback");
+        //Debug.Log("XYZ QuickTutorialCoroutine Called");
+        foreach (Card cd in cards)
+        {
+            //Debug.Log("XYZ Cards Rotation");
+            cd.Rotate(true, () => { }, true);
+        }
+
+        yield return new WaitForSeconds(tutorialTimerForVariantMode);
+
+        foreach (Card cd in cards)
+        {
+            cd.Rotate(false, () => { }, false);
+        }
     }
 
-    // Coroutine to shake and reset cards
-    private IEnumerator ShakeAndResetCards(Card card1, Card card2, float delay)
+    private void GameEndFailedCallback()
     {
-        yield return new WaitForSeconds(delay);
-
-        card1.ShakeCardAndReset();
-        card2.ShakeCardAndReset();
-
-        yield return new WaitForSeconds(0.5f);  // Wait for shaking to finish
-
-        // Reset cards after shaking
-        card1.ResetCard();
-        card2.ResetCard();
+        StopAllCoroutines();
     }
 
-    private void GameCompleteDelayedSound() {
-        SoundManager.Instance.MiniGameCompleteAudioClip();
-    }
-
-    private void OnDestroy() 
+    private void OnDestroy()
     {
-        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEndFailedCallback;
+        OnCardClickedCallback-= OnCardClicked;
     }
+}
 
-    // Might need for future where we implement one game as one prefab so that it won't get destroyed so above OnDestroy will be useless
-    //private void OnDisable()
-    //{
-    //    TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEnd;
-    //}
+public enum CardType
+{
+    mTwoClub, mThreeClub, mFourClub, mFiveClub, mSixClub, mSevenClub, mEightClub, mNineClub, mTenClub, mAClub, mJClub, mKClub, mQClub
+    //mTwoDiamond, mThreeDiamond, mFourDiamond, mFiveDiamond, mSixDiamond, mSevenDiamond, mEightDiamond, mNineDiamond, mTenDiamond, mADiamond, mJDiamond, mKDiamond, mQDiamond,
+    //mTwoHeart, mThreeHeart, mFourHeart, mFiveHeart, mSixHeart, mSevenHeart, mEightHeart, mNineHeart, mTenHeart, mAHeart, mJHeart, mKHeart, mQHeart,
+    //mTwoSpade, mThreeSpade, mFourSpade, mFiveSpade, mSixSpade, mSevenSpade, mEightSpade, mNineSpade, mTenSpade, mASpade, mJSpade, mKSpade, mQSpade
+}
+
+public enum FindTwoCardsVariant
+{
+    mFindTwoCardsNormal,
+    mFindTwoCardsSwapMode,
+    mFindTwoCardsSwapAndTutorialMode
 }

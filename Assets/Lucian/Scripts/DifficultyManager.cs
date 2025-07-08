@@ -6,17 +6,28 @@ public class DifficultyManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    // This script manages the difficulty levels in the game
+
+    //audio source
+
+    [SerializeField] private AudioSource musicSource;
+
+    // Enum to represent different difficulty levels
     public enum Difficulty
     {
         Level1,
         Level2,
         Level3,
         Level4,
+        Level5,
+        Level6,
     }
 
     public Difficulty currentDifficulty;
     public float difficultyMultiplier = 1.0f;
-    public float difficultyIncreaseRate = 0.1f;
+    public float difficultyIncreaseRate = 0.2f;
+
+    public int gamesPlayed=0;
 
     public static DifficultyManager Instance { get; private set; }
 
@@ -50,7 +61,13 @@ public class DifficultyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // Update the time scale based on the difficulty multiplier
+        Time.timeScale = difficultyMultiplier;
+        if (currentDifficulty == Difficulty.Level1)
+        {
+            if(SoundManager.Instance != null)
+            SoundManager.Instance.audioSource.pitch = 1.0f;
+        }
     }
 
     public void SetDifficulty(Difficulty newDifficulty)
@@ -60,16 +77,23 @@ public class DifficultyManager : MonoBehaviour
         switch (currentDifficulty)
         {
             case Difficulty.Level1:
-                difficultyMultiplier = 2.0f;
+                difficultyMultiplier = 1.0f;
+                gamesPlayed = 0;
                 break;
             case Difficulty.Level2:
-                difficultyMultiplier = 1.5f;
+                difficultyMultiplier = 1.2f;
                 break;
             case Difficulty.Level3:
-                difficultyMultiplier = 2.0f;
+                difficultyMultiplier = 1.4f;
                 break;
             case Difficulty.Level4:
-                difficultyMultiplier = 2.5f;
+                difficultyMultiplier = 1.6f;
+                break;
+            case Difficulty.Level5:
+                difficultyMultiplier = 1.8f;
+                break;
+            case Difficulty.Level6:
+                difficultyMultiplier = 2.0f;
                 break;
         }
     }
@@ -77,17 +101,19 @@ public class DifficultyManager : MonoBehaviour
     public void IncreaseDifficulty()
     {
         // Increase the difficulty level
-        if (currentDifficulty < Difficulty.Level4)
+        if (currentDifficulty < Difficulty.Level6)
         {
             currentDifficulty++;
             SetDifficulty(currentDifficulty);
             //saves the difficulty to PlayerPrefs
             PlayerPrefs.SetInt("Difficulty", (int)currentDifficulty);
+            gamesPlayed = 0; // Reset games played after increasing difficulty
+            SoundManager.Instance.audioSource.pitch += difficultyIncreaseRate; // Increase pitch for sound effects
         }
         else
         {
             // If already at max difficulty, do nothing
-            Debug.Log("Already at max difficulty!");
+            //Debug.Log("Already at max difficulty!");
         }
     }
 }

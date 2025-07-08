@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_Table_it
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: it
+  m_SharedData: {fileID: 11400000, guid: bcf18317208776648b654261890bf926, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 4419644595372818455
+  m_TableData:
+  - m_Id: 177916395520
+    m_Localized: Microgioco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292542529536
+    m_Localized: Giocare
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362029563904
+    m_Localized: Classifica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 411459436544
+    m_Localized: Crediti
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2319007924224
+    m_Localized: Collezione
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5312549797888
+    m_Localized: Fine del gioco
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5616687169536
+    m_Localized: 'Punteggio: {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644595372818455
+  - m_Id: 5722756923392
+    m_Localized: 'Miglior risultato: {targetValue}'
+    m_Metadata:
+      m_Items:
+      - rid: 4419644595372818455
+  - m_Id: 6168636604416
+    m_Localized: Menu principale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46496311721984
+    m_Localized: 'Vite: {targetValue}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51054605811712
+    m_Localized: 'Tempo rimanente: {targetValue}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92102518423552
+    m_Localized: Abbina le carte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92181534916608
+    m_Localized: Fai scoppiare i palloncini
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92256533266432
+    m_Localized: Gioco di matematica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92347696463872
+    m_Localized: Gioco del labirinto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92383129944064
+    m_Localized: Mira e spara
+    m_Metadata:
+      m_Items: []
+  - m_Id: 767845770510336
+    m_Localized: Responsabile di progetto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768073407971328
+    m_Localized: Progettazione
+    m_Metadata:
+      m_Items: []
+  - m_Id: 768276311621632
+    m_Localized: Programmazione
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770343860224000
+    m_Localized: Opzioni
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770394586136576
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770411300438016
+    m_Localized: Frequenza dei fotogrammi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 770428144762880
+    m_Localized: "Qualit\xE0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 772531059736576
+    m_Localized: Lingue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 809816627134464
+    m_Localized: Riempi lo spazio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3306049870544896
+    m_Localized: Fai rotolare la palla
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3312934514376704
+    m_Localized: Inserisci il nome!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5865157744181248
+    m_Localized: 'Prossima partita:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907791095316480
+    m_Localized: INVIA !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5907937522663424
+    m_Localized: NON INVIARE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5908481855242240
+    m_Localized: Teatro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5909062296584192
+    m_Localized: Inserisci il testo...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8380987816067072
+    m_Localized: 'Microgioco
+
+      Teatro'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8381375214567424
+    m_Localized: Sbrigati!
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 4419644595372818455
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 5616687169536
+        - id: 5722756923392

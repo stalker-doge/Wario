@@ -1,100 +1,124 @@
-//Mairaj Muhammad -->2415831
-using System.Collections;
+//Mairaj Muhammad ->2415831
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
 public class Card : MonoBehaviour
 {
-    [SerializeField]
-    private Text cardNo;
+    [SerializeField] private Image cardImage;
+    [Range(0.05f, 0.5f)][SerializeField] private float rotateTimer = 0.15f;
 
-    [Header("One Sided (Back, Front) Rotation Timer")]
-    [Range(0.05f, 0.5f)]
-    [SerializeField]
-    private float rotateTimer = 0.15f;
+    private CardType cardType;
+    private Sprite frontSprite;
+    private Sprite backSprite;
 
-    private int cardNum;
+    [SerializeField]
+    float defaultWidth = 200f;
+    [SerializeField]
+    float newWidth = 150f;
+
+    [Header("Card Size Increase % Upon Match")]
+    [Range(2f, 2.5f)]
+    [SerializeField]
+    private float cardSizeScaleValue;
 
     private void Awake()
     {
-
-        if (cardNo)
-        {
-            cardNo.gameObject.SetActive(false);
-        }
+        FindTwoCardGameManager.EnableCardClicking += ActivateButtonClicking; 
+        if (cardImage)
+            cardImage.sprite = backSprite;
+        gameObject.transform.localScale = new Vector3(cardSizeScaleValue, cardSizeScaleValue, cardSizeScaleValue);
     }
 
-    public void InitializeCardNumber(int number)
+    public float GetScaleValue()
     {
-        this.cardNo.text = number + "";
-        cardNum = number;
+        return cardSizeScaleValue;
     }
 
-    public int GetCardNumber()
+    public void InitializeCard(CardType type, Sprite front, Sprite back)
     {
-        return cardNum;
+        cardType = type;
+        frontSprite = front;
+        backSprite = back;
+
+        if (cardImage)
+            cardImage.sprite = backSprite;
+    }
+
+    public CardType GetCardType()
+    {
+        return cardType;
+    }
+
+    public Sprite GetFrontSprite()
+    {
+        return frontSprite;
     }
 
     public void ShakeCardAndReset()
     {
-        // Play a mismatch sound
-        SoundManager.Instance.CardMismatchAudioClip();
-
-        // Create a sequence for handling the delay and the shake
+        SoundManager.Instance?.CardMismatchAudioClip();
         Sequence shakeSequence = DOTween.Sequence();
-
-        // Add a delay of 0.3 seconds before starting the shake
         shakeSequence.AppendInterval(0.3f);
-
-        // Add the shake position effect after the delay
-        shakeSequence.Append(transform.DOShakePosition(0.1f, new Vector3(5f, 0f, 0f), 10, 90, false, true)
-            .SetLoops(Random.Range(3, 3)));  // 3 to x iterations of shake
-
-        // Add vibration for Android after the shake
+        shakeSequence.Append(transform.DOShakePosition(0.2f, new Vector3(15f, 0f, 0f), 10, 90, false, true));
         shakeSequence.OnComplete(() =>
         {
+            #if UNITY_ANDROID
             if (Application.platform == RuntimePlatform.Android)
-            {
-                Handheld.Vibrate();  // Vibrate the device
-            }
+                Handheld.Vibrate();
+            #endif
         });
     }
 
     public void OnButtonClicked()
     {
-        // Play a flip sound
-        SoundManager.Instance.CardFlipAudioClip();
-
-        // Notify the manager that this card was clicked
-        FindObjectOfType<FindTwoCardGameManager>().OnCardClicked(this);
-
-        // Rotate the card
-        Rotate(true);
+        if ( !TimerManager.Instance.winloseState)
+        {
+            SoundManager.Instance?.CardFlipAudioClip();
+            FindTwoCardGameManager.OnCardClickedCallback?.Invoke(this);
+            Rotate(true);
+        }
     }
 
-    private void Rotate(bool setTextActive)
+    public void Rotate(bool showFront, Action CompletionCallback = null, bool rotateInstant = false)
     {
-        // Play a flip sound
-        SoundManager.Instance.CardFlipAudioClip();
+        SoundManager.Instance?.CardFlipAudioClip();
 
         GetComponent<Button>().enabled = false;
-        transform.DORotate(new Vector3(0, 90, 0), rotateTimer, RotateMode.Fast).OnComplete(() => {
-            cardNo.gameObject.SetActive(setTextActive);
-            transform.DORotate(new Vector3(0, 0, 0), rotateTimer, RotateMode.Fast).OnComplete(() =>
-            {
-                GetComponent<Button>().enabled = !setTextActive;
-            });
+        transform.DORotate(new Vector3(0, 90, 0), rotateInstant ? 0 : rotateTimer, RotateMode.Fast).OnComplete(() =>
+        {
+            cardImage.sprite = showFront ? frontSprite : backSprite;
+
+            RectTransform rect = cardImage.transform as RectTransform;
+            Vector2 size = rect.sizeDelta;
+            size.x = showFront ? newWidth : defaultWidth;
+            rect.sizeDelta = size;
+
+            transform.DORotate(new Vector3(0, 0, 0), rotateInstant ? 0 : rotateTimer, RotateMode.Fast).OnComplete(() =>
+                {
+                    GetComponent<Button>().enabled = !showFront;
+                    CompletionCallback?.Invoke();
+                });
         });
     }
 
-    public void ResetCard()
+    public void ResetCard(Action CompletionCallback = null)
     {
-        Rotate(false);
+        Rotate(false, CompletionCallback);
     }
 
     public float GetRotateTimer()
     {
         return rotateTimer;
+    }
+
+    private void ActivateButtonClicking(bool activate)
+    {
+        GetComponent<Button>().enabled = activate;
+    }
+
+    private void OnDestroy()
+    {
+        FindTwoCardGameManager.EnableCardClicking -= ActivateButtonClicking;
     }
 }

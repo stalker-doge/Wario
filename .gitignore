@@ -34,3 +34,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/Logs
+UserSettings/Layouts/default-2022.dwlt
+/UserSettings
+Wario.code-workspace

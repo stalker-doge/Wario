@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Components;
 
 public class LevelSwitcher : MonoBehaviour
 {
@@ -21,10 +22,28 @@ public class LevelSwitcher : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelName;
 
+    // Localized String references
+    [SerializeField]
+    private LocalizeStringEvent localizedLevelName;
+
+    [SerializeField]
+    private float curtainAnimTimer =  0.5f;
+
     private string sceneName;
 
-    private int gamesPlayed = 0;
+    private bool isSwitchingScene = false;
 
+
+    [SerializeField]
+    private int gamesToPlay = 5;
+
+    [SerializeField]
+    private bool difficultyIncreased = false;
+
+    private bool increasedDifficulty = false;
+
+    [SerializeField]
+    private GameObject difficultyText;
 
     private float timer = 0;
     void Start()
@@ -70,6 +89,7 @@ public class LevelSwitcher : MonoBehaviour
 
         if (loading)
         {
+            difficultyIncreased = false;
             FindRandom();
         }
     }
@@ -81,20 +101,41 @@ public class LevelSwitcher : MonoBehaviour
 
         if (loading)
         {
-            levelName.text = sceneName;
+            //levelName.text = sceneName;
+            SetLevelTitle(sceneName);
             timer += Time.deltaTime;
+
+            //increments the games played counter only once per scene switch
+          if (!increasedDifficulty && TimerManager.Instance && TimerManager.Instance.isPaused)
+            {
+                increasedDifficulty = true;
+                DifficultyManager.Instance.gamesPlayed++;
+                if (DifficultyManager.Instance.gamesPlayed >= gamesToPlay)
+                {
+                    DifficultyManager.Instance.IncreaseDifficulty();
+                    difficultyText.SetActive(true);
+                }
+            }
             if (timer > timeToWait)
             {
-                //increment the games played
-                gamesPlayed++;
-                //if games played is greater than 5, reset the games played and up the difficulty
-                if (gamesPlayed > 5)
+                //gives the player a score based on the time left
+                if (TimerManager.Instance)
                 {
-                    gamesPlayed = 0;
-                    //up the difficulty
-                    DifficultyManager.Instance.IncreaseDifficulty();
+                    TimerManager.Instance.isPaused = true;
                 }
-                SwitchScene(sceneName);
+                else
+                {
+                    Debug.LogError("TimerManager not found in the scene.");
+                }
+               
+
+                if (!isSwitchingScene)
+                {
+                    isSwitchingScene = true;
+                    CurtainAnimController.Instance?.AnimateTowardsCenter(curtainAnimTimer, () => {
+                        SwitchScene(sceneName);
+                    });
+                }
             }
         }
     }
@@ -110,16 +151,72 @@ public class LevelSwitcher : MonoBehaviour
         scenes = sceneList.ToArray();
         //saves the scenes to the PlayerPrefs
         PlayerPrefs.SetString("Scenes", string.Join(",", scenes));
+
+        SetLevelTitle(sceneName);
     }
 
     public void PlayGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
     }
 
     public void SwitchScene(string sceneName)
     {
         //Load scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
+
+    // Function to set the correct localized string for each level
+    public void SetLevelTitle(string level)
+    {
+        switch (level)
+        {
+            case "MathGame":
+                localizedLevelName.StringReference.TableEntryReference = "MathGame_Title";
+                break;
+            case "Pop the Balloons":
+                localizedLevelName.StringReference.TableEntryReference = "PopTheBalloons_Title";
+                break;
+            case "Match the Cards":
+                localizedLevelName.StringReference.TableEntryReference = "MatchTwoCards_Title";
+                break;
+            case "MazeGame":
+                localizedLevelName.StringReference.TableEntryReference = "MazeGame_Title";
+                break;
+            case "Aim and Shoot":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim and Shoot 1":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim and Shoot 2":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim and Shoot 3":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Aim&Shoot":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "Hole in One":
+                localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "GyroscopGame":
+                localizedLevelName.StringReference.TableEntryReference = "RollingTheBall_Title";
+                break;
+            case "Fill The Gap":
+                localizedLevelName.StringReference.TableEntryReference = "FillTheGap_Title";
+                break;
+            case "Fill The GapNewVariant":
+                localizedLevelName.StringReference.TableEntryReference = "FillTheGap_Title";
+                break;
+            default:
+                Debug.LogWarning("Level not found in the localization table.");
+                return;
+        }
+
+        // Refresh the string to display the translated text
+        localizedLevelName.RefreshString();
+    }
+
 }
