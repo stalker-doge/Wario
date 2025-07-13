@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class OpponentSelectionScreen : MonoBehaviour
 {
@@ -15,6 +13,12 @@ public class OpponentSelectionScreen : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI gameName;
+
+    private void Awake()
+    {
+        NetworkChecker.Instance.OnWifiStatusChanged += HandleWifiStatus;
+        NetworkChecker.Instance.OnInternetStatusChecked += HandleInternetStatus;
+    }
 
     private void Start()
     {
@@ -29,5 +33,21 @@ public class OpponentSelectionScreen : MonoBehaviour
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(GameManager.Instance.SceneToLoad));
         yield return null;
+    }
+
+    private void HandleWifiStatus(bool isOn)
+    {
+        Debug.Log("XYZ Wi-Fi is " + (isOn ? "ON" : "OFF"));
+    }
+
+    private void HandleInternetStatus(bool isConnected)
+    {
+        Debug.Log("XYZ Internet is " + (isConnected ? "available" : "not available"));
+    }
+
+    private void OnDestroy()
+    {
+        NetworkChecker.Instance.OnWifiStatusChanged -= HandleWifiStatus;
+        NetworkChecker.Instance.OnInternetStatusChecked -= HandleInternetStatus;
     }
 }

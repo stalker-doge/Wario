@@ -163,8 +163,14 @@ public class LevelSwitcher : MonoBehaviour
 
     public void OnOnlinePlayPressed()
     {
-        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPGameSelection));
-        GameManager.Instance.SetGameMode(GameMode.Online);
+        if (NetworkChecker.Instance.IsConnected)
+        {
+            SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPGameSelection));
+            GameManager.Instance.SetGameMode(GameMode.Online);
+        } else
+        {
+            Debug.Log("XYZ no internet popup");
+        }
     }
 
     public void OnAimAndShootPressed()
