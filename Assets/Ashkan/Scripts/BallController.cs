@@ -11,19 +11,48 @@ public class BallController : MonoBehaviour
     private Vector2 endTouchPos;
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private PlayerType player;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    public void InitializeBallPlayer(PlayerType player)
+    {
+        this.player = player;
+    }
+
     void Update()
     {
-        if(!TimerManager.Instance.winloseState)
-            DetectSwipeInput();
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        {
+            if (!TimerManager.Instance.winloseState)
+                DetectSwipeInput();
+        }
+        else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            if (player == PlayerType.mUser)
+            {
+                DetectSwipeInput();
+            } else if (player == PlayerType.mAI)
+            {
+                GenerateSwipeInput();
+            }
+        }
+        
+    }
+
+    private void GenerateSwipeInput()
+    {
+        // Debug.Log("XYZ GenerateSwipeInput Called");
+        GameManager.Instance.ExecuteAIMove(gameObject);
     }
 
     void DetectSwipeInput()
     {
+        // Debug.Log("XYZ DetectSwipeInput Called");
         // Touch input (mobile)
         if (Input.touchCount > 0)
         {
@@ -60,12 +89,42 @@ public class BallController : MonoBehaviour
         }
     }
 
+    public void ForceSwipeLeft()
+    {
+        Vector2 swipeLeft = new Vector2(-150f, 0f);
+        ApplySwipeForce(swipeLeft);
+    }
+
+    public void ForceSwipeRight()
+    {
+        Vector2 swipeRight = new Vector2(150f, 0f);
+        ApplySwipeForce(swipeRight);
+    }
+
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Target") && !TimerManager.Instance.LosePage.activeSelf)
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
         {
-            StartCoroutine(ScoreManager.Instance?.GameComplete());
+            if (other.gameObject.CompareTag("Target") && !TimerManager.Instance.LosePage.activeSelf)
+            {
+                StartCoroutine(ScoreManager.Instance?.GameComplete());
+            }
+        } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            if (other.gameObject.CompareTag("Target"))
+            {
+                if (player == PlayerType.mUser)
+                {
+                    GameManager.Instance.User.PlayerWins++;
+                } else if (player == PlayerType.mAI)
+                {
+                    GameManager.Instance.Opponent.PlayerWins++;
+                }
+
+                GameManager.Instance.UpdateScoreAndLoadScene();
+            }
         }
+
 
         if (other.gameObject.CompareTag("Wall"))
         {
@@ -80,7 +139,7 @@ public class BallController : MonoBehaviour
 
                 // Destroy after 0.3 seconds
                 Destroy(dust, 0.3f);
-                
+
                 SoundManager.Instance.ShootAudioClip();
             }
         }
