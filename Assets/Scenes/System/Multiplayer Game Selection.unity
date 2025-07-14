@@ -638,7 +638,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 639385857}
         m_TargetAssemblyTypeName: LevelSwitcher, Assembly-CSharp
-        m_MethodName: OnOnlinePlayPressed
+        m_MethodName: OnRandomPlayPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

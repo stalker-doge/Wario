@@ -180,6 +180,7 @@ public class LevelSwitcher : MonoBehaviour
         GameManager.Instance.InitializeGame();
         GameManager.Instance.LevelTitle = "Hardcoded";
         GameManager.Instance.SceneToLoad = SceneType.GyroscopeGameOnline;
+        GameManager.Instance.IsRandomMode = false;
     }
 
     public void OnAimAndShootPressed()
@@ -189,8 +190,17 @@ public class LevelSwitcher : MonoBehaviour
         GameManager.Instance.InitializeGame();
         GameManager.Instance.LevelTitle = "Hardcoded";
         GameManager.Instance.SceneToLoad = SceneType.AimAndShootOnline;
+        GameManager.Instance.IsRandomMode = false;
     }
 
+    public void OnRandomPlayPressed()
+    {
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
+        GameManager.Instance.InitializeGame();
+        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.SceneToLoad = GameManager.Instance.GetRandomScene();
+        GameManager.Instance.IsRandomMode = true;
+    }
     public void SwitchScene(string sceneName)
     {
         //Load scene

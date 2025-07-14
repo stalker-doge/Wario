@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public Player Opponent { get { return opponent; } }
     public Difficulty SwipeGameDifficulty;
     private GameType gameType;
+    private bool isRandomMode = false;
     public string LevelTitle {
         get { return levelTitle; }
         set { levelTitle = value; }
@@ -59,6 +60,8 @@ public class GameManager : MonoBehaviour
     }
 
     public GameType CurrentGameType { get => gameType; }
+
+    public bool IsRandomMode { get { return isRandomMode; } set { isRandomMode = value; } }
 
     public void InitializeGame()
     {
@@ -163,5 +166,14 @@ public class GameManager : MonoBehaviour
     public bool IsTakingAPerfectShot()
     {
         return currentGameAI.IsTakingAPerfectShot;
+    }
+
+    public SceneType GetRandomScene()
+    {
+        SceneType randomScene = UnityEngine.Random.Range(0, 2) == 0
+            ? SceneType.AimAndShootOnline
+            : SceneType.GyroscopeGameOnline;
+        SetCurrentGame(randomScene == SceneType.AimAndShootOnline ? GameType.AimShoot : GameType.SwipeBall);
+        return randomScene;
     }
 }
