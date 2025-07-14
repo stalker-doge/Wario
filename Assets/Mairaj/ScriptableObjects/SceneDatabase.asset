@@ -51,3 +51,5 @@ MonoBehaviour:
     sceneType: 18
   - sceneName: EndGameMultiplayer
     sceneType: 19
+  - sceneName: GyroscopeGameOnline
+    sceneType: 20

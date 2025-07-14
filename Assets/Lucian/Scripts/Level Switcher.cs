@@ -173,6 +173,15 @@ public class LevelSwitcher : MonoBehaviour
         }
     }
 
+    public void OnRollingBallPressed()
+    {
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
+        GameManager.Instance.SetCurrentGame(GameType.SwipeBall);
+        GameManager.Instance.InitializeGame();
+        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.SceneToLoad = SceneType.GyroscopeGameOnline;
+    }
+
     public void OnAimAndShootPressed()
     {
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));

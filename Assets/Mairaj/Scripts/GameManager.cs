@@ -124,9 +124,9 @@ public class GameManager : MonoBehaviour
                 currentGameAI = new AimShootGameAI();
                 TrajectoryPredictor.IsEligibleToShoot = true;
                 break;
-            //case GameType.SwipeBall:
-            //    currentGameAI = new SwipeBallGameAI();
-            //    break;
+            case GameType.SwipeBall:
+                currentGameAI = new SwipeBallGameAI();
+                break;
             //case GameType.Math:
             //    currentGameAI = new MathGameAI();
             //    break;
