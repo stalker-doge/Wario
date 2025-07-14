@@ -38,7 +38,7 @@ public class TransitionScreenMultiplayer : MonoBehaviour
             timer--;
             nextGameIn.text = "NextGameIn... " + timer;
         }
-        GameManager.Instance.SetCurrentGame(GameType.AimShoot);
+        GameManager.Instance.SetCurrentGame(GameManager.Instance.CurrentGameType);
         SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.SceneToLoad));
         yield return null;
     }

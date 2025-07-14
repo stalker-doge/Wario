@@ -26,7 +26,5 @@ public enum MoveTypeRollTheBall
 {
     SwipeLeft,
     SwiptRight,
-    SwipeLeftDiagonal,
-    SwipeRightDiagonal,
     SwipeDown,
 }

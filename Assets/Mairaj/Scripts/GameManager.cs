@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static ScreenBorders;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public Player User { get { return user; } }
     public Player Opponent { get { return opponent; } }
-
+    public Difficulty SwipeGameDifficulty;
+    private GameType gameType;
     public string LevelTitle {
         get { return levelTitle; }
         set { levelTitle = value; }
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
             gameMode = value;
         }
     }
+
+    public GameType CurrentGameType { get => gameType; }
 
     public void InitializeGame()
     {
@@ -109,6 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentGame(GameType gameType)
     {
+        this.gameType = gameType;
         switch (gameType)
         {
             //case GameType.FillTheGap:
