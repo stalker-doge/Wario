@@ -67,6 +67,11 @@ public class GameManager : MonoBehaviour
         currentRounds = 0;
     }
 
+    public OpponentNameListSO GetOpponentNamesList()
+    {
+        return opponentNameList;
+    }
+
     public void UpdateScoreAndLoadScene()
     {
         int halfRounds = TotalRounds / 2;
