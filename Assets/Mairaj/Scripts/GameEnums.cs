@@ -14,10 +14,19 @@ public enum GameType
     MatchCards
 }
 
-public enum MoveType
+public enum MoveTypeAimAndShoot
 {
     AimLeft,
     AimRight,
     SwipeLeft,
     SwipeRight
+}
+
+public enum MoveTypeRollTheBall
+{
+    SwipeLeft,
+    SwiptRight,
+    SwipeLeftDiagonal,
+    SwipeRightDiagonal,
+    SwipeDown,
 }
