@@ -37,6 +37,10 @@ public class ScreenBorders : MonoBehaviour
                 break;
         }
         
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            GameManager.Instance.SwipeGameDifficulty = currentDifficulty;
+        }
         Camera cam = Camera.main;
 
         float height = 2f * cam.orthographicSize;
@@ -97,8 +101,8 @@ public class ScreenBorders : MonoBehaviour
         }
         else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
-            CreateCircle(circlePos, PlayerType.mUser);
             CreateCircle(circlePos, PlayerType.mAI);
+            CreateCircle(circlePos, PlayerType.mUser);
         }
 
         // Scale and position parent container

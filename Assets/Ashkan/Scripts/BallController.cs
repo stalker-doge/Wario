@@ -1,3 +1,4 @@
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -12,8 +13,16 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]
-    private PlayerType player;
+    private PlayerType playerType;
 
+    private void Awake()
+    {
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Ground");
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ground"), gameObject.layer, true);
+        }
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +30,17 @@ public class BallController : MonoBehaviour
 
     public void InitializeBallPlayer(PlayerType player)
     {
-        this.player = player;
+        this.playerType = player;
+        if (player == PlayerType.mAI)
+        {
+            Color redColor = new Color32(0xFF, 0x00, 0x00, 0xFF);
+            GetComponent<SpriteRenderer>().color = redColor;
+        }
+        else if (player == PlayerType.mUser)
+        {
+            Color blueColor = new Color32(0x00, 0x00, 0xFF, 0xFF);
+            GetComponent<SpriteRenderer>().color = blueColor;
+        }
     }
 
     void Update()
@@ -33,10 +52,10 @@ public class BallController : MonoBehaviour
         }
         else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
-            if (player == PlayerType.mUser)
+            if (playerType == PlayerType.mUser)
             {
                 DetectSwipeInput();
-            } else if (player == PlayerType.mAI)
+            } else if (playerType == PlayerType.mAI)
             {
                 GenerateSwipeInput();
             }
@@ -113,10 +132,10 @@ public class BallController : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Target"))
             {
-                if (player == PlayerType.mUser)
+                if (playerType == PlayerType.mUser)
                 {
                     GameManager.Instance.User.PlayerWins++;
-                } else if (player == PlayerType.mAI)
+                } else if (playerType == PlayerType.mAI)
                 {
                     GameManager.Instance.Opponent.PlayerWins++;
                 }
