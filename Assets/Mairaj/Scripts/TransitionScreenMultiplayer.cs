@@ -38,8 +38,16 @@ public class TransitionScreenMultiplayer : MonoBehaviour
             timer--;
             nextGameIn.text = "NextGameIn... " + timer;
         }
-        GameManager.Instance.SetCurrentGame(GameManager.Instance.CurrentGameType);
-        SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.SceneToLoad));
+        if (!GameManager.Instance.IsRandomMode)
+        {
+            GameManager.Instance.SetCurrentGame(GameManager.Instance.CurrentGameType);
+            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.SceneToLoad));
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.GetRandomScene()));
+        }
+        
         yield return null;
     }
 }
