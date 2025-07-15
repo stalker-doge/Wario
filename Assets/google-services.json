@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "81828985940",
+    "project_id": "wario-33848",
+    "storage_bucket": "wario-33848.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81828985940:android:992b838da38c45cea581c1",
+        "android_client_info": {
+          "package_name": "com.greengrassgames.wario"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkqz1aQw50Shr-F2D8vEKOgNk2A_MBHKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
