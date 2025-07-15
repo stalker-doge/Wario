@@ -82,16 +82,16 @@ public class GameManager : MonoBehaviour
     public void UpdateScoreAndLoadScene()
     {
         int halfRounds = TotalRounds / 2;
-        Debug.Log("XYZ Rounds " + halfRounds);
+        //Debug.Log("XYZ Rounds " + halfRounds);
 
         if (User.PlayerWins > halfRounds || Opponent.PlayerWins > halfRounds)
         {
-            Debug.Log("XYZ someone wins the game!");
+            //Debug.Log("XYZ someone wins the game!");
             SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.MPWinLoss));
         }
         else if (CurrentRoundNumber < TotalRounds)
         {
-            Debug.Log("XYZ Next round...");
+            //Debug.Log("XYZ Next round...");
             CurrentRoundNumber++;
             SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.MPGameTransition));
         }
