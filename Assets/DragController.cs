@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DragController : MonoBehaviour
 {
@@ -13,10 +11,11 @@ public class DragController : MonoBehaviour
 
     private Camera cam;
     private bool isDragging ;
-
-    private bool isGrounded ;
+    public bool isGrounded ;
+    
     public bool shoot;
     public Transform spawnPoint;
+    public BallTrajectory trajectory;
 
     public static DragController Instance { get; private set; }
 
@@ -53,27 +52,33 @@ public class DragController : MonoBehaviour
         lineRenderer.SetPosition(0, Vector2.zero);
         lineRenderer.SetPosition(1, Vector2.zero); 
         lineRenderer.enabled = false;
+        
+        trajectory.dragController = this;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isDragging)
-        {
-            DragStart();
-        }
-
-        if (isDragging)
-        {
-            Drag();
-        }
-
-        if (Input.GetMouseButtonUp(0) && isDragging)
-        {
-            DragEnd();
-        }
         
-        
+            if (Input.GetMouseButtonDown(0) && !isDragging)
+            {
+                DragStart();
+            }
+
+            if (isDragging)
+            {
+                Drag();
+                trajectory.ShowTrajectory(GetDirection());
+
+            }
+
+            if (Input.GetMouseButtonUp(0) && isDragging)
+            {
+                DragEnd();
+            }
+
     }
 
     void DragStart()
@@ -106,10 +111,18 @@ public class DragController : MonoBehaviour
     {
         isDragging = false;
         lineRenderer.enabled = false;
-        
+        Vector3 curentpos;
         Vector3 startpos = lineRenderer.GetPosition(0);
-        Vector3 curentpos = MousPosition;
-        
+        if ((Vector3.Distance(MousPosition,startpos)) > Vector3.Distance(lineRenderer.GetPosition(1),startpos))
+        {
+             curentpos = lineRenderer.GetPosition(1);
+
+        }
+        else
+        {
+            curentpos = MousPosition;
+        }
+
         Vector3 distance = curentpos - startpos;
         Vector3 finalForce = distance * forceToAdd;
         
@@ -117,7 +130,17 @@ public class DragController : MonoBehaviour
 
         isGrounded = false;
         shoot = true;
+        trajectory.HideTrajectory();
+
+    }
+
+    Vector3 GetDirection()
+    {
+        Vector3 start = lineRenderer.GetPosition(0);
+        Vector3 end = lineRenderer.GetPosition(1);
+        return (start - end).normalized * Vector3.Distance(start, end);
     }
 
 
 }
+
