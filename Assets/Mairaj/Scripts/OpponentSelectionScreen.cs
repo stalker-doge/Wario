@@ -90,6 +90,8 @@ public class OpponentSelectionScreen : MonoBehaviour
             string scene = SceneDatabaseManager.Instance?
                 .GetSceneString(GameManager.Instance.SceneToLoad);
             SceneManager.LoadScene(scene);
+
+            TimeLoggingManager.Instance.StartCountingSessionTime(GameManager.Instance.CurrentGameMode);
         }
         else
         {

@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("XYZ someone wins the game!");
             SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.MPWinLoss));
+            TimeLoggingManager.Instance.StopCountingSessionTime();
         }
         else if (CurrentRoundNumber < TotalRounds)
         {
