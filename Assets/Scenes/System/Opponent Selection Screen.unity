@@ -1031,6 +1031,7 @@ MonoBehaviour:
   levelName: {fileID: 1512819103}
   localizedLevelName: {fileID: 1512819104}
   curtainAnimTimer: 0.5
+  errorPopup: {fileID: 0}
   gamesToPlay: 5
   difficultyIncreased: 0
   difficultyText: {fileID: 0}
@@ -2848,6 +2849,8 @@ MonoBehaviour:
   opponentName: {fileID: 2081741813}
   gameName: {fileID: 8720118879542960420}
   matching: {fileID: 1387312738}
+  errorPopup: {fileID: 1962685552665494242, guid: 3f832ded87cdd0345b189f4622615d21, type: 3}
+  canvas: {fileID: 6350101213307080509}
 --- !u!114 &6555168260995825917
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,13 @@ public class OpponentSelectionScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameName;
     [SerializeField] private TextMeshProUGUI matching;
 
+    [SerializeField] private InternetErrorPopup errorPopup;
+    [SerializeField] private Canvas canvas;
+
+    private InternetErrorPopup tempPopup;
+    private Coroutine matchmakingCoroutine;
+    private bool isMatchmakingAborted = false;
+
     private void Awake()
     {
         NetworkChecker.Instance.OnWifiStatusChanged += HandleWifiStatus;
@@ -23,33 +30,35 @@ public class OpponentSelectionScreen : MonoBehaviour
         gameName.text = GameManager.Instance.LevelTitle;
 
         var namesList = GameManager.Instance.GetOpponentNamesList().opponentNames;
-        StartCoroutine(ShuffleNamesAndLoad(namesList));
+        matchmakingCoroutine = StartCoroutine(ShuffleNamesAndLoad(namesList));
     }
 
     private IEnumerator ShuffleNamesAndLoad(IList<string> names)
     {
-        // total random shuffle duration (3–5s)
         float shuffleDuration = Random.Range(3f, 5f);
         float elapsed = 0f;
 
-        // timers & intervals
         float nameTimer = 0f;
-        float nameInterval = 0.15f;   // pick a new name every x seconds
+        float nameInterval = 0.15f;
         float dotTimer = 0f;
-        float dotInterval = 0.5f;   // update dots every x seconds
+        float dotInterval = 0.5f;
 
         int count = 0;
 
         while (elapsed < shuffleDuration)
         {
-            // wait one frame
+            if (isMatchmakingAborted)
+            {
+                Debug.Log("XYZ Matchmaking aborted during shuffle.");
+                yield break;
+            }
+
             yield return null;
             float dt = Time.deltaTime;
             elapsed += dt;
             nameTimer += dt;
             dotTimer += dt;
 
-            // shuffle name on its own interval
             if (nameTimer >= nameInterval)
             {
                 nameTimer -= nameInterval;
@@ -60,7 +69,6 @@ public class OpponentSelectionScreen : MonoBehaviour
                 }
             }
 
-            // update dots on its own interval
             if (dotTimer >= dotInterval)
             {
                 dotTimer -= dotInterval;
@@ -68,30 +76,32 @@ public class OpponentSelectionScreen : MonoBehaviour
             }
         }
 
-        // Decide success (90%) or failure (10%)
+        if (isMatchmakingAborted)
+        {
+            Debug.Log("XYZ Matchmaking aborted before resolution.");
+            yield break;
+        }
+
         bool found = Random.value < 0.9f;
 
         if (found)
         {
-            // show real opponent name
             opponentName.text = GameManager.Instance.Opponent.PlayerName;
-            count = -1;  // signal "Found Opponent!"
-                         // 2) Finally show the real opponent
-            opponentName.text = GameManager.Instance.Opponent.PlayerName;
-
+            count = -1;
             matching.text = "Match Successful!";
 
-            // 3) Wait remaining time until total 5s
             float remaining = 5f - shuffleDuration;
             if (remaining > 0f)
                 yield return new WaitForSeconds(remaining);
 
-            // 4) Load the next scene
-            string scene = SceneDatabaseManager.Instance?
-                .GetSceneString(GameManager.Instance.SceneToLoad);
-            SceneManager.LoadScene(scene);
+            if (!isMatchmakingAborted)
+            {
+                string scene = SceneDatabaseManager.Instance?
+                    .GetSceneString(GameManager.Instance.SceneToLoad);
+                SceneManager.LoadScene(scene);
 
-            TimeLoggingManager.Instance.StartCountingSessionTime(GameManager.Instance.CurrentGameMode);
+                TimeLoggingManager.Instance.StartCountingSessionTime(GameManager.Instance.CurrentGameMode);
+            }
         }
         else
         {
@@ -108,7 +118,6 @@ public class OpponentSelectionScreen : MonoBehaviour
         SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.MPGameSelection));
     }
 
-
     private void UpdateMatchingText(ref int count)
     {
         const int maxDots = 3;
@@ -119,11 +128,40 @@ public class OpponentSelectionScreen : MonoBehaviour
     private void HandleWifiStatus(bool isOn)
     {
         Debug.Log("XYZ Wi-Fi is " + (isOn ? "ON" : "OFF"));
+        if (!isOn && tempPopup == null)
+        {
+            ShowErrorPopup("");
+            AbortMatchmaking();
+        }
     }
 
     private void HandleInternetStatus(bool isConnected)
     {
         Debug.Log("XYZ Internet is " + (isConnected ? "available" : "not available"));
+        if (!isConnected && tempPopup == null)
+        {
+            ShowErrorPopup("");
+            AbortMatchmaking();
+        }
+    }
+
+    private void ShowErrorPopup(string message)
+    {
+        tempPopup = Instantiate(errorPopup, canvas.transform);
+        tempPopup.InitializePopup(message, true, 3, true);
+    }
+
+    private void AbortMatchmaking()
+    {
+        isMatchmakingAborted = true;
+        if (matchmakingCoroutine != null)
+        {
+            StopCoroutine(matchmakingCoroutine);
+            matchmakingCoroutine = null;
+        }
+
+        opponentName.text = "...";
+        matching.text = "Matchmaking canceled.";
     }
 
     private void OnDestroy()

@@ -29,6 +29,9 @@ public class LevelSwitcher : MonoBehaviour
     [SerializeField]
     private float curtainAnimTimer =  0.5f;
 
+    [SerializeField]
+    private InternetErrorPopup errorPopup;
+
     private string sceneName;
 
     private bool isSwitchingScene = false;
@@ -171,6 +174,8 @@ public class LevelSwitcher : MonoBehaviour
         } else
         {
             Debug.Log("XYZ no internet popup");
+            InternetErrorPopup popup = Instantiate(errorPopup, GetComponent<Canvas>().transform);
+            popup.InitializePopup("No internet connection. Please reconnect and try again!", true);
         }
     }
 
