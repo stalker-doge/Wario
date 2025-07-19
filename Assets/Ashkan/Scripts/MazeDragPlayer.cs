@@ -30,7 +30,7 @@ public class MazeDragPlayer : MonoBehaviour
 
     void Update()
     {
-        if (!TimerManager.Instance.winloseState)
+        if ((GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer && !TimerManager.Instance.winloseState) || GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
             if (isDragging)
             {

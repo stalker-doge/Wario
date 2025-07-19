@@ -22,7 +22,12 @@ public class MazeGenerator : MonoBehaviour
 
     private MazeCell[,] _mazeGrid;
     private MazeCell _playerStartCell;
+    private MazeCell _destinationCell;
 
+    private void Awake()
+    {
+        GameManager.Instance.SetGameMode(GameMode.Online);
+    }
     void Start()
     {
         if (MazeDifficulty.Easy == _difficulty)
@@ -38,7 +43,7 @@ public class MazeGenerator : MonoBehaviour
                 _mazeDepth = 7;
             }
 
-            
+
         }
         else if (MazeDifficulty.Medium == _difficulty)
         {
@@ -53,7 +58,7 @@ public class MazeGenerator : MonoBehaviour
                 _mazeDepth = 8;
             }
 
-           
+
 
         }
         else if (MazeDifficulty.Hard == _difficulty)
@@ -72,19 +77,31 @@ public class MazeGenerator : MonoBehaviour
 
         _mazeGrid = new MazeCell[_mazeWidth, _mazeDepth];
 
-        for (int x = 0; x < _mazeWidth; x++)
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
         {
-            for (int z = 0; z < _mazeDepth; z++)
+            for (int x = 0; x < _mazeWidth; x++)
             {
-                _mazeGrid[x, z] = Instantiate(_mazeCellPrefab, new Vector3(x, 0, z), Quaternion.identity, Parent);
+                for (int z = 0; z < _mazeDepth; z++)
+                {
+                    _mazeGrid[x, z] = Instantiate(_mazeCellPrefab, new Vector3(x, 0, z), Quaternion.identity, Parent);
+                }
+            }
+        } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            for (int x = 0; x < _mazeWidth; x++)
+            {
+                for (int z = 0; z < _mazeDepth; z++)
+                {
+                    MazeCell cell = Instantiate(_mazeCellPrefab, new Vector3(x, 0, z), Quaternion.identity, Parent);
+                    cell.SetCoordinates(x, z);
+                    _mazeGrid[x, z] = cell;
+                }
             }
         }
-        
 
-        
-        if (_difficulty == MazeDifficulty.Easy)
+        if (_difficulty == MazeDifficulty.Easy && GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
             GenerateSimplifiedMaze();
-        else
+        else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
             GenerateMaze(null, _mazeGrid[0, 0]);
 
         Parent.rotation = Quaternion.Euler(90, 0, 0);
@@ -119,21 +136,28 @@ public class MazeGenerator : MonoBehaviour
         }
         else if (MazeDifficulty.Hard == _difficulty)
         {
-           
+
             if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
             {
                 Parent.localScale = new Vector3(0.63f, 0.63f, 0.63f);
-                Parent.transform.position = new Vector3(-3.15f, 4.3f, 0f);            }
+                Parent.transform.position = new Vector3(-3.15f, 4.3f, 0f);
+            }
             else
             {
                 Parent.localScale = new Vector3(0.63f, 0.63f, 0.63f);
-                Parent.transform.position = new Vector3(-1.7f, 4.3f, 0f);            }
+                Parent.transform.position = new Vector3(-1.7f, 4.3f, 0f);
+            }
         }
 
         if (_difficulty == MazeDifficulty.Hard)
             AddExtraDeadEnds();
 
         PlacePlayerAndDestination();
+
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            VisualizePath();
+        }
     }
 
 
@@ -190,28 +214,44 @@ public class MazeGenerator : MonoBehaviour
 
     private void ClearWalls(MazeCell previousCell, MazeCell currentCell)
     {
-        if (previousCell == null)
-            return;
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        {
+            if (previousCell == null)
+                return;
 
-        if (previousCell.transform.position.x < currentCell.transform.position.x)
+            if (previousCell.transform.position.x < currentCell.transform.position.x)
+            {
+                previousCell.ClearRightWall();
+                currentCell.ClearLeftWall();
+            }
+            else if (previousCell.transform.position.x > currentCell.transform.position.x)
+            {
+                previousCell.ClearLeftWall();
+                currentCell.ClearRightWall();
+            }
+            else if (previousCell.transform.position.z < currentCell.transform.position.z)
+            {
+                previousCell.ClearFrontWall();
+                currentCell.ClearBackWall();
+            }
+            else if (previousCell.transform.position.z > currentCell.transform.position.z)
+            {
+                previousCell.ClearBackWall();
+                currentCell.ClearFrontWall();
+            }
+        } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
-            previousCell.ClearRightWall();
-            currentCell.ClearLeftWall();
-        }
-        else if (previousCell.transform.position.x > currentCell.transform.position.x)
-        {
-            previousCell.ClearLeftWall();
-            currentCell.ClearRightWall();
-        }
-        else if (previousCell.transform.position.z < currentCell.transform.position.z)
-        {
-            previousCell.ClearFrontWall();
-            currentCell.ClearBackWall();
-        }
-        else if (previousCell.transform.position.z > currentCell.transform.position.z)
-        {
-            previousCell.ClearBackWall();
-            currentCell.ClearFrontWall();
+            MazeCell a = previousCell;
+            MazeCell b = currentCell;
+            if (a == null || b == null) return;
+
+            int dx = b.GridPosition.x - a.GridPosition.x;
+            int dz = b.GridPosition.y - a.GridPosition.y;
+
+            if (dx == 1) { a.ClearRightWall(); b.ClearLeftWall(); }
+            else if (dx == -1) { a.ClearLeftWall(); b.ClearRightWall(); }
+            else if (dz == 1) { a.ClearFrontWall(); b.ClearBackWall(); }
+            else if (dz == -1) { a.ClearBackWall(); b.ClearFrontWall(); }
         }
     }
 
@@ -331,13 +371,92 @@ public class MazeGenerator : MonoBehaviour
                 {
                     maxDistance = dist;
                     farthest = cell;
+                    _destinationCell = cell;
                 }
             }
         }
 
-        if (farthest != null && destinationMarker != null)
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
         {
-            Instantiate(destinationMarker, farthest.transform.position, Quaternion.identity);
+            if (farthest != null && destinationMarker != null)
+            {
+                Instantiate(destinationMarker, farthest.transform.position, Quaternion.identity);
+            }
+        } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            if (_destinationCell != null && destinationMarker != null)
+                Instantiate(destinationMarker, _destinationCell.transform.position, Quaternion.identity);
         }
+    }
+
+    private void VisualizePath()
+    {
+        if (_playerStartCell == null || _destinationCell == null)
+        {
+            Debug.LogWarning("XYZ: Start or destination cell is null.");
+            return;
+        }
+
+        var path = FindPath(_playerStartCell, _destinationCell);
+        Debug.Log($"XYZ: Path length: {path.Count}");
+
+        foreach (var cell in path)
+        {
+            GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            marker.transform.position = cell.transform.position + new Vector3(0f, 0f, 0f);
+            marker.transform.localScale = Vector3.one * 0.2f;
+            marker.GetComponent<Renderer>().material.color = Color.green;
+            Destroy(marker.GetComponent<SphereCollider>());
+        }
+    }
+
+    private List<MazeCell> FindPath(MazeCell start, MazeCell end)
+    {
+        Queue<MazeCell> queue = new Queue<MazeCell>();
+        Dictionary<MazeCell, MazeCell> cameFrom = new Dictionary<MazeCell, MazeCell>();
+
+        queue.Enqueue(start);
+        cameFrom[start] = null;
+
+        while (queue.Count > 0)
+        {
+            MazeCell current = queue.Dequeue();
+            if (current == end) break;
+
+            foreach (var neighbor in GetConnectedNeighbors(current))
+            {
+                if (!cameFrom.ContainsKey(neighbor))
+                {
+                    queue.Enqueue(neighbor);
+                    cameFrom[neighbor] = current;
+                }
+            }
+        }
+
+        List<MazeCell> path = new List<MazeCell>();
+        MazeCell step = end;
+
+        while (step != null)
+        {
+            path.Add(step);
+            step = cameFrom.ContainsKey(step) ? cameFrom[step] : null;
+        }
+
+        path.Reverse();
+        return path;
+    }
+
+    private List<MazeCell> GetConnectedNeighbors(MazeCell cell)
+    {
+        List<MazeCell> neighbors = new List<MazeCell>();
+        int x = cell.GridPosition.x;
+        int z = cell.GridPosition.y;
+
+        if (x + 1 < _mazeWidth && !cell.HasRightWall()) neighbors.Add(_mazeGrid[x + 1, z]);
+        if (x - 1 >= 0 && !cell.HasLeftWall()) neighbors.Add(_mazeGrid[x - 1, z]);
+        if (z + 1 < _mazeDepth && !cell.HasFrontWall()) neighbors.Add(_mazeGrid[x, z + 1]);
+        if (z - 1 >= 0 && !cell.HasBackWall()) neighbors.Add(_mazeGrid[x, z - 1]);
+
+        return neighbors;
     }
 } 
