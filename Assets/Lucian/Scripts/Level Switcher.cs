@@ -199,6 +199,16 @@ public class LevelSwitcher : MonoBehaviour
         GameManager.Instance.IsRandomMode = false;
     }
 
+    public void OnMazeGamePressed()
+    {
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
+        GameManager.Instance.SetCurrentGame(GameType.Maze);
+        GameManager.Instance.InitializeGame();
+        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.SceneToLoad = SceneType.MazeGameOnline;
+        GameManager.Instance.IsRandomMode = false;
+    }
+
     public void OnRandomPlayPressed()
     {
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));

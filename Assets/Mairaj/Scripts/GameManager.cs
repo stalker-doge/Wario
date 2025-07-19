@@ -123,9 +123,9 @@ public class GameManager : MonoBehaviour
             //case GameType.FillTheGap:
             //    currentGameAI = new FillTheGapGameAI();
             //    break;
-            //case GameType.Maze:
-            //    currentGameAI = new MazeGameAI();
-            //    break;
+            case GameType.Maze:
+                currentGameAI = new MazeGameAI();
+                break;
             //case GameType.BalloonPop:
             //    currentGameAI = new BalloonPopGameAI();
             //    break;
@@ -171,10 +171,25 @@ public class GameManager : MonoBehaviour
 
     public SceneType GetRandomScene()
     {
-        SceneType randomScene = UnityEngine.Random.Range(0, 2) == 0
-            ? SceneType.AimAndShootOnline
-            : SceneType.GyroscopeGameOnline;
-        SetCurrentGame(randomScene == SceneType.AimAndShootOnline ? GameType.AimShoot : GameType.SwipeBall);
+        int randomIndex = UnityEngine.Random.Range(0, 3); // 0, 1, or 2
+
+        SceneType randomScene = randomIndex switch
+        {
+            0 => SceneType.AimAndShootOnline,
+            1 => SceneType.GyroscopeGameOnline,
+            2 => SceneType.MazeGameOnline,
+            _ => SceneType.AimAndShootOnline // fallback
+        };
+
+        GameType gameType = randomScene switch
+        {
+            SceneType.AimAndShootOnline => GameType.AimShoot,
+            SceneType.GyroscopeGameOnline => GameType.SwipeBall,
+            SceneType.MazeGameOnline => GameType.Maze,
+            _ => GameType.AimShoot // fallback
+        };
+
+        SetCurrentGame(gameType);
         return randomScene;
     }
 }

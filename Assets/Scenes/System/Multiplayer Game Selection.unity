@@ -229,7 +229,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734878349498191634, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734878349498191634, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734878349498191634, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMazeGamePressed
       objectReference: {fileID: 0}
     - target: {fileID: 5769268312693658828, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
       propertyPath: m_Name

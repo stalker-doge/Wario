@@ -24,10 +24,10 @@ public class MazeGenerator : MonoBehaviour
     private MazeCell _playerStartCell;
     private MazeCell _destinationCell;
 
-    private void Awake()
-    {
-        GameManager.Instance.SetGameMode(GameMode.Online);
-    }
+    private List<Transform> pathTransforms = null;
+
+    private MazeDragPlayer opponentPlayer = null;
+
     void Start()
     {
         if (MazeDifficulty.Easy == _difficulty)
@@ -356,7 +356,18 @@ public class MazeGenerator : MonoBehaviour
 
         if (playerPrefab != null)
         {
-            Instantiate(playerPrefab, _playerStartCell.transform.position , Quaternion.identity);
+            MazeDragPlayer player = null;
+            if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+            {
+                opponentPlayer = Instantiate(playerPrefab, _playerStartCell.transform.position, Quaternion.identity).GetComponent<MazeDragPlayer>();
+                opponentPlayer.InitializePlayerType(PlayerType.mAI);
+                player = Instantiate(playerPrefab, _playerStartCell.transform.position, Quaternion.identity).GetComponent<MazeDragPlayer>();
+                player.InitializePlayerType(PlayerType.mUser);
+            }
+            else if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+            {
+                Instantiate(playerPrefab, _playerStartCell.transform.position, Quaternion.identity);
+            }
         }
 
         MazeCell farthest = null;
@@ -400,6 +411,8 @@ public class MazeGenerator : MonoBehaviour
         var path = FindPath(_playerStartCell, _destinationCell);
         Debug.Log($"XYZ: Path length: {path.Count}");
 
+        pathTransforms = new List<Transform>();
+
         foreach (var cell in path)
         {
             GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -407,7 +420,11 @@ public class MazeGenerator : MonoBehaviour
             marker.transform.localScale = Vector3.one * 0.2f;
             marker.GetComponent<Renderer>().material.color = Color.green;
             Destroy(marker.GetComponent<SphereCollider>());
+            pathTransforms.Add(marker.transform);
+            marker.SetActive(false);
         }
+
+        opponentPlayer.InitializePathTransformsAndPlayMove(pathTransforms);
     }
 
     private List<MazeCell> FindPath(MazeCell start, MazeCell end)

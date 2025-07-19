@@ -60,7 +60,7 @@ public class TimeLoggingManager : MonoBehaviour
             PlayerPrefs.SetFloat(currentTimeKey, currentSessionSeconds);
             PlayerPrefs.Save();
 
-            Debug.Log("XYZ TimeLoggingManager: [" + currentTimeKey + "] Session Time: " + currentSessionSeconds + " seconds");
+            //Debug.Log("XYZ TimeLoggingManager: [" + currentTimeKey + "] Session Time: " + currentSessionSeconds + " seconds");
         }
     }
 

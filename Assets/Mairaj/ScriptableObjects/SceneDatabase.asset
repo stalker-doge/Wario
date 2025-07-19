@@ -53,3 +53,5 @@ MonoBehaviour:
     sceneType: 19
   - sceneName: GyroscopeGameOnline
     sceneType: 20
+  - sceneName: MazeGameOnline
+    sceneType: 21
