@@ -80,7 +80,7 @@ public class TransitionScreenMultiplayer : MonoBehaviour
         Debug.Log("XYZ Wi-Fi is " + (isOn ? "ON" : "OFF"));
         if (!isOn && tempPopup == null)
         {
-            ShowErrorPopup("Wi-Fi is turned off. Match paused.");
+            ShowErrorPopup("");
             AbortCountdown();
         }
     }
@@ -90,7 +90,7 @@ public class TransitionScreenMultiplayer : MonoBehaviour
         Debug.Log("XYZ Internet is " + (isConnected ? "available" : "not available"));
         if (!isConnected && tempPopup == null)
         {
-            ShowErrorPopup("Internet connection lost. Match paused.");
+            ShowErrorPopup("");
             AbortCountdown();
         }
     }
