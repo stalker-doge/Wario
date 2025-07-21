@@ -122,7 +122,6 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void BalloonPopEndGameCallback()
     {
-        //Debug.Log("XYZ BalloonsGameAllLivesGoneCase Callback");
         EndGame();
     }
 
