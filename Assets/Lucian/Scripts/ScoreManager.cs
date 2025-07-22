@@ -112,6 +112,7 @@ public class ScoreManager : MonoBehaviour
             lives = 3;
             score= 0;
             SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.EndScene));
+            TimeLoggingManager.Instance.StopCountingSessionTime();
         }
         TimerManager.Instance.Pause(true);
         TimerManager.Instance.ResetTimer();

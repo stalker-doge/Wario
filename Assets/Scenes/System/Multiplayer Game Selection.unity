@@ -179,67 +179,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3d1861563a9a504b936ebb4fffa85f1, type: 3}
---- !u!1001 &180003019
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1611974269233006426, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: CreditPage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.714045
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 22.642307
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 102.18929
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3638082664339668405, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778636368557228988, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
-      propertyPath: m_Name
-      value: MenuManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ca781c604be47cf439f373aefd0cc0c9, type: 3}
 --- !u!1001 &639385855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -290,7 +229,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734878349498191634, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734878349498191634, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734878349498191634, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMazeGamePressed
       objectReference: {fileID: 0}
     - target: {fileID: 5769268312693658828, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
       propertyPath: m_Name
@@ -439,6 +386,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6186f5df9f2846d42a0f1faf122402ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &639385858 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1397425632093071373, guid: 827beaa7347fa36419b09e0687c14505, type: 3}
+  m_PrefabInstance: {fileID: 639385855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &682914965
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +651,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 639385857}
         m_TargetAssemblyTypeName: LevelSwitcher, Assembly-CSharp
-        m_MethodName: OnOnlinePlayPressed
+        m_MethodName: OnRandomPlayPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1570,6 +1522,52 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 5130546747746962038, guid: 1f81019a5acd1ee45aa67af8920a84f1, type: 3}
   m_PrefabInstance: {fileID: 1711511435}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1870434963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1870434964}
+  - component: {fileID: 1870434965}
+  m_Layer: 0
+  m_Name: MultiplayerGameSelection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1870434964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870434963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1243.9268, y: 1414.6451, z: -13.192385}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870434965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870434963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c83ff1fe2fbbe488a1f6d542fe37b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  errorPopup: {fileID: 1962685552665494242, guid: 3f832ded87cdd0345b189f4622615d21, type: 3}
+  canvas: {fileID: 639385858}
 --- !u!1 &1977222278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,7 +1830,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051862990}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -1871,8 +1869,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 639385857}
         m_TargetAssemblyTypeName: LevelSwitcher, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 5
+        m_MethodName: OnRollingBallPressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1926,8 +1924,8 @@ SceneRoots:
   - {fileID: 1326145742}
   - {fileID: 1276370242}
   - {fileID: 1400163109}
+  - {fileID: 1870434964}
   - {fileID: 915853873}
-  - {fileID: 180003019}
   - {fileID: 177623395}
   - {fileID: 1711511435}
   - {fileID: 1570672788}

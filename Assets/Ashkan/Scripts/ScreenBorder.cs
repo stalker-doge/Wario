@@ -37,6 +37,10 @@ public class ScreenBorders : MonoBehaviour
                 break;
         }
         
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            GameManager.Instance.SwipeGameDifficulty = currentDifficulty;
+        }
         Camera cam = Camera.main;
 
         float height = 2f * cam.orthographicSize;
@@ -91,7 +95,15 @@ public class ScreenBorders : MonoBehaviour
             halfWidth - circleOffset,
             halfHeight - circleOffset
         );
-        CreateCircle(circlePos);
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        {
+            CreateCircle(circlePos);
+        }
+        else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            CreateCircle(circlePos, PlayerType.mAI);
+            CreateCircle(circlePos, PlayerType.mUser);
+        }
 
         // Scale and position parent container
         Parent.localScale = new Vector3(1, 0.9f, 1);
@@ -129,5 +141,14 @@ public class ScreenBorders : MonoBehaviour
 
         // Instantiate inside parent so scaling is applied
         GameObject circle = Instantiate(circleObject, position, Quaternion.identity);
+    }
+
+    void CreateCircle(Vector2 position, PlayerType player)
+    {
+        if (circleObject == null) return;
+
+        // Instantiate inside parent so scaling is applied
+        GameObject circle = Instantiate(circleObject, position, Quaternion.identity);
+        circle.GetComponent<BallController>()?.InitializeBallPlayer(player);
     }
 }

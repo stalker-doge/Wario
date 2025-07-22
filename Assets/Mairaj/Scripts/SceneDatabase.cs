@@ -36,6 +36,8 @@ public enum SceneType
     MPGameSelection,
     MPOpponentSelection,
     MPGameTransition,
-    MPWinLoss
+    MPWinLoss,
+    GyroscopeGameOnline,
+    MazeGameOnline
 }
 

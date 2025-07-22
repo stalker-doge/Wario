@@ -51,14 +51,14 @@ public class AimShootGameAI : GameAIBase
     {
         if (!DOTween.IsTweening(game.transform))
         {
-            FindTarget(game.transform, Random.Range(0, 2) == 1 ? MoveType.AimLeft : MoveType.AimRight);
+            FindTarget(game.transform, Random.Range(0, 2) == 1 ? MoveTypeAimAndShoot.AimLeft : MoveTypeAimAndShoot.AimRight);
         }
     }
     private void RandomShotCase(GameObject game)
     {
         if (!DOTween.IsTweening(game.transform))
         {
-            FindTarget(game.transform, Random.Range(0, 2) == 1 ? MoveType.AimLeft : MoveType.AimRight);
+            FindTarget(game.transform, Random.Range(0, 2) == 1 ? MoveTypeAimAndShoot.AimLeft : MoveTypeAimAndShoot.AimRight);
         }
     }
 
@@ -99,13 +99,13 @@ public class AimShootGameAI : GameAIBase
             TrajectoryPredictor.IsEligibleToShoot = true;
         });
     }
-    public void FindTarget(Transform transform, MoveType moveType)
+    public void FindTarget(Transform transform, MoveTypeAimAndShoot moveType)
     {
         //Debug.Log("XYZ FindTargetCalled");
         //if (DOTween.IsTweening(transform))
         //    return;
 
-        if (moveType == MoveType.AimLeft)
+        if (moveType == MoveTypeAimAndShoot.AimLeft)
         {
             transform.DORotate(isTakingAPerfectShot ? new Vector3(0, 0, 180) : new Vector3(0, 0, Random.Range(120, 160)), isTakingAPerfectShot ? Random.Range(6, 10): Random.Range(3, 5)).SetEase(Ease.Linear).OnComplete(() =>
             {
@@ -115,7 +115,7 @@ public class AimShootGameAI : GameAIBase
                 }
             });
         }
-        else if (moveType == MoveType.AimRight)
+        else if (moveType == MoveTypeAimAndShoot.AimRight)
         {
             transform.DORotate(isTakingAPerfectShot ? new Vector3(0, 0, 0) : new Vector3(0, 0, Random.Range(30, 70)), isTakingAPerfectShot ? Random.Range(6, 10) : Random.Range(3, 5)).SetEase(Ease.Linear).OnComplete(() =>
             {

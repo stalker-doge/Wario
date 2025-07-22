@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static ScreenBorders;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +21,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public Player User { get { return user; } }
     public Player Opponent { get { return opponent; } }
-
+    public Difficulty SwipeGameDifficulty;
+    private GameType gameType;
+    private bool isRandomMode = false;
     public string LevelTitle {
         get { return levelTitle; }
         set { levelTitle = value; }
@@ -56,6 +59,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameType CurrentGameType { get => gameType; }
+
+    public bool IsRandomMode { get { return isRandomMode; } set { isRandomMode = value; } }
+
     public void InitializeGame()
     {
         user = new Player();
@@ -67,19 +74,25 @@ public class GameManager : MonoBehaviour
         currentRounds = 0;
     }
 
+    public OpponentNameListSO GetOpponentNamesList()
+    {
+        return opponentNameList;
+    }
+
     public void UpdateScoreAndLoadScene()
     {
         int halfRounds = TotalRounds / 2;
-        Debug.Log("XYZ Rounds " + halfRounds);
+        //Debug.Log("XYZ Rounds " + halfRounds);
 
         if (User.PlayerWins > halfRounds || Opponent.PlayerWins > halfRounds)
         {
-            Debug.Log("XYZ someone wins the game!");
+            //Debug.Log("XYZ someone wins the game!");
             SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.MPWinLoss));
+            TimeLoggingManager.Instance.StopCountingSessionTime();
         }
         else if (CurrentRoundNumber < TotalRounds)
         {
-            Debug.Log("XYZ Next round...");
+            //Debug.Log("XYZ Next round...");
             CurrentRoundNumber++;
             SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(SceneType.MPGameTransition));
         }
@@ -104,14 +117,15 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentGame(GameType gameType)
     {
+        this.gameType = gameType;
         switch (gameType)
         {
             //case GameType.FillTheGap:
             //    currentGameAI = new FillTheGapGameAI();
             //    break;
-            //case GameType.Maze:
-            //    currentGameAI = new MazeGameAI();
-            //    break;
+            case GameType.Maze:
+                currentGameAI = new MazeGameAI();
+                break;
             //case GameType.BalloonPop:
             //    currentGameAI = new BalloonPopGameAI();
             //    break;
@@ -119,9 +133,9 @@ public class GameManager : MonoBehaviour
                 currentGameAI = new AimShootGameAI();
                 TrajectoryPredictor.IsEligibleToShoot = true;
                 break;
-            //case GameType.SwipeBall:
-            //    currentGameAI = new SwipeBallGameAI();
-            //    break;
+            case GameType.SwipeBall:
+                currentGameAI = new SwipeBallGameAI();
+                break;
             //case GameType.Math:
             //    currentGameAI = new MathGameAI();
             //    break;
@@ -153,5 +167,29 @@ public class GameManager : MonoBehaviour
     public bool IsTakingAPerfectShot()
     {
         return currentGameAI.IsTakingAPerfectShot;
+    }
+
+    public SceneType GetRandomScene()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, 3); // 0, 1, or 2
+
+        SceneType randomScene = randomIndex switch
+        {
+            0 => SceneType.AimAndShootOnline,
+            1 => SceneType.GyroscopeGameOnline,
+            2 => SceneType.MazeGameOnline,
+            _ => SceneType.AimAndShootOnline // fallback
+        };
+
+        GameType gameType = randomScene switch
+        {
+            SceneType.AimAndShootOnline => GameType.AimShoot,
+            SceneType.GyroscopeGameOnline => GameType.SwipeBall,
+            SceneType.MazeGameOnline => GameType.Maze,
+            _ => GameType.AimShoot // fallback
+        };
+
+        SetCurrentGame(gameType);
+        return randomScene;
     }
 }

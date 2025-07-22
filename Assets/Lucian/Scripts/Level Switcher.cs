@@ -29,6 +29,9 @@ public class LevelSwitcher : MonoBehaviour
     [SerializeField]
     private float curtainAnimTimer =  0.5f;
 
+    [SerializeField]
+    private InternetErrorPopup errorPopup;
+
     private string sceneName;
 
     private bool isSwitchingScene = false;
@@ -159,12 +162,31 @@ public class LevelSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
         GameManager.Instance.SetGameMode(GameMode.SinglePlayer);
+        TimeLoggingManager.Instance.StartCountingSessionTime(GameManager.Instance.CurrentGameMode);
     }
 
     public void OnOnlinePlayPressed()
     {
-        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPGameSelection));
-        GameManager.Instance.SetGameMode(GameMode.Online);
+        if (NetworkChecker.Instance.IsConnected)
+        {
+            SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPGameSelection));
+            GameManager.Instance.SetGameMode(GameMode.Online);
+        } else
+        {
+            Debug.Log("XYZ no internet popup");
+            InternetErrorPopup popup = Instantiate(errorPopup, GetComponent<Canvas>().transform);
+            popup.InitializePopup("No internet connection. Please reconnect and try again!", true);
+        }
+    }
+
+    public void OnRollingBallPressed()
+    {
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
+        GameManager.Instance.SetCurrentGame(GameType.SwipeBall);
+        GameManager.Instance.InitializeGame();
+        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.SceneToLoad = SceneType.GyroscopeGameOnline;
+        GameManager.Instance.IsRandomMode = false;
     }
 
     public void OnAimAndShootPressed()
@@ -174,8 +196,27 @@ public class LevelSwitcher : MonoBehaviour
         GameManager.Instance.InitializeGame();
         GameManager.Instance.LevelTitle = "Hardcoded";
         GameManager.Instance.SceneToLoad = SceneType.AimAndShootOnline;
+        GameManager.Instance.IsRandomMode = false;
     }
 
+    public void OnMazeGamePressed()
+    {
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
+        GameManager.Instance.SetCurrentGame(GameType.Maze);
+        GameManager.Instance.InitializeGame();
+        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.SceneToLoad = SceneType.MazeGameOnline;
+        GameManager.Instance.IsRandomMode = false;
+    }
+
+    public void OnRandomPlayPressed()
+    {
+        SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
+        GameManager.Instance.InitializeGame();
+        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.SceneToLoad = GameManager.Instance.GetRandomScene();
+        GameManager.Instance.IsRandomMode = true;
+    }
     public void SwitchScene(string sceneName)
     {
         //Load scene

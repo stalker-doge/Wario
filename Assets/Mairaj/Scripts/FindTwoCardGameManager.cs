@@ -98,19 +98,6 @@ public class FindTwoCardGameManager : MonoBehaviour
         return result;
     }
 
-    //private void Shuffle(CardType[] array)
-    //{
-    //    System.Random rand = new System.Random();
-    //    int n = array.Length;
-    //    while (n > 1)
-    //    {
-    //        int k = rand.Next(n--);
-    //        var temp = array[n];
-    //        array[n] = array[k];
-    //        array[k] = temp;
-    //    }
-    //}
-
     private void Shuffle<T>(T[] array)
     {
         System.Random rng = new System.Random();
@@ -186,13 +173,6 @@ public class FindTwoCardGameManager : MonoBehaviour
                 if (nonSelected.Count > 0)
                 {
                     Card swapTarget = nonSelected[Random.Range(0, nonSelected.Count)];
-
-                    //var tempType = wrongCard.GetCardType();
-                    //var tempSprite = wrongCard.GetFrontSprite();
-
-                    //wrongCard.InitializeCard(swapTarget.GetCardType(), swapTarget.GetFrontSprite(), backCardSprite);
-                    //swapTarget.InitializeCard(tempType, tempSprite, backCardSprite);
-
                     gridLayoutGroup.enabled = false;
                     EnableCardClicking.Invoke(false);
                     StartCoroutine(SwapPositionsAndSiblings(wrongCard.transform, swapTarget.transform, swapAnimTimer));
@@ -246,8 +226,6 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private void GameEndSuccessCallback()
     {
-        // Debug.Log("XYZ Game Over!");
-
         SuccessCompletionCallback?.Invoke();
 
         if (countDownCoroutine != null)
@@ -266,7 +244,6 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         if (ScoreManager.Instance && !TimerManager.Instance.LosePage.activeSelf)
         {
-            //scoreManager.GameComplete();
            StartCoroutine( ScoreManager.Instance.GameComplete());
         }
         else
@@ -277,10 +254,8 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private IEnumerator QuickTutorialCoroutine()
     {
-        //Debug.Log("XYZ QuickTutorialCoroutine Called");
         foreach (Card cd in cards)
         {
-            //Debug.Log("XYZ Cards Rotation");
             cd.Rotate(true, () => { }, true);
         }
 
@@ -306,9 +281,6 @@ public class FindTwoCardGameManager : MonoBehaviour
 public enum CardType
 {
     mTwoClub, mThreeClub, mFourClub, mFiveClub, mSixClub, mSevenClub, mEightClub, mNineClub, mTenClub, mAClub, mJClub, mKClub, mQClub
-    //mTwoDiamond, mThreeDiamond, mFourDiamond, mFiveDiamond, mSixDiamond, mSevenDiamond, mEightDiamond, mNineDiamond, mTenDiamond, mADiamond, mJDiamond, mKDiamond, mQDiamond,
-    //mTwoHeart, mThreeHeart, mFourHeart, mFiveHeart, mSixHeart, mSevenHeart, mEightHeart, mNineHeart, mTenHeart, mAHeart, mJHeart, mKHeart, mQHeart,
-    //mTwoSpade, mThreeSpade, mFourSpade, mFiveSpade, mSixSpade, mSevenSpade, mEightSpade, mNineSpade, mTenSpade, mASpade, mJSpade, mKSpade, mQSpade
 }
 
 public enum FindTwoCardsVariant
