@@ -27,7 +27,7 @@ public class BorderSpawner : MonoBehaviour
         bottom.tag = "Ground";
         bottom.transform.position = new Vector2(center.x, center.y - screenHeight / 2f - BottwallOffset);
         bottom.transform.localScale = new Vector2(screenWidth + wallThickness, wallThickness);
-
+/*
         // Top Wall
         GameObject top = Instantiate(wallPrefab);
         top.transform.position = new Vector2(center.x, center.y + screenHeight / 2 + TopwallOffset);
@@ -42,5 +42,7 @@ public class BorderSpawner : MonoBehaviour
         GameObject right = Instantiate(wallPrefab);
         right.transform.position = new Vector2(center.x + screenWidth / 2 , center.y);
         right.transform.localScale = new Vector2(wallThickness, screenHeight + wallThickness);
+        
+*/
     }
 }
