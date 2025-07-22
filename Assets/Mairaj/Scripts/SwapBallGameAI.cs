@@ -11,17 +11,17 @@ public class SwipeBallGameAI : GameAIBase
         isPlayingMove = true;
         var ball = game.GetComponent<BallController>();
 
-        if (GameManager.Instance.SwipeGameDifficulty == ScreenBorders.Difficulty.Easy)
+        if (GameManager.Instance.SwipeGameDifficulty == SwipeBallManager.Difficulty.Easy)
         {
             ball.Invoke(nameof(BallController.ForceSwipeLeft), Random.Range(0.8f, 1.2f));
             ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(2.2f,3f));
         }
-        else if (GameManager.Instance.SwipeGameDifficulty == ScreenBorders.Difficulty.Medium)
+        else if (GameManager.Instance.SwipeGameDifficulty == SwipeBallManager.Difficulty.Medium)
         {
             ball.Invoke(nameof(BallController.ForceSwipeLeft), Random.Range(0.8f, 1.2f));
             ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(3.2f, 4f));
         }
-        else if (GameManager.Instance.SwipeGameDifficulty == ScreenBorders.Difficulty.Hard)
+        else if (GameManager.Instance.SwipeGameDifficulty == SwipeBallManager.Difficulty.Hard)
         {
             ball.Invoke(nameof(BallController.ForceSwipeLeft), Random.Range(0.8f, 1.2f));
             ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(2.5f, 3f));

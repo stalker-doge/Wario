@@ -5,16 +5,15 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
-public class FillTheGapManager : MonoBehaviour
+public class FillTheGapManager : MiniGameManagerBase
 {
-    // Singleton instance
     public static FillTheGapManager Instance { get; private set; }
 
     [SerializeField]
-    private List<GameObject> dropZoneObjects; // List of DropZone objects
+    private List<GameObject> dropZoneObjects;
 
     [SerializeField]
-    private List<GameObject> dragZoneObjects; // List of Draggable objects, needed for selecting 5 at random out of which x should have a drop slot
+    private List<GameObject> dragZoneObjects;
 
     [SerializeField]
     private List<RectTransform> dragZoneRects;
@@ -29,7 +28,6 @@ public class FillTheGapManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -38,15 +36,12 @@ public class FillTheGapManager : MonoBehaviour
         Instance = this;
     }
 
-    private void OnDestroy()
+    private void Start()
     {
-        if (Instance == this)
-        {
-            Instance = null;
-        }
+        InitializeGame();
     }
 
-    private void Start()
+    public override void InitializeGame()
     {
         randomVariant = UnityEngine.Random.Range(0, 2);
         switch (randomVariant)
@@ -77,7 +72,26 @@ public class FillTheGapManager : MonoBehaviour
                     newVariant = NewFillTheGapVariant.mXFiveSlots;
                 break;
         }
+
         SelectRandomDropZonesAndUpdateColor();
+    }
+
+    public override void EndGame()
+    {
+        if (ScoreManager.Instance)
+        {
+            StartCoroutine(ScoreManager.Instance.GameComplete());
+        }
+    }
+
+    protected override void RegisterCallbacks()
+    {
+        
+    }
+
+    protected override void UnregisterCallbacks()
+    {
+        
     }
 
     public FillTheGapVariant GetVariant()
@@ -92,15 +106,9 @@ public class FillTheGapManager : MonoBehaviour
 
     private void SelectRandomDropZonesAndUpdateColor()
     {
-        int numberToSelect = 0;
-        if (newVariant == NewFillTheGapVariant.mXZeroSlots)
-        {
-            numberToSelect = VariantToCount(variant);
-        } else
-        {
-            numberToSelect = NewVariantToCount(newVariant);
-        }
-            
+        int numberToSelect = newVariant == NewFillTheGapVariant.mXZeroSlots
+            ? VariantToCount(variant)
+            : NewVariantToCount(newVariant);
 
         if (dropZoneObjects.Count < numberToSelect)
         {
@@ -108,7 +116,6 @@ public class FillTheGapManager : MonoBehaviour
             return;
         }
 
-        // Randomly select the required number of distinct drop zones
         List<GameObject> selectedDropZones;
         List<NewAcceptedShapeType?> selectedTypes;
         do
@@ -118,7 +125,6 @@ public class FillTheGapManager : MonoBehaviour
                 .Take(numberToSelect)
                 .ToList();
 
-            // Get the selected types to check the shape constraint
             selectedTypes = selectedDropZones
                 .Select(dz => dz.GetComponent<DropZone>()?.GetNewAcceptedShapeType())
                 .ToList();
@@ -137,16 +143,13 @@ public class FillTheGapManager : MonoBehaviour
                 })
                 .ToList();
 
-            // Calculate how many more we need to add
             int remainingToAdd = (int)GetLastEnumValue<NewFillTheGapVariant>() - numberToSelect;
 
-            // Find the remaining dragZoneObjects that are NOT in matchingDragObjects
             var remainingDragObjects = dragZoneObjects
                 .Except(matchingDragObjects)
                 .OrderBy(x => UnityEngine.Random.value)
                 .ToList();
 
-            // Filter out mShape10 if mShape16 is already in matching, and vice versa because both shapes are same with different colors and user can get confused
             bool has10 = matchingDragObjects.Any(d => d.GetComponent<DragDrop>()?.newAcceptedShapeType == NewAcceptedShapeType.mShape10);
             bool has16 = matchingDragObjects.Any(d => d.GetComponent<DragDrop>()?.newAcceptedShapeType == NewAcceptedShapeType.mShape16);
 
@@ -159,13 +162,9 @@ public class FillTheGapManager : MonoBehaviour
                     .Where(d => d.GetComponent<DragDrop>()?.newAcceptedShapeType != NewAcceptedShapeType.mShape10)
                     .ToList();
 
-            // Add the required number of distractors
             var distractors = remainingDragObjects.Take(remainingToAdd).ToList();
-
-            // Combine both matching and distractors
             var finalDragObjects = matchingDragObjects.Concat(distractors).ToList();
 
-            // Activate and position them
             for (int i = 0; i < dragZoneRects.Count; i++)
             {
                 GameObject drag = finalDragObjects[i];
@@ -175,13 +174,11 @@ public class FillTheGapManager : MonoBehaviour
             }
         }
 
-        // Set their color to black
         foreach (var dz in selectedDropZones)
         {
             SetImageColor(dz);
         }
 
-        // Remove DropZone component from unselected objects
         foreach (GameObject dz in dropZoneObjects)
         {
             if (!selectedDropZones.Contains(dz))
@@ -232,10 +229,11 @@ public class FillTheGapManager : MonoBehaviour
             if (newVariant == NewFillTheGapVariant.mXZeroSlots)
             {
                 imageComponent.color = Color.black;
-            } else
+            }
+            else
             {
                 Color currentColor = imageComponent.color;
-                currentColor.a = 0f; // Set alpha to 0 (fully transparent)
+                currentColor.a = 0f;
                 imageComponent.color = currentColor;
             }
         }
@@ -243,19 +241,26 @@ public class FillTheGapManager : MonoBehaviour
         {
             Debug.LogWarning("No Image component found on the child of " + dropZone.name);
         }
-
     }
+
     public static TEnum GetLastEnumValue<TEnum>() where TEnum : Enum
     {
         var values = (TEnum[])Enum.GetValues(typeof(TEnum));
-        return values[^1]; // ^1 is the last element (C# 8+)
+        return values[^1];
     }
 
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+        UnregisterCallbacks();
+    }
 }
 
 public enum FillTheGapVariant
 {
-    //mZeroSlots,
     mOneSlots,
     mTwoSlots,
     mThreeSlots,

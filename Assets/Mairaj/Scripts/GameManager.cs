@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static ScreenBorders;
+using static SwipeBallManager;
 
 public class GameManager : MonoBehaviour
 {

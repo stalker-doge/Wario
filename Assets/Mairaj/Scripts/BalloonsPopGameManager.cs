@@ -1,7 +1,8 @@
-//Mairaj Muhammad ->2415831
+// Mairaj Muhammad -> 2415831
 using UnityEngine;
 using System.Collections.Generic;
-public class BalloonsPopGameManager : MonoBehaviour
+
+public class BalloonsPopGameManager : MiniGameManagerBase
 {
     [SerializeField] private RectTransform canvasRect;
 
@@ -37,15 +38,17 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     private void Awake()
     {
-        TimeAndLifeManager.BallonPopGameEndCallback += BalloonPopEndGameCallback;
-        Balloon.BalloonPoppedCallback += BalloonsPopCount;
+        totalBalloonsCount = yellowCount + blueCount + redCount;
     }
 
-    void Start()
+    private void Start()
     {
-        totalBalloonsCount = yellowCount + blueCount + redCount;
-        List<Vector2> points = GenerateRandomPoints(canvasRect, totalBalloonsCount);
+        InitializeGame();
+    }
 
+    public override void InitializeGame()
+    {
+        List<Vector2> points = GenerateRandomPoints(canvasRect, totalBalloonsCount);
         int pointIndex = 0;
 
         for (int i = 0; i < yellowCount; i++, pointIndex++)
@@ -63,7 +66,7 @@ public class BalloonsPopGameManager : MonoBehaviour
         Balloon balloon = Instantiate(prefab, canvasRect);
         RectTransform rect = balloon.GetComponent<RectTransform>();
         rect.anchoredPosition = position;
-        rect.localScale = balloonScale; // Apply scale here
+        rect.localScale = balloonScale;
     }
 
     List<Vector2> GenerateRandomPoints(RectTransform canvas, int count)
@@ -75,7 +78,6 @@ public class BalloonsPopGameManager : MonoBehaviour
 
         float xMin = -width / 2f + leftPadding;
         float xMax = width / 2f - rightPadding;
-
         float yMin = -height / 2f + topPadding;
         float yMax = height / 2f - bottomPadding;
 
@@ -120,11 +122,6 @@ public class BalloonsPopGameManager : MonoBehaviour
         return randomPoints;
     }
 
-    private void BalloonPopEndGameCallback()
-    {
-        EndGame();
-    }
-
     private void BalloonsPopCount()
     {
         balloonsPoppedCount++;
@@ -135,17 +132,38 @@ public class BalloonsPopGameManager : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void BalloonPopEndGameCallback()
+    {
+        EndGame();
+    }
+
+    public override void EndGame()
+    {
+        if (ScoreManager.Instance)
+        {
+            StartCoroutine(ScoreManager.Instance.GameComplete());
+        }
+    }
+
+    protected override void RegisterCallbacks()
+    {
+        TimeAndLifeManager.BallonPopGameEndCallback += BalloonPopEndGameCallback;
+        Balloon.BalloonPoppedCallback += BalloonsPopCount;
+    }
+
+    protected override void UnregisterCallbacks()
     {
         TimeAndLifeManager.BallonPopGameEndCallback -= BalloonPopEndGameCallback;
         Balloon.BalloonPoppedCallback -= BalloonsPopCount;
     }
 
-    private void EndGame()
+    private void OnEnable()
     {
-        if (ScoreManager.Instance)
-        {
-            StartCoroutine(ScoreManager.Instance.GameComplete());
-        }    
+        RegisterCallbacks();
+    }
+
+    private void OnDisable()
+    {
+        UnregisterCallbacks();
     }
 }
