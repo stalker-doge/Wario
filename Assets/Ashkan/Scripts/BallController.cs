@@ -1,4 +1,3 @@
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
