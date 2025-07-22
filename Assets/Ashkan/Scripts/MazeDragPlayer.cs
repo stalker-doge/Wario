@@ -39,7 +39,9 @@ public class MazeDragPlayer : MonoBehaviour
     public void InitializePathTransformsAndPlayMove(List<Transform> pathTransforms)
     {
         this.pathTransforms = pathTransforms;
-        GameManager.Instance.ExecuteAIMove(gameObject);
+        CurtainAnimController.Instance.AnimateAwayFromCenter(0.5f, () => {
+            GameManager.Instance.ExecuteAIMove(gameObject);
+        });
     }
     public void InitializePlayerType(PlayerType playerType)
     {

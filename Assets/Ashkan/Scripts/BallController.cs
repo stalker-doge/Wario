@@ -80,7 +80,9 @@ public class BallController : MonoBehaviour
     private void GenerateSwipeInput()
     {
         // Debug.Log("XYZ GenerateSwipeInput Called");
-        GameManager.Instance.ExecuteAIMove(gameObject);
+        CurtainAnimController.Instance?.AnimateAwayFromCenter(0.5f, () => {
+            GameManager.Instance.ExecuteAIMove(gameObject);
+        });
     }
 
     void DetectSwipeInput()

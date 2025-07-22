@@ -17,6 +17,8 @@ public class CurtainAnimController : MonoBehaviour
     // Public callback for external destruction trigger
     public static Action DestroyParentCallback = null;
 
+    private bool isPlayingAnim = false;
+
     private void Awake()
     {
         // Singleton setup
@@ -47,6 +49,11 @@ public class CurtainAnimController : MonoBehaviour
 
     public void AnimateTowardsCenter(float animTimer, Action CompletionCallback)
     {
+        if (isPlayingAnim)
+            return;
+
+        isPlayingAnim = true;
+
         Activate(true);
 
         RectTransform leftRect = leftImage.GetComponent<RectTransform>();
@@ -58,13 +65,18 @@ public class CurtainAnimController : MonoBehaviour
 
         leftRect.DOAnchorPosX(-690f, animTimer).SetEase(Ease.Linear);
         rightRect.DOAnchorPosX(700f, animTimer).SetEase(Ease.Linear)
-            .OnComplete(() => CompletionCallback?.Invoke());
+            .OnComplete(() => {
+                CompletionCallback?.Invoke();
+                isPlayingAnim = false;
+            });
     }
 
     public void AnimateAwayFromCenter(float animTimer, Action CompletionCallback)
     {
-        if (!isAtCenter)
+        if (!isAtCenter || isPlayingAnim)
             return;
+
+        isPlayingAnim = true;
 
         RectTransform leftRect = leftImage.GetComponent<RectTransform>();
         RectTransform rightRect = rightImage.GetComponent<RectTransform>();
@@ -78,7 +90,9 @@ public class CurtainAnimController : MonoBehaviour
             .OnComplete(() =>
             {
                 CompletionCallback?.Invoke();
+                //if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
                 Destroy(gameObject.transform.parent.gameObject);
+                isPlayingAnim = false;
             });
     }
 

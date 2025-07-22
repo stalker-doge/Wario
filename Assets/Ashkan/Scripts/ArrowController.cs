@@ -78,7 +78,7 @@ public class ArrowController : MonoBehaviour
             }
         } else if (playerType == PlayerType.mAI)
         {
-            GameManager.Instance.ExecuteAIMove(gameObject);
+            CurtainAnimController.Instance?.AnimateAwayFromCenter(0.5f, () => { GameManager.Instance.ExecuteAIMove(gameObject); });
             //if (!DOTween.IsTweening(transform) && !hasAIFoundTarget)
             //{
             //    hasAIFoundTarget = true;
