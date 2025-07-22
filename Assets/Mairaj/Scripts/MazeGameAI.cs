@@ -10,6 +10,6 @@ public class MazeGameAI : GameAIBase
 
         isPlayingMove = true;
 
-        game.GetComponent<MazeDragPlayer>().PlayMoveAI(Random.Range(5,8));
+        game.GetComponentInChildren<MazeDragPlayer>().PlayMoveAI(Random.Range(5,8));
     }
 }

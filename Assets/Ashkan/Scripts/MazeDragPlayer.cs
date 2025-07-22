@@ -15,6 +15,8 @@ public class MazeDragPlayer : MonoBehaviour
 
     [SerializeField]
     private PlayerType playerType;
+    [SerializeField]
+    private PlayerName playerName;
 
     private List<Transform> pathTransforms = null;
     void Start()
@@ -81,6 +83,19 @@ public class MazeDragPlayer : MonoBehaviour
         if (sphereCollider == null)
         {
             Debug.LogWarning("XYZ: No SphereCollider found on this object.");
+        }
+
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            playerName.gameObject.SetActive(true);
+            if (playerType == PlayerType.mUser)
+            {
+                playerName.InitializePlayerName("You");
+            }
+            else if (playerType == PlayerType.mAI)
+            {
+                playerName.InitializePlayerName(GameManager.Instance.Opponent.PlayerName);
+            }
         }
     }
 

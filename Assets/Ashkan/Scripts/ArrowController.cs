@@ -15,6 +15,7 @@ public class ArrowController : MonoBehaviour
 
     [SerializeField] private int shootCount = 0; // Counts how many times player has shot
     [SerializeField] private PlayerType playerType;
+    [SerializeField] private PlayerName playerName;
 
     void Start()
     {
@@ -24,6 +25,17 @@ public class ArrowController : MonoBehaviour
         threeRemaining?.SetActive(true);
         twoRemaining?.SetActive(true);
         oneRemaining?.SetActive(true);
+
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            if (playerType == PlayerType.mUser)
+            {
+                playerName.InitializePlayerName("You");
+            } else if (playerType == PlayerType.mAI)
+            {
+                playerName.InitializePlayerName(GameManager.Instance.Opponent.PlayerName);
+            }
+        }
     }
 
     void Update()
