@@ -1,6 +1,6 @@
+// Mairaj Muhammad -> 2415831
 using UnityEngine;
 using System.Collections;
-
 public class TimeLoggingManager : MonoBehaviour
 {
     public static TimeLoggingManager Instance { get; private set; }

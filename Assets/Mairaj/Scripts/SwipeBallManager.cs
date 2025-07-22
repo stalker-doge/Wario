@@ -1,5 +1,5 @@
+// Mairaj Muhammad -> 2415831
 using UnityEngine;
-
 public class SwipeBallManager : MiniGameManagerBase
 {
     public enum Difficulty { Easy, Medium, Hard }
