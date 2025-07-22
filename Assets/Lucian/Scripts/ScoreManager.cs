@@ -15,9 +15,9 @@ public class ScoreManager : MonoBehaviour
 
     public static ScoreManager Instance { get; private set; }
 
+    public GameObject anims;
     void Start()
     {
-
     }
 
     // Awake is called when the script instance is being loaded
@@ -138,6 +138,7 @@ public class ScoreManager : MonoBehaviour
             TimerManager.Instance.ResetTimer();
             yield return new WaitForSeconds(1);
             TimerManager.Instance.WinPage.SetActive(false);
+            anims.SetActive(true);
             TimerManager.Instance.winloseState = false;
             //goes back to the main menu
             SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));

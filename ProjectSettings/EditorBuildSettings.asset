@@ -6,6 +6,81 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/System/SplashScreen.unity
+    guid: 43742821eca4deb48a03f20cd2f93770
+  - enabled: 1
+    path: Assets/Scenes/System/Main Menu.unity
+    guid: dc4cdb80aa592374f9d9905655e64126
+  - enabled: 1
     path: Assets/Scenes/Sort Game.unity
     guid: bdb716342dfbf894f8b4cea2583b3cef
+  - enabled: 1
+    path: Assets/Scenes/System/TransitionScreenMultiplayer.unity
+    guid: d059fcd6cb4e8c44a95c3de2c9d5a108
+  - enabled: 1
+    path: Assets/Scenes/System/Options.unity
+    guid: 0036ff0643cbf2642ac2a63ebe29377f
+  - enabled: 1
+    path: Assets/Scenes/System/Opponent Selection Screen.unity
+    guid: 880b1062cfe523944b23582a18b3049f
+  - enabled: 1
+    path: Assets/Scenes/System/Multiplayer Game Selection.unity
+    guid: b03b9bfda450f7547a622ddb4024fd1e
+  - enabled: 1
+    path: Assets/Scenes/System/MazeGameOnline.unity
+    guid: b749ec0444705f7428d4e650537fc3ec
+  - enabled: 1
+    path: Assets/Scenes/System/Loading.unity
+    guid: 5ec284562fa043d45ad56eacf3e1b96e
+  - enabled: 1
+    path: Assets/Scenes/System/LeaderboardMenu.unity
+    guid: 6f6206aa1f8b881489025ced062e45a5
+  - enabled: 1
+    path: Assets/Scenes/System/LeaderBoard.unity
+    guid: 9d34aeb53fa036f41beaeaae0906a139
+  - enabled: 1
+    path: Assets/Scenes/System/GyroscopeGameOnline.unity
+    guid: d1070c2dba93a7740834aa41bb58a054
+  - enabled: 1
+    path: Assets/Scenes/System/EndGameMultiplayer.unity
+    guid: 83ae7b4303de4a94abc090d4a49a7db5
+  - enabled: 1
+    path: Assets/Scenes/System/End Scene.unity
+    guid: 309bfe2f38f26ea45a66da7fb7121488
+  - enabled: 1
+    path: Assets/Scenes/System/Credits.unity
+    guid: c64fd6e1acdd2474e93eab17016a3414
+  - enabled: 1
+    path: Assets/Scenes/System/Aim&ShootOnline.unity
+    guid: 4036de965eb745a4a884909f9fe30486
+  - enabled: 1
+    path: Assets/Scenes/Pop the Balloons.unity
+    guid: 1ff83a57e2f2f1a4ba34146e5dbcb27f
+  - enabled: 1
+    path: Assets/Scenes/MazeGame.unity
+    guid: f62f4ad254165fc43a14592dcd7bc4cd
+  - enabled: 1
+    path: Assets/Scenes/MathGame.unity
+    guid: 1bced173a54400b41bf0880b627f22bf
+  - enabled: 1
+    path: Assets/Scenes/Match the Cards.unity
+    guid: 34565a93c28e11842ae08fab3b57baf4
+  - enabled: 1
+    path: Assets/Scenes/Hole in One.unity
+    guid: 5e172e87eee501f45ababa8e1c2c1f0b
+  - enabled: 1
+    path: Assets/Scenes/GyroscopGame.unity
+    guid: 6ae0807ea1ff29749b230de1ceb51382
+  - enabled: 1
+    path: Assets/Scenes/GolfGame.unity
+    guid: 5b205ea8c04b39840b091903da4a1a5a
+  - enabled: 1
+    path: Assets/Scenes/Fill The GapNewVariant.unity
+    guid: 5c8a0dc4b55dec149acb7ad79dcc1f76
+  - enabled: 1
+    path: Assets/Scenes/BasketballGame.unity
+    guid: 85f99b92867b25e4b99fe494dd7088dd
+  - enabled: 1
+    path: Assets/Scenes/Aim&Shoot.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
