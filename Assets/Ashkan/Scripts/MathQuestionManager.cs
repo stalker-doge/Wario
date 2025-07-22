@@ -2,41 +2,37 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class MathQuestionHandler : MonoBehaviour
+public class MathQuestionManager : MiniGameManagerBase
 {
-    // UI references for the math question
+    [Header("UI References")]
     public TMP_Text firstNumberText;
     public TMP_Text operatorText;
     public TMP_Text secondNumberText;
 
-    // Prefab for answer options
+    [Header("Answer Options")]
     public GameObject answerOptionPrefab;
-
-    // Spawn points for answer options
     public Transform[] optionSpawnPoints;
 
-    // Stores the correct answer
-    public int correctAnswer;
+    private int correctAnswer;
 
-    void Start()
+    public override void InitializeGame()
     {
         GenerateRandomQuestion();
         GenerateAnswerOptions();
     }
 
-    void GenerateRandomQuestion()
+    private void GenerateRandomQuestion()
     {
-        string[] operators = { "+", "-" }; // Only addition and subtraction allowed
+        string[] operators = { "+", "-" };
         string operatorSymbol = operators[Random.Range(0, operators.Length)];
 
         int firstNumber = 0;
         int secondNumber = 0;
 
-        // Generate numbers based on the selected operator
         switch (operatorSymbol)
         {
             case "+":
-                firstNumber = Random.Range(1, 11); // Numbers between 1 and 10
+                firstNumber = Random.Range(1, 11);
                 secondNumber = Random.Range(1, 11);
                 correctAnswer = firstNumber + secondNumber;
                 break;
@@ -45,60 +41,64 @@ public class MathQuestionHandler : MonoBehaviour
                 firstNumber = Random.Range(1, 11);
                 secondNumber = Random.Range(1, 11);
 
-                // Ensure positive result
                 if (secondNumber > firstNumber)
-                {
-                    int temp = firstNumber;
-                    firstNumber = secondNumber;
-                    secondNumber = temp;
-                }
+                    (firstNumber, secondNumber) = (secondNumber, firstNumber);
 
                 correctAnswer = firstNumber - secondNumber;
                 break;
         }
 
-        // Update question texts
         firstNumberText.text = firstNumber.ToString();
         operatorText.text = operatorSymbol;
         secondNumberText.text = secondNumber.ToString();
     }
 
-    void GenerateAnswerOptions()
+    private void GenerateAnswerOptions()
     {
-        // Initialize answer options with the correct answer
         List<int> options = new List<int> { correctAnswer };
 
-        // Generate additional unique wrong answers
-        while (options.Count < 3) // Only 3 options now
+        while (options.Count < 3)
         {
-            int fakeAnswer = correctAnswer + Random.Range(-5, 6); // Smaller range for fake answers
-            if (fakeAnswer != correctAnswer && !options.Contains(fakeAnswer) && fakeAnswer >= 0)
+            int fakeAnswer = correctAnswer + Random.Range(-5, 6);
+            if (fakeAnswer >= 0 && !options.Contains(fakeAnswer))
                 options.Add(fakeAnswer);
         }
 
         ShuffleList(options);
 
-        // Instantiate answer options
         for (int i = 0; i < options.Count; i++)
         {
             GameObject option = Instantiate(answerOptionPrefab, optionSpawnPoints[i].position, Quaternion.identity);
             option.GetComponentInChildren<TMP_Text>().text = options[i].ToString();
 
-            // Set answer option properties
             AnswerOption optionScript = option.AddComponent<AnswerOption>();
             optionScript.value = options[i];
             optionScript.isCorrect = (options[i] == correctAnswer);
         }
     }
 
-    void ShuffleList(List<int> list)
+    private void ShuffleList(List<int> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
-            int temp = list[i];
             int rand = Random.Range(i, list.Count);
-            list[i] = list[rand];
-            list[rand] = temp;
+            (list[i], list[rand]) = (list[rand], list[i]);
         }
+    }
+
+    public override void EndGame()
+    {
+        if (ScoreManager.Instance)
+            StartCoroutine(ScoreManager.Instance.GameComplete());
+    }
+
+    protected override void RegisterCallbacks()
+    {
+        
+    }
+
+    protected override void UnregisterCallbacks()
+    {
+        
     }
 }

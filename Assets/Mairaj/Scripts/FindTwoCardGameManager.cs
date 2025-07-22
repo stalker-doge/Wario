@@ -1,4 +1,4 @@
-//Mairaj Muhammad ->2415831
+// Mairaj Muhammad -> 2415831
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FindTwoCardGameManager : MonoBehaviour
+public class FindTwoCardGameManager : MiniGameManagerBase
 {
     [SerializeField] private Card[] cards;
     [SerializeField] private Sprite backCardSprite;
@@ -19,7 +19,6 @@ public class FindTwoCardGameManager : MonoBehaviour
     }
 
     public static System.Action SuccessCompletionCallback = null;
-
     [SerializeField] private CardSpriteMap[] cardSpriteMappings;
     [SerializeField] private GridLayoutGroup gridLayoutGroup;
     [SerializeField] private FindTwoCardsVariant variant = FindTwoCardsVariant.mFindTwoCardsNormal;
@@ -30,14 +29,11 @@ public class FindTwoCardGameManager : MonoBehaviour
     private List<Card> selectedCards = new List<Card>();
     private Coroutine countDownCoroutine = null;
 
-    public static System.Action <bool> EnableCardClicking = null;
-
+    public static System.Action<bool> EnableCardClicking = null;
     public static System.Action<Card> OnCardClickedCallback = null;
+
     private void Awake()
     {
-        TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
-
-        // Map sprites
         cardSpriteDict = new Dictionary<CardType, Sprite>();
         foreach (var map in cardSpriteMappings)
         {
@@ -49,14 +45,16 @@ public class FindTwoCardGameManager : MonoBehaviour
         {
             InitializeCards();
         }
+    }
 
-        OnCardClickedCallback += OnCardClicked;
+    public override void InitializeGame()
+    {
+        InitializeCards();
     }
 
     private void InitializeCards()
     {
         CardType[] types = GenerateCardTypes();
-
         for (int i = 0; i < cards.Length; i++)
         {
             var type = types[i];
@@ -69,17 +67,11 @@ public class FindTwoCardGameManager : MonoBehaviour
 
     private CardType[] GenerateCardTypes()
     {
-        // Get all possible card types
         CardType[] allTypes = (CardType[])System.Enum.GetValues(typeof(CardType));
         System.Random rng = new System.Random();
-
-        // Pick the repeated card randomly
         CardType repeated = allTypes[rng.Next(allTypes.Length)];
-
-        // Create a list of remaining types excluding the repeated one
         List<CardType> remaining = allTypes.Where(c => c != repeated).ToList();
 
-        // Shuffle the remaining list and pick two unique ones
         for (int i = 0; i < remaining.Count; i++)
         {
             int swapIndex = rng.Next(i, remaining.Count);
@@ -92,9 +84,7 @@ public class FindTwoCardGameManager : MonoBehaviour
         result[2] = remaining[0];
         result[3] = remaining[1];
 
-        // Shuffle the final result
         Shuffle(result);
-
         return result;
     }
 
@@ -107,7 +97,6 @@ public class FindTwoCardGameManager : MonoBehaviour
             (array[i], array[j]) = (array[j], array[i]);
         }
     }
-
 
     public void OnCardClicked(Card clickedCard)
     {
@@ -129,7 +118,6 @@ public class FindTwoCardGameManager : MonoBehaviour
 
         Card card1 = selectedCards[0];
         Card card2 = selectedCards[1];
-
         bool isMatch = card1.GetCardType() == card2.GetCardType();
 
         if (isMatch && !TimerManager.Instance.LosePage.activeSelf)
@@ -138,8 +126,11 @@ public class FindTwoCardGameManager : MonoBehaviour
             float upscaleValue = 0.2f;
             card1.GetComponent<Button>().interactable = false;
             card2.GetComponent<Button>().interactable = false;
-            card1.gameObject.transform.DOScale(new Vector3(card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + 0.25f), animTimer).SetEase(Ease.OutBack);
-            card2.gameObject.transform.DOScale(new Vector3(card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + 0.25f), animTimer).SetEase(Ease.OutBack);
+
+            Vector3 scale = new Vector3(card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + upscaleValue, card1.GetScaleValue() + 0.25f);
+            card1.transform.DOScale(scale, animTimer).SetEase(Ease.OutBack);
+            card2.transform.DOScale(scale, animTimer).SetEase(Ease.OutBack);
+
             yield return new WaitForSeconds(animTimer);
             SoundManager.Instance?.CardMatchAudioClip();
             SuccessCompletionCallback?.Invoke();
@@ -153,22 +144,14 @@ public class FindTwoCardGameManager : MonoBehaviour
             card2.ShakeCardAndReset();
 
             yield return new WaitForSeconds(0.55f);
-
             card1.ResetCard();
             card2.ResetCard();
-
             EnableCardClicking?.Invoke(true);
 
             if (variant != FindTwoCardsVariant.mFindTwoCardsNormal)
             {
                 Card wrongCard = card2;
-                List<Card> nonSelected = new List<Card>();
-
-                foreach (var card in cards)
-                {
-                    if (card != card1 && card != card2)
-                        nonSelected.Add(card);
-                }
+                List<Card> nonSelected = cards.Where(c => c != card1 && c != card2).ToList();
 
                 if (nonSelected.Count > 0)
                 {
@@ -187,37 +170,40 @@ public class FindTwoCardGameManager : MonoBehaviour
     {
         Vector3 startPosA = a.position;
         Vector3 startPosB = b.position;
-
         int indexA = a.GetSiblingIndex();
         int indexB = b.GetSiblingIndex();
-
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
-
             a.position = Vector3.Lerp(startPosA, startPosB, t);
             b.position = Vector3.Lerp(startPosB, startPosA, t);
-
             yield return null;
         }
 
-        // Final snap to ensure exact positions
         a.position = startPosB;
         b.position = startPosA;
-
-        // Swap sibling indices
         a.SetSiblingIndex(indexB);
         b.SetSiblingIndex(indexA);
 
         gridLayoutGroup.enabled = true;
-        a.gameObject.GetComponent<Button>().interactable = true;
-        b.gameObject.GetComponent<Button>().interactable = true;
+        a.GetComponent<Button>().interactable = true;
+        b.GetComponent<Button>().interactable = true;
         EnableCardClicking.Invoke(true);
     }
 
+    private IEnumerator QuickTutorialCoroutine()
+    {
+        foreach (Card cd in cards)
+            cd.Rotate(true, () => { }, true);
+
+        yield return new WaitForSeconds(tutorialTimerForVariantMode);
+
+        foreach (Card cd in cards)
+            cd.Rotate(false, () => { }, false);
+    }
 
     private void GameCompleteDelayedSound()
     {
@@ -229,42 +215,19 @@ public class FindTwoCardGameManager : MonoBehaviour
         SuccessCompletionCallback?.Invoke();
 
         if (countDownCoroutine != null)
-        {
             StopCoroutine(countDownCoroutine);
-        }
 
         foreach (var card in cards)
         {
             Button cardButton = card.GetComponent<Button>();
             if (cardButton != null)
-            {
                 cardButton.interactable = false;
-            }
         }
 
         if (ScoreManager.Instance && !TimerManager.Instance.LosePage.activeSelf)
-        {
-           StartCoroutine( ScoreManager.Instance.GameComplete());
-        }
+            StartCoroutine(ScoreManager.Instance.GameComplete());
         else
-        {
             Debug.LogError("ScoreManager not found in the scene.");
-        }
-    }
-
-    private IEnumerator QuickTutorialCoroutine()
-    {
-        foreach (Card cd in cards)
-        {
-            cd.Rotate(true, () => { }, true);
-        }
-
-        yield return new WaitForSeconds(tutorialTimerForVariantMode);
-
-        foreach (Card cd in cards)
-        {
-            cd.Rotate(false, () => { }, false);
-        }
     }
 
     private void GameEndFailedCallback()
@@ -272,15 +235,34 @@ public class FindTwoCardGameManager : MonoBehaviour
         StopAllCoroutines();
     }
 
+    public override void EndGame()
+    {
+        GameEndSuccessCallback();
+    }
+
+    protected override void RegisterCallbacks()
+    {
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
+        OnCardClickedCallback += OnCardClicked;
+    }
+
+    protected override void UnregisterCallbacks()
+    {
+        TimeAndLifeManager.FindTwoCardsGameEndCallBack -= GameEndFailedCallback;
+        OnCardClickedCallback -= OnCardClicked;
+    }
+
     private void OnDestroy()
     {
-        OnCardClickedCallback-= OnCardClicked;
+        UnregisterCallbacks();
     }
 }
 
 public enum CardType
 {
-    mTwoClub, mThreeClub, mFourClub, mFiveClub, mSixClub, mSevenClub, mEightClub, mNineClub, mTenClub, mAClub, mJClub, mKClub, mQClub
+    mTwoClub, mThreeClub, mFourClub, mFiveClub, mSixClub,
+    mSevenClub, mEightClub, mNineClub, mTenClub,
+    mAClub, mJClub, mKClub, mQClub
 }
 
 public enum FindTwoCardsVariant

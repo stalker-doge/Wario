@@ -39,7 +39,7 @@ public class ScreenBorders : MonoBehaviour
         
         if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
-            GameManager.Instance.SwipeGameDifficulty = currentDifficulty;
+            //GameManager.Instance.SwipeGameDifficulty = currentDifficulty;
         }
         Camera cam = Camera.main;
 
