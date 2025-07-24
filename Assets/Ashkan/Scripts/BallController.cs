@@ -124,15 +124,15 @@ public class BallController : MonoBehaviour
         }
     }
 
-    public void ForceSwipeLeft()
+    public void ForceSwipeLeft(float force)
     {
-        Vector2 swipeLeft = new Vector2(-150f, 0f);
+        Vector2 swipeLeft = new Vector2(force, 0f);
         ApplySwipeForce(swipeLeft);
     }
 
-    public void ForceSwipeRight()
+    public void ForceSwipeRight(float force)
     {
-        Vector2 swipeRight = new Vector2(150f, 0f);
+        Vector2 swipeRight = new Vector2(force, 0f);
         ApplySwipeForce(swipeRight);
     }
 

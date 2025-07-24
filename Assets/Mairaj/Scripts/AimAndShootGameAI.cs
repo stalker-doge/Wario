@@ -1,6 +1,7 @@
 // Mairaj Muhammad -> 2415831
 using DG.Tweening;
 using UnityEngine;
+using static FirebaseRemoteConfigManager;
 
 public class AimShootGameAI : GameAIBase
 {
@@ -30,7 +31,7 @@ public class AimShootGameAI : GameAIBase
         if (arrowController)
         {
             isPlayingMove = true;
-            bool shouldAimAtTarget = Random.Range(0, 2) == 1;
+            bool shouldAimAtTarget = FirebaseRemoteConfigManager.Instance.IsPerfectShot();
             IsTakingAPerfectShot = shouldAimAtTarget;
             
             if (shouldAimAtTarget)
@@ -52,14 +53,16 @@ public class AimShootGameAI : GameAIBase
     {
         if (!DOTween.IsTweening(game.transform))
         {
-            FindTarget(game.transform, Random.Range(0, 2) == 1 ? MoveTypeAimAndShoot.AimLeft : MoveTypeAimAndShoot.AimRight);
+            AimDirection move = FirebaseRemoteConfigManager.Instance.GetRandomAimSideDirection();
+            FindTarget(game.transform, move == AimDirection.Left ? MoveTypeAimAndShoot.AimLeft : MoveTypeAimAndShoot.AimRight);
         }
     }
     private void RandomShotCase(GameObject game)
     {
         if (!DOTween.IsTweening(game.transform))
         {
-            FindTarget(game.transform, Random.Range(0, 2) == 1 ? MoveTypeAimAndShoot.AimLeft : MoveTypeAimAndShoot.AimRight);
+            AimDirection move = FirebaseRemoteConfigManager.Instance.GetRandomAimSideDirection();
+            FindTarget(game.transform, move == AimDirection.Left ? MoveTypeAimAndShoot.AimLeft : MoveTypeAimAndShoot.AimRight);
         }
     }
 
@@ -68,21 +71,17 @@ public class AimShootGameAI : GameAIBase
         base.ChargeAndShoot(game);
         TrajectoryPredictor.IsEligibleToShoot = false;
         StopFindingTarget(game);
-        DOVirtual.DelayedCall(Random.Range(0.5f, 1.5f), () => AIShootLogic());
-
-        //Invoke("AIShootLogic", Random.Range(0.5f, 1.5f));
+        DOVirtual.DelayedCall(FirebaseRemoteConfigManager.Instance.GetAimAndShootMoveDelay(), () => AIShootLogic(game));
     }
-    private void AIShootLogic()
+    private void AIShootLogic(GameObject game)
     {
-        //Debug.Log("XYZ AIShootLogic");
+        Debug.Log("XYZ AIShootLogic");
         Bullet.ShootBulletLogicAICallback?.Invoke();
         arrowController.HandleShot();
         if (!arrowController.HasFiredAllShots())
         {
-            DOVirtual.DelayedCall(Random.Range(0.5f, 1.5f), () => TakeTimeBeforeShootingAgain());
+            DOVirtual.DelayedCall(FirebaseRemoteConfigManager.Instance.GetAimAndShootMoveDelay(), () => TakeTimeBeforeShootingAgain(game));
         }
-
-        //Invoke("TakeTimeBeforeShootingAgain", Random.Range(0.5f, 1.5f));
     }
 
     private void StopFindingTarget(GameObject game)
@@ -91,24 +90,27 @@ public class AimShootGameAI : GameAIBase
         game.transform.DOKill();
     }
 
-    private void TakeTimeBeforeShootingAgain()
+    private void TakeTimeBeforeShootingAgain(GameObject game)
     {
-        //Debug.Log("XYZ TakeTimeBeforeShooting");
-        arrowController.gameObject.transform.DORotate(new Vector3(0, 0, Random.Range(70, 90)), Random.Range(2, 4)).SetEase(Ease.Linear).OnComplete(() =>
+        Debug.Log("XYZ TakeTimeBeforeShooting");
+        arrowController.gameObject.transform.DORotate(new Vector3(0, 0, Random.Range(70, 90)), FirebaseRemoteConfigManager.Instance.GetAimAndShootMoveDelay()).SetEase(Ease.Linear).OnComplete(() =>
         {
             isPlayingMove = false;
             TrajectoryPredictor.IsEligibleToShoot = true;
+            PlayAIMove(game);
         });
     }
     public void FindTarget(Transform transform, MoveTypeAimAndShoot moveType)
     {
-        //Debug.Log("XYZ FindTargetCalled");
+        Debug.Log("XYZ FindTargetCalled");
         //if (DOTween.IsTweening(transform))
         //    return;
 
         if (moveType == MoveTypeAimAndShoot.AimLeft)
         {
-            transform.DORotate(isTakingAPerfectShot ? new Vector3(0, 0, 180) : new Vector3(0, 0, Random.Range(120, 160)), isTakingAPerfectShot ? Random.Range(6, 10): Random.Range(3, 5)).SetEase(Ease.Linear).OnComplete(() =>
+            float startDelay = FirebaseRemoteConfigManager.Instance.AimAndShootAIResponseSettings.AimAndShootTimerSetting.aimLeftStartRange;
+            float endDelay = FirebaseRemoteConfigManager.Instance.AimAndShootAIResponseSettings.AimAndShootTimerSetting.aimLeftEndRange;
+            transform.DORotate(isTakingAPerfectShot ? new Vector3(0, 0, 180) : new Vector3(0, 0, Random.Range(120, 160)), Random.Range(startDelay, endDelay)).SetEase(Ease.Linear).OnComplete(() =>
             {
                 if (!isTakingAPerfectShot)
                 {
@@ -118,7 +120,9 @@ public class AimShootGameAI : GameAIBase
         }
         else if (moveType == MoveTypeAimAndShoot.AimRight)
         {
-            transform.DORotate(isTakingAPerfectShot ? new Vector3(0, 0, 0) : new Vector3(0, 0, Random.Range(30, 70)), isTakingAPerfectShot ? Random.Range(6, 10) : Random.Range(3, 5)).SetEase(Ease.Linear).OnComplete(() =>
+            float startDelay = FirebaseRemoteConfigManager.Instance.AimAndShootAIResponseSettings.AimAndShootTimerSetting.aimRightStartRange;
+            float endDelay = FirebaseRemoteConfigManager.Instance.AimAndShootAIResponseSettings.AimAndShootTimerSetting.aimRightEndRange;
+            transform.DORotate(isTakingAPerfectShot ? new Vector3(0, 0, 0) : new Vector3(0, 0, Random.Range(30, 70)), Random.Range(startDelay, endDelay)).SetEase(Ease.Linear).OnComplete(() =>
             {
                 if (!isTakingAPerfectShot)
                 {
