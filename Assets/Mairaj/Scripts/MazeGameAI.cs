@@ -10,6 +10,12 @@ public class MazeGameAI : GameAIBase
 
         isPlayingMove = true;
 
-        game.GetComponentInChildren<MazeDragPlayer>().PlayMoveAI(Random.Range(5,8));
+        Debug.Log("XYZ Difficulty " + GameManager.Instance.MazeGameDifficulty);
+
+        MazeTimerSetting settings = FirebaseRemoteConfigManager.Instance.GetRandomMazeTimerSetting(GameManager.Instance.MazeGameDifficulty.ToString());
+
+        Debug.Log("XYZ MazeGameAISettings " + settings.randomRangeStartInterval + " " + settings.randomRangeEndInterval);
+
+        game.GetComponentInChildren<MazeDragPlayer>().PlayMoveAI(Random.Range(settings.randomRangeStartInterval,settings.randomRangeEndInterval));
     }
 }
