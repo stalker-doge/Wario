@@ -179,6 +179,7 @@ public class MazeTimerSetting
     public float probability;
     public int randomRangeStartInterval;
     public int randomRangeEndInterval;
+    public float moveStartDelay;
 }
 
 [System.Serializable]

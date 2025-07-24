@@ -1,4 +1,6 @@
 // Mairaj Muhammad -> 2415831
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 public class MazeGameAI : GameAIBase
 {
@@ -14,8 +16,17 @@ public class MazeGameAI : GameAIBase
 
         MazeTimerSetting settings = FirebaseRemoteConfigManager.Instance.GetRandomMazeTimerSetting(GameManager.Instance.MazeGameDifficulty.ToString());
 
-        Debug.Log("XYZ MazeGameAISettings " + settings.randomRangeStartInterval + " " + settings.randomRangeEndInterval);
+        Debug.Log("XYZ MazeGameAISettings " + settings.randomRangeStartInterval + " " + settings.randomRangeEndInterval + " " + settings.moveStartDelay);
 
-        game.GetComponentInChildren<MazeDragPlayer>().PlayMoveAI(Random.Range(settings.randomRangeStartInterval,settings.randomRangeEndInterval));
+        if (settings.moveStartDelay > 0)
+        {
+            DOVirtual.DelayedCall(settings.moveStartDelay, () =>
+            {
+                game.GetComponentInChildren<MazeDragPlayer>().PlayMoveAI(Random.Range(settings.randomRangeStartInterval, settings.randomRangeEndInterval));
+            });
+        } else
+        {
+            game.GetComponentInChildren<MazeDragPlayer>().PlayMoveAI(Random.Range(settings.randomRangeStartInterval, settings.randomRangeEndInterval));
+        }
     }
 }
