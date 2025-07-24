@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f004774a7efa44eab4c0e289b68f484f, type: 3}
   m_Name: LeaderboardCreatorConfig
   m_EditorClassIdentifier: 
-  authSaveMode: 0
+  authSaveMode: 1
   fileName: leaderboard-creator-guid.txt
   isUpdateLogsEnabled: 1
   leaderboardsFile: {fileID: 11500000, guid: 8ff334e8988744eea42cf12786ee20d5, type: 3}

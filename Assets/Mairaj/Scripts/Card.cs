@@ -63,8 +63,10 @@ public class Card : MonoBehaviour
         shakeSequence.Append(transform.DOShakePosition(0.2f, new Vector3(15f, 0f, 0f), 10, 90, false, true));
         shakeSequence.OnComplete(() =>
         {
+            #if UNITY_ANDROID
             if (Application.platform == RuntimePlatform.Android)
                 Handheld.Vibrate();
+            #endif
         });
     }
 
