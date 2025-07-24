@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// Mairaj Muhammad -> 2415831
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -98,9 +99,12 @@ public class OpponentSelectionScreen : MonoBehaviour
             {
                 string scene = SceneDatabaseManager.Instance?
                     .GetSceneString(GameManager.Instance.SceneToLoad);
-                SceneManager.LoadScene(scene);
 
-                TimeLoggingManager.Instance.StartCountingSessionTime(GameManager.Instance.CurrentGameMode);
+                yield return new WaitForSeconds(1.5f);
+                CurtainAnimController.Instance.AnimateTowardsCenter(0.4f, () => {
+                    SceneManager.LoadScene(scene);
+                    TimeLoggingManager.Instance.StartCountingSessionTime(GameManager.Instance.CurrentGameMode);
+                });
             }
         }
         else

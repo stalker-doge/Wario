@@ -1,8 +1,8 @@
+// Mairaj Muhammad -> 2415831
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class TransitionScreenMultiplayer : MonoBehaviour
 {
     [SerializeField]
@@ -63,16 +63,18 @@ public class TransitionScreenMultiplayer : MonoBehaviour
             yield break;
         }
 
-        // Load scene if not aborted
-        if (!GameManager.Instance.IsRandomMode)
-        {
-            GameManager.Instance.SetCurrentGame(GameManager.Instance.CurrentGameType);
-            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.SceneToLoad));
-        }
-        else
-        {
-            SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.GetRandomScene()));
-        }
+        CurtainAnimController.Instance.AnimateTowardsCenter(0.4f, () => {
+            // Load scene if not aborted
+            if (!GameManager.Instance.IsRandomMode)
+            {
+                GameManager.Instance.SetCurrentGame(GameManager.Instance.CurrentGameType);
+                SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.SceneToLoad));
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneDatabaseManager.Instance.GetSceneString(GameManager.Instance.GetRandomScene()));
+            }
+        });
     }
 
     private void HandleWifiStatus(bool isOn)

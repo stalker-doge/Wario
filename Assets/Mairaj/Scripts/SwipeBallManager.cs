@@ -1,5 +1,5 @@
+// Mairaj Muhammad -> 2415831
 using UnityEngine;
-
 public class SwipeBallManager : MiniGameManagerBase
 {
     public enum Difficulty { Easy, Medium, Hard }
@@ -153,6 +153,6 @@ public class SwipeBallManager : MiniGameManagerBase
     {
         if (circleObject == null) return;
         GameObject circle = Instantiate(circleObject, position, Quaternion.identity);
-        circle.GetComponent<BallController>()?.InitializeBallPlayer(player);
+        circle.GetComponentInChildren<BallController>()?.InitializeBallPlayer(player);
     }
 }

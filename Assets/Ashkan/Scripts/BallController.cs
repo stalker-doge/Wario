@@ -1,4 +1,3 @@
-//using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -14,6 +13,8 @@ public class BallController : MonoBehaviour
 
     [SerializeField]
     private PlayerType playerType;
+    [SerializeField]
+    private PlayerName playerName;
 
     private void Awake()
     {
@@ -41,6 +42,19 @@ public class BallController : MonoBehaviour
             Color blueColor = new Color32(0x00, 0x00, 0xFF, 0xFF);
             GetComponent<SpriteRenderer>().color = blueColor;
         }
+
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            playerName.gameObject.SetActive(true);
+            if (playerType == PlayerType.mUser)
+            {
+                playerName.InitializePlayerName("You");
+            }
+            else if (playerType == PlayerType.mAI)
+            {
+                playerName.InitializePlayerName(GameManager.Instance.Opponent.PlayerName);
+            }
+        }
     }
 
     void Update()
@@ -66,7 +80,9 @@ public class BallController : MonoBehaviour
     private void GenerateSwipeInput()
     {
         // Debug.Log("XYZ GenerateSwipeInput Called");
-        GameManager.Instance.ExecuteAIMove(gameObject);
+        CurtainAnimController.Instance?.AnimateAwayFromCenter(0.5f, () => {
+            GameManager.Instance.ExecuteAIMove(gameObject);
+        });
     }
 
     void DetectSwipeInput()

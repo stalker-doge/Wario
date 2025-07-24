@@ -1,5 +1,5 @@
+// Mairaj Muhammad -> 2415831
 using UnityEngine;
-
 public class AimAndShootGameManager : MiniGameManagerBase
 {
     public DynamicShelfGeneratorAshkan shelfGenerator;
@@ -19,10 +19,14 @@ public class AimAndShootGameManager : MiniGameManagerBase
             shelfGenerator.enabled = true;
 
         SetupArrow(userArrow, PlayerType.mUser);
-        SetupArrow(aiArrow, PlayerType.mAI);
+
+        if (aiArrow != null)
+            SetupArrow(aiArrow, PlayerType.mAI);
 
         SetupTrajectory(userTrajectory, PlayerType.mUser);
-        SetupTrajectory(aiTrajectory, PlayerType.mAI);
+
+        if (aiTrajectory != null)
+            SetupTrajectory(aiTrajectory, PlayerType.mAI);
     }
 
     private void SetupArrow(ArrowController arrow, PlayerType type)

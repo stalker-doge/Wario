@@ -359,9 +359,9 @@ public class MazeGenerator : MonoBehaviour
             MazeDragPlayer player = null;
             if (GameManager.Instance.CurrentGameMode == GameMode.Online)
             {
-                opponentPlayer = Instantiate(playerPrefab, _playerStartCell.transform.position, Quaternion.identity).GetComponent<MazeDragPlayer>();
+                opponentPlayer = Instantiate(playerPrefab, _playerStartCell.transform.position, Quaternion.identity).GetComponentInChildren<MazeDragPlayer>();
                 opponentPlayer.InitializePlayerType(PlayerType.mAI);
-                player = Instantiate(playerPrefab, _playerStartCell.transform.position, Quaternion.identity).GetComponent<MazeDragPlayer>();
+                player = Instantiate(playerPrefab, _playerStartCell.transform.position, Quaternion.identity).GetComponentInChildren<MazeDragPlayer>();
                 player.InitializePlayerType(PlayerType.mUser);
             }
             else if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)

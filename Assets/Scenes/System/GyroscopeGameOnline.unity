@@ -473,6 +473,10 @@ PrefabInstance:
       propertyPath: Parent
       value: 
       objectReference: {fileID: 1890735339}
+    - target: {fileID: 2308517692269811028, guid: 804a048568ec1a9429551c1db0005c66, type: 3}
+      propertyPath: circleObject
+      value: 
+      objectReference: {fileID: 2469081243350233474, guid: e5faa05f31f9ab8459d8b30757bf1041, type: 3}
     - target: {fileID: 5488246601347166218, guid: 804a048568ec1a9429551c1db0005c66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

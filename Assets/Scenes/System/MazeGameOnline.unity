@@ -157,7 +157,7 @@ MonoBehaviour:
   _mazeDepth: 8
   _difficulty: 1
   destinationMarker: {fileID: 3828879308536681871, guid: f8a31373021a3524487b0dbd0ab6a1c7, type: 3}
-  playerPrefab: {fileID: 3828879308536681871, guid: 0ef2eaedca2f66047b250f8d90013eb8, type: 3}
+  playerPrefab: {fileID: 3828879308536681871, guid: 4bcd0bcee4ff52d4292248f2dd531e65, type: 3}
 --- !u!4 &202258087
 Transform:
   m_ObjectHideFlags: 0

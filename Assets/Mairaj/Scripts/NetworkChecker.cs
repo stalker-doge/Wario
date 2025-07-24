@@ -1,8 +1,8 @@
+// Mairaj Muhammad -> 2415831
 using UnityEngine;
 using System;
 using System.Collections;
 using UnityEngine.Networking;
-
 public class NetworkChecker : MonoBehaviour
 {
     public static NetworkChecker Instance { get; private set; }
