@@ -87,9 +87,9 @@ public class GameOverCaseAnim : MonoBehaviour
             yield return new WaitForSeconds(frameRate);
         }
 
-        fireExplosionImage.gameObject.SetActive(false);
-        gameOverText.gameObject.SetActive(false);
-        gameObject.SetActive(false);
+        //fireExplosionImage.gameObject.SetActive(false);
+        //gameOverText.gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     private void AnimateGameOverText()

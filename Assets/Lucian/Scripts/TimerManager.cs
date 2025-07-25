@@ -115,16 +115,18 @@ public class TimerManager : MonoBehaviour
 
                 if (ScoreManager.Instance)
                 {
+                    float additionalDelay = 0f;
                     if (ScoreManager.Instance.GetLives() <= 1)
                     {
                         GameOverPage.SetActive(true);
+                        additionalDelay = 2f;
                     } else
                     {
                         LosePage.SetActive(true);
                     }
                     winloseState = true;
                     Pause(true);
-                    yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(1 + additionalDelay);
                     ScoreManager.Instance.GameFail();
                     LosePage.SetActive(false);
                     GameOverPage.SetActive(false);
@@ -215,6 +217,7 @@ public class TimerManager : MonoBehaviour
             //    Destroy(anim.gameObject.transform.parent.gameObject);
             //}
             CurtainAnimController.DestroyParentCallback?.Invoke();
+            GameOverPage.SetActive(false);
         }
     }
 
