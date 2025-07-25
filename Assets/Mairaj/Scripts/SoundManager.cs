@@ -44,6 +44,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip MenuMusicAudioClip;
 
+    [SerializeField]
+    private AudioClip gameWinCheerAudioClip;
+
     private string GAME_VOLUME_KEY = "GameVolume";
 
     public string GetGameVolumeKey
@@ -135,6 +138,11 @@ public class SoundManager : MonoBehaviour
     public void MenuMusic()
     {
         Instance?.audioSource.PlayOneShot(MenuMusicAudioClip);
+    }
+
+    public void GameWinCheerAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(gameWinCheerAudioClip);
     }
 
     public void SetVolume(float volume)
