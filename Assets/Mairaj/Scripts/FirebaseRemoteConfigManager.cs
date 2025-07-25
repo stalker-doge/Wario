@@ -66,38 +66,43 @@ public class FirebaseRemoteConfigManager : MonoBehaviour
     {
         Debug.Log("XYZ Fetching Firebase Remote Config...");
 
-        var defaults = new Dictionary<string, object>
+        try
         {
-            { AIM_AND_SHOOT_GAME_AI_RESPONSE_SETTINGS_KEY, "{\"AimAndShootTimerSetting\":{\"perfectShotProbability\":0.5,\"aimLeftProbability\":0.5,\"aimRightProbability\":0.5,\"aimRightStartRange\":1,\"aimRightEndRange\":3,\"aimLeftStartRange\":1,\"aimLeftEndRange\":2,\"moveDelayStartRange\":0.25,\"moveDelayEndRange\":0.5}}" },
-            { MAZE_GAME_AI_RESPONSE_SETTINGS_KEY, "{\"MazeTimerSetting\":{\"currentDifficulty\":\"easy\",\"easy\":[{\"probability\":0.25,\"randomRangeStartInterval\":6,\"randomRangeEndInterval\":9,\"moveStartDelay\":0.1},{\"probability\":0.25,\"randomRangeStartInterval\":7,\"randomRangeEndInterval\":10,\"moveStartDelay\":0.1},{\"probability\":0.5,\"randomRangeStartInterval\":10,\"randomRangeEndInterval\":12,\"moveStartDelay\":0.1}],\"medium\":[{\"probability\":0.25,\"randomRangeStartInterval\":5,\"randomRangeEndInterval\":8,\"moveStartDelay\":0.1},{\"probability\":0.25,\"randomRangeStartInterval\":6,\"randomRangeEndInterval\":9,\"moveStartDelay\":0.1},{\"probability\":0.5,\"randomRangeStartInterval\":9,\"randomRangeEndInterval\":11,\"moveStartDelay\":0.1}],\"hard\":[{\"probability\":0.25,\"randomRangeStartInterval\":4,\"randomRangeEndInterval\":7,\"moveStartDelay\":0.1},{\"probability\":0.25,\"randomRangeStartInterval\":5,\"randomRangeEndInterval\":8,\"moveStartDelay\":0.1},{\"probability\":0.5,\"randomRangeStartInterval\":8,\"randomRangeEndInterval\":10,\"moveStartDelay\":0.1}]}}"},
-            { SWIPE_GAME_AI_RESPONSE_SETTINGS_KEY, "{\"SwipeTimerSetting\":{\"easy\":[{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":0.8,\"randomRangeEndInterval\":1.2,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.5},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":2.2,\"randomRangeEndInterval\":3,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.5}],\"medium\":[{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":0.8,\"randomRangeEndInterval\":1.2,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.5},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":3.2,\"randomRangeEndInterval\":4,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.5}],\"hard\":[{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":0.8,\"randomRangeEndInterval\":1.2,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":2.5,\"randomRangeEndInterval\":3,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":4.5,\"randomRangeEndInterval\":5,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":6.5,\"randomRangeEndInterval\":7,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":8.5,\"randomRangeEndInterval\":9,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.2}]}}" }
-        };
+            var defaults = new Dictionary<string, object> {
+                { AIM_AND_SHOOT_GAME_AI_RESPONSE_SETTINGS_KEY, "{\"AimAndShootTimerSetting\":{\"perfectShotProbability\":0.5,\"aimLeftProbability\":0.5,\"aimRightProbability\":0.5,\"aimRightStartRange\":1,\"aimRightEndRange\":3,\"aimLeftStartRange\":1,\"aimLeftEndRange\":2,\"moveDelayStartRange\":0.25,\"moveDelayEndRange\":0.5}}" },
+                { MAZE_GAME_AI_RESPONSE_SETTINGS_KEY, "{\"MazeTimerSetting\":{\"currentDifficulty\":\"easy\",\"easy\":[{\"probability\":0.25,\"randomRangeStartInterval\":6,\"randomRangeEndInterval\":9,\"moveStartDelay\":0.1},{\"probability\":0.25,\"randomRangeStartInterval\":7,\"randomRangeEndInterval\":10,\"moveStartDelay\":0.1},{\"probability\":0.5,\"randomRangeStartInterval\":10,\"randomRangeEndInterval\":12,\"moveStartDelay\":0.1}],\"medium\":[{\"probability\":0.25,\"randomRangeStartInterval\":5,\"randomRangeEndInterval\":8,\"moveStartDelay\":0.1},{\"probability\":0.25,\"randomRangeStartInterval\":6,\"randomRangeEndInterval\":9,\"moveStartDelay\":0.1},{\"probability\":0.5,\"randomRangeStartInterval\":9,\"randomRangeEndInterval\":11,\"moveStartDelay\":0.1}],\"hard\":[{\"probability\":0.25,\"randomRangeStartInterval\":4,\"randomRangeEndInterval\":7,\"moveStartDelay\":0.1},{\"probability\":0.25,\"randomRangeStartInterval\":5,\"randomRangeEndInterval\":8,\"moveStartDelay\":0.1},{\"probability\":0.5,\"randomRangeStartInterval\":8,\"randomRangeEndInterval\":10,\"moveStartDelay\":0.1}]}}"},
+                { SWIPE_GAME_AI_RESPONSE_SETTINGS_KEY, "{\"SwipeTimerSetting\":{\"easy\":[{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":0.8,\"randomRangeEndInterval\":1.2,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.5},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":2.2,\"randomRangeEndInterval\":3,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.5}],\"medium\":[{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":0.8,\"randomRangeEndInterval\":1.2,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.5},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":3.2,\"randomRangeEndInterval\":4,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.5}],\"hard\":[{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":0.8,\"randomRangeEndInterval\":1.2,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":2.5,\"randomRangeEndInterval\":3,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeLeft\",\"randomRangeStartInterval\":4.5,\"randomRangeEndInterval\":5,\"moveForce\":-150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":6.5,\"randomRangeEndInterval\":7,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.2},{\"moveType\":\"SwipeRight\",\"randomRangeStartInterval\":8.5,\"randomRangeEndInterval\":9,\"moveForce\":150,\"moveStartDelay\":0.1,\"probability\":0.2}]}}" }
+            };
 
-        FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaults).ContinueWithOnMainThread(_ =>
-        {
-            FirebaseRemoteConfig.DefaultInstance.FetchAsync(System.TimeSpan.Zero).ContinueWithOnMainThread(fetchTask =>
+            FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaults).ContinueWithOnMainThread(_ =>
             {
-                if (fetchTask.IsCompleted && !fetchTask.IsFaulted && !fetchTask.IsCanceled)
+                FirebaseRemoteConfig.DefaultInstance.FetchAsync(System.TimeSpan.Zero).ContinueWithOnMainThread(fetchTask =>
                 {
-                    FirebaseRemoteConfig.DefaultInstance.ActivateAsync().ContinueWithOnMainThread(activateTask =>
+                    if (fetchTask.IsCompleted && !fetchTask.IsFaulted && !fetchTask.IsCanceled)
                     {
-                        if (activateTask.IsCompleted)
+                        FirebaseRemoteConfig.DefaultInstance.ActivateAsync().ContinueWithOnMainThread(activateTask =>
                         {
-                            _isConfigFetched = true;
-                            Debug.Log("XYZ Remote Config fetched and activated.");
+                            if (activateTask.IsCompleted)
+                            {
+                                _isConfigFetched = true;
+                                Debug.Log("XYZ Remote Config fetched and activated.");
 
-                            LoadMazeGameSettings();
-                            LoadSwipeGameSettings();
-                            LoadAimAndShootSettings();
-                        }
-                    });
-                }
-                else
-                {
-                    Debug.LogError("XYZ Failed to fetch remote config.");
-                }
+                                LoadMazeGameSettings();
+                                LoadSwipeGameSettings();
+                                LoadAimAndShootSettings();
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Debug.LogError("XYZ Failed to fetch remote config.");
+                    }
+                });
             });
-        });
+        } catch (System.Exception exe)
+        {
+            Debug.Log("EXC " + exe.ToString());
+        }
     }
 
     private void LoadSwipeGameSettings()
