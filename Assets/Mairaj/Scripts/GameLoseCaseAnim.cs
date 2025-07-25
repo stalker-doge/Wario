@@ -1,3 +1,4 @@
+// Mairaj Muhammad -> 2415831
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +52,7 @@ public class GameLoseCaseAnim : MonoBehaviour
 
     private void AnimateLoseText()
     {
+        loseTextFromBottom.gameObject.SetActive(true);
         // Scale up with OutBack ease
         loseTextFromBottom.transform
             .DOScale(Vector3.one, 0.5f)
@@ -65,6 +67,7 @@ public class GameLoseCaseAnim : MonoBehaviour
 
     private void AnimateCharacterRise()
     {
+        animCharactersFromBottom.gameObject.SetActive(true);
         animCharactersFromBottom.rectTransform
             .DOAnchorPosY(0, 0.5f)
             .SetEase(Ease.OutCubic);
@@ -83,6 +86,9 @@ public class GameLoseCaseAnim : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         blackScreenImage.gameObject.SetActive(false);
+        loseTextFromBottom.gameObject.SetActive(false);
+        animCharactersFromBottom.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private IEnumerator PlayHeartBrokenAnimation()

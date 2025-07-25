@@ -27,7 +27,7 @@ public class TimerManager : MonoBehaviour
     [SerializeField]
     private GameObject timerBackground;
 
-    public GameObject WinPage,LosePage;
+    public GameObject WinPage,LosePage, GameOverPage;
     public static TimerManager Instance { get; private set; }
 
     public bool winloseState = false;
@@ -115,12 +115,19 @@ public class TimerManager : MonoBehaviour
 
                 if (ScoreManager.Instance)
                 {
-                    LosePage.SetActive(true);
+                    if (ScoreManager.Instance.GetLives() <= 1)
+                    {
+                        GameOverPage.SetActive(true);
+                    } else
+                    {
+                        LosePage.SetActive(true);
+                    }
                     winloseState = true;
                     Pause(true);
                     yield return new WaitForSeconds(1);
                     ScoreManager.Instance.GameFail();
                     LosePage.SetActive(false);
+                    GameOverPage.SetActive(false);
                     winloseState = false;
                 }
             }

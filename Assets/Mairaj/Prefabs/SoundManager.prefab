@@ -158,6 +158,7 @@ MonoBehaviour:
   MenuMusicAudioClip: {fileID: 8300000, guid: 8a50610a4cdc1ee4e92ff088ec6e733f, type: 3}
   gameWinCheerAudioClip: {fileID: 8300000, guid: 103d64fb818771e4ba321fadb93c7a17, type: 3}
   gameLostSadAudioClip: {fileID: 8300000, guid: 163cf67a44c16c846b5c07e015b62548, type: 3}
+  gameOverExplosionAudioClip: {fileID: 8300000, guid: 2802c0eba63c2b84cb7c15c2f87e69cf, type: 3}
 --- !u!114 &4976062257117289611
 MonoBehaviour:
   m_ObjectHideFlags: 0
