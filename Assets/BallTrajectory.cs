@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallTrajectory : MonoBehaviour
+public class BallTrajectory : MonoBehaviour , IMiniGame
 {
     public Rigidbody2D ballRigidbody;
     public Transform shootPoint;
@@ -15,12 +16,8 @@ public class BallTrajectory : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < dotCount; i++)
-        {
-            GameObject dot = Instantiate(dotPrefab, transform);
-            dot.SetActive(false);
-            dots.Add(dot.transform);
-        }
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel");
+        SetDifficulty(difficulty);
     }
 
     public void ShowTrajectory(Vector3 direction)
@@ -45,6 +42,29 @@ public class BallTrajectory : MonoBehaviour
         foreach (Transform dot in dots)
         {
             dot.gameObject.SetActive(false);
+        }
+    }
+
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        if (difficulty == DifficultyLevel.Easy)
+        {
+            dotCount = 10;
+        }
+        else if (difficulty == DifficultyLevel.Medium)
+        {
+            dotCount = 5;
+        }
+        else if (difficulty == DifficultyLevel.Hard)
+        {
+            dotCount = 3;
+        }
+        
+        for (int i = 0; i < dotCount; i++)
+        {
+            GameObject dot = Instantiate(dotPrefab, transform);
+            dot.SetActive(false);
+            dots.Add(dot.transform);
         }
     }
 }
