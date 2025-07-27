@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
-public class FillTheGapManager : MonoBehaviour
+public class FillTheGapManager : MonoBehaviour , IMiniGame
 {
     // Singleton instance
     public static FillTheGapManager Instance { get; private set; }
@@ -48,35 +48,8 @@ public class FillTheGapManager : MonoBehaviour
 
     private void Start()
     {
-        randomVariant = UnityEngine.Random.Range(0, 2);
-        switch (randomVariant)
-        {
-            case 0:
-                variant = FillTheGapVariant.mOneSlots;
-                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
-                    newVariant = NewFillTheGapVariant.mXOneSlots;
-                break;
-            case 1:
-                variant = FillTheGapVariant.mTwoSlots;
-                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
-                    newVariant = NewFillTheGapVariant.mXTwoSlots;
-                break;
-            case 2:
-                variant = FillTheGapVariant.mThreeSlots;
-                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
-                    newVariant = NewFillTheGapVariant.mXThreeSlots;
-                break;
-            case 3:
-                variant = FillTheGapVariant.mFourSlots;
-                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
-                    newVariant = NewFillTheGapVariant.mXFourSlots;
-                break;
-            case 4:
-                variant = FillTheGapVariant.mFiveSlots;
-                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
-                    newVariant = NewFillTheGapVariant.mXFiveSlots;
-                break;
-        }
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel", 0);
+        SetDifficulty(difficulty);
         SelectRandomDropZonesAndUpdateColor();
     }
 
@@ -251,6 +224,50 @@ public class FillTheGapManager : MonoBehaviour
         return values[^1]; // ^1 is the last element (C# 8+)
     }
 
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        if (difficulty == DifficultyLevel.Easy)
+        {
+            randomVariant = UnityEngine.Random.Range(0, 2);
+        }
+        else if (difficulty == DifficultyLevel.Medium)
+        {
+            randomVariant = UnityEngine.Random.Range(2,4);
+        }
+        else if (difficulty == DifficultyLevel.Hard)
+        {
+            randomVariant = UnityEngine.Random.Range(4,6);
+        }
+
+        switch (randomVariant)
+        {
+            case 0:
+                variant = FillTheGapVariant.mOneSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXOneSlots;
+                break;
+            case 1:
+                variant = FillTheGapVariant.mTwoSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXTwoSlots;
+                break;
+            case 2:
+                variant = FillTheGapVariant.mThreeSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXThreeSlots;
+                break;
+            case 3:
+                variant = FillTheGapVariant.mFourSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXFourSlots;
+                break;
+            case 4:
+                variant = FillTheGapVariant.mFiveSlots;
+                if (newVariant != NewFillTheGapVariant.mXZeroSlots)
+                    newVariant = NewFillTheGapVariant.mXFiveSlots;
+                break;
+        }
+    }
 }
 
 public enum FillTheGapVariant

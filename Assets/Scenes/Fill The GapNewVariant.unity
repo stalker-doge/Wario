@@ -1537,7 +1537,7 @@ MonoBehaviour:
   - {fileID: 725606191}
   - {fileID: 1005454951}
   - {fileID: 247247367}
-  variant: 0
+  variant: 2
   newVariant: 1
 --- !u!1001 &685387165
 PrefabInstance:
