@@ -1838,6 +1838,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4977315046150934827, guid: 70d7846abc0dd9d4fa407e997d5fbec2, type: 3}
   m_PrefabInstance: {fileID: 710837072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &744331461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744331463}
+  - component: {fileID: 744331462}
+  m_Layer: 0
+  m_Name: GameDifficultyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &744331462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744331461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f76f5175537ab47a09e326aed3ad60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 1
+--- !u!4 &744331463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744331461}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850432097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 386791141387813222, guid: 97ca6bc5e2fd65043974e009490d567b, type: 3}
@@ -3168,3 +3213,4 @@ SceneRoots:
   - {fileID: 582447337}
   - {fileID: 548144269}
   - {fileID: 265400154}
+  - {fileID: 744331463}

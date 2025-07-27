@@ -44,6 +44,9 @@ public class LevelSwitcher : MonoBehaviour
 
     [SerializeField]
     private GameObject difficultyText;
+    
+    //AS
+    private GameDifficultyManager difficultyManager;
 
     private float timer = 0;
     void Start()
@@ -92,6 +95,10 @@ public class LevelSwitcher : MonoBehaviour
             difficultyIncreased = false;
             FindRandom();
         }
+        
+        //AS
+        difficultyManager = FindObjectOfType<GameDifficultyManager>();
+
     }
 
     // Update is called once per frame
@@ -163,6 +170,7 @@ public class LevelSwitcher : MonoBehaviour
     public void SwitchScene(string sceneName)
     {
         //Load scene
+        PlayerPrefs.SetInt("DifficultyLevel", (int)difficultyManager.GetNextDifficulty()); 
         SceneManager.LoadScene(sceneName);
     }
 

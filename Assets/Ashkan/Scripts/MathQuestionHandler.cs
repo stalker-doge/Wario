@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class MathQuestionHandler : MonoBehaviour
+public class MathQuestionHandler : MonoBehaviour, IMiniGame
 {
     // UI references for the math question
     public TMP_Text firstNumberText;
@@ -18,32 +18,63 @@ public class MathQuestionHandler : MonoBehaviour
     // Stores the correct answer
     public int correctAnswer;
 
+ 
     void Start()
     {
-        GenerateRandomQuestion();
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel", 0);
+        SetDifficulty(difficulty);
+    }
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        GenerateRandomQuestion(difficulty);
         GenerateAnswerOptions();
     }
 
-    void GenerateRandomQuestion()
+    void GenerateRandomQuestion( DifficultyLevel difficultyLevel )
     {
-        string[] operators = { "+", "-" }; // Only addition and subtraction allowed
-        string operatorSymbol = operators[Random.Range(0, operators.Length)];
+        string operatorSymbol;
 
         int firstNumber = 0;
         int secondNumber = 0;
+
+        int upRange , downRange;
+        
+        if (difficultyLevel == DifficultyLevel.Easy)
+        {
+            string[] operators = { "+", "-" }; // Only addition and subtraction allowed
+            operatorSymbol = operators[Random.Range(0, operators.Length)];
+            upRange = 11;
+            downRange = 1;
+
+        }
+        else if (difficultyLevel == DifficultyLevel.Medium)
+        {
+            string[] operators = { "+", "-" ,"x" , "/"}; 
+            operatorSymbol = operators[Random.Range(0, operators.Length)];
+            upRange = 30;
+            downRange = 11;
+        }
+        else
+        {
+            string[] operators = { "+", "-" ,"x" , "/" }; 
+            operatorSymbol = operators[Random.Range(0, operators.Length)];
+            upRange = 150; downRange = 50;
+
+        }
+
 
         // Generate numbers based on the selected operator
         switch (operatorSymbol)
         {
             case "+":
-                firstNumber = Random.Range(1, 11); // Numbers between 1 and 10
-                secondNumber = Random.Range(1, 11);
+                firstNumber = Random.Range(downRange, upRange); // Numbers between 1 and 10
+                secondNumber = Random.Range(downRange, upRange);
                 correctAnswer = firstNumber + secondNumber;
                 break;
 
             case "-":
-                firstNumber = Random.Range(1, 11);
-                secondNumber = Random.Range(1, 11);
+                firstNumber = Random.Range(downRange, upRange);
+                secondNumber = Random.Range(downRange, upRange);
 
                 // Ensure positive result
                 if (secondNumber > firstNumber)
@@ -52,9 +83,24 @@ public class MathQuestionHandler : MonoBehaviour
                     firstNumber = secondNumber;
                     secondNumber = temp;
                 }
-
                 correctAnswer = firstNumber - secondNumber;
                 break;
+            
+            case "x":
+                firstNumber = Random.Range(downRange, upRange); // Numbers between 1 and 10
+                secondNumber = Random.Range(downRange, upRange);
+                correctAnswer = firstNumber * secondNumber;
+                break;
+            
+            case "/":
+                correctAnswer = Random.Range(downRange, upRange); 
+
+                secondNumber = Random.Range(downRange, upRange); 
+
+                firstNumber = correctAnswer * secondNumber;
+
+                break;
+                
         }
 
         // Update question texts
@@ -101,4 +147,6 @@ public class MathQuestionHandler : MonoBehaviour
             list[rand] = temp;
         }
     }
+
+ 
 }
