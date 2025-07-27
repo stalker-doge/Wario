@@ -11,7 +11,11 @@ public class FirebaseManager : MonoBehaviour
 
     public bool IsFirebaseReady { get; private set; } = false;
 
-    public System.Action OnFirebaseReady = null;
+    public Action OnFirebaseReady = null;
+
+#if UNITY_EDITOR
+    private FirebaseApp editorApp = null;
+#endif
 
     void Awake()
     {
@@ -33,7 +37,21 @@ public class FirebaseManager : MonoBehaviour
             var dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available)
             {
-                Debug.Log("XYZ Firebase initialized successfully.");
+                Debug.Log("XYZ Firebase dependencies available.");
+
+#if UNITY_EDITOR
+                AppOptions options = new AppOptions
+                {
+                    DatabaseUrl = new Uri("https://wario-33848-default-rtdb.europe-west1.firebasedatabase.app"),
+                    ProjectId = "wario-33848",
+                    AppId = "1:81828985940:android:992b838da38c45cea581c1",
+                    ApiKey = "AIzaSyBkqz1aQw50Shr-F2D8vEKOgNk2A_MBHKE"
+                };
+
+                editorApp = FirebaseApp.Create(options, "EditorTestApp");
+                Debug.Log("XYZ FirebaseApp 'EditorTestApp' created with correct DB URL.");
+#endif
+
                 IsFirebaseReady = true;
                 OnFirebaseReady?.Invoke();
             }
@@ -46,21 +64,34 @@ public class FirebaseManager : MonoBehaviour
 
     public void LogSessionTime(GameMode gameMode, string seconds, int totalPlays)
     {
-        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+#if UNITY_EDITOR
+        if (editorApp == null)
+        {
+            Debug.LogError("XYZ Firebase editor app not initialized.");
+            return;
+        }
 
-        Debug.Log("XYZ RootReference " + reference);
+        DatabaseReference reference = FirebaseDatabase.GetInstance(editorApp).RootReference;
+#else
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+#endif
+
+        Debug.Log("XYZ RootReference: " + reference);
 
         string deviceId = SystemInfo.deviceUniqueIdentifier;
 
-        SessionEngagementData user = new SessionEngagementData {time = seconds, totalPlays = totalPlays + ""};
-        string json = JsonUtility.ToJson(user);
+        SessionEngagementData user = new SessionEngagementData
+        {
+            time = seconds,
+            totalPlays = totalPlays.ToString()
+        };
 
+        string json = JsonUtility.ToJson(user);
         Debug.Log("XYZ JSON being pushed: " + json);
 
         reference.Child("users").Child(deviceId).Child(gameMode.ToString()).SetRawJsonValueAsync(json)
             .ContinueWithOnMainThread(pushTask =>
             {
-                Debug.Log("XYZ Did Come Here");
                 if (pushTask.IsCompleted && !pushTask.IsFaulted && !pushTask.IsCanceled)
                 {
                     Debug.Log("XYZ Successfully pushed user data to Firebase.");
