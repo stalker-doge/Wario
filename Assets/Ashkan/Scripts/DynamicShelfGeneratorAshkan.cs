@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class DynamicShelfGeneratorAshkan : MonoBehaviour
+public class DynamicShelfGeneratorAshkan : MonoBehaviour , IMiniGame
 {
     public enum Difficulty { Easy, Medium, Hard }
-    public Difficulty currentDifficulty = Difficulty.Medium;
 
     [Header("Prefabs")]
     public GameObject wallPrefab; // Vertical wall prefab (used for sides & shelves)
@@ -25,22 +24,20 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
 
     private void Start()
     {
-        randomVariant = Random.Range(0, 2);
-        switch (randomVariant)
-        {
-            case 0:
-                currentDifficulty = Difficulty.Easy;
-                break;
-            case 1:
-                currentDifficulty = Difficulty.Medium;
-                break;
-        }
-        CalculateScreenSize();
-        CreateFrameWalls();
-        CreateShelves();
+      
+       CalculateScreenSize();
+       CreateFrameWalls();
+       
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel", 0);
+        SetDifficulty(difficulty);
         PlaceTargetOnTopShelf();
+
     }
 
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        CreateShelves(difficulty);
+    }
     void CalculateScreenSize()
     {
         Camera cam = Camera.main;
@@ -77,7 +74,7 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
             .transform.localScale = new Vector3(screenWidth, wallThickness, 1);
     }
 
-    void CreateShelves()
+    void CreateShelves(DifficultyLevel difficulty)
     {
         float bottomY = -screenHeight / 2f + wallThickness * 2f;
         float topY = screenHeight / 2f - wallThickness;
@@ -87,15 +84,15 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
         string lastSide = "";
         int shelfCount = 3;
 
-        switch (currentDifficulty)
+        switch (difficulty)
         {
-            case Difficulty.Easy:
+            case DifficultyLevel.Easy:
                 shelfCount = 1;
                 break;
-            case Difficulty.Medium:
-                shelfCount = 2;
+            case DifficultyLevel.Medium:
+                shelfCount = 3;
                 break;
-            case Difficulty.Hard:
+            case DifficultyLevel.Hard:
                 shelfCount = 4;
                 break;
         }
@@ -143,4 +140,6 @@ public class DynamicShelfGeneratorAshkan : MonoBehaviour
 
         Instantiate(targetPrefab, targetPosition, Quaternion.identity, transform);
     }
+
+   
 }
