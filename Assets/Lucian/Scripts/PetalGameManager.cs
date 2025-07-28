@@ -5,7 +5,7 @@ public class PetalGameManager : MonoBehaviour
 {
     public static PetalGameManager Instance;
 
-    private int totalPetals;
+    private int totalPetals = 0;
     private int pickedPetals = 0;
 
     public GameObject endGamePanel;
@@ -13,15 +13,19 @@ public class PetalGameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
 
-    void Start()
-    {
-        totalPetals = GameObject.FindGameObjectsWithTag("Petal").Length;
         if (endGamePanel != null)
             endGamePanel.SetActive(false);
+    }
+
+    public void RegisterPetals(int count)
+    {
+        totalPetals = count;
+        pickedPetals = 0;
     }
 
     public void PetalPicked()
@@ -41,5 +45,6 @@ public class PetalGameManager : MonoBehaviour
             endGamePanel.SetActive(true);
             endGameText.text = Random.value > 0.5f ? "They love me!" : "They love me not...";
         }
+        Debug.Log("All petals picked! Game Over.");
     }
 }
