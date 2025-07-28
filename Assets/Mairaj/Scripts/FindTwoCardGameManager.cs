@@ -6,7 +6,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FindTwoCardGameManager : MonoBehaviour
+public class FindTwoCardGameManager : MonoBehaviour ,IMiniGame
 {
     [SerializeField] private Card[] cards;
     [SerializeField] private Sprite backCardSprite;
@@ -35,6 +35,9 @@ public class FindTwoCardGameManager : MonoBehaviour
     public static System.Action<Card> OnCardClickedCallback = null;
     private void Awake()
     {
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel");
+        SetDifficulty(difficulty);
+        
         TimeAndLifeManager.FindTwoCardsGameEndCallBack += GameEndFailedCallback;
 
         // Map sprites
@@ -300,6 +303,22 @@ public class FindTwoCardGameManager : MonoBehaviour
     private void OnDestroy()
     {
         OnCardClickedCallback-= OnCardClicked;
+    }
+
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        if (difficulty == DifficultyLevel.Easy)
+        {
+            variant = FindTwoCardsVariant.mFindTwoCardsNormal;
+        }
+        else if (difficulty == DifficultyLevel.Medium)
+        {
+            variant = FindTwoCardsVariant.mFindTwoCardsSwapAndTutorialMode;
+        }
+        else
+        {
+            variant = FindTwoCardsVariant.mFindTwoCardsSwapMode;
+        }
     }
 }
 

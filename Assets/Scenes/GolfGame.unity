@@ -508,7 +508,7 @@ MonoBehaviour:
   ballRigidbody: {fileID: 2093707658}
   shootPoint: {fileID: 203482858}
   dotPrefab: {fileID: 3327319725810970542, guid: f89025a07393eae4eb33ad6bcb923566, type: 3}
-  dotCount: 5
+  dotCount: 10
   dotSpacing: 0.1
   dragController: {fileID: 1756968723}
 --- !u!4 &203482858

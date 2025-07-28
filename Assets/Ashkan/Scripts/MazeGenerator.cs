@@ -10,7 +10,7 @@ public enum MazeDifficulty
     Hard = 3
 }
 
-public class MazeGenerator : MonoBehaviour
+public class MazeGenerator : MonoBehaviour ,IMiniGame
 {
     [SerializeField] private MazeCell _mazeCellPrefab;
     [SerializeField] private Transform Parent;
@@ -25,6 +25,9 @@ public class MazeGenerator : MonoBehaviour
 
     void Start()
     {
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel");
+        SetDifficulty(difficulty);
+        
         if (MazeDifficulty.Easy == _difficulty)
         {
             if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
@@ -338,6 +341,22 @@ public class MazeGenerator : MonoBehaviour
         if (farthest != null && destinationMarker != null)
         {
             Instantiate(destinationMarker, farthest.transform.position, Quaternion.identity);
+        }
+    }
+
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        if (difficulty == DifficultyLevel.Easy)
+        {
+            _difficulty = MazeDifficulty.Easy;
+        }
+        else if (difficulty == DifficultyLevel.Medium)
+        {
+            _difficulty = MazeDifficulty.Medium;
+        }
+        else
+        {
+            _difficulty = MazeDifficulty.Hard;
         }
     }
 } 

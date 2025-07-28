@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Balloon : MonoBehaviour
+public class Balloon : MonoBehaviour,IMiniGame
 {
     public static System.Action BalloonPoppedCallback = null;
     public static List<Balloon> allBalloons = new List<Balloon>();
@@ -37,6 +37,9 @@ public class Balloon : MonoBehaviour
         animator.enabled = false;
 
         allBalloons.Add(this);
+        
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel");
+        SetDifficulty(difficulty);
     }
 
     private void OnDestroy()
@@ -141,5 +144,21 @@ public class Balloon : MonoBehaviour
         Red,
         Yellow,
         Blue
+    }
+
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        if (difficulty == DifficultyLevel.Easy)
+        {
+            moveSpeed =+ 50;
+        }
+        else if (difficulty == DifficultyLevel.Medium)
+        {
+            moveSpeed =+ 100;
+        }
+        else
+        {
+            moveSpeed =+ 150;
+        }
     }
 }

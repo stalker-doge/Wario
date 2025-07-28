@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScreenBorders : MonoBehaviour
+public class ScreenBorders : MonoBehaviour , IMiniGame
 {
     public enum Difficulty { Easy, Medium, Hard }
     public Difficulty currentDifficulty = Difficulty.Medium;
@@ -16,26 +16,15 @@ public class ScreenBorders : MonoBehaviour
     public float rnd ;
     void Start()
     {
-        
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel");
+        SetDifficulty(difficulty);
         CreateBordersAndRects();
      
     }
 
     void CreateBordersAndRects()
     {
-        rnd = Mathf.RoundToInt(Random.Range(0f, 3f));
-        switch (rnd)
-        {
-            case 0 :
-                currentDifficulty = Difficulty.Easy;
-                break;
-            case 1 :
-                currentDifficulty = Difficulty.Medium;
-                break;
-            case 2 : 
-                currentDifficulty = Difficulty.Hard;
-                break;
-        }
+        
         
         Camera cam = Camera.main;
 
@@ -129,5 +118,21 @@ public class ScreenBorders : MonoBehaviour
 
         // Instantiate inside parent so scaling is applied
         GameObject circle = Instantiate(circleObject, position, Quaternion.identity);
+    }
+
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        switch (difficulty)
+        {
+            case DifficultyLevel.Easy :
+                currentDifficulty = Difficulty.Easy;
+                break;
+            case DifficultyLevel.Medium :
+                currentDifficulty = Difficulty.Medium;
+                break;
+            case DifficultyLevel.Hard : 
+                currentDifficulty = Difficulty.Hard;
+                break;
+        }
     }
 }

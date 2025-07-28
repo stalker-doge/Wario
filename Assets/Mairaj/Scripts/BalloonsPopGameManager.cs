@@ -1,7 +1,7 @@
 //Mairaj Muhammad ->2415831
 using UnityEngine;
 using System.Collections.Generic;
-public class BalloonsPopGameManager : MonoBehaviour
+public class BalloonsPopGameManager : MonoBehaviour , IMiniGame
 {
     [SerializeField] private RectTransform canvasRect;
 
@@ -43,6 +43,9 @@ public class BalloonsPopGameManager : MonoBehaviour
 
     void Start()
     {
+        DifficultyLevel difficulty = (DifficultyLevel)PlayerPrefs.GetInt("DifficultyLevel");
+        SetDifficulty(difficulty);
+        
         totalBalloonsCount = yellowCount + blueCount + redCount;
         List<Vector2> points = GenerateRandomPoints(canvasRect, totalBalloonsCount);
 
@@ -148,5 +151,27 @@ public class BalloonsPopGameManager : MonoBehaviour
         {
             StartCoroutine(ScoreManager.Instance.GameComplete());
         }    
+    }
+
+    public void SetDifficulty(DifficultyLevel difficulty)
+    {
+        if (difficulty == DifficultyLevel.Easy)
+        {
+            redCount = 3;
+            blueCount = 3;
+            yellowCount = 3;
+        }
+        else if (difficulty == DifficultyLevel.Medium)
+        {
+            redCount = 5;
+            blueCount = 5;
+            yellowCount = 5;
+        }
+        else
+        {
+            redCount = 7;
+            blueCount = 9;
+            yellowCount = 9;
+        }
     }
 }
