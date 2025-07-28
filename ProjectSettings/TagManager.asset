@@ -11,6 +11,7 @@ TagManager:
   - MazeGoal
   - MazeWall
   - Ground
+  - Petal
   layers:
   - Default
   - TransparentFX
