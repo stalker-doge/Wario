@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public Difficulty SwipeGameDifficulty;
     private GameType gameType;
     private bool isRandomMode = false;
+    public MazeDifficulty MazeGameDifficulty;
     public string LevelTitle {
         get { return levelTitle; }
         set { levelTitle = value; }

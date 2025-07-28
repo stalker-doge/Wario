@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum MazeDifficulty
 {
@@ -30,6 +32,21 @@ public class MazeGenerator : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        {
+            string difficultyStr = FirebaseRemoteConfigManager.Instance.MazeGameAIResponseSettings.MazeTimerSetting.currentDifficulty;
+
+            if (!string.IsNullOrEmpty(difficultyStr) &&
+                Enum.TryParse(difficultyStr, ignoreCase: true, out MazeDifficulty parsedDifficulty))
+            {
+                _difficulty = parsedDifficulty;
+            }
+            else
+            {
+                _difficulty = MazeDifficulty.Easy;
+            }
+
+        }
         if (MazeDifficulty.Easy == _difficulty)
         {
             if (Screen.resolutions[Screen.resolutions.Length - 1].width > 1500)
@@ -97,6 +114,7 @@ public class MazeGenerator : MonoBehaviour
                     _mazeGrid[x, z] = cell;
                 }
             }
+            GameManager.Instance.MazeGameDifficulty = _difficulty;
         }
 
         if (_difficulty == MazeDifficulty.Easy && GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)

@@ -1,4 +1,5 @@
 // Mairaj Muhammad -> 2415831
+using DG.Tweening;
 using UnityEngine;
 public class SwipeBallGameAI : GameAIBase
 {
@@ -11,23 +12,39 @@ public class SwipeBallGameAI : GameAIBase
         isPlayingMove = true;
         var ball = game.GetComponent<BallController>();
 
-        if (GameManager.Instance.SwipeGameDifficulty == SwipeBallManager.Difficulty.Easy)
+        SwipeBallManager.Difficulty difficulty = GameManager.Instance.SwipeGameDifficulty;
+
+        SwipeMoveSetting[] swipeSettings = FirebaseRemoteConfigManager.Instance
+            .GetSwipeSettingsByDifficulty(difficulty.ToString());
+
+        if (swipeSettings == null || swipeSettings.Length == 0)
         {
-            ball.Invoke(nameof(BallController.ForceSwipeLeft), Random.Range(0.8f, 1.2f));
-            ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(2.2f,3f));
+            Debug.LogWarning($"No swipe settings found for difficulty: {difficulty}");
+            return;
         }
-        else if (GameManager.Instance.SwipeGameDifficulty == SwipeBallManager.Difficulty.Medium)
+
+        foreach (var setting in swipeSettings)
         {
-            ball.Invoke(nameof(BallController.ForceSwipeLeft), Random.Range(0.8f, 1.2f));
-            ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(3.2f, 4f));
+            float delay = Random.Range(setting.randomRangeStartInterval, setting.randomRangeEndInterval)
+                          + setting.moveStartDelay;
+
+            // Choose swipe direction based on moveType string
+            DOVirtual.DelayedCall(delay, () =>
+            {
+                if (setting.moveType.Equals("SwipeLeft", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    ball.ForceSwipeLeft(setting.moveForce);
+                }
+                else if (setting.moveType.Equals("SwipeRight", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    ball.ForceSwipeRight(setting.moveForce);
+                }
+                else
+                {
+                    Debug.LogWarning($"Unknown moveType: {setting.moveType}");
+                }
+            });
         }
-        else if (GameManager.Instance.SwipeGameDifficulty == SwipeBallManager.Difficulty.Hard)
-        {
-            ball.Invoke(nameof(BallController.ForceSwipeLeft), Random.Range(0.8f, 1.2f));
-            ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(2.5f, 3f));
-            ball.Invoke(nameof(BallController.ForceSwipeLeft), Random.Range(4.5f, 5f));
-            ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(6.5f, 7f));
-            ball.Invoke(nameof(BallController.ForceSwipeRight), Random.Range(8.5f, 9f));
-        }
+
     }
 }

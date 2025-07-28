@@ -1,4 +1,5 @@
 ﻿//Mairaj Muhammad ->2415831
+using System;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
@@ -43,6 +44,15 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField]
     private AudioClip MenuMusicAudioClip;
+
+    [SerializeField]
+    private AudioClip gameWinCheerAudioClip;
+
+    [SerializeField]
+    private AudioClip gameLostSadAudioClip;
+
+    [SerializeField]
+    private AudioClip gameOverExplosionAudioClip;
 
     private string GAME_VOLUME_KEY = "GameVolume";
 
@@ -137,11 +147,25 @@ public class SoundManager : MonoBehaviour
         Instance?.audioSource.PlayOneShot(MenuMusicAudioClip);
     }
 
+    public void GameWinCheerAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(gameWinCheerAudioClip);
+    }
+
+    public void GameLoseSadAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(gameLostSadAudioClip);
+    }
+
+    public void GameOverExplosionAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(gameOverExplosionAudioClip);
+    }
+
     public void SetVolume(float volume)
     {
         audioSource.volume = volume;
 
         PlayerPrefs.SetFloat(GAME_VOLUME_KEY, volume);
     }
-
 }

@@ -138,7 +138,8 @@ public class ScoreManager : MonoBehaviour
             TimerManager.Instance.ResetTimer();
             yield return new WaitForSeconds(1);
             TimerManager.Instance.WinPage.SetActive(false);
-            anims.SetActive(true);
+            if (anims)
+                anims.SetActive(true);
             TimerManager.Instance.winloseState = false;
             //goes back to the main menu
             SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.Loading));
