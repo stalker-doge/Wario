@@ -876,7 +876,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.80555, y: 0.80555, z: 0.80555}
+  m_LocalScale: {x: 0.18609816, y: 0.18609816, z: 0.18609816}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1826225502}
@@ -922,8 +922,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 495aa4e62c25c294b9416a97936b959c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -970,7 +970,7 @@ MonoBehaviour:
   collisionCount: 0
   collisionCountMax: 15
   bulletLimit: 0
-  playerType: 0
+  playerType: 1
 --- !u!4 &1603550379
 Transform:
   m_ObjectHideFlags: 0
@@ -1060,6 +1060,7 @@ MonoBehaviour:
   oneRemaining: {fileID: 917089629}
   shootCount: 0
   playerType: 0
+  playerName: {fileID: 0}
 --- !u!61 &1826225500
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1112,7 +1113,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826225498}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1147,7 +1148,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.9892735, b: 0.4292453, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
