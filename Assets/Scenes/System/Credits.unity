@@ -893,7 +893,10 @@ MonoBehaviour:
   levelName: {fileID: 0}
   localizedLevelName: {fileID: 0}
   curtainAnimTimer: 0
+  errorPopup: {fileID: 0}
+  gamesToPlay: 5
   difficultyIncreased: 0
+  difficultyText: {fileID: 0}
 --- !u!1 &1389080210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,6 +1256,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5072764241655593627, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_text
+      value: 'Daniel Slater
+
+        Sam Allen
+
+        Gabriel Lupton Levy'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004576485102881026, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -649
+      objectReference: {fileID: 0}
     - target: {fileID: 6610097706621040671, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_fontSize
       value: 18
@@ -1273,6 +1288,10 @@ PrefabInstance:
       propertyPath: m_enableAutoSizing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7015821982184734851, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -891
+      objectReference: {fileID: 0}
     - target: {fileID: 8296241895247264459, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_fontSize
       value: 18
@@ -1288,6 +1307,10 @@ PrefabInstance:
     - target: {fileID: 8296241895247264459, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637691129110694938, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1156.7562
       objectReference: {fileID: 0}
     - target: {fileID: 9148880986818653325, guid: dd67fd52b075fd54b9c2fe21a8ab5dd0, type: 3}
       propertyPath: m_fontSize
