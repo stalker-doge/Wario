@@ -62,7 +62,10 @@ public class NewBehaviourScript : MonoBehaviour
         //lives.text = "Lives: " + PlayerPrefs.GetInt("Lives", 3).ToString();
         currentScoreEvent = score.GetComponent<LocalizeStringEvent>();
         //livesCountEvent = lives.GetComponent<LocalizeStringEvent>();
-        SetSmartInt(currentScoreEvent, "targetValue", PlayerPrefs.GetInt("Score", 0));
+        if (currentScoreEvent)
+        {
+            SetSmartInt(currentScoreEvent, "targetValue", PlayerPrefs.GetInt("Score", 0));
+        }
         //SetSmartInt(livesCountEvent, "targetValue", PlayerPrefs.GetInt("Lives", 3));
         //if lives is less than or equal 0, immediately switch to the end scene
         if (PlayerPrefs.GetInt("Lives", 3) <= 0)
