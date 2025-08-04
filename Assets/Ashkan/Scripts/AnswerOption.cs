@@ -17,8 +17,12 @@ public class AnswerOption : MonoBehaviour
 
     void OnMouseDown()
     {
-        if(!TimerManager.Instance.winloseState)
+        if (!TimerManager.Instance.winloseState)
+        {
             dragging = true;
+            SoundManager.Instance.MathPopAudioClip();
+        }
+
     }
 
     void OnMouseDrag()
@@ -53,6 +57,7 @@ public class AnswerOption : MonoBehaviour
                     transform.position = startPosition;
                     SoundManager.Instance?.CardMismatchAudioClip();
                     FlashBoundaryManager.OnFlashRequested?.Invoke();
+                    Camera.main.GetComponent<CameraShake>().switchh = true;
 
                 }
             }

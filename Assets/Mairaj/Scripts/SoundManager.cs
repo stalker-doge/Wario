@@ -53,6 +53,18 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private AudioClip gameOverExplosionAudioClip;
+    
+    [SerializeField]
+    private AudioClip golfGolaAudioClip;
+    
+    [SerializeField]
+    private AudioClip golfBallHitAudioClip;
+    
+    [SerializeField]
+    private AudioClip basketballBounceAudioClip;
+    
+    [SerializeField]
+    private AudioClip mathPopAudioClip;
 
     private string GAME_VOLUME_KEY = "GameVolume";
 
@@ -160,6 +172,25 @@ public class SoundManager : MonoBehaviour
     public void GameOverExplosionAudioClip()
     {
         Instance?.audioSource.PlayOneShot(gameOverExplosionAudioClip);
+    } 
+    
+    public void GolfGoalAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(golfBallHitAudioClip);
+    }  
+    
+    public void GolfHitAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(golfGolaAudioClip);
+    } 
+    public void BasketballBounceAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(basketballBounceAudioClip);
+    }    
+    
+    public void MathPopAudioClip()
+    {
+        Instance?.audioSource.PlayOneShot(mathPopAudioClip);
     }
 
     public void SetVolume(float volume)

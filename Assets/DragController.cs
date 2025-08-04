@@ -79,6 +79,10 @@ public class DragController : MonoBehaviour
                 DragEnd();
             }
 
+            if (TimerManager.Instance.winloseState)
+            {
+                lineRenderer.enabled = false;
+            }
     }
 
     void DragStart()
@@ -105,6 +109,7 @@ public class DragController : MonoBehaviour
             lineRenderer.SetPosition(1, limitVector);
         }
 
+       
     }
 
     void DragEnd()
@@ -131,6 +136,9 @@ public class DragController : MonoBehaviour
         isGrounded = false;
         shoot = true;
         trajectory.HideTrajectory();
+        
+        if (SceneManager.GetActiveScene().name ==  "GolfGame")
+            SoundManager.Instance.GolfHitAudioClip();
 
     }
 

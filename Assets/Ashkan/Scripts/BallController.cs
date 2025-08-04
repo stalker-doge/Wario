@@ -16,6 +16,7 @@ public class BallController : MonoBehaviour
     [SerializeField]
     private PlayerName playerName;
 
+    private CameraShake cameraShake;
     private void Awake()
     {
         if (GameManager.Instance.CurrentGameMode == GameMode.Online)
@@ -23,6 +24,8 @@ public class BallController : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Ground");
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ground"), gameObject.layer, true);
         }
+        
+        cameraShake = Camera.main.GetComponent<CameraShake>();
     }
     void Start()
     {
@@ -176,6 +179,7 @@ public class BallController : MonoBehaviour
                 Destroy(dust, 0.3f);
 
                 SoundManager.Instance.ShootAudioClip();
+                cameraShake.switchh = true;
             }
         }
     }
