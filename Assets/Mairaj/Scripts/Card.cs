@@ -60,7 +60,7 @@ public class Card : MonoBehaviour
         SoundManager.Instance?.CardMismatchAudioClip();
         Sequence shakeSequence = DOTween.Sequence();
         shakeSequence.AppendInterval(0.3f);
-        shakeSequence.Append(transform.DOShakePosition(0.2f, new Vector3(15f, 0f, 0f), 10, 90, false, true));
+        shakeSequence.Append(transform.DOShakePosition(0.2f, new Vector3(45f, 15f, 0f), 10, 90, false, true));
         shakeSequence.OnComplete(() =>
         {
             #if UNITY_ANDROID

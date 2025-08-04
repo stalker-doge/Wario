@@ -128,7 +128,6 @@ public class TimerManager : MonoBehaviour
                     Pause(true);
                     yield return new WaitForSeconds(1 + additionalDelay);
                     ScoreManager.Instance.GameFail();
-                    LosePage.SetActive(false);
                     GameOverPage.SetActive(false);
                     winloseState = false;
                 }
@@ -218,6 +217,12 @@ public class TimerManager : MonoBehaviour
             //}
             CurtainAnimController.DestroyParentCallback?.Invoke();
             GameOverPage.SetActive(false);
+        }
+
+        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        {
+            Instance.WinPage.SetActive(false);
+            LosePage.SetActive(false);
         }
     }
 
