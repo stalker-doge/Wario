@@ -32,6 +32,8 @@ public class MazeGenerator : MonoBehaviour
 
     void Start()
     {
+        
+
         if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
             string difficultyStr = FirebaseRemoteConfigManager.Instance.MazeGameAIResponseSettings.MazeTimerSetting.currentDifficulty;

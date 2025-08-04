@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallScript : MonoBehaviour
 {
@@ -24,13 +25,20 @@ public class BallScript : MonoBehaviour
     {
         if (other.CompareTag("Goal"))
         {
-            Debug.Log("Goal");
             if (!TimerManager.Instance.LosePage.activeSelf)
             {
-                Debug.Log("HEYYYY");
-                // Snap to placeholder if correct
                 SoundManager.Instance?.CardMatchAudioClip();
                 StartCoroutine(ScoreManager.Instance?.GameComplete());
+
+                if (SceneManager.GetActiveScene().name ==  "GolfGame")
+                {
+                    SoundManager.Instance.GolfGoalAudioClip();
+                }
+
+                if (SceneManager.GetActiveScene().name ==  "BasketballGame")
+                {
+                    mainCam.GetComponent<CameraShake>().switchh = true;
+                }
             }
         }
     }
@@ -41,6 +49,11 @@ public class BallScript : MonoBehaviour
         {
             StartCoroutine(RespawnWithDelay());
             DragController.Instance.shoot = false;
+            
+            if (SceneManager.GetActiveScene().name ==  "BasketballGame")
+            {
+                SoundManager.Instance.BasketballBounceAudioClip();
+            }
         }
     }
 
