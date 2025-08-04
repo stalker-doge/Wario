@@ -159,6 +159,7 @@ MonoBehaviour:
   shelfSpacingStart: 3
   shelfWidthFactorMin: 0.25
   shelfWidthFactorMax: 0.45
+  randomVariant: 0
 --- !u!4 &165935401
 Transform:
   m_ObjectHideFlags: 0
@@ -552,11 +553,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3962812470986539896, guid: f2863e641e6ef1242bcfc2e5c39761f1, type: 3}
+  collisionAnimationObject: {fileID: 0}
   shootPoint: {fileID: 1276213563}
   arrow: {fileID: 1826225499}
   bulletSpeed: 20
   collisionCount: 0
   collisionCountMax: 15
+  bulletLimit: 0
+  playerType: 0
 --- !u!4 &1603550379
 Transform:
   m_ObjectHideFlags: 0
@@ -750,10 +754,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8d39e3f1d57904ea481fefe27869e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepAngle: 10
-  swipeThreshold: 10
+  rotationSensitivity: 0.3
   minAngle: 0
   maxAngle: 180
+  minDistanceThreshold: 1
+  offsetDistance: 3
+  threeRemaining: {fileID: 0}
+  twoRemaining: {fileID: 0}
+  oneRemaining: {fileID: 0}
+  shootCount: 0
+  playerType: 0
+  playerName: {fileID: 0}
 --- !u!61 &1826225500
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -887,6 +898,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 64
+  playerType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
