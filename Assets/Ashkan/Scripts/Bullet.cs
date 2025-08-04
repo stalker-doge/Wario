@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        if (GameManager.Instance?.CurrentGameMode == GameMode.Online)
         {
             if (playerType == PlayerType.mAI)
             {
@@ -72,27 +72,34 @@ public class Bullet : MonoBehaviour
         //    bullet.GetComponent<Rigidbody2D>().AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
         //}
 
-        if (playerType == PlayerType.mUser)
+        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
         {
-            if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+            if (playerType == PlayerType.mUser)
             {
-                if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
+                if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
                 {
-                    ShootBulletLogic();
+                    if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
+                    {
+                        ShootBulletLogic();
+                    }
                 }
-            } else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
-            {
-                if (Input.GetMouseButtonUp(0))
+                else if (GameManager.Instance.CurrentGameMode == GameMode.Online)
                 {
-                    ShootBulletLogic();
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        ShootBulletLogic();
+                    }
                 }
+
             }
-            
-        } 
-        //else if (playerType == PlayerType.mAI)
-        //{
-            //Invoke("ShootBulletLogic", 2f);
-        //}
+        }
+        else if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        {
+            if (Input.GetMouseButtonUp(0) && !TimerManager.Instance.winloseState)
+            {
+                ShootBulletLogic();
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

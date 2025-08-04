@@ -23,6 +23,24 @@ public class FlashBoundaryManager : MonoBehaviour
     public static System.Action OnFlashRequested = null;
 
     public static System.Action OnFlashCorrectRequested = null;
+    IEnumerator ShakeCamera(float duration, float magnitude)
+    {
+        Vector3 originalPos = Camera.main.transform.localPosition;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            Camera.main.transform.localPosition = originalPos + new Vector3(x, y, 0f);
+            elapsed += Time.deltaTime;
+            Debug.Log("XYZ Shaking Cam " + Camera.main.transform.localPosition);
+            yield return null;
+        }
+
+        Camera.main.transform.localPosition = originalPos;
+    }
 
     private void Awake()
     {
@@ -32,6 +50,7 @@ public class FlashBoundaryManager : MonoBehaviour
 
     private void FlashingActivityCallback()
     {
+        StartCoroutine(ShakeCamera(0.2f, 0.3f));
         StartCoroutine(FlashCoroutine());
     }
     private void FlashingCorrectActivityCallback()
