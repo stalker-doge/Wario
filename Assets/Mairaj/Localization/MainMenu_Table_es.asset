@@ -162,6 +162,64 @@ MonoBehaviour:
     m_Localized: "\xA1Date prisa!"
     m_Metadata:
       m_Items: []
+  - m_Id: 33631438211694592
+    m_Localized: Multijugador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33632916657717248
+    m_Localized: Juego aleatorio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33633090725527552
+    m_Localized: "Selecci\xF3n de juego multijugador"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33635954118148096
+    m_Localized: "B\xE1squet"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33636180874805248
+    m_Localized: "P\xE9talos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637414130204672
+    m_Localized: Golf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637594875346944
+    m_Localized: Emparejamiento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637925231312896
+    m_Localized: Emparejamiento exitoso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33638734018953216
+    m_Localized: "Fallido. \xA1Int\xE9ntalo de nuevo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33647764405796864
+    m_Localized: "Pr\xF3ximo juego en"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648011412553728
+    m_Localized: Has ganado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648072771026944
+    m_Localized: Has perdido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648342754181120
+    m_Localized: "Conexi\xF3n perdida\nPor favor, vuelve a conectarte a Internet.\nRegresando
+      al men\xFA principal."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648420717903872
+    m_Localized: "Sin conexi\xF3n a Internet. Por favor, vuelve a conectarte e int\xE9ntalo
+      de nuevo."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

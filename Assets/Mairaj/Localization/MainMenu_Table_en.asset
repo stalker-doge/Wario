@@ -162,6 +162,68 @@ MonoBehaviour:
     m_Localized: Speed it up!
     m_Metadata:
       m_Items: []
+  - m_Id: 33631438211694592
+    m_Localized: Multiplayer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33632916657717248
+    m_Localized: Random Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33633090725527552
+    m_Localized: Multiplayer Game Selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33635954118148096
+    m_Localized: Basketball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33636180874805248
+    m_Localized: Petals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637414130204672
+    m_Localized: Golf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637594875346944
+    m_Localized: Matching
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637925231312896
+    m_Localized: Match Successful
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33638734018953216
+    m_Localized: Failed. Try Again!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33647764405796864
+    m_Localized: Next Game In
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648011412553728
+    m_Localized: You Won
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648072771026944
+    m_Localized: You Lost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648342754181120
+    m_Localized: 'Connection lost
+
+      Please reconnect to the internet.
+
+
+      Returning
+      to main menu.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648420717903872
+    m_Localized: No internet connection. Please reconnect and try again!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class InternetErrorPopup : MonoBehaviour
 
     [SerializeField]
     private Button closeButton;
+
+    [SerializeField]
+    private LocalizeStringEvent localizationAsset;
 
     private Coroutine autoCloseCoroutine;
 
@@ -30,7 +34,10 @@ public class InternetErrorPopup : MonoBehaviour
     public void InitializePopup(string message, bool enableButton, float autoCloseDelay = 3f, bool shouldReturnToMainMenu = false)
     {
         if (message != "")
-            text.text = message;
+        {
+            localizationAsset.StringReference.TableEntryReference = message;
+            localizationAsset.RefreshString();
+        }
 
         returnToMainMenu = shouldReturnToMainMenu;
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.SceneManagement;
 
 public class OpponentSelectionScreen : MonoBehaviour
@@ -19,6 +20,8 @@ public class OpponentSelectionScreen : MonoBehaviour
     private Coroutine matchmakingCoroutine;
     private bool isMatchmakingAborted = false;
 
+    [SerializeField] private LocalizeStringEvent localizedMatchingState;
+    [SerializeField] private LocalizeStringEvent localizedLevelName;
     private void Awake()
     {
         NetworkChecker.Instance.OnWifiStatusChanged += HandleWifiStatus;
@@ -28,10 +31,13 @@ public class OpponentSelectionScreen : MonoBehaviour
     private void Start()
     {
         playerName.text = GameManager.Instance.User.PlayerName;
-        gameName.text = GameManager.Instance.LevelTitle;
+        //gameName.text = GameManager.Instance.LevelTitle;
 
         var namesList = GameManager.Instance.GetOpponentNamesList().opponentNames;
         matchmakingCoroutine = StartCoroutine(ShuffleNamesAndLoad(namesList));
+
+        localizedLevelName.StringReference.TableEntryReference = GameManager.Instance.LevelTitle;
+        localizedLevelName.RefreshString();
     }
 
     private IEnumerator ShuffleNamesAndLoad(IList<string> names)
@@ -89,7 +95,8 @@ public class OpponentSelectionScreen : MonoBehaviour
         {
             opponentName.text = GameManager.Instance.Opponent.PlayerName;
             count = -1;
-            matching.text = "Match Successful!";
+            localizedMatchingState.StringReference.TableEntryReference = "MatchSuccessful_Title";
+            localizedMatchingState.RefreshString();
 
             float remaining = 5f - shuffleDuration;
             if (remaining > 0f)
@@ -110,7 +117,8 @@ public class OpponentSelectionScreen : MonoBehaviour
         else
         {
             opponentName.text = "...";
-            matching.text = "Failed. Try Again!";
+            localizedMatchingState.StringReference.TableEntryReference = "FailedTryAgain_Title";
+            localizedMatchingState.RefreshString();
             StartCoroutine(LoadSceneAfterDelay(3));
         }
     }
@@ -126,7 +134,9 @@ public class OpponentSelectionScreen : MonoBehaviour
     {
         const int maxDots = 3;
         count = (count % maxDots) + 1;
-        matching.text = "Matching" + new string('.', count);
+        localizedMatchingState.StringReference.TableEntryReference = "Matching_Title";
+        localizedMatchingState.RefreshString();
+        matching.text += new string('.', count);
     }
 
     private void HandleWifiStatus(bool isOn)

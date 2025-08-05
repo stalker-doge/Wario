@@ -157,6 +157,64 @@ MonoBehaviour:
     m_Localized: "Acc\xE9l\xE8re!"
     m_Metadata:
       m_Items: []
+  - m_Id: 33631438211694592
+    m_Localized: Multijoueur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33632916657717248
+    m_Localized: "Jeu al\xE9atoire"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33633090725527552
+    m_Localized: "S\xE9lection de jeu multijoueur"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33635954118148096
+    m_Localized: Basket-ball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33636180874805248
+    m_Localized: "P\xE9tales"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637414130204672
+    m_Localized: Golf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637594875346944
+    m_Localized: Association
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637925231312896
+    m_Localized: "Association r\xE9ussie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33638734018953216
+    m_Localized: "\xC9chec. R\xE9essayez !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33647764405796864
+    m_Localized: Prochaine partie dans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648011412553728
+    m_Localized: "Tu as gagn\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648072771026944
+    m_Localized: Tu as perdu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648342754181120
+    m_Localized: "Connexion perdue\nVeuillez vous reconnecter \xE0 Internet.\nRetour
+      au menu principal."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648420717903872
+    m_Localized: "Pas de connexion Internet. Veuillez vous reconnecter et r\xE9essayer
+      !"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

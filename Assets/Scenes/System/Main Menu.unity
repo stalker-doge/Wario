@@ -659,7 +659,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682914965}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
   m_Name: 
@@ -668,7 +668,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:bcf18317208776648b654261890bf926
     m_TableEntryReference:
-      m_KeyId: 362029563904
+      m_KeyId: 33631438211694592
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
