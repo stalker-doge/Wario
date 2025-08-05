@@ -179,7 +179,9 @@ public class BallController : MonoBehaviour
                 Destroy(dust, 0.3f);
 
                 SoundManager.Instance.ShootAudioClip();
-                cameraShake.switchh = true;
+
+                if (cameraShake)
+                    cameraShake.switchh = true;
             }
         }
     }
