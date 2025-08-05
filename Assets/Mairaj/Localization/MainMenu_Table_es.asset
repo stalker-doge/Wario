@@ -220,6 +220,10 @@ MonoBehaviour:
       de nuevo."
     m_Metadata:
       m_Items: []
+  - m_Id: 33794892188925952
+    m_Localized: "Puntuaci\xF3n"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

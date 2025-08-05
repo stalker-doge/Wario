@@ -224,6 +224,10 @@ MonoBehaviour:
     m_Localized: No internet connection. Please reconnect and try again!
     m_Metadata:
       m_Items: []
+  - m_Id: 33794892188925952
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

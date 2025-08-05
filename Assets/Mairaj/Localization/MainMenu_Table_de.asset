@@ -216,6 +216,10 @@ MonoBehaviour:
     m_Localized: Keine Internetverbindung. Bitte erneut verbinden und erneut versuchen!
     m_Metadata:
       m_Items: []
+  - m_Id: 33794892188925952
+    m_Localized: Punktestand
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

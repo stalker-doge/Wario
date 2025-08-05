@@ -207,6 +207,10 @@ MonoBehaviour:
     m_Key: NetworkMessage2_Title
     m_Metadata:
       m_Items: []
+  - m_Id: 33794892188925952
+    m_Key: ScoreOnly_Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

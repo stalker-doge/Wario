@@ -220,6 +220,10 @@ MonoBehaviour:
     m_Localized: Nessuna connessione a Internet. Ricollegati e riprova!
     m_Metadata:
       m_Items: []
+  - m_Id: 33794892188925952
+    m_Localized: Punteggio
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
