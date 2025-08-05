@@ -176,7 +176,7 @@ public class LevelSwitcher : MonoBehaviour
         {
             Debug.Log("XYZ no internet popup");
             InternetErrorPopup popup = Instantiate(errorPopup, GetComponent<Canvas>().transform);
-            popup.InitializePopup("No internet connection. Please reconnect and try again!", true);
+            popup.InitializePopup("NetworkMessage2_Title", true);
         }
     }
 
@@ -185,7 +185,7 @@ public class LevelSwitcher : MonoBehaviour
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
         GameManager.Instance.SetCurrentGame(GameType.SwipeBall);
         GameManager.Instance.InitializeGame();
-        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.LevelTitle = "RollingTheBall_Title";
         GameManager.Instance.SceneToLoad = SceneType.GyroscopeGameOnline;
         GameManager.Instance.IsRandomMode = false;
     }
