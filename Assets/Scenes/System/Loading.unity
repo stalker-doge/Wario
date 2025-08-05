@@ -1122,6 +1122,26 @@ PrefabInstance:
       propertyPath: musicSource
       value: 
       objectReference: {fileID: 946362775}
+    - target: {fileID: 2881076625786207513, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881076625786207513, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881076625786207513, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.9849854
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719361456237910255, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5890084165924149685, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6122107764772450504, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1213,6 +1233,22 @@ PrefabInstance:
     - target: {fileID: 6122107764772450504, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7332124436404333502, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7332124436404333502, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7332124436404333502, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7332124436404333502, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1620
       objectReference: {fileID: 0}
     - target: {fileID: 8642385231477856762, guid: de0482bd277495847b2baa65cad3b21e, type: 3}
       propertyPath: m_Name
@@ -1994,6 +2030,7 @@ MonoBehaviour:
   levelName: {fileID: 1512819103}
   localizedLevelName: {fileID: 1512819104}
   curtainAnimTimer: 0.5
+  errorPopup: {fileID: 0}
   gamesToPlay: 5
   difficultyIncreased: 0
   difficultyText: {fileID: 0}

@@ -176,7 +176,7 @@ public class LevelSwitcher : MonoBehaviour
         {
             Debug.Log("XYZ no internet popup");
             InternetErrorPopup popup = Instantiate(errorPopup, GetComponent<Canvas>().transform);
-            popup.InitializePopup("No internet connection. Please reconnect and try again!", true);
+            popup.InitializePopup("NetworkMessage2_Title", true);
         }
     }
 
@@ -185,7 +185,7 @@ public class LevelSwitcher : MonoBehaviour
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
         GameManager.Instance.SetCurrentGame(GameType.SwipeBall);
         GameManager.Instance.InitializeGame();
-        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.LevelTitle = "RollingTheBall_Title";
         GameManager.Instance.SceneToLoad = SceneType.GyroscopeGameOnline;
         GameManager.Instance.IsRandomMode = false;
     }
@@ -194,8 +194,8 @@ public class LevelSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
         GameManager.Instance.SetCurrentGame(GameType.AimShoot);
-        GameManager.Instance.InitializeGame();
-        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.InitializeGame();;
+        GameManager.Instance.LevelTitle = "AimAndShoot_Title";
         GameManager.Instance.SceneToLoad = SceneType.AimAndShootOnline;
         GameManager.Instance.IsRandomMode = false;
     }
@@ -205,7 +205,7 @@ public class LevelSwitcher : MonoBehaviour
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
         GameManager.Instance.SetCurrentGame(GameType.Maze);
         GameManager.Instance.InitializeGame();
-        GameManager.Instance.LevelTitle = "Hardcoded";
+        GameManager.Instance.LevelTitle = "MazeGame_Title";
         GameManager.Instance.SceneToLoad = SceneType.MazeGameOnline;
         GameManager.Instance.IsRandomMode = false;
     }
@@ -218,6 +218,7 @@ public class LevelSwitcher : MonoBehaviour
         GameManager.Instance.SceneToLoad = GameManager.Instance.GetRandomScene();
         GameManager.Instance.IsRandomMode = true;
     }
+
     public void SwitchScene(string sceneName)
     {
         //Load scene
@@ -270,6 +271,15 @@ public class LevelSwitcher : MonoBehaviour
                 break;
             case "Aim&ShootOnline":
                 localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
+                break;
+            case "BaseketballGame":
+                localizedLevelName.StringReference.TableEntryReference = "BasketBall_Title";
+                break;
+            case "Golf":
+                localizedLevelName.StringReference.TableEntryReference = "Golf_Title";
+                break;
+            case "Petals":
+                localizedLevelName.StringReference.TableEntryReference = "Petals_Title";
                 break;
             default:
                 Debug.LogWarning("Level not found in the localization table.");

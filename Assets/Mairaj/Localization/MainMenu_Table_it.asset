@@ -159,6 +159,67 @@ MonoBehaviour:
     m_Localized: Sbrigati!
     m_Metadata:
       m_Items: []
+  - m_Id: 33631438211694592
+    m_Localized: Multigiocatore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33632916657717248
+    m_Localized: Gioco casuale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33633090725527552
+    m_Localized: Selezione gioco multigiocatore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33635954118148096
+    m_Localized: Basket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33636180874805248
+    m_Localized: Petali
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637414130204672
+    m_Localized: Golf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637594875346944
+    m_Localized: Abbinamento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637925231312896
+    m_Localized: Abbinamento riuscito
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33638734018953216
+    m_Localized: Fallito. Riprova!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33647764405796864
+    m_Localized: Prossima partita tra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648011412553728
+    m_Localized: Hai vinto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648072771026944
+    m_Localized: Hai perso
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648342754181120
+    m_Localized: 'Connessione persa
+
+      Ricollegati a Internet, per favore.
+
+      Ritorno
+      al menu principale.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648420717903872
+    m_Localized: Nessuna connessione a Internet. Ricollegati e riprova!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

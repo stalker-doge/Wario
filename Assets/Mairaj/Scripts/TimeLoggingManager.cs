@@ -75,6 +75,7 @@ public class TimeLoggingManager : MonoBehaviour
 
         if (FirebaseManager.Instance.IsFirebaseReady)
         {
+            Debug.Log("XYZ IsFirebaseReady");
             FirebaseManager.Instance.LogSessionTime(GameManager.Instance.CurrentGameMode, currentSessionSeconds + "", currentPlays);
         }
     }

@@ -159,6 +159,63 @@ MonoBehaviour:
     m_Localized: Beeil dich!
     m_Metadata:
       m_Items: []
+  - m_Id: 33631438211694592
+    m_Localized: Mehrspieler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33632916657717248
+    m_Localized: "Zuf\xE4lliges Spiel"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33633090725527552
+    m_Localized: Mehrspieler-Spielauswahl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33635954118148096
+    m_Localized: Basketball
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33636180874805248
+    m_Localized: "Bl\xFCtenbl\xE4tter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637414130204672
+    m_Localized: Golf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637594875346944
+    m_Localized: Zuordnung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33637925231312896
+    m_Localized: Zuordnung erfolgreich
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33638734018953216
+    m_Localized: Fehlgeschlagen. Versuche es erneut!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33647764405796864
+    m_Localized: "N\xE4chstes Spiel in"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648011412553728
+    m_Localized: Du hast gewonnen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648072771026944
+    m_Localized: Du hast verloren
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648342754181120
+    m_Localized: "Verbindung verloren\nBitte stelle die Internetverbindung wieder
+      her.\nZur\xFCck zum Hauptmen\xFC."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33648420717903872
+    m_Localized: Keine Internetverbindung. Bitte erneut verbinden und erneut versuchen!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
