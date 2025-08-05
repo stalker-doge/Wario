@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.SceneManagement;
 public class TransitionScreenMultiplayer : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class TransitionScreenMultiplayer : MonoBehaviour
 
     [SerializeField] private InternetErrorPopup errorPopup;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private LocalizeStringEvent nextGameInLocalization;
 
     private InternetErrorPopup tempPopup;
     private Coroutine countdownCoroutine;
@@ -33,7 +35,7 @@ public class TransitionScreenMultiplayer : MonoBehaviour
 
     private void Start()
     {
-        gameName.text = GameManager.Instance.GameName;
+        //gameName.text = GameManager.Instance.GameName;
         playerName.text = GameManager.Instance.User.PlayerName;
         opponentName.text = GameManager.Instance.Opponent.PlayerName;
         playerScore.text = GameManager.Instance.User.PlayerWins + "";
@@ -52,7 +54,10 @@ public class TransitionScreenMultiplayer : MonoBehaviour
                 yield break;
             }
 
-            nextGameIn.text = "NextGameIn... " + Mathf.CeilToInt(timer);
+            nextGameInLocalization.StringReference.TableEntryReference = "NextGameIn_Title";
+            nextGameInLocalization.RefreshString();
+
+            nextGameIn.text += "..." + Mathf.CeilToInt(timer);
             yield return new WaitForSeconds(1);
             timer--;
         }
@@ -100,7 +105,7 @@ public class TransitionScreenMultiplayer : MonoBehaviour
     private void ShowErrorPopup(string message)
     {
         tempPopup = Instantiate(errorPopup, canvas.transform);
-        tempPopup.InitializePopup(message, true, 3, true);
+        tempPopup.InitializePopup("NetworkMessage2_Title", true, 3, true);
     }
 
     private void AbortCountdown()
@@ -112,7 +117,7 @@ public class TransitionScreenMultiplayer : MonoBehaviour
             countdownCoroutine = null;
         }
 
-        nextGameIn.text = "Match interrupted.";
+        nextGameIn.text = "...";
     }
 
     private void OnDestroy()

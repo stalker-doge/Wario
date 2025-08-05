@@ -1960,7 +1960,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833065361}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
   m_Name: 
@@ -3176,6 +3176,7 @@ MonoBehaviour:
   nextGameIn: {fileID: 1833065364}
   errorPopup: {fileID: 1962685552665494242, guid: 3f832ded87cdd0345b189f4622615d21, type: 3}
   canvas: {fileID: 6350101213307080509}
+  nextGameInLocalization: {fileID: 1833065363}
 --- !u!114 &6555168260995825917
 MonoBehaviour:
   m_ObjectHideFlags: 0

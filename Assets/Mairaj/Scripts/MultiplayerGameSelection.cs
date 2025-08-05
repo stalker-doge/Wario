@@ -20,7 +20,7 @@ public class MultiplayerGameSelection : MonoBehaviour
         if (!isOn && tempPopup == null)
         {
             InternetErrorPopup popup = Instantiate(errorPopup, canvas.transform);
-            popup.InitializePopup("", true, 3, true);
+            popup.InitializePopup("NetworkMessage1_Title", true, 3, true);
             tempPopup = popup;
         }
     }
@@ -31,7 +31,7 @@ public class MultiplayerGameSelection : MonoBehaviour
         if (!isConnected && tempPopup == null)
         {
             InternetErrorPopup popup = Instantiate(errorPopup, canvas.transform);
-            popup.InitializePopup("", true, 3, true);
+            popup.InitializePopup("NetworkMessage1_Title", true, 3, true);
             tempPopup = popup;
         }
     }

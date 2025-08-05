@@ -162,7 +162,7 @@ public class OpponentSelectionScreen : MonoBehaviour
     private void ShowErrorPopup(string message)
     {
         tempPopup = Instantiate(errorPopup, canvas.transform);
-        tempPopup.InitializePopup(message, true, 3, true);
+        tempPopup.InitializePopup("NetworkMessage1_Title", true, 3, true);
     }
 
     private void AbortMatchmaking()
@@ -175,7 +175,7 @@ public class OpponentSelectionScreen : MonoBehaviour
         }
 
         opponentName.text = "...";
-        matching.text = "Matchmaking canceled.";
+        matching.text = "...";
     }
 
     private void OnDestroy()

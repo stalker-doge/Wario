@@ -214,8 +214,8 @@ public class LevelSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene(SceneDatabaseManager.Instance?.GetSceneString(SceneType.MPOpponentSelection));
         GameManager.Instance.InitializeGame();
-        GameManager.Instance.LevelTitle = "Hardcoded";
         GameManager.Instance.SceneToLoad = GameManager.Instance.GetRandomScene();
+        SetOnlineSceneTitle(GameManager.Instance.SceneToLoad.ToString());
         GameManager.Instance.IsRandomMode = true;
     }
 
@@ -289,6 +289,26 @@ public class LevelSwitcher : MonoBehaviour
 
         // Refresh the string to display the translated text
         localizedLevelName.RefreshString();
+    }
+
+    public void SetOnlineSceneTitle(string level)
+    {
+        Debug.Log("XYZ Level " + level);
+        switch (level)
+        {
+            case "MazeGameOnline":
+                GameManager.Instance.LevelTitle = "MazeGame_Title";
+                break;
+            case "GyroscopeGameOnline":
+                GameManager.Instance.LevelTitle = "RollingTheBall_Title";
+                break;
+            case "AimAndShootOnline":
+                GameManager.Instance.LevelTitle = "AimAndShoot_Title";
+                break;
+            default:
+                Debug.LogWarning("Level not found in the localization table.");
+                return;
+        }
     }
 
 }

@@ -33,11 +33,8 @@ public class InternetErrorPopup : MonoBehaviour
 
     public void InitializePopup(string message, bool enableButton, float autoCloseDelay = 3f, bool shouldReturnToMainMenu = false)
     {
-        if (message != "")
-        {
-            localizationAsset.StringReference.TableEntryReference = message;
-            localizationAsset.RefreshString();
-        }
+        localizationAsset.StringReference.TableEntryReference = message;
+        localizationAsset.RefreshString();
 
         returnToMainMenu = shouldReturnToMainMenu;
 
