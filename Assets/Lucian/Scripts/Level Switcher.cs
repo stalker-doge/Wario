@@ -228,7 +228,7 @@ public class LevelSwitcher : MonoBehaviour
     // Function to set the correct localized string for each level
     public void SetLevelTitle(string level)
     {
-        Debug.Log("XYZ Level " + level);
+        //Debug.Log("XYZ Level " + level);
         switch (level)
         {
             case "MathGame":

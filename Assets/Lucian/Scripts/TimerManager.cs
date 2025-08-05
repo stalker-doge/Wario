@@ -224,6 +224,11 @@ public class TimerManager : MonoBehaviour
             Instance.WinPage.SetActive(false);
             LosePage.SetActive(false);
         }
+
+        if (GameManager.Instance?.CurrentGameMode == GameMode.Online)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator CurtainAnimCoroutine(float animTimer)
