@@ -219,7 +219,7 @@ public class TimerManager : MonoBehaviour
             GameOverPage.SetActive(false);
         }
 
-        if (GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        if (GameManager.Instance?.CurrentGameMode == GameMode.SinglePlayer)
         {
             Instance.WinPage.SetActive(false);
             LosePage.SetActive(false);

@@ -115,6 +115,9 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        GameManager.Instance.CurrentGameMode = GameMode.SinglePlayer;
+
     }
 
     public void SetCurrentGame(GameType gameType)

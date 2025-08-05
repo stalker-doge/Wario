@@ -31,7 +31,7 @@ public class AimAndShootGameManager : MiniGameManagerBase
 
     private void SetupArrow(ArrowController arrow, PlayerType type)
     {
-        arrow.gameObject.SetActive(false);
+        arrow?.gameObject.SetActive(false);
         if (arrow != null)
         {
             arrow.enabled = true;

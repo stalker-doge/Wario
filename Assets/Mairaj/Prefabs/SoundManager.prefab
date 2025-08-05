@@ -159,6 +159,9 @@ MonoBehaviour:
   gameWinCheerAudioClip: {fileID: 8300000, guid: 103d64fb818771e4ba321fadb93c7a17, type: 3}
   gameLostSadAudioClip: {fileID: 8300000, guid: 163cf67a44c16c846b5c07e015b62548, type: 3}
   gameOverExplosionAudioClip: {fileID: 8300000, guid: 2802c0eba63c2b84cb7c15c2f87e69cf, type: 3}
+  golfGolaAudioClip: {fileID: 8300000, guid: 95af310741a99214da0180dfc10164b3, type: 3}
+  golfBallHitAudioClip: {fileID: 8300000, guid: 70f5c65b38a2a1843917acb5838988b2, type: 3}
+  basketballBounceAudioClip: {fileID: 8300000, guid: 51b4e1fd010703d4c90b6f98e2b3d32b, type: 3}
 --- !u!114 &4976062257117289611
 MonoBehaviour:
   m_ObjectHideFlags: 0

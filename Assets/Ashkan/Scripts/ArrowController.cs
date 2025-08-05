@@ -26,7 +26,7 @@ public class ArrowController : MonoBehaviour
         twoRemaining?.SetActive(true);
         oneRemaining?.SetActive(true);
 
-        if (GameManager.Instance.CurrentGameMode == GameMode.Online)
+        if (GameManager.Instance?.CurrentGameMode == GameMode.Online)
         {
             if (playerType == PlayerType.mUser)
             {

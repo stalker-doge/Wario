@@ -19,11 +19,14 @@ public class MazeDragPlayer : MonoBehaviour
     private PlayerName playerName;
 
     private List<Transform> pathTransforms = null;
+    public CameraShake cameraShake;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // this blocks Unity's physics from rotating the object
         targetPosition = transform.position;
+
+        cameraShake = FindObjectOfType<CameraShake>();
     }
 
     void OnMouseDown()
@@ -161,6 +164,7 @@ public class MazeDragPlayer : MonoBehaviour
         {
             moveSpeed = 6;
             isTouchingWall = true;
+            cameraShake.switchh = true;
         }
     }
 
@@ -169,6 +173,7 @@ public class MazeDragPlayer : MonoBehaviour
         if (other.gameObject.CompareTag("MazeWall"))
         {
             moveSpeed = 8;
+
         }
     }
 

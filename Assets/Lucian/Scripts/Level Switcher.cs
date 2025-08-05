@@ -148,6 +148,7 @@ public class LevelSwitcher : MonoBehaviour
         //Get random scene
         int randomIndex = Random.Range(0, scenes.Length);
         sceneName = scenes[randomIndex];
+        //sceneName = "Aim&Shoot";
         //deletes the scene from the array
         List<string> sceneList = new List<string>(scenes);
         sceneList.RemoveAt(randomIndex);
