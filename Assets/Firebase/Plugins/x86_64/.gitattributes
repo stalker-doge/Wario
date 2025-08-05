@@ -1,2 +1,0 @@
-FirebaseCppApp-12_10_1.bundle filter=lfs diff=lfs merge=lfs -text
-FirebaseCppApp-12_10_1.so filter=lfs diff=lfs merge=lfs -text
