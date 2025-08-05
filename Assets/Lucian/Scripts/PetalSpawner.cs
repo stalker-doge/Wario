@@ -27,34 +27,28 @@ public class PetalSpawnerCapsule2D : MonoBehaviour
             return;
         }
 
-        // Tell the GameManager exactly how many we’ll spawn.
+        // Spawn all petals first
+        for (int i = 0; i < petalCount; i++)
+        {
+            float t = (float)i / petalCount;
+            Vector2 edgeLocal = PerimeterPointLocal(t);
+            Vector3 centerLocal = capsule.offset;
+
+            Vector3 edgeWorld = transform.TransformPoint(centerLocal + (Vector3)edgeLocal);
+            Vector3 centerWorld = transform.TransformPoint(centerLocal);
+            Vector2 outwardDir = (edgeWorld - centerWorld).normalized;
+            Vector3 spawnWorld = edgeWorld + (Vector3)(outwardDir * outwardOffset);
+
+            GameObject petal = Instantiate(petalPrefab, spawnWorld, Quaternion.identity, transform);
+
+            float angleZ = Mathf.Atan2(outwardDir.y, outwardDir.x) * Mathf.Rad2Deg;
+            petal.transform.rotation = Quaternion.Euler(0f, 0f, angleZ + 90f);
+        }
+
+        // AFTER spawning, register with GameManager
         if (PetalGameManager.Instance != null)
         {
             PetalGameManager.Instance.RegisterPetals(petalCount);
-        }
-
-        for (int i = 0; i < petalCount; i++)
-        {
-            float t = (float)i / petalCount; // 0..1 (excluded at 1 due to i<p)
-            Vector2 edgeLocal = PerimeterPointLocal(t); // point on capsule edge in LOCAL space
-            Vector3 centerLocal = capsule.offset;
-
-            // Convert to world space
-            Vector3 edgeWorld = transform.TransformPoint(centerLocal + (Vector3)edgeLocal);
-
-            // Outward direction = from collider center to edge
-            Vector3 centerWorld = transform.TransformPoint(centerLocal);
-            Vector2 outwardDir = (edgeWorld - centerWorld).normalized;
-
-            // Final spawn position a bit outside the edge
-            Vector3 spawnWorld = edgeWorld + (Vector3)(outwardDir * outwardOffset);
-
-            // Instantiate as child so it follows the flower
-            GameObject petal = Instantiate(petalPrefab, spawnWorld, Quaternion.identity, transform);
-
-            // Rotate petal to face outward (+90 adjusts for typical vertical-up sprite forward)
-            float angleZ = Mathf.Atan2(outwardDir.y, outwardDir.x) * Mathf.Rad2Deg;
-            petal.transform.rotation = Quaternion.Euler(0f, 0f, angleZ + 90f);
         }
     }
 

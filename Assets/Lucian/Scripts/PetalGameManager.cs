@@ -24,19 +24,33 @@ public class PetalGameManager : MonoBehaviour
 
     private void Start()
     {
-        // Auto-register petals in the scene
-        RegisterPetals(FindObjectsOfType<Petal>().Length);
+        // Remove the auto-registration here since PetalSpawner will call RegisterPetals()
+        // Only do this as fallback if no spawner exists
+        StartCoroutine(RegisterPetalsAfterFrame());
+    }
+
+    private System.Collections.IEnumerator RegisterPetalsAfterFrame()
+    {
+        yield return null; // Wait one frame for spawners to run
+
+        // Only auto-register if no petals were registered by spawner
+        if (totalPetals == 0)
+        {
+            RegisterPetals(FindObjectsOfType<Petal>().Length);
+        }
     }
 
     public void RegisterPetals(int count)
     {
         totalPetals = count;
         pickedPetals = 0;
+        Debug.Log($"Registered {count} petals for the game");
     }
 
     public void PetalPicked()
     {
         pickedPetals++;
+        Debug.Log($"Petal picked! {pickedPetals}/{totalPetals}");
 
         if (pickedPetals >= totalPetals)
         {
