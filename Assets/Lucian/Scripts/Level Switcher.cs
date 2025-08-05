@@ -228,6 +228,7 @@ public class LevelSwitcher : MonoBehaviour
     // Function to set the correct localized string for each level
     public void SetLevelTitle(string level)
     {
+        Debug.Log("XYZ Level " + level);
         switch (level)
         {
             case "MathGame":
@@ -272,10 +273,10 @@ public class LevelSwitcher : MonoBehaviour
             case "Aim&ShootOnline":
                 localizedLevelName.StringReference.TableEntryReference = "AimAndShoot_Title";
                 break;
-            case "BaseketballGame":
+            case "BasketballGame":
                 localizedLevelName.StringReference.TableEntryReference = "BasketBall_Title";
                 break;
-            case "Golf":
+            case "GolfGame":
                 localizedLevelName.StringReference.TableEntryReference = "Golf_Title";
                 break;
             case "Petals":

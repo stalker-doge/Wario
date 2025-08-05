@@ -136,7 +136,7 @@ public class ScoreManager : MonoBehaviour
             TimerManager.Instance.winloseState = true;
             TimerManager.Instance.Pause(true);
             TimerManager.Instance.ResetTimer();
-            yield return new WaitForSeconds(1.25f);
+            yield return new WaitForSeconds(1.15f);
             if (anims)
                 anims.SetActive(true);
             TimerManager.Instance.winloseState = false;
