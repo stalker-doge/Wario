@@ -17,6 +17,7 @@ public class FirebaseManager : MonoBehaviour
     private FirebaseApp editorApp = null;
 #endif
 
+    private FirebaseApp androidApp = null;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -39,7 +40,7 @@ public class FirebaseManager : MonoBehaviour
             {
                 Debug.Log("XYZ Firebase dependencies available.");
 
-#if UNITY_EDITOR
+
                 AppOptions options = new AppOptions
                 {
                     DatabaseUrl = new Uri("https://wario-33848-default-rtdb.europe-west1.firebasedatabase.app"),
@@ -47,8 +48,11 @@ public class FirebaseManager : MonoBehaviour
                     AppId = "1:81828985940:android:992b838da38c45cea581c1",
                     ApiKey = "AIzaSyBkqz1aQw50Shr-F2D8vEKOgNk2A_MBHKE"
                 };
-
+#if UNITY_EDITOR
                 editorApp = FirebaseApp.Create(options, "EditorTestApp");
+                Debug.Log("XYZ FirebaseApp 'EditorTestApp' created with correct DB URL.");
+#else
+                androidApp = FirebaseApp.Create(options, "androidTestApp");
                 Debug.Log("XYZ FirebaseApp 'EditorTestApp' created with correct DB URL.");
 #endif
 
@@ -73,7 +77,7 @@ public class FirebaseManager : MonoBehaviour
 
         DatabaseReference reference = FirebaseDatabase.GetInstance(editorApp).RootReference;
 #else
-        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        DatabaseReference reference = FirebaseDatabase.GetInstance(androidApp).RootReference;
 #endif
 
         Debug.Log("XYZ RootReference: " + reference);
