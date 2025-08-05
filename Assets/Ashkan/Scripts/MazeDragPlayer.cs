@@ -164,7 +164,8 @@ public class MazeDragPlayer : MonoBehaviour
         {
             moveSpeed = 6;
             isTouchingWall = true;
-            cameraShake.switchh = true;
+            if (cameraShake)
+                cameraShake.switchh = true;
         }
     }
 
