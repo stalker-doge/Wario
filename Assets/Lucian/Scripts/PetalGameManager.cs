@@ -22,6 +22,12 @@ public class PetalGameManager : MonoBehaviour
             endGamePanel.SetActive(false);
     }
 
+    private void Start()
+    {
+        // Auto-register petals in the scene
+        RegisterPetals(FindObjectsOfType<Petal>().Length);
+    }
+
     public void RegisterPetals(int count)
     {
         totalPetals = count;
@@ -45,6 +51,13 @@ public class PetalGameManager : MonoBehaviour
             endGamePanel.SetActive(true);
             endGameText.text = Random.value > 0.5f ? "They love me!" : "They love me not...";
         }
+        
         Debug.Log("All petals picked! Game Over.");
+        
+        // Common game completion pattern used across all games
+        if (ScoreManager.Instance)
+        {
+            StartCoroutine(ScoreManager.Instance.GameComplete());
+        }
     }
 }
